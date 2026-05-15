@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>305business.llc — Live Stock Market Ticker</title>
+    <link rel="icon" type="image/png" href="305business-logo-transparent.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: #0a0a0f;
+            overflow: hidden;
+        }
+        
+        .ticker-container {
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(90deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%);
+            border-top: 2px solid #00D4FF;
+            border-bottom: 2px solid #B829DD;
+        }
+        
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        .ticker {
+            display: inline-block;
+            animation: ticker-scroll 60s linear infinite;
+            padding-left: 100%;
+        }
+        
+        .ticker-item {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .ticker-item .symbol {
+            color: #00D4FF;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+        
+        .ticker-item .price {
+            color: #ffffff;
+            margin-right: 8px;
+        }
+        
+        .ticker-item .change {
+            font-weight: 600;
+        }
+        
+        .ticker-item .change.up {
+            color: #00ff88;
+        }
+        
+        .ticker-item .change.down {
+            color: #ff4757;
+        }
+        
+        .ticker-item .volume {
+            color: #888;
+            margin-left: 8px;
+            font-size: 12px;
+        }
+        
+        @keyframes ticker-scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        .ticker:hover {
+            animation-play-state: paused;
+        }
+        
+        /* Full screen version */
+        .fullscreen-ticker {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #0a0a0f;
+        }
+        
+        .stock-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            min-width: 280px;
+            transition: all 0.3s;
+        }
+        
+        .stock-card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: #00D4FF;
+            transform: translateY(-2px);
+        }
+        
+        .marquee-container {
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .marquee-content {
+            display: flex;
+            animation: marquee 40s linear infinite;
+            gap: 20px;
+        }
+        
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+        
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .last-update {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .controls button {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .controls button:hover {
+            background: rgba(0,212,255,0.2);
+            border-color: #00D4FF;
+        }
+        
+        .sparkline {
+            width: 60px;
+            height: 20px;
+            display: inline-block;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Compact Ticker (for embedding) -->
+    <div class="ticker-container" id="compactTicker" style="display: none;">
+        <div class="ticker-wrap">
+            <div class="ticker" id="tickerContent"></div>
+        </div>
+    </div>
+
+    <!-- Full Screen Card Ticker -->
+    <div class="fullscreen-ticker" id="fullscreenTicker">
+        <div class="text-center mb-8">
+            <!-- 305business Logo -->
+            <div class="flex justify-center mb-4">
+                <img src="305business-logo-transparent.png" alt="305business.llc" class="h-16 w-auto object-contain" style="filter: drop-shadow(0 0 10px rgba(0,212,255,0.3));">
+            </div>
+            <h1 class="text-3xl font-bold text-white mb-2">
+                <span class="text-[#00D4FF]">305business</span><span class="text-[#B829DD]">.llc</span>
+            </h1>
+            <p class="text-gray-500">Live Market Data — Real-time stock prices scrolling across your screen</p>
+        </div>
+        
+        <div class="marquee-container">
+            <div class="marquee-content" id="marqueeContent"></div>
+        </div>
+        
+        <div class="text-center mt-8">
+            <p class="text-gray-600 text-sm">Hover to pause • Data refreshes every 5 minutes</p>
+        </div>
+    </div>
+
+    <div class="last-update" id="lastUpdate"></div>
+    
+    <div class="controls">
+        <button onclick="toggleView()">Toggle View</button>
+        <button onclick="refreshData()">Refresh Now</button>
+        <button onclick="changeSpeed()">Speed</button>
+    </div>
+
+    <script>
+        // Stock symbols to track
+        const STOCKS = [
+            { symbol: 'AAPL', name: 'Apple Inc.' },
+            { symbol: 'MSFT', name: 'Microsoft' },
+            { symbol: 'GOOGL', name: 'Alphabet' },
+            { symbol: 'AMZN', name: 'Amazon' },
+            { symbol: 'TSLA', name: 'Tesla' },
+            { symbol: 'META', name: 'Meta' },
+            { symbol: 'NVDA', name: 'NVIDIA' },
+            { symbol: 'NFLX', name: 'Netflix' },
+            { symbol: 'AMD', name: 'AMD' },
+            { symbol: 'INTC', name: 'Intel' },
+            { symbol: 'CRM', name: 'Salesforce' },
+            { symbol: 'ADBE', name: 'Adobe' },
+            { symbol: 'PYPL', name: 'PayPal' },
+            { symbol: 'UBER', name: 'Uber' },
+            { symbol: 'COIN', name: 'Coinbase' },
+            { symbol: 'PLTR', name: 'Palantir' },
+            { symbol: 'SNOW', name: 'Snowflake' },
+            { symbol: 'ZM', name: 'Zoom' },
+            { symbol: 'ROKU', name: 'Roku' },
+            { symbol: 'SQ', name: 'Block' }
+        ];
+
+        let currentSpeed = 40; // seconds for one loop
+        let isCompact = false;
+
+        // Generate mock data (replace with real API)
+        function generateMockData() {
+            return STOCKS.map(stock => {
+                const basePrice = Math.random() * 500 + 50;
+                const change = (Math.random() - 0.5) * 10;
+                const changePercent = (change / basePrice) * 100;
+                const volume = Math.floor(Math.random() * 10000000) + 1000000;
+                
+                return {
+                    ...stock,
+                    price: basePrice.toFixed(2),
+                    change: change.toFixed(2),
+                    changePercent: changePercent.toFixed(2),
+                    volume: volume
+                };
+            });
+        }
+
+        // Create stock card HTML
+        function createStockCard(stock) {
+            const isUp = parseFloat(stock.change) >= 0;
+            const arrow = isUp ? '▲' : '▼';
+            const volumeM = (stock.volume / 1000000).toFixed(1);
+            
+            return `
+                <div class="stock-card">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <span class="text-[#00D4FF] font-bold text-lg">${stock.symbol}</span>
+                            <span class="text-gray-500 text-xs block">${stock.name}</span>
+                        </div>
+                        <span class="text-gray-600 text-xs">Vol: ${volumeM}M</span>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="text-white text-2xl font-bold">$${stock.price}</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="${isUp ? 'text-green-400' : 'text-red-400'} font-semibold">
+                                ${arrow} ${Math.abs(stock.change)} (${Math.abs(stock.changePercent)}%)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create compact ticker item HTML
+        function createTickerItem(stock) {
+            const isUp = parseFloat(stock.change) >= 0;
+            const arrow = isUp ? '▲' : '▼';
+            
+            return `
+                <div class="ticker-item">
+                    <span class="symbol">${stock.symbol}</span>
+                    <span class="price">$${stock.price}</span>
+                    <span class="change ${isUp ? 'up' : 'down'}">
+                        ${arrow} ${Math.abs(stock.change)} (${Math.abs(stock.changePercent)}%)
+                    </span>
+                    <span class="volume">Vol: ${(stock.volume / 1000000).toFixed(1)}M</span>
+                </div>
+            `;
+        }
+
+        // Render data
+        function renderData() {
+            const data = generateMockData();
+            
+            // Full screen cards
+            const marqueeContent = document.getElementById('marqueeContent');
+            const cardsHTML = data.map(createStockCard).join('');
+            // Duplicate for seamless loop
+            marqueeContent.innerHTML = cardsHTML + cardsHTML;
+            
+            // Compact ticker
+            const tickerContent = document.getElementById('tickerContent');
+            const tickerHTML = data.map(createTickerItem).join('');
+            tickerContent.innerHTML = tickerHTML + tickerHTML;
+            
+            // Update timestamp
+            document.getElementById('lastUpdate').textContent = 
+                'Last updated: ' + new Date().toLocaleTimeString();
+        }
+
+        // Toggle between compact and full screen
+        function toggleView() {
+            isCompact = !isCompact;
+            document.getElementById('compactTicker').style.display = isCompact ? 'block' : 'none';
+            document.getElementById('fullscreenTicker').style.display = isCompact ? 'none' : 'flex';
+        }
+
+        // Refresh data
+        function refreshData() {
+            renderData();
+        }
+
+        // Change scroll speed
+        function changeSpeed() {
+            const speeds = [20, 40, 60, 80];
+            const currentIndex = speeds.indexOf(currentSpeed);
+            currentSpeed = speeds[(currentIndex + 1) % speeds.length];
+            
+            document.querySelector('.marquee-content').style.animationDuration = currentSpeed + 's';
+            document.querySelector('.ticker').style.animationDuration = (currentSpeed * 1.5) + 's';
+        }
+
+        // Initialize
+        renderData();
+        
+        // Auto-refresh every 5 minutes
+        setInterval(renderData, 300000);
+        
+        // Simulate live updates every 10 seconds
+        setInterval(() => {
+            const data = generateMockData();
+            const marqueeContent = document.getElementById('marqueeContent');
+            const cards = marqueeContent.querySelectorAll('.stock-card');
+            
+            cards.forEach((card, index) => {
+                if (index < data.length) {
+                    const stock = data[index];
+                    const isUp = parseFloat(stock.change) >= 0;
+                    const priceEl = card.querySelector('.text-2xl');
+                    const changeEl = card.querySelector('.text-right span');
+                    
+                    if (priceEl) priceEl.textContent = `$${stock.price}`;
+                    if (changeEl) {
+                        changeEl.className = `${isUp ? 'text-green-400' : 'text-red-400'} font-semibold`;
+                        changeEl.innerHTML = `${isUp ? '▲' : '▼'} ${Math.abs(stock.change)} (${Math.abs(stock.changePercent)}%)`;
+                    }
+                }
+            });
+            
+            document.getElementById('lastUpdate').textContent = 
+                'Last updated: ' + new Date().toLocaleTimeString();
+        }, 10000);
+    </script>
+</body>
+</html>
