@@ -146,12 +146,121 @@
         .stock-item .chg-down { color: #ff4757; }
         .stock-item .vol { color: rgba(255,255,255,0.3); font-size: 11px; }
         
-        /* Animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        /* Dynamic Hero Stats */
+        .hero-stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1.5px solid rgba(255,255,255,0.25);
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
         }
-        .animate-float { animation: float 6s ease-in-out infinite; }
+        .hero-stat-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%);
+        }
+        .hero-stat-card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.4);
+            transform: translateY(-3px);
+        }
+        .stat-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00D4FF;
+            text-shadow: 0 0 20px rgba(0,212,255,0.3);
+        }
+        .stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            margin-top: 0.5rem;
+        }
+        
+        /* Animated Graph Lines */
+        .graph-container {
+            position: relative;
+            height: 200px;
+            border: 1.5px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.02);
+            overflow: hidden;
+        }
+        .graph-line {
+            position: absolute;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to top, rgba(0,212,255,0.3), rgba(0,212,255,0.8));
+            animation: graphGrow 2s ease-out forwards;
+        }
+        @keyframes graphGrow {
+            from { height: 0; }
+            to { height: var(--h); }
+        }
+        .graph-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #00D4FF;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0,212,255,0.5);
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+        @keyframes dotPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.7; }
+        }
+        
+        /* Live Ticker Pills */
+        .live-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border: 1px solid rgba(0,255,136,0.4);
+            background: rgba(0,255,136,0.08);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: #00FF88;
+        }
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: #00FF88;
+            border-radius: 50%;
+            animation: liveBlink 1.5s ease-in-out infinite;
+        }
+        @keyframes liveBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        /* Connection Lines Animation */
+        .connection-line {
+            stroke: rgba(255,255,255,0.15);
+            stroke-width: 1;
+            stroke-dasharray: 5,5;
+            animation: dashMove 20s linear infinite;
+        }
+        @keyframes dashMove {
+            to { stroke-dashoffset: -100; }
+        }
+        
+        /* Floating Data Points */
+        .data-point {
+            position: absolute;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.3);
+            animation: floatData 8s ease-in-out infinite;
+        }
+        @keyframes floatData {
+            0%, 100% { transform: translate(0, 0); opacity: 0.3; }
+            25% { transform: translate(10px, -15px); opacity: 0.6; }
+            50% { transform: translate(-5px, -25px); opacity: 0.3; }
+            75% { transform: translate(15px, -10px); opacity: 0.5; }
+        }
         
         /* Modal - Sky blue */
         .modal-overlay {
@@ -199,36 +308,104 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - Dynamic Landing -->
     <section class="pt-32 pb-12 relative">
-        <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute top-20 left-10 w-px h-40 bg-white/5"></div>
-            <div class="absolute top-20 left-10 w-20 h-px bg-white/5"></div>
-            <div class="absolute bottom-20 right-10 w-px h-40 bg-white/5"></div>
-            <div class="absolute bottom-20 right-10 w-20 h-px bg-white/5"></div>
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <!-- Corner brackets -->
+            <div class="absolute top-20 left-10 w-px h-40 bg-white/10"></div>
+            <div class="absolute top-20 left-10 w-20 h-px bg-white/10"></div>
+            <div class="absolute bottom-20 right-10 w-px h-40 bg-white/10"></div>
+            <div class="absolute bottom-20 right-10 w-20 h-px bg-white/10"></div>
+            <!-- Floating data points -->
+            <div class="data-point" style="top: 15%; left: 8%; animation-delay: 0s;">REV: $2.4M</div>
+            <div class="data-point" style="top: 25%; right: 12%; animation-delay: 2s;">DEALS: 50+</div>
+            <div class="data-point" style="top: 60%; left: 5%; animation-delay: 4s;">MATCH: 94%</div>
+            <div class="data-point" style="top: 70%; right: 8%; animation-delay: 6s;">GROWTH: +23%</div>
+            <!-- SVG Connection Lines -->
+            <svg class="absolute inset-0 w-full h-full" style="opacity: 0.3;">
+                <line x1="10%" y1="20%" x2="30%" y2="40%" class="connection-line"/>
+                <line x1="70%" y1="15%" x2="85%" y2="35%" class="connection-line"/>
+                <line x1="20%" y1="60%" x2="40%" y2="80%" class="connection-line"/>
+                <line x1="60%" y1="70%" x2="80%" y2="55%" class="connection-line"/>
+            </svg>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="title-block p-8 mb-8 max-w-3xl">
-                <div class="flex justify-between items-start mb-4">
-                    <span class="tech-label">PROJECT NO. 305</span>
-                    <span class="tech-label">SCALE: 1:1</span>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Title Block -->
+                <div class="title-block p-8">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="tech-label">PROJECT NO. 305</span>
+                        <span class="tech-label">SCALE: 1:1</span>
+                    </div>
+                    <div class="live-pill mb-6">
+                        <span class="live-dot"></span>
+                        <span>MARKET LIVE — 2,000+ BUSINESSES SOLD</span>
+                    </div>
+                    <h1 class="text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
+                        BUY & SELL<br>BUSINESSES
+                    </h1>
+                    <p class="text-lg text-white/50 max-w-xl mb-6">
+                        AI-powered matching. Secure transactions. Verified listings. 
+                        The future of business sales in Miami.
+                    </p>
+                    <div class="flex gap-4">
+                        <button onclick="document.getElementById('search').scrollIntoView({behavior:'smooth'})" class="schematic-btn px-6 py-3">
+                            <span class="relative z-10"><i class="fas fa-search mr-2"></i>SEARCH NOW</span>
+                        </button>
+                        <button onclick="document.getElementById('matching').scrollIntoView({behavior:'smooth'})" class="schematic-btn px-6 py-3">
+                            <span class="relative z-10"><i class="fas fa-magic mr-2"></i>AI MATCH</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="inline-flex items-center gap-2 px-4 py-2 border border-white/10 mb-6 animate-float">
-                    <span class="w-2 h-2 bg-[#00D4FF]"></span>
-                    <span class="tech-label" style="color: rgba(255,255,255,0.6)">2,000+ MIAMI BUSINESSES SOLD</span>
-                </div>
-                <h1 class="text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
-                    BUY & SELL<br>BUSINESSES
-                </h1>
-                <p class="text-lg text-white/50 max-w-xl">
-                    AI-powered matching. Secure transactions. Verified listings. 
-                    The future of business sales in Miami.
-                </p>
-                <div class="flex gap-4 mt-8">
-                    <div class="dimension"><span class="tech-label">50+ LISTINGS</span></div>
-                    <div class="dimension"><span class="tech-label">$2.4M VOLUME</span></div>
-                    <div class="dimension"><span class="tech-label">98% SUCCESS</span></div>
+
+                <!-- Right: Live Stats Dashboard -->
+                <div class="space-y-4">
+                    <!-- Live Market Graph -->
+                    <div class="tech-card p-4">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="tech-label">MARKET ACTIVITY — LIVE</span>
+                            <span class="live-pill"><span class="live-dot"></span>LIVE</span>
+                        </div>
+                        <div class="graph-container" id="heroGraph">
+                            <!-- Bars generated by JS -->
+                        </div>
+                        <div class="flex justify-between mt-2">
+                            <span class="tech-label">00:00</span>
+                            <span class="tech-label">06:00</span>
+                            <span class="tech-label">12:00</span>
+                            <span class="tech-label">18:00</span>
+                            <span class="tech-label">24:00</span>
+                        </div>
+                    </div>
+
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="hero-stat-card text-center">
+                            <div class="stat-number" id="statListings">50</div>
+                            <div class="stat-label">ACTIVE LISTINGS</div>
+                        </div>
+                        <div class="hero-stat-card text-center">
+                            <div class="stat-number" id="statVolume">2.4M</div>
+                            <div class="stat-label">$ VOLUME</div>
+                        </div>
+                        <div class="hero-stat-card text-center">
+                            <div class="stat-number" id="statSuccess">98%</div>
+                            <div class="stat-label">SUCCESS RATE</div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity Feed -->
+                    <div class="tech-card p-4">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="tech-label">RECENT TRANSACTIONS</span>
+                            <span class="tech-label" id="lastUpdate">UPDATED: NOW</span>
+                        </div>
+                        <div id="activityFeed" class="space-y-2">
+                            <!-- Activity items generated by JS -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -914,9 +1091,110 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Initialize
+        // ====== HERO DYNAMIC ELEMENTS ======
+        function initHeroGraph() {
+            const container = document.getElementById('heroGraph');
+            const bars = 24;
+            for (let i = 0; i < bars; i++) {
+                const height = Math.random() * 80 + 20;
+                const bar = document.createElement('div');
+                bar.className = 'graph-line';
+                bar.style.left = `${(i / bars) * 100}%`;
+                bar.style.setProperty('--h', `${height}%`);
+                bar.style.animationDelay = `${i * 0.1}s`;
+                bar.style.width = `${90 / bars}%`;
+                container.appendChild(bar);
+                
+                // Add dot on top of some bars
+                if (i % 4 === 0) {
+                    const dot = document.createElement('div');
+                    dot.className = 'graph-dot';
+                    dot.style.left = `${(i / bars) * 100 + (45 / bars)}%`;
+                    dot.style.bottom = `${height}%`;
+                    dot.style.animationDelay = `${i * 0.2}s`;
+                    container.appendChild(dot);
+                }
+            }
+        }
+
+        const activities = [
+            { type: 'sale', text: 'Miami Beach Café — SALE CLOSED', time: '2 min ago', icon: 'fa-check-circle', color: '#00FF88' },
+            { type: 'new', text: 'New: Brickell Wine Bar listed', time: '5 min ago', icon: 'fa-plus-circle', color: '#00D4FF' },
+            { type: 'view', text: 'Downtown Marketing — 12 views', time: '8 min ago', icon: 'fa-eye', color: '#FFC107' },
+            { type: 'offer', text: 'Offer received: Wynwood Gallery', time: '12 min ago', icon: 'fa-handshake', color: '#FF006E' },
+            { type: 'sale', text: 'Coral Gables Dental — NDA signed', time: '15 min ago', icon: 'fa-file-signature', color: '#00FF88' },
+        ];
+
+        function updateActivityFeed() {
+            const feed = document.getElementById('activityFeed');
+            feed.innerHTML = activities.map(a => `
+                <div class="flex items-center gap-3 py-2 border-b border-white/5 last:border-0">
+                    <i class="fas ${a.icon}" style="color: ${a.color}; width: 16px;"></i>
+                    <div class="flex-1">
+                        <span class="text-white/70 text-sm">${a.text}</span>
+                    </div>
+                    <span class="tech-label">${a.time}</span>
+                </div>
+            `).join('');
+        }
+
+        function animateStats() {
+            const stats = [
+                { id: 'statListings', target: 50, suffix: '' },
+                { id: 'statVolume', target: 2.4, suffix: 'M', isFloat: true },
+                { id: 'statSuccess', target: 98, suffix: '%' }
+            ];
+            
+            stats.forEach(stat => {
+                const el = document.getElementById(stat.id);
+                let current = 0;
+                const increment = stat.isFloat ? 0.1 : 1;
+                const interval = setInterval(() => {
+                    current += increment;
+                    if (current >= stat.target) {
+                        current = stat.target;
+                        clearInterval(interval);
+                    }
+                    el.textContent = stat.isFloat ? current.toFixed(1) + stat.suffix : Math.floor(current) + stat.suffix;
+                }, 30);
+            });
+        }
+
+        function rotateActivities() {
+            const feed = document.getElementById('activityFeed');
+            const items = feed.children;
+            if (items.length > 0) {
+                const first = items[0];
+                first.style.opacity = '0';
+                first.style.transform = 'translateX(-20px)';
+                setTimeout(() => {
+                    const last = activities.pop();
+                    activities.unshift({
+                        ...last,
+                        time: 'Just now',
+                        text: last.text.replace(/\d+ min ago|Just now/, 'Just now')
+                    });
+                    updateActivityFeed();
+                }, 300);
+            }
+        }
+
+        // Initialize hero elements
         document.addEventListener('DOMContentLoaded', () => {
             renderListings();
+            initHeroGraph();
+            updateActivityFeed();
+            animateStats();
+            
+            // Rotate activities every 8 seconds
+            setInterval(rotateActivities, 8000);
+            
+            // Update last updated time
+            setInterval(() => {
+                const now = new Date();
+                const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                document.getElementById('lastUpdate').textContent = `UPDATED: ${time}`;
+            }, 1000);
         });
     </script>
 </body>
