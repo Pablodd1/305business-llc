@@ -10,13 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: #0a1628;
-            color: #e0e0e0;
-            min-height: 100vh;
-        }
+        body { font-family: 'Inter', sans-serif; background: #0a1628; color: #e0e0e0; min-height: 100vh; }
         
         /* Blueprint Grid Background - FULL SITE */
         .blueprint-bg {
@@ -29,111 +23,72 @@
         }
         
         /* Technical Drawing Lines */
-        .tech-border {
-            border: 1px solid rgba(255,255,255,0.15);
-            position: relative;
-        }
+        .tech-border { border: 1px solid rgba(255,255,255,0.15); position: relative; }
         .tech-border::before, .tech-border::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border: 1px solid rgba(255,255,255,0.3);
+            content: ''; position: absolute; width: 8px; height: 8px; border: 1px solid rgba(255,255,255,0.3);
         }
         .tech-border::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
         .tech-border::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
         
         /* Technical Card */
         .tech-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.1);
-            position: relative;
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); position: relative;
+            transition: all 0.3s ease;
         }
         .tech-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
             background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 20%, rgba(255,255,255,0.2) 80%, transparent 100%);
+        }
+        .tech-card:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
         }
         
         /* Inset Views */
         .inset-view {
-            border: 1px solid rgba(255,255,255,0.15);
-            background: rgba(255,255,255,0.02);
-            position: relative;
+            border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.02); position: relative;
         }
         .inset-view::before {
-            content: attr(data-view);
-            position: absolute;
-            top: -10px;
-            left: 10px;
-            background: #0a1628;
-            padding: 0 5px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            color: rgba(255,255,255,0.4);
-            letter-spacing: 0.1em;
+            content: attr(data-view); position: absolute; top: -10px; left: 10px; background: #0a1628;
+            padding: 0 5px; font-family: 'JetBrains Mono', monospace; font-size: 9px;
+            color: rgba(255,255,255,0.4); letter-spacing: 0.1em;
         }
         
         /* Schematic Button */
         .schematic-btn {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            letter-spacing: 0.05em;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
+            background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.05em;
+            position: relative; overflow: hidden; cursor: pointer;
         }
         .schematic-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.05);
-            transition: left 0.3s;
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.05); transition: left 0.3s;
         }
         .schematic-btn:hover::before { left: 0; }
         
         /* Technical Labels */
         .tech-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.4);
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4);
         }
         
         /* Section Divider */
         .section-divider {
             height: 1px;
             background: repeating-linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 10px, transparent 10px, transparent 20px);
-            margin: 40px 0;
-            position: relative;
+            margin: 40px 0; position: relative;
         }
         .section-divider::after {
-            content: '◆';
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            color: rgba(255,255,255,0.2);
-            background: #0a1628;
-            padding: 0 10px;
+            content: '◆'; position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%, -50%); color: rgba(255,255,255,0.2);
+            background: #0a1628; padding: 0 10px;
         }
         
         /* Title Block */
         .title-block {
             border: 1px solid rgba(255,255,255,0.15);
-            background: rgba(255,255,255,0.02);
-            position: relative;
+            background: rgba(255,255,255,0.02); position: relative;
         }
         
         /* Blueprint Navigation */
@@ -154,70 +109,67 @@
         /* Dimension Lines */
         .dimension { position: relative; padding: 0 20px; }
         .dimension::before, .dimension::after {
-            content: '|';
-            position: absolute;
-            top: 0;
-            color: rgba(255,255,255,0.2);
+            content: '|'; position: absolute; top: 0; color: rgba(255,255,255,0.2);
         }
         .dimension::before { left: 5px; }
         .dimension::after { right: 5px; }
         
-        /* ====== SINGLE STOCK TICKER ====== */
+        /* Status badges */
+        .status-active { border: 1px solid rgba(0,255,136,0.3); color: #00FF88; }
+        .status-negotiating { border: 1px solid rgba(255,193,7,0.3); color: #FFC107; }
+        .status-closed { border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.5); }
+        
+        /* Stock Ticker */
         .ticker-bar {
-            width: 100%;
-            overflow: hidden;
+            width: 100%; overflow: hidden;
             background: rgba(10,22,40,0.8);
             border-top: 1px solid rgba(255,255,255,0.1);
             border-bottom: 1px solid rgba(255,255,255,0.1);
             padding: 10px 0;
         }
-        
         .ticker-track {
-            display: flex;
-            animation: ticker-scroll 50s linear infinite;
-            width: max-content;
+            display: flex; animation: ticker-scroll 50s linear infinite; width: max-content;
         }
-        
-        .ticker-track:hover {
-            animation-play-state: paused;
-        }
-        
+        .ticker-track:hover { animation-play-state: paused; }
         @keyframes ticker-scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-        
         .stock-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0 24px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            white-space: nowrap;
+            display: flex; align-items: center; gap: 8px;
+            padding: 0 24px; font-family: 'JetBrains Mono', monospace;
+            font-size: 13px; white-space: nowrap;
         }
+        .stock-item .sym { color: #00D4FF; font-weight: 700; }
+        .stock-item .price { color: #ffffff; }
+        .stock-item .chg-up { color: #00ff88; }
+        .stock-item .chg-down { color: #ff4757; }
+        .stock-item .vol { color: rgba(255,255,255,0.3); font-size: 11px; }
         
-        .stock-item .sym {
-            color: #00D4FF;
-            font-weight: 700;
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
+        .animate-float { animation: float 6s ease-in-out infinite; }
         
-        .stock-item .price {
-            color: #ffffff;
+        /* Modal */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+            z-index: 100; display: none; align-items: center; justify-content: center;
         }
-        
-        .stock-item .chg-up {
-            color: #00ff88;
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: #0a1628; border: 1px solid rgba(255,255,255,0.15);
+            max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto;
+            position: relative;
         }
-        
-        .stock-item .chg-down {
-            color: #ff4757;
+        .modal-content::before, .modal-content::after {
+            content: ''; position: absolute; width: 12px; height: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
         }
-        
-        .stock-item .vol {
-            color: rgba(255,255,255,0.3);
-            font-size: 11px;
-        }
+        .modal-content::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+        .modal-content::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
     </style>
 </head>
 <body class="blueprint-bg">
@@ -226,7 +178,7 @@
     <nav class="blueprint-nav fixed top-0 left-0 right-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home')">
                     <img src="305business-logo-transparent.png" alt="305business" class="h-8 w-auto">
                     <div>
                         <span class="font-bold text-lg text-white tracking-wider">305business</span>
@@ -235,9 +187,13 @@
                 </div>
                 <div class="flex items-center gap-6">
                     <a href="#market" class="tech-label hover:text-white/60 transition">MARKET</a>
+                    <a href="#search" class="tech-label hover:text-white/60 transition">SEARCH</a>
                     <a href="#listings" class="tech-label hover:text-white/60 transition">LISTINGS</a>
-                    <a href="#services" class="tech-label hover:text-white/60 transition">SERVICES</a>
-                    <a href="#contact" class="tech-label hover:text-white/60 transition">CONTACT</a>
+                    <a href="#matching" class="tech-label hover:text-white/60 transition">AI MATCH</a>
+                    <a href="#how-it-works" class="tech-label hover:text-white/60 transition">PROCESS</a>
+                    <button onclick="showListingModal()" class="schematic-btn px-4 py-2">
+                        <span class="relative z-10">+ LIST BUSINESS</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -258,12 +214,16 @@
                     <span class="tech-label">PROJECT NO. 305</span>
                     <span class="tech-label">SCALE: 1:1</span>
                 </div>
+                <div class="inline-flex items-center gap-2 px-4 py-2 border border-white/10 mb-6 animate-float">
+                    <span class="w-2 h-2 bg-[#00D4FF]"></span>
+                    <span class="tech-label" style="color: rgba(255,255,255,0.6)">2,000+ MIAMI BUSINESSES SOLD</span>
+                </div>
                 <h1 class="text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
-                    MIAMI<br>BUSINESS<br>HUB
+                    BUY & SELL<br>BUSINESSES
                 </h1>
                 <p class="text-lg text-white/50 max-w-xl">
-                    Technical marketplace for business transactions, market intelligence,
-                    and verified commercial listings.
+                    AI-powered matching. Secure transactions. Verified listings. 
+                    The future of business sales in Miami.
                 </p>
                 <div class="flex gap-4 mt-8">
                     <div class="dimension"><span class="tech-label">50+ LISTINGS</span></div>
@@ -285,10 +245,173 @@
                 <span class="tech-label">VIEW: REAL-TIME</span>
             </div>
         </div>
-
-        <!-- ONE scrolling ticker bar -->
         <div class="ticker-bar">
             <div class="ticker-track" id="tickerTrack"></div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Search Section -->
+    <section id="search" class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="tech-border p-6 max-w-3xl mx-auto">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="tech-label">SEARCH PARAMETERS</span>
+                    <span class="tech-label">QUERY: ACTIVE</span>
+                </div>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1">
+                        <input type="text" id="heroSearch" placeholder="SEARCH_BUSINESS_TYPE..." 
+                            class="tech-input w-full px-4 py-3 text-sm" onkeypress="if(event.key==='Enter')performSearch()">
+                    </div>
+                    <select id="heroCategory" class="tech-input px-4 py-3 text-sm">
+                        <option value="">ALL_CATEGORIES</option>
+                        <option value="restaurant">RESTAURANT</option>
+                        <option value="retail">RETAIL</option>
+                        <option value="service">SERVICE</option>
+                        <option value="tech">TECHNOLOGY</option>
+                        <option value="healthcare">HEALTHCARE</option>
+                        <option value="hospitality">HOSPITALITY</option>
+                    </select>
+                    <button onclick="performSearch()" class="schematic-btn px-6 py-3">
+                        <span class="relative z-10"><i class="fas fa-search mr-2"></i>EXECUTE</span>
+                    </button>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <button onclick="quickFilter('restaurant')" class="schematic-btn px-3 py-1 text-xs">
+                        <span class="relative z-10"><i class="fas fa-utensils mr-1"></i>RESTAURANTS</span>
+                    </button>
+                    <button onclick="quickFilter('retail')" class="schematic-btn px-3 py-1 text-xs">
+                        <span class="relative z-10"><i class="fas fa-store mr-1"></i>RETAIL</span>
+                    </button>
+                    <button onclick="quickFilter('tech')" class="schematic-btn px-3 py-1 text-xs">
+                        <span class="relative z-10"><i class="fas fa-laptop-code mr-1"></i>TECH</span>
+                    </button>
+                    <button onclick="quickFilter('healthcare')" class="schematic-btn px-3 py-1 text-xs">
+                        <span class="relative z-10"><i class="fas fa-heartbeat mr-1"></i>HEALTHCARE</span>
+                    </button>
+                    <button onclick="quickFilter('under-500k')" class="schematic-btn px-3 py-1 text-xs">
+                        <span class="relative z-10"><i class="fas fa-tag mr-1"></i>UNDER_$500K</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- AI Matching Section -->
+    <section id="matching" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="tech-label block mb-2">SHEET: AI-1</span>
+                <h2 class="text-3xl font-bold text-white mb-4">AI-POWERED MATCHING</h2>
+                <p class="text-white/40 max-w-2xl mx-auto">Neural network analysis finds your ideal business from 2,000+ Miami listings.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Buyer Profile -->
+                <div class="tech-card p-8">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                        <i class="fas fa-user-tie text-[#00D4FF]"></i> BUYER PROFILE
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="tech-label block mb-2">BUDGET_RANGE</label>
+                            <select id="buyerBudget" class="tech-input w-full px-4 py-3 text-sm">
+                                <option value="">ANY_BUDGET</option>
+                                <option value="0-100k">$0 - $100K</option>
+                                <option value="100k-500k">$100K - $500K</option>
+                                <option value="500k-1m">$500K - $1M</option>
+                                <option value="1m+">$1M+</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="tech-label block mb-2">INDUSTRY</label>
+                            <select id="buyerIndustry" class="tech-input w-full px-4 py-3 text-sm">
+                                <option value="">ANY_INDUSTRY</option>
+                                <option value="restaurant">RESTAURANT/FOOD</option>
+                                <option value="retail">RETAIL</option>
+                                <option value="service">SERVICE</option>
+                                <option value="tech">TECHNOLOGY</option>
+                                <option value="healthcare">HEALTHCARE</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="tech-label block mb-2">LOCATION_PREF</label>
+                            <select id="buyerLocation" class="tech-input w-full px-4 py-3 text-sm">
+                                <option value="">ANY_LOCATION</option>
+                                <option value="miami-beach">MIAMI_BEACH</option>
+                                <option value="brickell">BRICKELL</option>
+                                <option value="wynwood">WYNWOOD</option>
+                                <option value="coral-gables">CORAL_GABLES</option>
+                                <option value="downtown">DOWNTOWN</option>
+                            </select>
+                        </div>
+                        <button onclick="findMatches()" class="schematic-btn w-full py-4">
+                            <span class="relative z-10"><i class="fas fa-magic mr-2"></i>FIND MATCHES →</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Match Results -->
+                <div id="matchesContainer" class="space-y-4">
+                    <div class="tech-card p-6 border-l-4" style="border-left-color: #00D4FF">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 border border-white/20 flex items-center justify-center">
+                                    <i class="fas fa-utensils text-2xl text-[#00D4FF]"></i>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <h4 class="font-bold text-white text-lg">Miami Beach Café</h4>
+                                        <span class="px-2 py-1 border border-[#00D4FF]/30 text-[#00D4FF] text-xs font-bold">94% MATCH</span>
+                                    </div>
+                                    <p class="text-white/40 text-sm">RESTAURANT • MIAMI_BEACH, FL</p>
+                                    <div class="flex items-center gap-4 mt-3 text-sm">
+                                        <span class="text-white/30"><i class="fas fa-dollar-sign mr-1 text-[#00D4FF]"></i>$420K/YEAR REVENUE</span>
+                                        <span class="text-white/30"><i class="fas fa-chair mr-1 text-[#00D4FF]"></i>45 SEATS</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-2xl font-bold text-white">$185,000</p>
+                                <button onclick="requestInfo('miami-beach-cafe')" class="mt-2 px-4 py-2 border border-white/20 text-white text-sm hover:bg-white/5 transition">
+                                    REQUEST INFO →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card p-6 border-l-4" style="border-left-color: #B829DD">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 border border-white/20 flex items-center justify-center">
+                                    <i class="fas fa-wine-glass text-2xl text-[#B829DD]"></i>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <h4 class="font-bold text-white text-lg">Brickell Wine Bar</h4>
+                                        <span class="px-2 py-1 border border-[#B829DD]/30 text-[#B829DD] text-xs font-bold">87% MATCH</span>
+                                    </div>
+                                    <p class="text-white/40 text-sm">RESTAURANT • BRICKELL, MIAMI</p>
+                                    <div class="flex items-center gap-4 mt-3 text-sm">
+                                        <span class="text-white/30"><i class="fas fa-dollar-sign mr-1 text-[#B829DD]"></i>$680K/YEAR REVENUE</span>
+                                        <span class="text-white/30"><i class="fas fa-wine-bottle mr-1 text-[#B829DD]"></i>80+ WINES</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-2xl font-bold text-white">$320,000</p>
+                                <button onclick="requestInfo('brickell-wine-bar')" class="mt-2 px-4 py-2 border border-white/20 text-white text-sm hover:bg-white/5 transition">
+                                    REQUEST INFO →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -297,58 +420,74 @@
     <!-- Featured Listings -->
     <section id="listings" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-end mb-12">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
                 <div>
                     <span class="tech-label block mb-2">SHEET: A-1</span>
                     <h2 class="text-3xl font-bold text-white">FEATURED LISTINGS</h2>
+                    <p class="text-white/40">20 verified businesses for sale in Miami</p>
                 </div>
-                <span class="tech-label">VIEW: ORTHOGRAPHIC</span>
+                <div class="flex gap-2 flex-wrap">
+                    <button onclick="filterListings('all')" class="schematic-btn px-4 py-2 active"><span class="relative z-10">ALL</span></button>
+                    <button onclick="filterListings('tech')" class="schematic-btn px-4 py-2"><span class="relative z-10">TECH</span></button>
+                    <button onclick="filterListings('restaurant')" class="schematic-btn px-4 py-2"><span class="relative z-10">RESTAURANTS</span></button>
+                    <button onclick="filterListings('retail')" class="schematic-btn px-4 py-2"><span class="relative z-10">RETAIL</span></button>
+                    <button onclick="filterListings('healthcare')" class="schematic-btn px-4 py-2"><span class="relative z-10">HEALTHCARE</span></button>
+                    <button onclick="filterListings('hospitality')" class="schematic-btn px-4 py-2"><span class="relative z-10">HOTELS</span></button>
+                </div>
             </div>
+            
+            <div id="listingsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Listings rendered by JS -->
+            </div>
+        </div>
+    </section>
 
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="tech-card p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="tech-label">REF: BS-001</span>
-                        <span class="px-2 py-1 border border-white/10 text-xs text-white/40">ACTIVE</span>
+    <div class="section-divider"></div>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="tech-label block mb-2">SHEET: P-1</span>
+                <h2 class="text-3xl font-bold text-white mb-4">TRANSACTION PROCESS</h2>
+                <p class="text-white/40 max-w-2xl mx-auto">Secure, transparent, and efficient business transactions</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 border border-white/20 flex items-center justify-center mx-auto mb-6 relative">
+                        <span class="absolute -top-2 -right-2 w-8 h-8 border border-white/30 text-white text-sm font-bold flex items-center justify-center bg-[#0a1628]">1</span>
+                        <i class="fas fa-search text-3xl text-[#00D4FF]"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Medical Billing Co.</h3>
-                    <p class="text-white/40 text-sm mb-4">Established revenue cycle management firm with 50+ physician clients.</p>
-                    <div class="space-y-2 mb-4">
-                        <div class="flex justify-between text-sm"><span class="text-white/30">REVENUE</span><span class="text-white">$1.2M/year</span></div>
-                        <div class="flex justify-between text-sm"><span class="text-white/30">ASKING</span><span class="text-white">$450K</span></div>
-                        <div class="flex justify-between text-sm"><span class="text-white/30">MULTIPLE</span><span class="text-white">2.8x</span></div>
-                    </div>
-                    <button class="schematic-btn w-full py-2"><span class="relative z-10">VIEW DETAILS →</span></button>
+                    <h3 class="text-xl font-bold text-white mb-2">SEARCH</h3>
+                    <p class="text-white/40 text-sm">Browse AI-matched businesses or search by industry, location, and budget</p>
                 </div>
-
-                <div class="tech-card p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="tech-label">REF: BS-002</span>
-                        <span class="px-2 py-1 border border-white/10 text-xs text-white/40">ACTIVE</span>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 border border-white/20 flex items-center justify-center mx-auto mb-6 relative">
+                        <span class="absolute -top-2 -right-2 w-8 h-8 border border-white/30 text-white text-sm font-bold flex items-center justify-center bg-[#0a1628]">2</span>
+                        <i class="fas fa-file-signature text-3xl text-[#B829DD]"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Urgent Care Chain</h3>
-                    <p class="text-white/40 text-sm mb-4">3-location urgent care network in Miami-Dade. High growth potential.</p>
-                    <div class="space-y-2 mb-4">
-                        <div class="flex justify-between text-sm"><span class="text-white/30">REVENUE</span><span class="text-white">$3.8M/year</span></div>
-                        <div class="flex justify-between text-sm"><span class="text-white/30">ASKING</span><span class="text-white">$1.8M</span></div>
-                        <div class="flex justify-between text-sm"><span class="text-white/30">MULTIPLE</span><span class="text-white">4.2x</span></div>
-                    </div>
-                    <button class="schematic-btn w-full py-2"><span class="relative z-10">VIEW DETAILS →</span></button>
+                    <h3 class="text-xl font-bold text-white mb-2">CONNECT</h3>
+                    <p class="text-white/40 text-sm">Sign NDA, unlock secure chat, and schedule video calls with sellers</p>
                 </div>
-
-                <div class="tech-card p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="tech-label">REF: BS-003</span>
-                        <span class="px-2 py-1 border border-white/10 text-xs text-white/40">ACTIVE</span>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 border border-white/20 flex items-center justify-center mx-auto mb-6 relative">
+                        <span class="absolute -top-2 -right-2 w-8 h-8 border border-white/30 text-white text-sm font-bold flex items-center justify-center bg-[#0a1628]">3</span>
+                        <i class="fas fa-handshake text-3xl text-[#FF006E]"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Dermatology Practice</h3>
-                    <p class="text-white/40 text-sm mb-4">Cosmetic + medical dermatology. Prime location in Coral Gables.</p>
-                    <div class="space-y-2 mb-4">
-                        <div class="flex justify-between text-sm"><span class="text-white/30">REVENUE</span><span class="text-white">$890K/year</span></div>
-                        <div class="flex justify-between text-sm"><span class="text-white/30">ASKING</span><span class="text-white">$320K</span></div>
-                        <div class="flex justify-between text-sm"><span class="text-white/30">MULTIPLE</span><span class="text-white">3.1x</span></div>
+                    <h3 class="text-xl font-bold text-white mb-2">NEGOTIATE</h3>
+                    <p class="text-white/40 text-sm">Make offers, review financials, and sign digital contracts securely</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 border border-white/20 flex items-center justify-center mx-auto mb-6 relative">
+                        <span class="absolute -top-2 -right-2 w-8 h-8 border border-white/30 text-white text-sm font-bold flex items-center justify-center bg-[#0a1628]">4</span>
+                        <i class="fas fa-check-circle text-3xl text-[#00FF88]"></i>
                     </div>
-                    <button class="schematic-btn w-full py-2"><span class="relative z-10">VIEW DETAILS →</span></button>
+                    <h3 class="text-xl font-bold text-white mb-2">CLOSE</h3>
+                    <p class="text-white/40 text-sm">Admin verifies, funds transfer, and business handover completed</p>
                 </div>
             </div>
         </div>
@@ -359,45 +498,38 @@
     <!-- Services Section -->
     <section id="services" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-end mb-12">
-                <div>
-                    <span class="tech-label block mb-2">SHEET: B-1</span>
-                    <h2 class="text-3xl font-bold text-white">TECHNICAL SPECIFICATIONS</h2>
-                </div>
-                <span class="tech-label">VIEW: DETAIL</span>
+            <div class="text-center mb-12">
+                <span class="tech-label block mb-2">SHEET: S-1</span>
+                <h2 class="text-3xl font-bold text-white mb-4">BUSINESS SERVICES</h2>
+                <p class="text-white/40 max-w-2xl mx-auto">Professional services to maximize your business value</p>
             </div>
-
-            <div class="grid md:grid-cols-4 gap-6">
-                <div class="inset-view p-6" data-view="DETAIL A">
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="inset-view p-6" data-view="SERVICE A">
                     <div class="w-12 h-12 border border-white/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-search text-white/40"></i>
+                        <i class="fas fa-calculator text-[#00D4FF] text-xl"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">AI MATCHING</h3>
-                    <p class="text-white/40 text-sm">Neural network analysis of buyer/seller compatibility.</p>
+                    <h3 class="text-lg font-bold text-white mb-2">BUSINESS VALUATION</h3>
+                    <p class="text-white/40 text-sm mb-4">Comprehensive assessment of your business worth</p>
+                    <p class="text-[#00D4FF] font-bold font-mono">$495</p>
                 </div>
-
-                <div class="inset-view p-6" data-view="DETAIL B">
+                
+                <div class="inset-view p-6" data-view="SERVICE B">
                     <div class="w-12 h-12 border border-white/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-shield-alt text-white/40"></i>
+                        <i class="fas fa-chart-line text-[#B829DD] text-xl"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">ESCROW</h3>
-                    <p class="text-white/40 text-sm">Secure transaction holding with milestone release.</p>
+                    <h3 class="text-lg font-bold text-white mb-2">FINANCIAL FORECASTING</h3>
+                    <p class="text-white/40 text-sm mb-4">3-year financial model with projections</p>
+                    <p class="text-[#B829DD] font-bold font-mono">$895</p>
                 </div>
-
-                <div class="inset-view p-6" data-view="DETAIL C">
+                
+                <div class="inset-view p-6" data-view="SERVICE C">
                     <div class="w-12 h-12 border border-white/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-check-double text-white/40"></i>
+                        <i class="fas fa-presentation text-[#FF006E] text-xl"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">VERIFICATION</h3>
-                    <p class="text-white/40 text-sm">Document authentication and financial validation.</p>
-                </div>
-
-                <div class="inset-view p-6" data-view="DETAIL D">
-                    <div class="w-12 h-12 border border-white/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-chart-line text-white/40"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2">VALUATION</h3>
-                    <p class="text-white/40 text-sm">Market-based pricing with comparable analysis.</p>
+                    <h3 class="text-lg font-bold text-white mb-2">INVESTOR PITCH DECK</h3>
+                    <p class="text-white/40 text-sm mb-4">Custom-designed deck for investors</p>
+                    <p class="text-[#FF006E] font-bold font-mono">$695</p>
                 </div>
             </div>
         </div>
@@ -467,37 +599,55 @@
                     <p class="text-white/30 text-sm">Technical marketplace for business transactions.</p>
                 </div>
                 <div>
-                    <span class="tech-label block mb-4">NAVIGATION</span>
+                    <span class="tech-label block mb-4">PLATFORM</span>
                     <ul class="space-y-2">
-                        <li><a href="#market" class="text-white/30 hover:text-white/60 text-sm transition">Market</a></li>
+                        <li><a href="#search" class="text-white/30 hover:text-white/60 text-sm transition">Search Businesses</a></li>
+                        <li><a href="#matching" class="text-white/30 hover:text-white/60 text-sm transition">AI Matching</a></li>
                         <li><a href="#listings" class="text-white/30 hover:text-white/60 text-sm transition">Listings</a></li>
-                        <li><a href="#services" class="text-white/30 hover:text-white/60 text-sm transition">Services</a></li>
+                        <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Broker Portal</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <span class="tech-label block mb-4">SERVICES</span>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Valuation</a></li>
+                        <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Pitch Decks</a></li>
+                        <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Financial Forecasting</a></li>
+                        <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Legal Support</a></li>
                     </ul>
                 </div>
                 <div>
                     <span class="tech-label block mb-4">CONTACT</span>
                     <ul class="space-y-2">
-                        <li class="text-white/30 text-sm">+1 786-643-2099</li>
-                        <li class="text-white/30 text-sm">info@305business.llc</li>
-                        <li class="text-white/30 text-sm">Miami, FL</li>
-                    </ul>
-                </div>
-                <div>
-                    <span class="tech-label block mb-4">LEGAL</span>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Privacy</a></li>
-                        <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Terms</a></li>
+                        <li class="text-white/30 text-sm"><i class="fas fa-phone mr-2"></i>+1 786-643-2099</li>
+                        <li class="text-white/30 text-sm"><i class="fas fa-envelope mr-2"></i>info@305business.llc</li>
+                        <li class="text-white/30 text-sm"><i class="fas fa-map-marker-alt mr-2"></i>Miami, FL</li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-white/10 mt-8 pt-8 text-center">
+            <div class="border-t border-white/10 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
                 <span class="tech-label">© 2026 305business.LLC — ALL RIGHTS RESERVED — REV 1.0</span>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Privacy</a>
+                    <a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Terms</a>
+                    <a href="#" class="text-white/30 hover:text-white/60 text-sm transition">NDA Template</a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Listing Detail Modal -->
+    <div id="listingModal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content p-8" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-white/40 hover:text-white">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
     <script>
-        // Stock Ticker Data
+        // ====== STOCK TICKER ======
         const STOCKS = [
             { symbol: 'AAPL', name: 'Apple Inc.' }, { symbol: 'MSFT', name: 'Microsoft' },
             { symbol: 'GOOGL', name: 'Alphabet' }, { symbol: 'AMZN', name: 'Amazon' },
@@ -511,7 +661,7 @@
             { symbol: 'ROKU', name: 'Roku' }, { symbol: 'SQ', name: 'Block' }
         ];
 
-        function generateData() {
+        function generateStockData() {
             return STOCKS.map(stock => {
                 const basePrice = Math.random() * 500 + 50;
                 const change = (Math.random() - 0.5) * 10;
@@ -523,15 +673,13 @@
         }
 
         function renderTicker() {
-            const data = generateData();
+            const data = generateStockData();
             const track = document.getElementById('tickerTrack');
-            
             const items = data.map(stock => {
                 const isUp = parseFloat(stock.change) >= 0;
                 const arrow = isUp ? '▲' : '▼';
                 const chgClass = isUp ? 'chg-up' : 'chg-down';
                 const volumeM = (stock.volume / 1000000).toFixed(1);
-                
                 return `
                     <div class="stock-item">
                         <span class="sym">${stock.symbol}</span>
@@ -541,13 +689,235 @@
                     </div>
                 `;
             }).join('');
-            
-            // Duplicate for seamless loop
             track.innerHTML = items + items;
         }
 
         renderTicker();
         setInterval(renderTicker, 300000);
+
+        // ====== BUSINESS LISTINGS DATA ======
+        const listings = [
+            { id: 1, name: "Miami Beach Café", category: "restaurant", price: 185000, revenue: "$420,000/year", location: "Miami Beach, FL", description: "Established café with ocean views. 45 seats, full kitchen, loyal customer base.", image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&h=400&fit=crop", features: ["45 Seats", "Full Kitchen", "Ocean View", "Established 2015"], status: "active", matchScore: 94 },
+            { id: 2, name: "Brickell Wine Bar", category: "restaurant", price: 320000, revenue: "$680,000/year", location: "Brickell, Miami", description: "Upscale wine bar in financial district. Premium clientele, 80+ wine selection.", image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600&h=400&fit=crop", features: ["80+ Wines", "Premium Location", "Financial District"], status: "active", matchScore: 87 },
+            { id: 3, name: "Wynwood Art Gallery", category: "retail", price: 250000, revenue: "$180,000/year", location: "Wynwood, Miami", description: "Contemporary art gallery in trendy Wynwood. 2,000 sq ft, established artists.", image: "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=600&h=400&fit=crop", features: ["2,000 sq ft", "Established Artists", "Event Space"], status: "negotiating", matchScore: 82 },
+            { id: 4, name: "Coral Gables Dental", category: "healthcare", price: 450000, revenue: "$890,000/year", location: "Coral Gables, FL", description: "Well-established dental practice with loyal patient base. 4 chairs, modern equipment.", image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&h=400&fit=crop", features: ["4 Chairs", "Modern Equipment", "Loyal Patients"], status: "active", matchScore: 91 },
+            { id: 5, name: "Downtown Marketing", category: "tech", price: 180000, revenue: "$350,000/year", location: "Downtown Miami", description: "Digital marketing agency with 15+ clients. Remote-friendly, scalable model.", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop", features: ["15+ Clients", "Remote Team", "Scalable"], status: "active", matchScore: 78 },
+            { id: 6, name: "Little Havana Bakery", category: "restaurant", price: 120000, revenue: "$280,000/year", location: "Little Havana, Miami", description: "Traditional Cuban bakery with strong community presence. Family-owned since 2008.", image: "https://images.unsplash.com/photo-1556217477-d325251ece38?w=600&h=400&fit=crop", features: ["Family Owned", "Community Favorite", "Since 2008"], status: "closed", matchScore: 85 },
+            { id: 7, name: "Miami SaaS Startup", category: "tech", price: 850000, revenue: "$1.2M/year", location: "Brickell, Miami", description: "B2B SaaS platform for logistics. 50+ enterprise clients, 95% retention rate.", image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop", features: ["50+ Clients", "95% Retention", "MRR $100K"], status: "active", matchScore: 96 },
+            { id: 8, name: "South Beach Boutique Hotel", category: "hospitality", price: 2500000, revenue: "$1.8M/year", location: "South Beach, Miami", description: "Boutique hotel with 25 rooms. Prime Ocean Drive location, 4.5 star rating.", image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop", features: ["25 Rooms", "Ocean Drive", "4.5 Stars"], status: "active", matchScore: 89 },
+            { id: 9, name: "Doral Logistics", category: "logistics", price: 650000, revenue: "$2.1M/year", location: "Doral, FL", description: "Last-mile delivery company serving Miami-Dade. Fleet of 15 vehicles, 30 drivers.", image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop", features: ["15 Vehicles", "30 Drivers", "Miami-Dade Coverage"], status: "active", matchScore: 83 },
+            { id: 10, name: "Aventura Medical Spa", category: "healthcare", price: 380000, revenue: "$520,000/year", location: "Aventura, FL", description: "Medical spa offering aesthetic treatments. 3 treatment rooms, licensed staff.", image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&h=400&fit=crop", features: ["3 Treatment Rooms", "Licensed Staff", "Established 2019"], status: "active", matchScore: 88 },
+            { id: 11, name: "Wynwood Software Dev", category: "tech", price: 420000, revenue: "$780,000/year", location: "Wynwood, Miami", description: "Custom software development agency. 12 developers, specializing in fintech.", image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop", features: ["12 Developers", "Fintech Focus", "Remote Capable"], status: "active", matchScore: 92 },
+            { id: 12, name: "Miami Auto Repair", category: "automotive", price: 195000, revenue: "$450,000/year", location: "Allapattah, Miami", description: "Full-service auto repair with 4 bays. Established 2010, loyal customer base.", image: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop", features: ["4 Service Bays", "ASE Certified", "Since 2010"], status: "active", matchScore: 79 },
+            { id: 13, name: "Coconut Grove Yoga", category: "wellness", price: 145000, revenue: "$220,000/year", location: "Coconut Grove, Miami", description: "Boutique yoga studio with 3 rooms. 200+ monthly members, retail shop included.", image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&h=400&fit=crop", features: ["3 Studios", "200+ Members", "Retail Shop"], status: "active", matchScore: 81 },
+            { id: 14, name: "Miami AI Consulting", category: "tech", price: 1200000, revenue: "$2.5M/year", location: "Brickell, Miami", description: "AI/ML consulting for enterprise clients. 20 consultants, Fortune 500 clients.", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop", features: ["20 Consultants", "Fortune 500 Clients", "AI/ML Focus"], status: "active", matchScore: 97 },
+            { id: 15, name: "Hialeah Construction", category: "construction", price: 890000, revenue: "$3.2M/year", location: "Hialeah, FL", description: "Residential construction company. 8 crews, licensed in Miami-Dade and Broward.", image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop", features: ["8 Crews", "Licensed", "Miami-Dade/Broward"], status: "active", matchScore: 86 },
+            { id: 16, name: "Design District Fashion", category: "retail", price: 275000, revenue: "$340,000/year", location: "Design District, Miami", description: "High-end fashion boutique in luxury shopping district. Curated designer brands.", image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop", features: ["Designer Brands", "High Foot Traffic", "Established 2017"], status: "active", matchScore: 84 },
+            { id: 17, name: "Miami Fintech Startup", category: "tech", price: 2100000, revenue: "$4.1M/year", location: "Brickell, Miami", description: "Payment processing platform for Latin America. Series A, 100+ merchant clients.", image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop", features: ["Series A", "100+ Merchants", "LatAm Focus"], status: "active", matchScore: 95 },
+            { id: 18, name: "Kendall Daycare", category: "education", price: 320000, revenue: "$480,000/year", location: "Kendall, FL", description: "Licensed daycare with 45 children capacity. Full staff, established 2015.", image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&h=400&fit=crop", features: ["45 Children", "Licensed", "Full Staff"], status: "active", matchScore: 80 },
+            { id: 19, name: "Miami Beach Nightclub", category: "hospitality", price: 750000, revenue: "$1.1M/year", location: "Miami Beach, FL", description: "Popular nightclub on Collins Avenue. Capacity 500, VIP sections, full liquor license.", image: "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=600&h=400&fit=crop", features: ["Capacity 500", "VIP Sections", "Liquor License"], status: "active", matchScore: 90 },
+            { id: 20, name: "Downtown Law Firm", category: "professional", price: 550000, revenue: "$920,000/year", location: "Downtown Miami", description: "Boutique law firm specializing in real estate. 3 partners, established client base.", image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=400&fit=crop", features: ["3 Partners", "Real Estate Focus", "Established 2012"], status: "active", matchScore: 87 }
+        ];
+
+        // ====== RENDER LISTINGS ======
+        function renderListings(filtered = listings) {
+            const grid = document.getElementById('listingsGrid');
+            grid.innerHTML = filtered.map(listing => `
+                <div class="tech-card overflow-hidden group cursor-pointer" onclick="viewListing(${listing.id})">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="${listing.image}" alt="${listing.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-4 right-4">
+                            <span class="status-${listing.status} px-3 py-1 text-xs font-bold uppercase">${listing.status}</span>
+                        </div>
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 border border-white/20 text-xs text-white font-bold">${listing.matchScore}% MATCH</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-white">${listing.name}</h3>
+                            <p class="text-2xl font-bold text-[#00D4FF]">$${listing.price.toLocaleString()}</p>
+                        </div>
+                        <p class="text-white/40 text-sm mb-3">${listing.description}</p>
+                        <div class="flex items-center gap-2 text-sm text-white/30 mb-4">
+                            <i class="fas fa-map-marker-alt text-[#00D4FF]"></i>
+                            <span>${listing.location}</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${listing.features.map(f => `<span class="px-2 py-1 border border-white/10 text-xs text-white/40">${f}</span>`).join('')}
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <div>
+                                <p class="tech-label">REVENUE</p>
+                                <p class="font-semibold text-[#00FF88]">${listing.revenue}</p>
+                            </div>
+                            <button class="schematic-btn px-4 py-2">
+                                <span class="relative z-10">VIEW DETAILS →</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ====== FILTER FUNCTIONS ======
+        function filterListings(category) {
+            const filtered = category === 'all' ? listings : listings.filter(l => l.category === category);
+            renderListings(filtered);
+        }
+
+        function quickFilter(type) {
+            let filtered;
+            if (type === 'under-500k') {
+                filtered = listings.filter(l => l.price < 500000);
+            } else {
+                filtered = listings.filter(l => l.category === type);
+            }
+            renderListings(filtered);
+            document.getElementById('listings').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function performSearch() {
+            const term = document.getElementById('heroSearch').value.toLowerCase();
+            const category = document.getElementById('heroCategory').value;
+            let filtered = listings;
+            if (term) {
+                filtered = filtered.filter(l => 
+                    l.name.toLowerCase().includes(term) || 
+                    l.description.toLowerCase().includes(term) ||
+                    l.location.toLowerCase().includes(term)
+                );
+            }
+            if (category) {
+                filtered = filtered.filter(l => l.category === category);
+            }
+            renderListings(filtered);
+            document.getElementById('listings').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ====== AI MATCHING ======
+        function findMatches() {
+            const budget = document.getElementById('buyerBudget').value;
+            const industry = document.getElementById('buyerIndustry').value;
+            const location = document.getElementById('buyerLocation').value;
+            const container = document.getElementById('matchesContainer');
+            container.innerHTML = '<div class="text-center py-8"><i class="fas fa-spinner fa-spin text-3xl text-[#00D4FF]"></i><p class="mt-2 text-white/40">AI analyzing your preferences...</p></div>';
+            
+            setTimeout(() => {
+                let matches = listings;
+                if (industry) matches = matches.filter(l => l.category === industry);
+                if (location) matches = matches.filter(l => l.location.toLowerCase().includes(location.replace('-', ' ')));
+                if (budget) {
+                    const ranges = { '0-100k': [0, 100000], '100k-500k': [100000, 500000], '500k-1m': [500000, 1000000], '1m+': [1000000, Infinity] };
+                    const [min, max] = ranges[budget] || [0, Infinity];
+                    matches = matches.filter(l => l.price >= min && l.price <= max);
+                }
+                displayMatches(matches);
+            }, 1500);
+        }
+
+        function displayMatches(matches) {
+            const container = document.getElementById('matchesContainer');
+            if (matches.length === 0) {
+                container.innerHTML = '<div class="text-center py-8"><i class="fas fa-search text-4xl text-white/20 mb-4"></i><p class="text-white/40">No matches found. Try adjusting your preferences.</p></div>';
+                return;
+            }
+            container.innerHTML = matches.map(listing => `
+                <div class="tech-card p-6 border-l-4" style="border-left-color: #00D4FF">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-start gap-4">
+                            <div class="w-16 h-16 border border-white/20 flex items-center justify-center">
+                                <i class="fas fa-store text-2xl text-[#00D4FF]"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <h4 class="font-bold text-white text-lg">${listing.name}</h4>
+                                    <span class="px-2 py-1 border border-[#00D4FF]/30 text-[#00D4FF] text-xs font-bold">${listing.matchScore}% MATCH</span>
+                                </div>
+                                <p class="text-white/40 text-sm">${listing.category.toUpperCase()} • ${listing.location.toUpperCase()}</p>
+                                <div class="flex items-center gap-4 mt-3 text-sm">
+                                    <span class="text-white/30"><i class="fas fa-dollar-sign mr-1 text-[#00D4FF]"></i>${listing.revenue.toUpperCase()}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-bold text-white">$${listing.price.toLocaleString()}</p>
+                            <button onclick="requestInfo('${listing.name}')" class="mt-2 px-4 py-2 border border-white/20 text-white text-sm hover:bg-white/5 transition">
+                                REQUEST INFO →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ====== MODAL ======
+        function viewListing(id) {
+            const listing = listings.find(l => l.id === id);
+            const modal = document.getElementById('listingModal');
+            const body = document.getElementById('modalBody');
+            body.innerHTML = `
+                <div class="flex justify-between items-start mb-4">
+                    <span class="tech-label">REF: BS-${String(listing.id).padStart(3, '0')}</span>
+                    <span class="status-${listing.status} px-3 py-1 text-xs font-bold uppercase">${listing.status}</span>
+                </div>
+                <img src="${listing.image}" alt="${listing.name}" class="w-full h-64 object-cover mb-6 border border-white/10">
+                <h2 class="text-3xl font-bold text-white mb-2">${listing.name}</h2>
+                <p class="text-white/40 mb-4">${listing.description}</p>
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="tech-card p-4">
+                        <span class="tech-label block mb-1">ASKING PRICE</span>
+                        <p class="text-2xl font-bold text-[#00D4FF]">$${listing.price.toLocaleString()}</p>
+                    </div>
+                    <div class="tech-card p-4">
+                        <span class="tech-label block mb-1">REVENUE</span>
+                        <p class="text-xl font-bold text-[#00FF88]">${listing.revenue}</p>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <span class="tech-label block mb-2">LOCATION</span>
+                    <p class="text-white"><i class="fas fa-map-marker-alt mr-2 text-[#00D4FF]"></i>${listing.location}</p>
+                </div>
+                <div class="mb-6">
+                    <span class="tech-label block mb-2">FEATURES</span>
+                    <div class="flex flex-wrap gap-2">
+                        ${listing.features.map(f => `<span class="px-3 py-1 border border-white/20 text-sm text-white/60">${f}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <button onclick="requestInfo('${listing.name}')" class="schematic-btn flex-1 py-3">
+                        <span class="relative z-10">REQUEST INFO →</span>
+                    </button>
+                    <button onclick="closeModal()" class="schematic-btn px-6 py-3">
+                        <span class="relative z-10">CLOSE</span>
+                    </button>
+                </div>
+            `;
+            modal.classList.add('active');
+        }
+
+        function closeModal(e) {
+            if (!e || e.target === document.getElementById('listingModal')) {
+                document.getElementById('listingModal').classList.remove('active');
+            }
+        }
+
+        function requestInfo(businessName) {
+            alert(`INFO REQUEST SENT FOR: ${businessName.toUpperCase()}\n\nThe seller has been notified and will contact you within 24 hours.\n\nReference: REQ-${Math.random().toString(36).substr(2,6).toUpperCase()}`);
+        }
+
+        function showListingModal() {
+            alert('LISTING CREATION FORM\n\nComing soon! Contact us at info@305business.llc to list your business now.');
+        }
+
+        function showPage(page) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderListings();
+        });
     </script>
 </body>
 </html>
