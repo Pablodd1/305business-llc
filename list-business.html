@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Business — 305business.llc</title>
+    <link rel="icon" type="image/png" href="305business-logo-transparent.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1a202c; min-height: 100vh; }
+        
+        /* Clean white background with subtle blueprint accents */
+        .list-page {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+        }
+        
+        /* Card styles */
+        .form-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+        .form-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+        
+        /* Blueprint accent elements */
+        .blueprint-accent {
+            border-left: 4px solid #1a4a7a;
+        }
+        
+        /* Section headers */
+        .section-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #1a4a7a;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-header::before {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background: #1a4a7a;
+        }
+        
+        /* Input styles */
+        .form-input {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 14px;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #1a4a7a;
+            box-shadow: 0 0 0 3px rgba(26,74,122,0.1);
+        }
+        
+        /* Select styles */
+        .form-select {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 14px;
+            transition: all 0.2s;
+            width: 100%;
+            cursor: pointer;
+        }
+        .form-select:focus {
+            outline: none;
+            border-color: #1a4a7a;
+            box-shadow: 0 0 0 3px rgba(26,74,122,0.1);
+        }
+        
+        /* Textarea styles */
+        .form-textarea {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 14px;
+            transition: all 0.2s;
+            width: 100%;
+            resize: vertical;
+            min-height: 120px;
+        }
+        .form-textarea:focus {
+            outline: none;
+            border-color: #1a4a7a;
+            box-shadow: 0 0 0 3px rgba(26,74,122,0.1);
+        }
+        
+        /* Checkbox styles */
+        .form-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            accent-color: #1a4a7a;
+        }
+        
+        /* Button styles */
+        .btn-primary {
+            background: #1a4a7a;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn-primary:hover {
+            background: #2d6a9f;
+            transform: translateY(-1px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: #1a4a7a;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 2px solid #1a4a7a;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-outline:hover {
+            background: #1a4a7a;
+            color: white;
+        }
+        
+        /* Progress bar */
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1a4a7a, #2d6a9f);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Navigation */
+        .detail-nav {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        
+        /* Help text */
+        .help-text {
+            font-size: 0.875rem;
+            color: #718096;
+            margin-top: 4px;
+        }
+        
+        /* Required indicator */
+        .required::after {
+            content: ' *';
+            color: #e53e3e;
+        }
+        
+        /* Form grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        @media (min-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        /* Step indicator */
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .step-dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: #718096;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .step-dot.active {
+            background: #1a4a7a;
+            color: white;
+        }
+        .step-dot.completed {
+            background: #48bb78;
+            color: white;
+        }
+        .step-line {
+            width: 40px;
+            height: 2px;
+            background: #e2e8f0;
+        }
+        .step-line.completed {
+            background: #48bb78;
+        }
+    </style>
+</head>
+<body class="list-page">
+    <!-- Navigation -->
+    <nav class="detail-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                    <img src="305business-logo-transparent.png" alt="305business" class="h-8 w-auto">
+                    <span class="font-bold text-lg text-gray-900 tracking-wider">305business</span>
+                    <span class="text-xs text-gray-500 font-mono">.LLC</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="window.location.href='index.html'" class="text-gray-600 hover:text-gray-900 transition">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Listings
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="bg-blue-900 text-white py-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl font-bold mb-4">List Your Business</h1>
+            <p class="text-blue-200 text-lg">Complete the form below to create your business listing. All information helps buyers make informed decisions.</p>
+        </div>
+    </div>
+
+    <!-- Progress Steps -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex justify-center items-center">
+            <div class="step-indicator">
+                <div class="step-dot active" id="step1">1</div>
+                <div class="step-line" id="line1"></div>
+                <div class="step-dot" id="step2">2</div>
+                <div class="step-line" id="line2"></div>
+                <div class="step-dot" id="step3">3</div>
+                <div class="step-line" id="line3"></div>
+                <div class="step-dot" id="step4">4</div>
+            </div>
+        </div>
+        <div class="flex justify-center gap-8 mt-2 text-sm text-gray-500">
+            <span>Basic Info</span>
+            <span>Financials</span>
+            <span>Details</span>
+            <span>Review</span>
+        </div>
+    </div>
+
+    <!-- Form Container -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <form id="listingForm" onsubmit="event.preventDefault(); submitForm();">
+            
+            <!-- Step 1: Basic Information -->
+            <div id="section1" class="form-card p-8 mb-8 blueprint-accent">
+                <div class="section-header">Step 1: Basic Information</div>
+                
+                <div class="form-grid">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2 required">Business Name</label>
+                        <input type="text" class="form-input" placeholder="e.g., Miami Beach Café" required>
+                        <p class="help-text">The official name of your business</p>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2 required">Business Category</label>
+                        <select class="form-select" required>
+                            <option value="">Select category...</option>
+                            <option value="restaurant">Restaurant / Food Service</option>
+                            <option value="retail">Retail Store</option>
+                            <option value="tech">Technology / Software</option>
+                            <option value="healthcare">Healthcare / Medical</option>
+                            <option value="hospitality">Hospitality / Hotel</option>
+                            <option value="service">Professional Service</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="construction">Construction</option>
+                            <option value="automotive">Automotive</option>
+                            <option value="education">Education / Daycare</option>
+                            <option value="fitness">Fitness / Wellness</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2 required">Year Established</label>
+                        <input type="number" class="form-input" placeholder="e.g., 2015" min="1900" max="2026" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2 required">Location</label>
+                        <input type="text" class="form-input" placeholder="e.g., Miami Beach, FL" required>
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2 required">Business Description</label>
+                    <textarea class="form-textarea" placeholder="Describe your business, its history, and what makes it unique..." required></textarea>
+                    <p class="help-text">This will appear on your listing page. Be specific about what the buyer gets.</p>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button type="button" onclick="nextStep(2)" class="btn-primary" style="width: auto;">
+                        Next: Financials <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Financial Information -->
+            <div id="section2" class="form-card p-8 mb-8 blueprint-accent hidden">
+                <div class="section-header">Step 2: Financial Information</div>
+                
+                <div class="form-grid">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2 required">Asking Price ($)</label>
+                        <input type="number" class="form-input" placeholder="e.g., 185000" min="0" required>
+                        <p class="help-text">What you want to sell the business for</p>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2 required">Annual Revenue ($)</label>
+                        <input type="number" class="form-input" placeholder="e.g., 420000" min="0" required>
+                        <p class="help-text">Total sales in the last 12 months</p>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Annual Cash Flow / Net Profit ($)</label>
+                        <input type="number" class="form-input" placeholder="e.g., 85000" min="0">
+                        <p class="help-text">Net income after all expenses</p>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Inventory Value ($)</label>
+                        <input type="number" class="form-input" placeholder="e.g., 15000" min="0">
+                        <p class="help-text">Value of inventory included in sale</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 form-grid">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Monthly Rent ($)</label>
+                        <input type="number" class="form-input" placeholder="e.g., 4500" min="0">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Lease Terms</label>
+                        <input type="text" class="form-input" placeholder="e.g., 5 years remaining">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Number of Employees</label>
+                        <input type="number" class="form-input" placeholder="e.g., 8" min="0">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Square Footage</label>
+                        <input type="number" class="form-input" placeholder="e.g., 1200" min="0">
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Revenue History (Last 5 Years)</label>
+                    <div class="form-grid">
+                        <input type="number" class="form-input" placeholder="2021 Revenue">
+                        <input type="number" class="form-input" placeholder="2022 Revenue">
+                        <input type="number" class="form-input" placeholder="2023 Revenue">
+                        <input type="number" class="form-input" placeholder="2024 Revenue">
+                        <input type="number" class="form-input" placeholder="2025 Revenue (Projected)">
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-between">
+                    <button type="button" onclick="prevStep(1)" class="btn-outline">
+                        <i class="fas fa-arrow-left mr-2"></i>Back
+                    </button>
+                    <button type="button" onclick="nextStep(3)" class="btn-primary" style="width: auto;">
+                        Next: Details <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Business Details -->
+            <div id="section3" class="form-card p-8 mb-8 blueprint-accent hidden">
+                <div class="section-header">Step 3: Business Details</div>
+                
+                <div class="form-grid">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Business Hours</label>
+                        <input type="text" class="form-input" placeholder="e.g., Mon-Sat 7AM-10PM">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Parking Available</label>
+                        <select class="form-select">
+                            <option value="">Select...</option>
+                            <option value="street">Street Parking</option>
+                            <option value="lot">Parking Lot</option>
+                            <option value="valet">Valet</option>
+                            <option value="garage">Parking Garage</option>
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Key Features & Assets</label>
+                    <div class="grid md:grid-cols-2 gap-3">
+                        <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
+                            <input type="checkbox" class="form-checkbox">
+                            <span>Real Estate Included</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
+                            <input type="checkbox" class="form-checkbox">
+                            <span>Equipment Included</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
+                            <input type="checkbox" class="form-checkbox">
+                            <span>Liquor License</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
+                            <input type="checkbox" class="form-checkbox">
+                            <span>Franchise Rights</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
+                            <input type="checkbox" class="form-checkbox">
+                            <span>Trademarks / IP</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
+                            <input type="checkbox" class="form-checkbox">
+                            <span>Established Client Base</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
+                            <input type="checkbox" class="form-checkbox">
+                            <span>Website / E-commerce</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
+                            <input type="checkbox" class="form-checkbox">
+                            <span>Social Media Following</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Reason for Selling</label>
+                    <select class="form-select">
+                        <option value="">Select reason...</option>
+                        <option value="retirement">Retirement</option>
+                        <option value="relocation">Relocation</option>
+                        <option value="new-venture">Pursuing New Venture</option>
+                        <option value="health">Health Reasons</option>
+                        <option value="partnership">Partnership Dispute</option>
+                        <option value="financial">Financial Reasons</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="mt-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Training & Transition</label>
+                    <textarea class="form-textarea" placeholder="Describe what training and support you'll provide to the new owner..."></textarea>
+                </div>
+                
+                <div class="mt-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Growth Opportunities</label>
+                    <textarea class="form-textarea" placeholder="Describe potential growth opportunities for the new owner..."></textarea>
+                </div>
+                
+                <div class="mt-6 flex justify-between">
+                    <button type="button" onclick="prevStep(2)" class="btn-outline">
+                        <i class="fas fa-arrow-left mr-2"></i>Back
+                    </button>
+                    <button type="button" onclick="nextStep(4)" class="btn-primary" style="width: auto;">
+                        Next: Review <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 4: Review & Submit -->
+            <div id="section4" class="form-card p-8 mb-8 blueprint-accent hidden">
+                <div class="section-header">Step 4: Review & Submit</div>
+                
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+                    <h3 class="font-bold text-blue-900 mb-4">Listing Preview</h3>
+                    <div id="listingPreview" class="space-y-4">
+                        <!-- Preview content populated by JS -->
+                    </div>
+                </div>
+                
+                <div class="space-y-4 mb-6">
+                    <label class="flex items-start gap-3">
+                        <input type="checkbox" class="form-checkbox mt-1" required>
+                        <span class="text-sm text-gray-700">I confirm that all information provided is accurate to the best of my knowledge. I understand that false information may result in my listing being removed.</span>
+                    </label>
+                    
+                    <label class="flex items-start gap-3">
+                        <input type="checkbox" class="form-checkbox mt-1" required>
+                        <span class="text-sm text-gray-700">I agree to respond to buyer inquiries within 24 hours. I understand that responsiveness improves my chances of selling.</span>
+                    </label>
+                    
+                    <label class="flex items-start gap-3">
+                        <input type="checkbox" class="form-checkbox mt-1">
+                        <span class="text-sm text-gray-700">I want to upgrade to a Featured Listing ($99) for priority placement and highlighted display.</span>
+                    </label>
+                </div>
+                
+                <div class="mt-6 flex justify-between">
+                    <button type="button" onclick="prevStep(3)" class="btn-outline">
+                        <i class="fas fa-arrow-left mr-2"></i>Back
+                    </button>
+                    <button type="submit" class="btn-primary" style="width: auto;">
+                        <i class="fas fa-check-circle mr-2"></i>Submit Listing
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center gap-2 mb-4 md:mb-0">
+                    <img src="305business-logo-transparent.png" alt="305business" class="h-6 w-auto">
+                    <span class="font-bold text-gray-900">305business.LLC</span>
+                </div>
+                <p class="text-gray-500 text-sm">© 2026 — Miami Business Marketplace</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        function nextStep(step) {
+            // Hide current section
+            document.getElementById(`section${currentStep}`).classList.add('hidden');
+            
+            // Show new section
+            document.getElementById(`section${step}`).classList.remove('hidden');
+            
+            // Update progress
+            updateProgress(step);
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            currentStep = step;
+            
+            // If step 4, generate preview
+            if (step === 4) {
+                generatePreview();
+            }
+        }
+
+        function prevStep(step) {
+            document.getElementById(`section${currentStep}`).classList.add('hidden');
+            document.getElementById(`section${step}`).classList.remove('hidden');
+            updateProgress(step);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            currentStep = step;
+        }
+
+        function updateProgress(step) {
+            for (let i = 1; i <= totalSteps; i++) {
+                const dot = document.getElementById(`step${i}`);
+                const line = document.getElementById(`line${i}`);
+                
+                if (i < step) {
+                    dot.classList.add('completed');
+                    dot.classList.remove('active');
+                    if (line) line.classList.add('completed');
+                } else if (i === step) {
+                    dot.classList.add('active');
+                    dot.classList.remove('completed');
+                } else {
+                    dot.classList.remove('active', 'completed');
+                    if (line) line.classList.remove('completed');
+                }
+            }
+        }
+
+        function generatePreview() {
+            const preview = document.getElementById('listingPreview');
+            preview.innerHTML = `
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Business Name</p>
+                        <p class="font-semibold">Miami Beach Café (Sample)</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Category</p>
+                        <p class="font-semibold">Restaurant / Food Service</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Asking Price</p>
+                        <p class="font-semibold text-blue-900">$185,000</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Annual Revenue</p>
+                        <p class="font-semibold">$420,000</p>
+                    </div>
+                </div>
+                <div class="mt-4 p-4 bg-white rounded-lg">
+                    <p class="text-sm text-gray-500 mb-2">Description Preview</p>
+                    <p class="text-gray-700">Established café with ocean views. 45 seats, full kitchen, loyal customer base. Perfect for owner-operator looking for a turn-key operation in prime Miami Beach location.</p>
+                </div>
+            `;
+        }
+
+        function submitForm() {
+            alert('Listing Submitted Successfully!\n\nReference: LIST-' + Math.random().toString(36).substr(2, 6).toUpperCase() + '\n\nWhat happens next:\n1. Our team reviews your listing (24-48 hours)\n2. We may request additional documentation\n3. Once approved, your listing goes live\n4. You receive buyer inquiries via email\n\nThank you for choosing 305business.llc!');
+            
+            // Redirect to home
+            window.location.href = 'index.html';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateProgress(1);
+        });
+    </script>
+</body>
+</html>
