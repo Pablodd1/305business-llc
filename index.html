@@ -3,296 +3,491 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>305business.llc — Live Stock Market Ticker</title>
+    <title>305business.llc — Miami Business Marketplace</title>
     <link rel="icon" type="image/png" href="305business-logo-transparent.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blueprint: {
+                            50: '#e8f0f8', 100: '#c5d8ed', 200: '#a0c0e0',
+                            300: '#7aa8d3', 400: '#5a90c6', 500: '#4a7fb5',
+                            600: '#3a6fa0', 700: '#2a5f8b', 800: '#1a4f76',
+                            900: '#0a3f61', 950: '#052d4a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body {
+        body { font-family: 'Inter', sans-serif; background: #0a1628; color: #e0e0e0; }
+        .blueprint-bg {
+            background-color: #0a1628;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .tech-border { border: 1px solid rgba(255,255,255,0.15); position: relative; }
+        .tech-border::before, .tech-border::after {
+            content: ''; position: absolute; width: 8px; height: 8px; border: 1px solid rgba(255,255,255,0.3);
+        }
+        .tech-border::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+        .tech-border::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+        .tech-card {
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); position: relative;
+        }
+        .tech-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 20%, rgba(255,255,255,0.2) 80%, transparent 100%);
+        }
+        .inset-view {
+            border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.02); position: relative;
+        }
+        .inset-view::before {
+            content: attr(data-view); position: absolute; top: -10px; left: 10px; background: #0a1628;
+            padding: 0 5px; font-family: 'JetBrains Mono', monospace; font-size: 9px;
+            color: rgba(255,255,255,0.4); letter-spacing: 0.1em;
+        }
+        .schematic-btn {
+            background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.05em;
+            position: relative; overflow: hidden;
+        }
+        .schematic-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.05); transition: left 0.3s;
+        }
+        .schematic-btn:hover::before { left: 0; }
+        .tech-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4);
+        }
+        .section-divider {
+            height: 1px;
+            background: repeating-linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 10px, transparent 10px, transparent 20px);
+            margin: 40px 0; position: relative;
+        }
+        .section-divider::after {
+            content: '◆'; position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%, -50%); color: rgba(255,255,255,0.2);
+            background: #0a1628; padding: 0 10px;
+        }
+        .title-block {
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.02); position: relative;
+        }
+        .blueprint-nav {
+            background: rgba(10,22,40,0.95);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .tech-input {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
             font-family: 'JetBrains Mono', monospace;
-            background: #0a0a0f;
-            overflow: hidden;
         }
-        
+        .tech-input:focus { outline: none; border-color: rgba(255,255,255,0.3); }
+        .dimension { position: relative; padding: 0 20px; }
+        .dimension::before, .dimension::after {
+            content: '|'; position: absolute; top: 0; color: rgba(255,255,255,0.2);
+        }
+        .dimension::before { left: 5px; } .dimension::after { right: 5px; }
+
+        /* Stock Ticker Styles */
         .ticker-container {
-            width: 100%;
-            overflow: hidden;
-            background: linear-gradient(90deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%);
-            border-top: 2px solid #00D4FF;
-            border-bottom: 2px solid #B829DD;
+            width: 100%; overflow: hidden;
+            background: linear-gradient(90deg, #0a1628 0%, #1a2a4a 50%, #0a1628 100%);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        
-        .ticker-wrap {
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        
+        .ticker-wrap { width: 100%; overflow: hidden; white-space: nowrap; }
         .ticker {
             display: inline-block;
             animation: ticker-scroll 60s linear infinite;
             padding-left: 100%;
         }
-        
+        .ticker:hover { animation-play-state: paused; }
         .ticker-item {
-            display: inline-block;
-            padding: 12px 24px;
-            font-size: 14px;
-            font-weight: 500;
+            display: inline-block; padding: 8px 20px;
+            font-size: 12px; font-weight: 500; font-family: 'JetBrains Mono', monospace;
         }
-        
-        .ticker-item .symbol {
-            color: #00D4FF;
-            font-weight: 700;
-            margin-right: 8px;
-        }
-        
-        .ticker-item .price {
-            color: #ffffff;
-            margin-right: 8px;
-        }
-        
-        .ticker-item .change {
-            font-weight: 600;
-        }
-        
-        .ticker-item .change.up {
-            color: #00ff88;
-        }
-        
-        .ticker-item .change.down {
-            color: #ff4757;
-        }
-        
-        .ticker-item .volume {
-            color: #888;
-            margin-left: 8px;
-            font-size: 12px;
-        }
-        
+        .ticker-item .symbol { color: #00D4FF; font-weight: 700; margin-right: 6px; }
+        .ticker-item .price { color: #ffffff; margin-right: 6px; }
+        .ticker-item .change { font-weight: 600; }
+        .ticker-item .change.up { color: #00ff88; }
+        .ticker-item .change.down { color: #ff4757; }
         @keyframes ticker-scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
         }
-        
-        .ticker:hover {
-            animation-play-state: paused;
-        }
-        
-        /* Full screen version */
-        .fullscreen-ticker {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: #0a0a0f;
-        }
-        
+
+        /* Stock Card Styles */
         .stock-card {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 16px;
-            padding: 20px;
-            min-width: 280px;
+            padding: 16px; min-width: 240px;
             transition: all 0.3s;
         }
-        
         .stock-card:hover {
-            background: rgba(255,255,255,0.08);
-            border-color: #00D4FF;
-            transform: translateY(-2px);
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.2);
         }
-        
-        .marquee-container {
-            overflow: hidden;
-            width: 100%;
-        }
-        
+        .marquee-container { overflow: hidden; width: 100%; }
         .marquee-content {
-            display: flex;
-            animation: marquee 40s linear infinite;
-            gap: 20px;
+            display: flex; animation: marquee 40s linear infinite; gap: 16px;
         }
-        
-        .marquee-content:hover {
-            animation-play-state: paused;
-        }
-        
+        .marquee-content:hover { animation-play-state: paused; }
         @keyframes marquee {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-        
-        .last-update {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            color: #666;
-            font-size: 12px;
-        }
-        
-        .controls {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .controls button {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s;
-        }
-        
-        .controls button:hover {
-            background: rgba(0,212,255,0.2);
-            border-color: #00D4FF;
-        }
-        
-        .sparkline {
-            width: 60px;
-            height: 20px;
-            display: inline-block;
-            margin-left: 10px;
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
     </style>
 </head>
-<body>
-    <!-- Compact Ticker (for embedding) -->
-    <div class="ticker-container" id="compactTicker" style="display: none;">
-        <div class="ticker-wrap">
-            <div class="ticker" id="tickerContent"></div>
-        </div>
-    </div>
+<body class="blueprint-bg min-h-screen">
 
-    <!-- Full Screen Card Ticker -->
-    <div class="fullscreen-ticker" id="fullscreenTicker">
-        <div class="text-center mb-8">
-            <!-- 305business Logo -->
-            <div class="flex justify-center mb-4">
-                <img src="305business-logo-transparent.png" alt="305business.llc" class="h-16 w-auto object-contain" style="filter: drop-shadow(0 0 10px rgba(0,212,255,0.3));">
+    <!-- Navigation -->
+    <nav class="blueprint-nav fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-3">
+                    <img src="305business-logo-transparent.png" alt="305business" class="h-8 w-auto">
+                    <div>
+                        <span class="font-bold text-lg text-white tracking-wider">305business</span>
+                        <span class="tech-label ml-2">.LLC</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="#market" class="tech-label hover:text-white/60 transition">MARKET</a>
+                    <a href="#listings" class="tech-label hover:text-white/60 transition">LISTINGS</a>
+                    <a href="#services" class="tech-label hover:text-white/60 transition">SERVICES</a>
+                    <a href="#contact" class="tech-label hover:text-white/60 transition">CONTACT</a>
+                </div>
             </div>
-            <h1 class="text-3xl font-bold text-white mb-2">
-                <span class="text-[#00D4FF]">305business</span><span class="text-[#B829DD]">.llc</span>
-            </h1>
-            <p class="text-gray-500">Live Market Data — Real-time stock prices scrolling across your screen</p>
         </div>
-        
-        <div class="marquee-container">
-            <div class="marquee-content" id="marqueeContent"></div>
-        </div>
-        
-        <div class="text-center mt-8">
-            <p class="text-gray-600 text-sm">Hover to pause • Data refreshes every 5 minutes</p>
-        </div>
-    </div>
+    </nav>
 
-    <div class="last-update" id="lastUpdate"></div>
-    
-    <div class="controls">
-        <button onclick="toggleView()">Toggle View</button>
-        <button onclick="refreshData()">Refresh Now</button>
-        <button onclick="changeSpeed()">Speed</button>
-    </div>
+    <!-- Hero Section -->
+    <section class="pt-32 pb-12 relative">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-20 left-10 w-px h-40 bg-white/5"></div>
+            <div class="absolute top-20 left-10 w-20 h-px bg-white/5"></div>
+            <div class="absolute bottom-20 right-10 w-px h-40 bg-white/5"></div>
+            <div class="absolute bottom-20 right-10 w-20 h-px bg-white/5"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="title-block p-8 mb-8 max-w-3xl">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="tech-label">PROJECT NO. 305</span>
+                    <span class="tech-label">SCALE: 1:1</span>
+                </div>
+                <h1 class="text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
+                    MIAMI<br>BUSINESS<br>HUB
+                </h1>
+                <p class="text-lg text-white/50 max-w-xl">
+                    Technical marketplace for business transactions, market intelligence,
+                    and verified commercial listings.
+                </p>
+                <div class="flex gap-4 mt-8">
+                    <div class="dimension"><span class="tech-label">50+ LISTINGS</span></div>
+                    <div class="dimension"><span class="tech-label">$2.4M VOLUME</span></div>
+                    <div class="dimension"><span class="tech-label">98% SUCCESS</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Stock Ticker -->
+    <section id="market" class="py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
+            <div class="flex justify-between items-end">
+                <div>
+                    <span class="tech-label block mb-1">SHEET: M-1</span>
+                    <h2 class="text-xl font-bold text-white">LIVE MARKET DATA</h2>
+                </div>
+                <span class="tech-label">VIEW: REAL-TIME</span>
+            </div>
+        </div>
+
+        <!-- Compact Ticker -->
+        <div class="ticker-container">
+            <div class="ticker-wrap">
+                <div class="ticker" id="tickerContent"></div>
+            </div>
+        </div>
+
+        <!-- Full Stock Cards -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+            <div class="marquee-container">
+                <div class="marquee-content" id="marqueeContent"></div>
+            </div>
+            <div class="text-center mt-4">
+                <p class="text-gray-600 text-sm">Hover to pause • Data refreshes every 5 minutes</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Featured Listings -->
+    <section id="listings" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="tech-label block mb-2">SHEET: A-1</span>
+                    <h2 class="text-3xl font-bold text-white">FEATURED LISTINGS</h2>
+                </div>
+                <span class="tech-label">VIEW: ORTHOGRAPHIC</span>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="tech-card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="tech-label">REF: BS-001</span>
+                        <span class="px-2 py-1 border border-white/10 text-xs text-white/40">ACTIVE</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Medical Billing Co.</h3>
+                    <p class="text-white/40 text-sm mb-4">Established revenue cycle management firm with 50+ physician clients.</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex justify-between text-sm"><span class="text-white/30">REVENUE</span><span class="text-white">$1.2M/year</span></div>
+                        <div class="flex justify-between text-sm"><span class="text-white/30">ASKING</span><span class="text-white">$450K</span></div>
+                        <div class="flex justify-between text-sm"><span class="text-white/30">MULTIPLE</span><span class="text-white">2.8x</span></div>
+                    </div>
+                    <button class="schematic-btn w-full py-2"><span class="relative z-10">VIEW DETAILS →</span></button>
+                </div>
+
+                <div class="tech-card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="tech-label">REF: BS-002</span>
+                        <span class="px-2 py-1 border border-white/10 text-xs text-white/40">ACTIVE</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Urgent Care Chain</h3>
+                    <p class="text-white/40 text-sm mb-4">3-location urgent care network in Miami-Dade. High growth potential.</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex justify-between text-sm"><span class="text-white/30">REVENUE</span><span class="text-white">$3.8M/year</span></div>
+                        <div class="flex justify-between text-sm"><span class="text-white/30">ASKING</span><span class="text-white">$1.8M</span></div>
+                        <div class="flex justify-between text-sm"><span class="text-white/30">MULTIPLE</span><span class="text-white">4.2x</span></div>
+                    </div>
+                    <button class="schematic-btn w-full py-2"><span class="relative z-10">VIEW DETAILS →</span></button>
+                </div>
+
+                <div class="tech-card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="tech-label">REF: BS-003</span>
+                        <span class="px-2 py-1 border border-white/10 text-xs text-white/40">ACTIVE</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Dermatology Practice</h3>
+                    <p class="text-white/40 text-sm mb-4">Cosmetic + medical dermatology. Prime location in Coral Gables.</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex justify-between text-sm"><span class="text-white/30">REVENUE</span><span class="text-white">$890K/year</span></div>
+                        <div class="flex justify-between text-sm"><span class="text-white/30">ASKING</span><span class="text-white">$320K</span></div>
+                        <div class="flex justify-between text-sm"><span class="text-white/30">MULTIPLE</span><span class="text-white">3.1x</span></div>
+                    </div>
+                    <button class="schematic-btn w-full py-2"><span class="relative z-10">VIEW DETAILS →</span></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="tech-label block mb-2">SHEET: B-1</span>
+                    <h2 class="text-3xl font-bold text-white">TECHNICAL SPECIFICATIONS</h2>
+                </div>
+                <span class="tech-label">VIEW: DETAIL</span>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="inset-view p-6" data-view="DETAIL A">
+                    <div class="w-12 h-12 border border-white/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-search text-white/40"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">AI MATCHING</h3>
+                    <p class="text-white/40 text-sm">Neural network analysis of buyer/seller compatibility.</p>
+                </div>
+
+                <div class="inset-view p-6" data-view="DETAIL B">
+                    <div class="w-12 h-12 border border-white/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-white/40"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">ESCROW</h3>
+                    <p class="text-white/40 text-sm">Secure transaction holding with milestone release.</p>
+                </div>
+
+                <div class="inset-view p-6" data-view="DETAIL C">
+                    <div class="w-12 h-12 border border-white/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-check-double text-white/40"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">VERIFICATION</h3>
+                    <p class="text-white/40 text-sm">Document authentication and financial validation.</p>
+                </div>
+
+                <div class="inset-view p-6" data-view="DETAIL D">
+                    <div class="w-12 h-12 border border-white/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-white/40"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">VALUATION</h3>
+                    <p class="text-white/40 text-sm">Market-based pricing with comparable analysis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="tech-border p-8 max-w-2xl mx-auto">
+                <div class="flex justify-between items-start mb-6">
+                    <span class="tech-label">SHEET: C-1</span>
+                    <span class="tech-label">REVISION: 1.0</span>
+                </div>
+                <h2 class="text-3xl font-bold text-white mb-2">SUBMIT INQUIRY</h2>
+                <p class="text-white/40 mb-8">Complete technical specifications for listing request.</p>
+
+                <form class="space-y-4" onsubmit="event.preventDefault(); alert('INQUIRY_SUBMITTED — REF: BS-' + Math.random().toString(36).substr(2,6).toUpperCase());">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="tech-label block mb-2">ENTITY_NAME</label>
+                            <input type="text" class="tech-input w-full px-4 py-3 text-sm">
+                        </div>
+                        <div>
+                            <label class="tech-label block mb-2">CONTACT_EMAIL</label>
+                            <input type="email" class="tech-input w-full px-4 py-3 text-sm">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="tech-label block mb-2">BUSINESS_TYPE</label>
+                        <select class="tech-input w-full px-4 py-3 text-sm">
+                            <option value="">SELECT_TYPE...</option>
+                            <option value="medical">MEDICAL_PRACTICE</option>
+                            <option value="retail">RETAIL</option>
+                            <option value="service">SERVICE</option>
+                            <option value="tech">TECHNOLOGY</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="tech-label block mb-2">REVENUE_RANGE</label>
+                        <select class="tech-input w-full px-4 py-3 text-sm">
+                            <option value="">SELECT_RANGE...</option>
+                            <option value="0-500k">$0 - $500K</option>
+                            <option value="500k-1m">$500K - $1M</option>
+                            <option value="1m-5m">$1M - $5M</option>
+                            <option value="5m+">$5M+</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="schematic-btn w-full py-4 mt-4">
+                        <span class="relative z-10">SUBMIT REQUEST →</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="blueprint-nav border-t border-white/10 py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <img src="305business-logo-transparent.png" alt="305business" class="h-8 w-auto">
+                        <span class="font-bold text-white tracking-wider">305business</span>
+                    </div>
+                    <p class="text-white/30 text-sm">Technical marketplace for business transactions.</p>
+                </div>
+                <div>
+                    <span class="tech-label block mb-4">NAVIGATION</span>
+                    <ul class="space-y-2">
+                        <li><a href="#market" class="text-white/30 hover:text-white/60 text-sm transition">Market</a></li>
+                        <li><a href="#listings" class="text-white/30 hover:text-white/60 text-sm transition">Listings</a></li>
+                        <li><a href="#services" class="text-white/30 hover:text-white/60 text-sm transition">Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <span class="tech-label block mb-4">CONTACT</span>
+                    <ul class="space-y-2">
+                        <li class="text-white/30 text-sm">+1 786-643-2099</li>
+                        <li class="text-white/30 text-sm">info@305business.llc</li>
+                        <li class="text-white/30 text-sm">Miami, FL</li>
+                    </ul>
+                </div>
+                <div>
+                    <span class="tech-label block mb-4">LEGAL</span>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Privacy</a></li>
+                        <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 mt-8 pt-8 text-center">
+                <span class="tech-label">© 2026 305business.LLC — ALL RIGHTS RESERVED — REV 1.0</span>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Stock symbols to track
+        // Stock Ticker Data
         const STOCKS = [
-            { symbol: 'AAPL', name: 'Apple Inc.' },
-            { symbol: 'MSFT', name: 'Microsoft' },
-            { symbol: 'GOOGL', name: 'Alphabet' },
-            { symbol: 'AMZN', name: 'Amazon' },
-            { symbol: 'TSLA', name: 'Tesla' },
-            { symbol: 'META', name: 'Meta' },
-            { symbol: 'NVDA', name: 'NVIDIA' },
-            { symbol: 'NFLX', name: 'Netflix' },
-            { symbol: 'AMD', name: 'AMD' },
-            { symbol: 'INTC', name: 'Intel' },
-            { symbol: 'CRM', name: 'Salesforce' },
-            { symbol: 'ADBE', name: 'Adobe' },
-            { symbol: 'PYPL', name: 'PayPal' },
-            { symbol: 'UBER', name: 'Uber' },
-            { symbol: 'COIN', name: 'Coinbase' },
-            { symbol: 'PLTR', name: 'Palantir' },
-            { symbol: 'SNOW', name: 'Snowflake' },
-            { symbol: 'ZM', name: 'Zoom' },
-            { symbol: 'ROKU', name: 'Roku' },
-            { symbol: 'SQ', name: 'Block' }
+            { symbol: 'AAPL', name: 'Apple Inc.' }, { symbol: 'MSFT', name: 'Microsoft' },
+            { symbol: 'GOOGL', name: 'Alphabet' }, { symbol: 'AMZN', name: 'Amazon' },
+            { symbol: 'TSLA', name: 'Tesla' }, { symbol: 'META', name: 'Meta' },
+            { symbol: 'NVDA', name: 'NVIDIA' }, { symbol: 'NFLX', name: 'Netflix' },
+            { symbol: 'AMD', name: 'AMD' }, { symbol: 'INTC', name: 'Intel' },
+            { symbol: 'CRM', name: 'Salesforce' }, { symbol: 'ADBE', name: 'Adobe' },
+            { symbol: 'PYPL', name: 'PayPal' }, { symbol: 'UBER', name: 'Uber' },
+            { symbol: 'COIN', name: 'Coinbase' }, { symbol: 'PLTR', name: 'Palantir' },
+            { symbol: 'SNOW', name: 'Snowflake' }, { symbol: 'ZM', name: 'Zoom' },
+            { symbol: 'ROKU', name: 'Roku' }, { symbol: 'SQ', name: 'Block' }
         ];
 
-        let currentSpeed = 40; // seconds for one loop
-        let isCompact = false;
-
-        // Generate mock data (replace with real API)
         function generateMockData() {
             return STOCKS.map(stock => {
                 const basePrice = Math.random() * 500 + 50;
                 const change = (Math.random() - 0.5) * 10;
                 const changePercent = (change / basePrice) * 100;
                 const volume = Math.floor(Math.random() * 10000000) + 1000000;
-                
-                return {
-                    ...stock,
-                    price: basePrice.toFixed(2),
-                    change: change.toFixed(2),
-                    changePercent: changePercent.toFixed(2),
-                    volume: volume
-                };
+                return { ...stock, price: basePrice.toFixed(2), change: change.toFixed(2),
+                    changePercent: changePercent.toFixed(2), volume: volume };
             });
         }
 
-        // Create stock card HTML
         function createStockCard(stock) {
             const isUp = parseFloat(stock.change) >= 0;
             const arrow = isUp ? '▲' : '▼';
             const volumeM = (stock.volume / 1000000).toFixed(1);
-            
             return `
                 <div class="stock-card">
                     <div class="flex justify-between items-start mb-2">
-                        <div>
-                            <span class="text-[#00D4FF] font-bold text-lg">${stock.symbol}</span>
-                            <span class="text-gray-500 text-xs block">${stock.name}</span>
-                        </div>
+                        <div><span class="text-[#00D4FF] font-bold text-lg">${stock.symbol}</span>
+                        <span class="text-gray-500 text-xs block">${stock.name}</span></div>
                         <span class="text-gray-600 text-xs">Vol: ${volumeM}M</span>
                     </div>
                     <div class="flex justify-between items-end">
-                        <div>
-                            <span class="text-white text-2xl font-bold">$${stock.price}</span>
-                        </div>
+                        <div><span class="text-white text-2xl font-bold">$${stock.price}</span></div>
                         <div class="text-right">
                             <span class="${isUp ? 'text-green-400' : 'text-red-400'} font-semibold">
                                 ${arrow} ${Math.abs(stock.change)} (${Math.abs(stock.changePercent)}%)
                             </span>
                         </div>
                     </div>
-                </div>
-            `;
+                </div>`;
         }
 
-        // Create compact ticker item HTML
         function createTickerItem(stock) {
             const isUp = parseFloat(stock.change) >= 0;
             const arrow = isUp ? '▲' : '▼';
-            
             return `
                 <div class="ticker-item">
                     <span class="symbol">${stock.symbol}</span>
@@ -300,72 +495,30 @@
                     <span class="change ${isUp ? 'up' : 'down'}">
                         ${arrow} ${Math.abs(stock.change)} (${Math.abs(stock.changePercent)}%)
                     </span>
-                    <span class="volume">Vol: ${(stock.volume / 1000000).toFixed(1)}M</span>
-                </div>
-            `;
+                </div>`;
         }
 
-        // Render data
         function renderData() {
             const data = generateMockData();
-            
-            // Full screen cards
             const marqueeContent = document.getElementById('marqueeContent');
             const cardsHTML = data.map(createStockCard).join('');
-            // Duplicate for seamless loop
             marqueeContent.innerHTML = cardsHTML + cardsHTML;
-            
-            // Compact ticker
             const tickerContent = document.getElementById('tickerContent');
             const tickerHTML = data.map(createTickerItem).join('');
             tickerContent.innerHTML = tickerHTML + tickerHTML;
-            
-            // Update timestamp
-            document.getElementById('lastUpdate').textContent = 
-                'Last updated: ' + new Date().toLocaleTimeString();
         }
 
-        // Toggle between compact and full screen
-        function toggleView() {
-            isCompact = !isCompact;
-            document.getElementById('compactTicker').style.display = isCompact ? 'block' : 'none';
-            document.getElementById('fullscreenTicker').style.display = isCompact ? 'none' : 'flex';
-        }
-
-        // Refresh data
-        function refreshData() {
-            renderData();
-        }
-
-        // Change scroll speed
-        function changeSpeed() {
-            const speeds = [20, 40, 60, 80];
-            const currentIndex = speeds.indexOf(currentSpeed);
-            currentSpeed = speeds[(currentIndex + 1) % speeds.length];
-            
-            document.querySelector('.marquee-content').style.animationDuration = currentSpeed + 's';
-            document.querySelector('.ticker').style.animationDuration = (currentSpeed * 1.5) + 's';
-        }
-
-        // Initialize
         renderData();
-        
-        // Auto-refresh every 5 minutes
         setInterval(renderData, 300000);
-        
-        // Simulate live updates every 10 seconds
         setInterval(() => {
             const data = generateMockData();
-            const marqueeContent = document.getElementById('marqueeContent');
-            const cards = marqueeContent.querySelectorAll('.stock-card');
-            
+            const cards = document.querySelectorAll('.stock-card');
             cards.forEach((card, index) => {
                 if (index < data.length) {
                     const stock = data[index];
                     const isUp = parseFloat(stock.change) >= 0;
                     const priceEl = card.querySelector('.text-2xl');
                     const changeEl = card.querySelector('.text-right span');
-                    
                     if (priceEl) priceEl.textContent = `$${stock.price}`;
                     if (changeEl) {
                         changeEl.className = `${isUp ? 'text-green-400' : 'text-red-400'} font-semibold`;
@@ -373,9 +526,6 @@
                     }
                 }
             });
-            
-            document.getElementById('lastUpdate').textContent = 
-                'Last updated: ' + new Date().toLocaleTimeString();
         }, 10000);
     </script>
 </body>
