@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Business Detail — 305business.llc</title>
+    <link rel="icon" type="image/png" href="305business-logo-transparent.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1a202c; min-height: 100vh; }
+        
+        /* Clean white background with subtle blueprint accents */
+        .detail-page {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+        }
+        
+        /* Card styles */
+        .detail-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+        .detail-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+        
+        /* Blueprint accent elements */
+        .blueprint-accent {
+            border-left: 4px solid #1a4a7a;
+        }
+        
+        /* Interactive input styles */
+        .interactive-input {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        .interactive-input:focus {
+            outline: none;
+            border-color: #1a4a7a;
+            box-shadow: 0 0 0 3px rgba(26,74,122,0.1);
+        }
+        
+        /* Slider styles */
+        .range-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            outline: none;
+        }
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #1a4a7a;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Metric cards */
+        .metric-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a4a7a;
+        }
+        .metric-label {
+            font-size: 0.875rem;
+            color: #718096;
+            margin-top: 4px;
+        }
+        
+        /* Section headers */
+        .section-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #1a4a7a;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-header::before {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background: #1a4a7a;
+        }
+        
+        /* Toggle switches */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e2e8f0;
+            transition: .4s;
+            border-radius: 26px;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .toggle-slider {
+            background-color: #1a4a7a;
+        }
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+        
+        /* Chart bars */
+        .chart-bar {
+            background: linear-gradient(to top, #1a4a7a, #2d6a9f);
+            border-radius: 4px 4px 0 0;
+            transition: height 0.5s ease;
+        }
+        
+        /* Navigation */
+        .detail-nav {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        
+        /* Status badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .status-active { background: #c6f6d5; color: #22543d; }
+        .status-negotiating { background: #fefcbf; color: #744210; }
+        .status-closed { background: #e2e8f0; color: #4a5568; }
+        
+        /* Button styles */
+        .btn-primary {
+            background: #1a4a7a;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: #2d6a9f;
+            transform: translateY(-1px);
+        }
+        .btn-outline {
+            background: transparent;
+            color: #1a4a7a;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 2px solid #1a4a7a;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-outline:hover {
+            background: #1a4a7a;
+            color: white;
+        }
+        
+        /* Responsive grid */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        @media (min-width: 1024px) {
+            .detail-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+            .detail-card { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="detail-page">
+    <!-- Navigation -->
+    <nav class="detail-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                    <img src="305business-logo-transparent.png" alt="305business" class="h-8 w-auto">
+                    <span class="font-bold text-lg text-gray-900 tracking-wider">305business</span>
+                    <span class="text-xs text-gray-500 font-mono">.LLC</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="window.location.href='index.html'" class="text-gray-600 hover:text-gray-900 transition">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Listings
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Image Section -->
+    <div class="relative h-96 overflow-hidden">
+        <img id="heroImage" src="" alt="Business Location" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center gap-3 mb-2">
+                    <span id="businessCategory" class="px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-sm rounded-full"></span>
+                    <span id="businessStatus" class="status-badge"></span>
+                </div>
+                <h1 id="businessName" class="text-4xl md:text-5xl font-bold text-white mb-2"></h1>
+                <p id="businessLocation" class="text-white/80 text-lg"><i class="fas fa-map-marker-alt mr-2"></i><span id="locationText"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="detail-grid">
+            <!-- Left Column -->
+            <div class="space-y-8">
+                <!-- Key Metrics -->
+                <div class="detail-card p-6 blueprint-accent">
+                    <div class="section-header">Key Financials</div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="metric-card">
+                            <div class="metric-value" id="askingPrice"></div>
+                            <div class="metric-label">Asking Price</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="annualRevenue"></div>
+                            <div class="metric-label">Annual Revenue</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="cashFlow"></div>
+                            <div class="metric-label">Cash Flow</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="multiple"></div>
+                            <div class="metric-label">Multiple</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Valuation Calculator -->
+                <div class="detail-card p-6">
+                    <div class="section-header">Valuation Calculator</div>
+                    <p class="text-gray-600 mb-4 text-sm">Adjust assumptions to see how they affect business value</p>
+                    
+                    <div class="space-y-6">
+                        <!-- Revenue Growth -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="text-sm font-medium text-gray-700">Revenue Growth Rate</label>
+                                <span class="text-sm font-mono text-blue-900" id="growthValue">5%</span>
+                            </div>
+                            <input type="range" min="-10" max="30" value="5" class="range-slider" id="growthSlider" oninput="updateValuation()">
+                            <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                <span>-10%</span>
+                                <span>0%</span>
+                                <span>+30%</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Profit Margin -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="text-sm font-medium text-gray-700">Profit Margin</label>
+                                <span class="text-sm font-mono text-blue-900" id="marginValue">20%</span>
+                            </div>
+                            <input type="range" min="5" max="50" value="20" class="range-slider" id="marginSlider" oninput="updateValuation()">
+                            <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                <span>5%</span>
+                                <span>25%</span>
+                                <span>50%</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Industry Multiple -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="text-sm font-medium text-gray-700">Industry Multiple</label>
+                                <span class="text-sm font-mono text-blue-900" id="multipleValue">2.5x</span>
+                            </div>
+                            <input type="range" min="1" max="6" step="0.1" value="2.5" class="range-slider" id="multipleSlider" oninput="updateValuation()">
+                            <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                <span>1x</span>
+                                <span>3.5x</span>
+                                <span>6x</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Calculated Value -->
+                        <div class="bg-gray-50 rounded-lg p-4 border-2 border-blue-900/20">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-sm text-gray-600">Calculated Valuation</p>
+                                    <p class="text-3xl font-bold text-blue-900 font-mono" id="calculatedValue">$0</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-sm text-gray-600">vs. Asking</p>
+                                    <p class="text-lg font-semibold" id="valuationDiff">+0%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revenue Chart -->
+                <div class="detail-card p-6">
+                    <div class="section-header">Revenue History & Projection</div>
+                    <div class="h-64 flex items-end justify-between gap-2" id="revenueChart">
+                        <!-- Bars generated by JS -->
+                    </div>
+                    <div class="flex justify-between mt-2 text-xs text-gray-500">
+                        <span>2021</span>
+                        <span>2022</span>
+                        <span>2023</span>
+                        <span>2024</span>
+                        <span>2025 (proj)</span>
+                    </div>
+                </div>
+
+                <!-- Business Details -->
+                <div class="detail-card p-6">
+                    <div class="section-header">Business Details</div>
+                    <div class="grid md:grid-cols-2 gap-4" id="detailsGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Features & Assets -->
+                <div class="detail-card p-6">
+                    <div class="section-header">Features & Assets</div>
+                    <div class="grid md:grid-cols-3 gap-3" id="featuresGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Financial Breakdown -->
+                <div class="detail-card p-6">
+                    <div class="section-header">Financial Breakdown</div>
+                    <div class="space-y-3" id="financialBreakdown">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-6">
+                <!-- Contact Card -->
+                <div class="detail-card p-6 bg-blue-900 text-white">
+                    <div class="section-header text-white/70">Interested?</div>
+                    <h3 class="text-xl font-bold mb-2">Request Information</h3>
+                    <p class="text-white/70 text-sm mb-4">Get detailed financials and schedule a viewing</p>
+                    <button onclick="requestInfo()" class="w-full bg-white text-blue-900 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                        Request NDA & Financials
+                    </button>
+                    <button onclick="scheduleViewing()" class="w-full mt-3 bg-transparent border-2 border-white text-white py-3 rounded-lg font-semibold hover:bg-white/10 transition">
+                        Schedule Viewing
+                    </button>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="detail-card p-6">
+                    <div class="section-header">Quick Stats</div>
+                    <div class="space-y-3" id="quickStats">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Seller Info -->
+                <div class="detail-card p-6">
+                    <div class="section-header">Seller</div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold" id="sellerName">Confidential</p>
+                            <p class="text-sm text-gray-500">Verified Seller</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 space-y-2">
+                        <div class="flex items-center gap-2 text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                            <span>Financials Verified</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                            <span>NDA Required</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                            <span>Broker Represented</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparable Sales -->
+                <div class="detail-card p-6">
+                    <div class="section-header">Comparable Sales</div>
+                    <div class="space-y-3" id="comparableSales">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Share -->
+                <div class="detail-card p-6">
+                    <div class="section-header">Share</div>
+                    <div class="flex gap-2">
+                        <button onclick="share('email')" class="flex-1 py-2 border rounded-lg hover:bg-gray-50 transition">
+                            <i class="fas fa-envelope text-gray-600"></i>
+                        </button>
+                        <button onclick="share('linkedin')" class="flex-1 py-2 border rounded-lg hover:bg-gray-50 transition">
+                            <i class="fab fa-linkedin text-blue-700"></i>
+                        </button>
+                        <button onclick="share('twitter')" class="flex-1 py-2 border rounded-lg hover:bg-gray-50 transition">
+                            <i class="fab fa-twitter text-blue-400"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center gap-2 mb-4 md:mb-0">
+                    <img src="305business-logo-transparent.png" alt="305business" class="h-6 w-auto">
+                    <span class="font-bold text-gray-900">305business.LLC</span>
+                </div>
+                <p class="text-gray-500 text-sm">© 2026 — Miami Business Marketplace</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Business data - Miami Beach Café (example)
+        const businessData = {
+            id: 1,
+            name: "Miami Beach Café",
+            category: "Restaurant",
+            status: "active",
+            location: "Miami Beach, FL",
+            price: 185000,
+            revenue: 420000,
+            cashFlow: 85000,
+            multiple: 2.2,
+            employees: 8,
+            established: 2015,
+            sqft: 1200,
+            description: "Established café with ocean views. 45 seats, full kitchen, loyal customer base. Perfect for owner-operator looking for a turn-key operation in prime Miami Beach location.",
+            features: [
+                "45 Seats Indoor",
+                "Full Commercial Kitchen",
+                "Ocean View Terrace",
+                "Beer & Wine License",
+                "Established 2015",
+                "Loyal Customer Base",
+                "Turn-key Operation",
+                "POS System Included"
+            ],
+            details: {
+                "Monthly Rent": "$4,500",
+                "Lease Terms": "5 years remaining",
+                "Hours": "7AM - 10PM Daily",
+                "Cuisine": "American / Breakfast",
+                "Avg Ticket": "$18",
+                "Daily Covers": "120-150",
+                "Parking": "Street + Valet",
+                "Recent Renovation": "2023"
+            },
+            financials: {
+                "Food Costs": { amount: 126000, percent: 30 },
+                "Labor": { amount: 147000, percent: 35 },
+                "Rent": { amount: 54000, percent: 13 },
+                "Utilities": { amount: 12000, percent: 3 },
+                "Insurance": { amount: 8400, percent: 2 },
+                "Other": { amount: 16800, percent: 4 },
+                "Net Profit": { amount: 66000, percent: 16 }
+            },
+            revenueHistory: [280000, 320000, 350000, 420000, 450000],
+            comparableSales: [
+                { name: "South Beach Bistro", price: 210000, multiple: 2.4 },
+                { name: "Ocean Drive Café", price: 165000, multiple: 2.0 },
+                { name: "Collins Ave Diner", price: 195000, multiple: 2.3 }
+            ]
+        };
+
+        // Initialize page
+        function initPage() {
+            // Set basic info
+            document.getElementById('pageTitle').textContent = `${businessData.name} — 305business.llc`;
+            document.getElementById('businessName').textContent = businessData.name;
+            document.getElementById('businessCategory').textContent = businessData.category;
+            document.getElementById('locationText').textContent = businessData.location;
+            document.getElementById('heroImage').src = "https://images.unsplash.com/photo-1554118811-1c0d58224f24?w=1200&h=600&fit=crop";
+            
+            // Status badge
+            const statusEl = document.getElementById('businessStatus');
+            statusEl.className = `status-badge status-${businessData.status}`;
+            statusEl.innerHTML = `<i class="fas fa-circle text-xs"></i> ${businessData.status.toUpperCase()}`;
+            
+            // Key metrics
+            document.getElementById('askingPrice').textContent = `$${(businessData.price / 1000).toFixed(0)}K`;
+            document.getElementById('annualRevenue').textContent = `$${(businessData.revenue / 1000).toFixed(0)}K`;
+            document.getElementById('cashFlow').textContent = `$${(businessData.cashFlow / 1000).toFixed(0)}K`;
+            document.getElementById('multiple').textContent = `${businessData.multiple}x`;
+            
+            // Initialize valuation calculator
+            updateValuation();
+            
+            // Render revenue chart
+            renderRevenueChart();
+            
+            // Render details
+            renderDetails();
+            
+            // Render features
+            renderFeatures();
+            
+            // Render financial breakdown
+            renderFinancialBreakdown();
+            
+            // Render quick stats
+            renderQuickStats();
+            
+            // Render comparable sales
+            renderComparableSales();
+        }
+
+        // Valuation Calculator
+        function updateValuation() {
+            const growth = parseFloat(document.getElementById('growthSlider').value);
+            const margin = parseFloat(document.getElementById('marginSlider').value);
+            const multiple = parseFloat(document.getElementById('multipleSlider').value);
+            
+            document.getElementById('growthValue').textContent = `${growth > 0 ? '+' : ''}${growth}%`;
+            document.getElementById('marginValue').textContent = `${margin}%`;
+            document.getElementById('multipleValue').textContent = `${multiple}x`;
+            
+            // Calculate projected revenue
+            const projectedRevenue = businessData.revenue * (1 + growth / 100);
+            const projectedProfit = projectedRevenue * (margin / 100);
+            const valuation = projectedProfit * multiple;
+            
+            document.getElementById('calculatedValue').textContent = `$${(valuation / 1000).toFixed(0)}K`;
+            
+            const diff = ((valuation - businessData.price) / businessData.price * 100);
+            const diffEl = document.getElementById('valuationDiff');
+            diffEl.textContent = `${diff > 0 ? '+' : ''}${diff.toFixed(1)}%`;
+            diffEl.className = `text-lg font-semibold ${diff >= 0 ? 'text-green-600' : 'text-red-600'}`;
+        }
+
+        // Revenue Chart
+        function renderRevenueChart() {
+            const chart = document.getElementById('revenueChart');
+            const max = Math.max(...businessData.revenueHistory);
+            
+            chart.innerHTML = businessData.revenueHistory.map((rev, i) => {
+                const height = (rev / max) * 100;
+                const isProjected = i === businessData.revenueHistory.length - 1;
+                return `
+                    <div class="flex-1 flex flex-col items-center gap-1">
+                        <div class="chart-bar w-full" style="height: ${height}%; ${isProjected ? 'background: linear-gradient(to top, #2d6a9f, #4a90c2); opacity: 0.7;' : ''}"></div>
+                        <span class="text-xs font-mono text-gray-600">$${(rev / 1000).toFixed(0)}K</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Details Grid
+        function renderDetails() {
+            const grid = document.getElementById('detailsGrid');
+            grid.innerHTML = Object.entries(businessData.details).map(([key, value]) => `
+                <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span class="text-gray-600 text-sm">${key}</span>
+                    <span class="font-semibold text-gray-900">${value}</span>
+                </div>
+            `).join('');
+        }
+
+        // Features Grid
+        function renderFeatures() {
+            const grid = document.getElementById('featuresGrid');
+            grid.innerHTML = businessData.features.map(f => `
+                <div class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
+                    <i class="fas fa-check-circle text-green-500"></i>
+                    <span class="text-sm text-gray-700">${f}</span>
+                </div>
+            `).join('');
+        }
+
+        // Financial Breakdown
+        function renderFinancialBreakdown() {
+            const container = document.getElementById('financialBreakdown');
+            const total = Object.values(businessData.financials).reduce((sum, item) => sum + item.amount, 0);
+            
+            container.innerHTML = Object.entries(businessData.financials).map(([key, data]) => {
+                const width = (data.amount / total) * 100;
+                const isProfit = key === 'Net Profit';
+                return `
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-700">${key}</span>
+                            <span class="font-mono font-semibold ${isProfit ? 'text-green-600' : 'text-gray-900'}">
+                                $${(data.amount / 1000).toFixed(0)}K (${data.percent}%)
+                            </span>
+                        </div>
+                        <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                            <div class="h-full ${isProfit ? 'bg-green-500' : 'bg-blue-900'} rounded-full" style="width: ${width}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Quick Stats
+        function renderQuickStats() {
+            const stats = [
+                { label: 'Days on Market', value: '12', icon: 'fa-calendar' },
+                { label: 'Views', value: '234', icon: 'fa-eye' },
+                { label: 'Inquiries', value: '8', icon: 'fa-envelope' },
+                { label: 'NDAs Signed', value: '3', icon: 'fa-file-signature' }
+            ];
+            
+            document.getElementById('quickStats').innerHTML = stats.map(s => `
+                <div class="flex items-center justify-between py-2">
+                    <div class="flex items-center gap-2 text-gray-600">
+                        <i class="fas ${s.icon} text-gray-400"></i>
+                        <span class="text-sm">${s.label}</span>
+                    </div>
+                    <span class="font-semibold text-gray-900">${s.value}</span>
+                </div>
+            `).join('');
+        }
+
+        // Comparable Sales
+        function renderComparableSales() {
+            const container = document.getElementById('comparableSales');
+            container.innerHTML = businessData.comparableSales.map(sale => `
+                <div class="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
+                    <div>
+                        <p class="font-semibold text-gray-900 text-sm">${sale.name}</p>
+                        <p class="text-xs text-gray-500">${sale.multiple}x multiple</p>
+                    </div>
+                    <span class="font-mono font-semibold text-blue-900">$${(sale.price / 1000).toFixed(0)}K</span>
+                </div>
+            `).join('');
+        }
+
+        // Actions
+        function requestInfo() {
+            alert(`NDA & Financials Requested for ${businessData.name}\n\nReference: REQ-${Math.random().toString(36).substr(2,6).toUpperCase()}\n\nThe seller will contact you within 24 hours.`);
+        }
+
+        function scheduleViewing() {
+            alert(`Viewing Requested for ${businessData.name}\n\nAvailable times:\n• Monday 2PM\n• Wednesday 10AM\n• Friday 4PM\n\nReference: VIEW-${Math.random().toString(36).substr(2,6).toUpperCase()}`);
+        }
+
+        function share(platform) {
+            const url = window.location.href;
+            const text = `Check out ${businessData.name} on 305business.llc`;
+            
+            switch(platform) {
+                case 'email':
+                    window.location.href = `mailto:?subject=${encodeURIComponent(text)}&body=${encodeURIComponent(url)}`;
+                    break;
+                case 'linkedin':
+                    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`);
+                    break;
+                case 'twitter':
+                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`);
+                    break;
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>
