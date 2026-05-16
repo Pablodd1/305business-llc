@@ -342,7 +342,8 @@
                         <span class="tech-label ml-2">.LLC</span>
                     </div>
                 </div>
-                <div class="flex items-center gap-4">
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-4">
                     <a href="#market" class="tech-label hover:text-white/60 transition">MARKET</a>
                     <a href="#search" class="tech-label hover:text-white/60 transition">SEARCH</a>
                     <a href="#listings" class="tech-label hover:text-white/60 transition">LISTINGS</a>
@@ -351,10 +352,60 @@
                     <button onclick="window.location.href='list-business.html'" class="schematic-btn px-4 py-2">
                         <span class="relative z-10">+ LIST BUSINESS</span>
                     </button>
-                    <a href="https://t.me/YourTelegramUsername" target="_blank" class="text-white/60 hover:text-white transition" title="Contact us on Telegram">
-                        <i class="fab fa-telegram text-xl"></i>
+                    <div class="flex items-center gap-2 ml-2">
+                        <a href="https://t.me/YourTelegramUsername" target="_blank" class="text-white/60 hover:text-white transition" title="Telegram">
+                            <i class="fab fa-telegram text-lg"></i>
+                        </a>
+                        <a href="https://wa.me/17866432099" target="_blank" class="text-white/60 hover:text-white transition" title="WhatsApp">
+                            <i class="fab fa-whatsapp text-lg"></i>
+                        </a>
+                        <a href="https://instagram.com/305business" target="_blank" class="text-white/60 hover:text-white transition" title="Instagram">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                        <a href="https://facebook.com/305business" target="_blank" class="text-white/60 hover:text-white transition" title="Facebook">
+                            <i class="fab fa-facebook text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden text-white p-2" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-[#0a1628]/95 z-50 pt-16">
+            <div class="flex flex-col items-center gap-6 py-8">
+                <a href="#market" class="text-white text-lg" onclick="toggleMobileMenu()">MARKET</a>
+                <a href="#search" class="text-white text-lg" onclick="toggleMobileMenu()">SEARCH</a>
+                <a href="#listings" class="text-white text-lg" onclick="toggleMobileMenu()">LISTINGS</a>
+                <a href="#matching" class="text-white text-lg" onclick="toggleMobileMenu()">AI MATCH</a>
+                <a href="#how-it-works" class="text-white text-lg" onclick="toggleMobileMenu()">PROCESS</a>
+                <button onclick="window.location.href='list-business.html'" class="schematic-btn px-6 py-3">
+                    <span class="relative z-10">+ LIST BUSINESS</span>
+                </button>
+                <div class="flex items-center gap-6 mt-4">
+                    <a href="https://t.me/YourTelegramUsername" target="_blank" class="text-white/60 hover:text-white">
+                        <i class="fab fa-telegram text-2xl"></i>
+                    </a>
+                    <a href="https://wa.me/17866432099" target="_blank" class="text-white/60 hover:text-white">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                    </a>
+                    <a href="https://instagram.com/305business" target="_blank" class="text-white/60 hover:text-white">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+                    <a href="https://facebook.com/305business" target="_blank" class="text-white/60 hover:text-white">
+                        <i class="fab fa-facebook text-2xl"></i>
                     </a>
                 </div>
+                <button onclick="toggleMobileMenu()" class="absolute top-4 right-4 text-white/60 hover:text-white">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
             </div>
         </div>
     </nav>
@@ -851,6 +902,10 @@
                         <li class="text-white/30 text-sm"><i class="fas fa-envelope mr-2"></i>info@305business.llc</li>
                         <li class="text-white/30 text-sm"><i class="fas fa-map-marker-alt mr-2"></i>Miami, FL</li>
                         <li><a href="https://t.me/YourTelegramUsername" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fab fa-telegram mr-2"></i>Telegram</a></li>
+                        <li><a href="https://wa.me/17866432099" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fab fa-whatsapp mr-2"></i>WhatsApp</a></li>
+                        <li><a href="https://instagram.com/305business" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fab fa-instagram mr-2"></i>Instagram</a></li>
+                        <li><a href="https://facebook.com/305business" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fab fa-facebook mr-2"></i>Facebook</a></li>
+                        <li><a href="https://calendly.com/aidynamicpro" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fas fa-calendar mr-2"></i>Book Consultation</a></li>
                     </ul>
                 </div>
             </div>
@@ -1252,5 +1307,27 @@
     <!-- Agentic Website Engine -->
     <script src="agentic-config.js"></script>
     <script src="agentic-website-engine.js"></script>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                menu.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Close mobile menu on resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) {
+                document.getElementById('mobileMenu').classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
 </body>
 </html>
