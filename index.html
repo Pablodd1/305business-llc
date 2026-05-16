@@ -344,12 +344,13 @@
                 </div>
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center gap-4">
-                    <a href="#market" class="tech-label hover:text-white/60 transition">MARKET</a>
-                    <a href="#search" class="tech-label hover:text-white/60 transition">SEARCH</a>
-                    <a href="#listings" class="tech-label hover:text-white/60 transition">LISTINGS</a>
-                    <a href="#matching" class="tech-label hover:text-white/60 transition">AI MATCH</a>
-                    <a href="#how-it-works" class="tech-label hover:text-white/60 transition">PROCESS</a>
-                    <button onclick="window.location.href='list-business.html'" class="schematic-btn px-4 py-2">
+                    <a href="#market" class="tech-label hover:text-white/60 transition" data-i18n="nav_market">MARKET</a>
+                    <a href="#search" class="tech-label hover:text-white/60 transition" data-i18n="nav_search">SEARCH</a>
+                    <a href="#listings" class="tech-label hover:text-white/60 transition" data-i18n="nav_listings">LISTINGS</a>
+                    <a href="#matching" class="tech-label hover:text-white/60 transition" data-i18n="nav_match">AI MATCH</a>
+                    <a href="#how-it-works" class="tech-label hover:text-white/60 transition" data-i18n="nav_process">PROCESS</a>
+                    <div id="lang-toggle" style="margin-left:0.5rem;"></div>
+                    <button onclick="window.location.href='list-business.html'" class="schematic-btn px-4 py-2" data-i18n="nav_list_business">
                         <span class="relative z-10">+ LIST BUSINESS</span>
                     </button>
                     <div class="flex items-center gap-2 ml-2">
@@ -383,6 +384,7 @@
                 <a href="#listings" class="text-white text-lg" onclick="toggleMobileMenu()">LISTINGS</a>
                 <a href="#matching" class="text-white text-lg" onclick="toggleMobileMenu()">AI MATCH</a>
                 <a href="#how-it-works" class="text-white text-lg" onclick="toggleMobileMenu()">PROCESS</a>
+                <div id="lang-toggle-mobile" style="margin-top:0.5rem;"></div>
                 <button onclick="window.location.href='list-business.html'" class="schematic-btn px-6 py-3">
                     <span class="relative z-10">+ LIST BUSINESS</span>
                 </button>
@@ -403,9 +405,6 @@
                 <button onclick="toggleMobileMenu()" class="absolute top-4 right-4 text-white/60 hover:text-white">
                     <i class="fas fa-times text-2xl"></i>
                 </button>
-            </div>
-        </div>
-    </nav>
             </div>
         </div>
     </nav>
@@ -453,10 +452,10 @@
                         The future of business sales in Miami.
                     </p>
                     <div class="flex gap-4">
-                        <button onclick="document.getElementById('search').scrollIntoView({behavior:'smooth'})" class="schematic-btn px-6 py-3">
+                        <button onclick="document.getElementById('search').scrollIntoView({behavior:'smooth'})" class="schematic-btn px-6 py-3" data-i18n="hero_cta_primary">
                             <span class="relative z-10"><i class="fas fa-search mr-2"></i>SEARCH NOW</span>
                         </button>
-                        <button onclick="document.getElementById('matching').scrollIntoView({behavior:'smooth'})" class="schematic-btn px-6 py-3">
+                        <button onclick="document.getElementById('matching').scrollIntoView({behavior:'smooth'})" class="schematic-btn px-6 py-3" data-i18n="hero_cta_secondary">
                             <span class="relative z-10"><i class="fas fa-magic mr-2"></i>AI MATCH</span>
                         </button>
                     </div>
@@ -519,7 +518,7 @@
             <div class="flex justify-between items-end">
                 <div>
                     <span class="tech-label block mb-1">SHEET: M-1</span>
-                    <h2 class="text-xl font-bold text-white">LIVE MARKET DATA</h2>
+                    <h2 class="text-xl font-bold text-white" data-i18n="section_market_data">LIVE MARKET DATA</h2>
                 </div>
                 <span class="tech-label">VIEW: REAL-TIME</span>
             </div>
@@ -585,7 +584,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <span class="tech-label block mb-2">SHEET: AI-1</span>
-                <h2 class="text-3xl font-bold text-white mb-4">AI-POWERED MATCHING</h2>
+                <h2 class="text-3xl font-bold text-white mb-4" data-i18n="section_matching">AI-POWERED MATCHING</h2>
                 <p class="text-white/40 max-w-2xl mx-auto">Neural network analysis finds your ideal business from 2,000+ Miami listings.</p>
             </div>
             
@@ -702,7 +701,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
                 <div>
                     <span class="tech-label block mb-2">SHEET: A-1</span>
-                    <h2 class="text-3xl font-bold text-white">FEATURED LISTINGS</h2>
+                    <h2 class="text-3xl font-bold text-white" data-i18n="section_listings">FEATURED LISTINGS</h2>
                     <p class="text-white/40">20 verified businesses for sale in Miami</p>
                 </div>
                 <div class="flex gap-2 flex-wrap">
@@ -728,7 +727,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <span class="tech-label block mb-2">SHEET: P-1</span>
-                <h2 class="text-3xl font-bold text-white mb-4">TRANSACTION PROCESS</h2>
+                <h2 class="text-3xl font-bold text-white mb-4" data-i18n="section_process">TRANSACTION PROCESS</h2>
                 <p class="text-white/40 max-w-2xl mx-auto">Secure, transparent, and efficient business transactions</p>
             </div>
             
@@ -779,7 +778,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <span class="tech-label block mb-2">SHEET: S-1</span>
-                <h2 class="text-3xl font-bold text-white mb-4">BUSINESS SERVICES</h2>
+                <h2 class="text-3xl font-bold text-white mb-4" data-i18n="section_services">BUSINESS SERVICES</h2>
                 <p class="text-white/40 max-w-2xl mx-auto">Professional services to maximize your business value</p>
             </div>
             
@@ -824,7 +823,7 @@
                     <span class="tech-label">SHEET: C-1</span>
                     <span class="tech-label">REVISION: 1.0</span>
                 </div>
-                <h2 class="text-3xl font-bold text-white mb-2">SUBMIT INQUIRY</h2>
+                <h2 class="text-3xl font-bold text-white mb-2" data-i18n="section_contact">SUBMIT INQUIRY</h2>
                 <p class="text-white/40 mb-8">Complete technical specifications for listing request.</p>
 
                 <form class="space-y-4" onsubmit="event.preventDefault(); alert('INQUIRY_SUBMITTED — REF: BS-' + Math.random().toString(36).substr(2,6).toUpperCase());">
@@ -866,7 +865,22 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Calendly Inline Booking -->
+  <section class="py-20" id="calendly-embed">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="tech-border p-8 max-w-4xl mx-auto">
+        <div class="flex justify-between items-start mb-6">
+          <span class="tech-label">SHEET: BK-1</span>
+          <span class="tech-label">REVISION: 1.0</span>
+        </div>
+        <h2 class="text-3xl font-bold text-white mb-2" data-i18n="cta_schedule_call">Book Consultation</h2>
+        <p class="text-white/40 mb-8" data-i18n="cta_section_desc">Schedule a free 30-minute strategy call to discuss your business needs.</p>
+        <div id="calendly-widget" style="min-height: 600px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
     <footer class="blueprint-nav border-t border-white/10 py-12 mt-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-8">
@@ -878,7 +892,7 @@
                     <p class="text-white/30 text-sm">Technical marketplace for business transactions.</p>
                 </div>
                 <div>
-                    <span class="tech-label block mb-4">PLATFORM</span>
+                    <span class="tech-label block mb-4" data-i18n="footer_platform">PLATFORM</span>
                     <ul class="space-y-2">
                         <li><a href="#search" class="text-white/30 hover:text-white/60 text-sm transition">Search Businesses</a></li>
                         <li><a href="#matching" class="text-white/30 hover:text-white/60 text-sm transition">AI Matching</a></li>
@@ -887,7 +901,7 @@
                     </ul>
                 </div>
                 <div>
-                    <span class="tech-label block mb-4">SERVICES</span>
+                    <span class="tech-label block mb-4" data-i18n="footer_services">SERVICES</span>
                     <ul class="space-y-2">
                         <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Valuation</a></li>
                         <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Pitch Decks</a></li>
@@ -896,7 +910,7 @@
                     </ul>
                 </div>
                 <div>
-                    <span class="tech-label block mb-4">CONTACT</span>
+                    <span class="tech-label block mb-4" data-i18n="footer_contact">CONTACT</span>
                     <ul class="space-y-2">
                         <li class="text-white/30 text-sm"><i class="fas fa-phone mr-2"></i>+1 786-643-2099</li>
                         <li class="text-white/30 text-sm"><i class="fas fa-envelope mr-2"></i>info@305business.llc</li>
@@ -905,7 +919,7 @@
                         <li><a href="https://wa.me/17866432099" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fab fa-whatsapp mr-2"></i>WhatsApp</a></li>
                         <li><a href="https://instagram.com/305business" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fab fa-instagram mr-2"></i>Instagram</a></li>
                         <li><a href="https://facebook.com/305business" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fab fa-facebook mr-2"></i>Facebook</a></li>
-                        <li><a href="https://calendly.com/aidynamicpro" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fas fa-calendar mr-2"></i>Book Consultation</a></li>
+                        <li><a href="https://calendly.com/aidynamicpro" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition" data-i18n="footer_book_consultation"><i class="fas fa-calendar mr-2"></i>Book Consultation</a></li>
                     </ul>
                 </div>
             </div>
@@ -1328,6 +1342,22 @@
                 document.body.style.overflow = '';
             }
         });
+    </script>
+    <!-- Shared Language & Calendly Modules -->
+    <script src="../shared/language-toggle.js"></script>
+    <script src="../shared/calendly-booking.js"></script>
+    <script>
+      window.__i18nBasePath = '../shared/translations/';
+      document.addEventListener('DOMContentLoaded', function() {
+        LanguageToggle.init({ toggleContainerId: 'lang-toggle', basePath: '../shared/translations/' });
+        if (document.getElementById('calendly-widget')) {
+          CalendlyBooking.init({
+            username: 'aidynamicpro',
+            containerId: 'calendly-widget',
+            colors: { primary: '#00D4FF', background: '#1a4a7a', text: '#e0e0e0' }
+          });
+        }
+      });
     </script>
 </body>
 </html>
