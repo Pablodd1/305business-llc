@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broker Portal — 305business.llc</title>
+    <link rel="icon" type="image/png" href="305business-logo-transparent.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #1a4a7a; color: #e0e0e0; min-height: 100vh; }
+        .blueprint-bg {
+            background-color: #1a4a7a;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+            background-attachment: fixed;
+        }
+        .tech-border { border: 2px solid rgba(255,255,255,0.4); position: relative; margin: 2px; }
+        .tech-border::before, .tech-border::after {
+            content: ''; position: absolute; width: 12px; height: 12px; 
+            border: 2px solid rgba(255,255,255,0.6);
+        }
+        .tech-border::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .tech-border::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+        .tech-card {
+            background: rgba(255,255,255,0.03); 
+            border: 1.5px solid rgba(255,255,255,0.25); 
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .tech-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 20%, rgba(255,255,255,0.5) 80%, transparent 100%);
+        }
+        .tech-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6);
+        }
+        .schematic-btn {
+            background: transparent; border: 1.5px solid rgba(255,255,255,0.3); color: white;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.05em;
+            position: relative; overflow: hidden; cursor: pointer;
+            padding: 12px 24px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .schematic-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.08); transition: left 0.3s;
+        }
+        .schematic-btn:hover::before { left: 0; }
+        .blueprint-nav {
+            background: rgba(26,74,122,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .tech-input {
+            background: rgba(255,255,255,0.05);
+            border: 1.5px solid rgba(255,255,255,0.2);
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            padding: 12px;
+            width: 100%;
+        }
+        .tech-input:focus {
+            outline: none;
+            border-color: rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.08);
+        }
+    </style>
+</head>
+<body class="blueprint-bg">
+    <!-- Navigation -->
+    <nav class="blueprint-nav fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center gap-2">
+                    <img src="305business-logo-transparent.png" alt="305business" class="h-8 w-auto">
+                    <span class="font-bold text-white tracking-wider">305business</span>
+                </a>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="index.html#search" class="text-white/60 hover:text-white text-sm transition">Search</a>
+                    <a href="index.html#services" class="text-white/60 hover:text-white text-sm transition">Services</a>
+                    <a href="index.html#contact" class="text-white/60 hover:text-white text-sm transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-32 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="tech-border p-8 mb-8">
+                <span class="tech-label">COMING SOON</span>
+                <h1 class="text-4xl font-bold text-white mt-4 mb-4">BROKER PORTAL</h1>
+                <p class="text-white/60 text-lg max-w-2xl">Exclusive platform for licensed business brokers. Manage listings, track deals, and collaborate with buyers and sellers in one secure workspace.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Preview -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl font-bold text-white mb-8">PORTAL FEATURES</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="tech-card p-6">
+                    <div class="w-12 h-12 border border-white/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-list text-[#00D4FF] text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Listing Management</h3>
+                    <p class="text-white/60 text-sm">Create, edit, and manage multiple business listings with rich media and financial data.</p>
+                </div>
+                <div class="tech-card p-6">
+                    <div class="w-12 h-12 border border-white/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-[#B829DD] text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Deal Pipeline</h3>
+                    <p class="text-white/60 text-sm">Track every deal from initial inquiry to closing with stage-based workflow management.</p>
+                </div>
+                <div class="tech-card p-6">
+                    <div class="w-12 h-12 border border-white/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-users text-[#FF006E] text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Client Management</h3>
+                    <p class="text-white/60 text-sm">Organize buyer and seller contacts with notes, communication history, and preferences.</p>
+                </div>
+                <div class="tech-card p-6">
+                    <div class="w-12 h-12 border border-white/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-file-contract text-[#00D4FF] text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Document Vault</h3>
+                    <p class="text-white/60 text-sm">Secure storage for NDAs, financials, and legal documents with access controls.</p>
+                </div>
+                <div class="tech-card p-6">
+                    <div class="w-12 h-12 border border-white/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-comments text-[#B829DD] text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Secure Messaging</h3>
+                    <p class="text-white/60 text-sm">Encrypted communication between brokers, buyers, and sellers within the platform.</p>
+                </div>
+                <div class="tech-card p-6">
+                    <div class="w-12 h-12 border border-white/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-percentage text-[#FF006E] text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Commission Tracking</h3>
+                    <p class="text-white/60 text-sm">Automated commission calculations and payment tracking for closed deals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Waitlist -->
+    <section class="py-12 mb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="tech-border p-8 max-w-2xl mx-auto">
+                <span class="tech-label">EARLY ACCESS</span>
+                <h2 class="text-2xl font-bold text-white mt-4 mb-4">JOIN THE WAITLIST</h2>
+                <p class="text-white/60 mb-6">Be the first to access the Broker Portal when it launches. Enter your details below:</p>
+                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Thank you! You have been added to the Broker Portal waitlist. We will contact you when early access is available.');">
+                    <div>
+                        <label class="tech-label block mb-2">BROKER_NAME</label>
+                        <input type="text" class="tech-input" placeholder="Full Name" required>
+                    </div>
+                    <div>
+                        <label class="tech-label block mb-2">LICENSE_NUMBER</label>
+                        <input type="text" class="tech-input" placeholder="Business Broker License #" required>
+                    </div>
+                    <div>
+                        <label class="tech-label block mb-2">EMAIL</label>
+                        <input type="email" class="tech-input" placeholder="Email Address" required>
+                    </div>
+                    <div>
+                        <label class="tech-label block mb-2">PHONE</label>
+                        <input type="tel" class="tech-input" placeholder="Phone Number">
+                    </div>
+                    <button type="submit" class="schematic-btn w-full py-4 mt-4">
+                        <span class="relative z-10">REQUEST EARLY ACCESS →</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="blueprint-nav border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <span class="tech-label">© 2026 305business.LLC — ALL RIGHTS RESERVED</span>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <a href="privacy.html" class="text-white/30 hover:text-white/60 text-sm transition">Privacy</a>
+                    <a href="terms.html" class="text-white/30 hover:text-white/60 text-sm transition">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
