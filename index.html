@@ -349,6 +349,7 @@
                     <a href="#listings" class="tech-label hover:text-white/60 transition" data-i18n="nav_listings">LISTINGS</a>
                     <a href="#matching" class="tech-label hover:text-white/60 transition" data-i18n="nav_match">AI MATCH</a>
                     <a href="#how-it-works" class="tech-label hover:text-white/60 transition" data-i18n="nav_process">PROCESS</a>
+                    <a href="https://aidynamic.pro/founders.html" target="_blank" class="tech-label hover:text-white/60 transition">FOUNDERS</a>
                     <div id="lang-toggle" style="margin-left:0.5rem;"></div>
                     <button onclick="window.location.href='list-business.html'" class="schematic-btn px-4 py-2" data-i18n="nav_list_business">
                         <span class="relative z-10">+ LIST BUSINESS</span>
@@ -897,38 +898,38 @@
                         <li><a href="#search" class="text-white/30 hover:text-white/60 text-sm transition">Search Businesses</a></li>
                         <li><a href="#matching" class="text-white/30 hover:text-white/60 text-sm transition">AI Matching</a></li>
                         <li><a href="#listings" class="text-white/30 hover:text-white/60 text-sm transition">Listings</a></li>
-                        <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Broker Portal</a></li>
+                        <li><a href="#" onclick="alert('Broker Portal coming soon. Contact us for early access.')" class="text-white/30 hover:text-white/60 text-sm transition">Broker Portal</a></li>
                     </ul>
                 </div>
                 <div>
                     <span class="tech-label block mb-4" data-i18n="footer_services">SERVICES</span>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Valuation</a></li>
-                        <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Pitch Decks</a></li>
-                        <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Financial Forecasting</a></li>
-                        <li><a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Legal Support</a></li>
+                        <li><a href="#services" class="text-white/30 hover:text-white/60 text-sm transition">Valuation</a></li>
+                        <li><a href="#services" class="text-white/30 hover:text-white/60 text-sm transition">Pitch Decks</a></li>
+                        <li><a href="#services" class="text-white/30 hover:text-white/60 text-sm transition">Financial Forecasting</a></li>
+                        <li><a href="#contact" class="text-white/30 hover:text-white/60 text-sm transition">Legal Support</a></li>
                     </ul>
                 </div>
                 <div>
                     <span class="tech-label block mb-4" data-i18n="footer_contact">CONTACT</span>
                     <ul class="space-y-2">
                         <li class="text-white/30 text-sm"><i class="fas fa-phone mr-2"></i>+1 786-643-2099</li>
-                        <li class="text-white/30 text-sm"><i class="fas fa-envelope mr-2"></i>info@305business.llc</li>
+                        <li class="text-white/30 text-sm"><i class="fas fa-envelope mr-2"></i>info@305business.llc <span class="text-white/20 text-xs">(coming soon — remind Jasmel)</span></li>
                         <li class="text-white/30 text-sm"><i class="fas fa-map-marker-alt mr-2"></i>Miami, FL</li>
                         <li><a href="https://t.me/28729102e2163caa3555992f580e1013" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fab fa-telegram mr-2"></i>Telegram</a></li>
                         <li><a href="https://wa.me/17866432099" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fab fa-whatsapp mr-2"></i>WhatsApp</a></li>
                         <li><a href="https://instagram.com/305business" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fab fa-instagram mr-2"></i>Instagram</a></li>
                         <li><a href="https://facebook.com/305business" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fab fa-facebook mr-2"></i>Facebook</a></li>
-                        <li><a href="https://calendly.com/aidynamicpro" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition" data-i18n="footer_book_consultation"><i class="fas fa-calendar mr-2"></i>Book Consultation</a></li>
+                        <li><a href="https://calendly.com/305business" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition" data-i18n="footer_book_consultation"><i class="fas fa-calendar mr-2"></i>Book Consultation</a></li>
                     </ul>
                 </div>
             </div>
             <div class="border-t border-white/10 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
                 <span class="tech-label">© 2026 305business.LLC — ALL RIGHTS RESERVED — REV 1.0</span>
                 <div class="flex gap-4 mt-4 md:mt-0">
-                    <a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Privacy</a>
-                    <a href="#" class="text-white/30 hover:text-white/60 text-sm transition">Terms</a>
-                    <a href="#" class="text-white/30 hover:text-white/60 text-sm transition">NDA Template</a>
+                    <a href="#" onclick="alert('Privacy Policy coming soon.')" class="text-white/30 hover:text-white/60 text-sm transition">Privacy</a>
+                    <a href="#" onclick="alert('Terms of Service coming soon.')" class="text-white/30 hover:text-white/60 text-sm transition">Terms</a>
+                    <a href="#" onclick="alert('NDA Template coming soon.')" class="text-white/30 hover:text-white/60 text-sm transition">NDA Template</a>
                 </div>
             </div>
         </div>
@@ -1352,7 +1353,7 @@
         LanguageToggle.init({ toggleContainerId: 'lang-toggle', basePath: 'shared/translations/' });
         if (document.getElementById('calendly-widget')) {
           CalendlyBooking.init({
-            username: 'aidynamicpro',
+            username: '305business',
             containerId: 'calendly-widget',
             colors: { primary: '#00D4FF', background: '#1a4a7a', text: '#e0e0e0' }
           });
