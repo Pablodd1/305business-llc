@@ -1344,12 +1344,12 @@
         });
     </script>
     <!-- Shared Language & Calendly Modules -->
-    <script src="../shared/language-toggle.js"></script>
-    <script src="../shared/calendly-booking.js"></script>
+    <script src="shared/language-toggle.js"></script>
+    <script src="shared/calendly-booking.js"></script>
     <script>
-      window.__i18nBasePath = '../shared/translations/';
+      window.__i18nBasePath = 'shared/translations/';
       document.addEventListener('DOMContentLoaded', function() {
-        LanguageToggle.init({ toggleContainerId: 'lang-toggle', basePath: '../shared/translations/' });
+        LanguageToggle.init({ toggleContainerId: 'lang-toggle', basePath: 'shared/translations/' });
         if (document.getElementById('calendly-widget')) {
           CalendlyBooking.init({
             username: 'aidynamicpro',
