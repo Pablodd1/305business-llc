@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Founders — 305business.LLC</title>
+    <link rel="icon" type="image/png" href="305business-logo-transparent.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a1628; color: #e0e0e0; min-height: 100vh; overflow-x: hidden; }
+        
+        /* Neural Network Background */
+        #neuralCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.4;
+        }
+        
+        .content-layer {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Tech styling */
+        .tech-card {
+            background: rgba(255,255,255,0.03); 
+            border: 1.5px solid rgba(255,255,255,0.25); 
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .tech-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(0,212,255,0.5) 20%, rgba(0,212,255,0.5) 80%, transparent 100%);
+        }
+        
+        .tech-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+        }
+        
+        /* Connection lines */
+        .connection-line {
+            position: absolute;
+            background: linear-gradient(90deg, #00D4FF, #B829DD, #00FF88);
+            height: 2px;
+            opacity: 0.6;
+            animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+        
+        /* Founder card glow */
+        .founder-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .founder-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+        .founder-card:hover::after {
+            opacity: 1;
+        }
+        
+        /* Brain icon animation */
+        .brain-pulse {
+            animation: brainPulse 4s ease-in-out infinite;
+        }
+        @keyframes brainPulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a1628; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.3); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <!-- Neural Network Background -->
+    <canvas id="neuralCanvas"></canvas>
+    
+    <div class="content-layer">
+        <!-- Header -->
+        <header class="fixed top-0 left-0 right-0 z-50 bg-[#0a1628]/90 backdrop-blur-sm border-b border-white/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="305business-logo-transparent.png" alt="305business" class="h-8 w-auto">
+                    <span class="font-bold text-white tracking-wider">305business</span>
+                </a>
+                <a href="index.html" class="text-white/60 hover:text-white transition text-sm">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Main
+                </a>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center pt-20 pb-12 px-4">
+            <div class="max-w-6xl mx-auto text-center">
+                <div class="mb-8">
+                    <i class="fas fa-brain text-6xl text-[#00D4FF] brain-pulse mb-4"></i>
+                </div>
+                <span class="tech-label block mb-4">NEURAL NETWORK — INTERCONNECTED THINKING</span>
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
+                    THE FOUNDERS
+                </h1>
+                <p class="text-white/60 text-lg max-w-2xl mx-auto mb-12">
+                    Three minds. One vision. Connected by the neural network of innovation that powers Miami's premier business listing platform.
+                </p>
+                
+                <!-- Connection visualization -->
+                <div class="relative max-w-4xl mx-auto">
+                    <svg class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-32 opacity-30" viewBox="0 0 800 100">
+                        <path d="M 100 50 Q 250 10, 400 50 T 700 50" stroke="#00D4FF" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                            <animate attributeName="stroke-dashoffset" values="0;-20" dur="2s" repeatCount="indefinite"/>
+                        </path>
+                        <path d="M 100 50 Q 250 90, 400 50 T 700 50" stroke="#B829DD" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                            <animate attributeName="stroke-dashoffset" values="0;-20" dur="2.5s" repeatCount="indefinite"/>
+                        </path>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Founders Grid -->
+        <section class="py-20 px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-3 gap-8">
+                    
+                    <!-- Jasmel Acosta -->
+                    <div class="founder-card tech-card p-8 text-center">
+                        <div class="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#00D4FF]/30 relative">
+                            <img src="https://aidynamic.pro/founder.jpg" alt="Jasmel Acosta" class="w-full h-full object-cover object-center">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#00D4FF]/20 to-transparent"></div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Jasmel Acosta</h3>
+                        <p class="text-[#00D4FF] font-mono text-sm mb-4">FOUNDER & CEO</p>
+                        <p class="text-white/60 text-sm mb-6 leading-relaxed">
+                            Serial entrepreneur with 15+ years building tech solutions for healthcare and small businesses. Founded AI Dynamics and 305business to bridge cutting-edge technology with real-world business results. The brain behind the neural network.
+                        </p>
+                        <div class="flex justify-center gap-4">
+                            <a href="https://www.linkedin.com/in/jasmel-acosta/" target="_blank" class="text-white/40 hover:text-[#00D4FF] transition">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="mailto:hello@aidynamic.pro" class="text-white/40 hover:text-[#00D4FF] transition">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </a>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-white/10">
+                            <span class="tech-label">ALSO FOUNDER OF</span>
+                            <div class="flex justify-center gap-3 mt-3">
+                                <a href="https://aidynamic.pro" target="_blank" class="text-xs text-white/40 hover:text-[#00D4FF] transition">AI Dynamic Pro</a>
+                                <span class="text-white/20">·</span>
+                                <a href="https://medicalbillingmb.com" target="_blank" class="text-xs text-white/40 hover:text-[#00FF88] transition">MBMB</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Maria Elena Giusti -->
+                    <div class="founder-card tech-card p-8 text-center">
+                        <div class="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#B829DD]/30 relative">
+                            <img src="maria-giusti.jpg" alt="Maria Elena Giusti" class="w-full h-full object-cover object-center">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#B829DD]/20 to-transparent"></div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Maria Elena Giusti</h3>
+                        <p class="text-[#B829DD] font-mono text-sm mb-4">CO-FOUNDER & OPERATIONS</p>
+                        <p class="text-white/60 text-sm mb-6 leading-relaxed">
+                            Business operations expert specializing in marketplace dynamics, client relations, and transaction coordination. Ensures every business listing on 305business is visible, secure, and successful. The connector who makes it all work.
+                        </p>
+                        <div class="flex justify-center gap-4">
+                            <a href="#" class="text-white/40 hover:text-[#B829DD] transition">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="mailto:maria@305business.llc" class="text-white/40 hover:text-[#B829DD] transition">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </a>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-white/10">
+                            <span class="tech-label">EXPERTISE</span>
+                            <div class="flex justify-center gap-3 mt-3 flex-wrap">
+                                <span class="text-xs text-white/40">Marketplace Ops</span>
+                                <span class="text-white/20">·</span>
+                                <span class="text-xs text-white/40">Client Relations</span>
+                                <span class="text-white/20">·</span>
+                                <span class="text-xs text-white/40">Logistics</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Juan Diaz -->
+                    <div class="founder-card tech-card p-8 text-center">
+                        <div class="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#00FF88]/30 relative">
+                            <img src="juan-diaz.jpg" alt="Juan Diaz" class="w-full h-full object-cover object-center">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#00FF88]/20 to-transparent"></div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Juan Diaz</h3>
+                        <p class="text-[#00FF88] font-mono text-sm mb-4">CO-FOUNDER & STRATEGY</p>
+                        <p class="text-white/60 text-sm mb-6 leading-relaxed">
+                            Co-founder of Unitec USA and Building Innovation. Strategic leader with deep expertise in logistics, construction, and business development across Miami-Dade. The strategic mind connecting businesses to opportunities.
+                        </p>
+                        <div class="flex justify-center gap-4">
+                            <a href="#" class="text-white/40 hover:text-[#00FF88] transition">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="mailto:juan@305business.llc" class="text-white/40 hover:text-[#00FF88] transition">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </a>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-white/10">
+                            <span class="tech-label">ALSO FOUNDER OF</span>
+                            <div class="flex justify-center gap-3 mt-3 flex-wrap">
+                                <span class="text-xs text-white/40">Unitec USA</span>
+                                <span class="text-white/20">·</span>
+                                <span class="text-xs text-white/40">Building Innovation</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Interconnected Philosophy -->
+        <section class="py-20 px-4 border-t border-white/10">
+            <div class="max-w-4xl mx-auto text-center">
+                <i class="fas fa-network-wired text-4xl text-[#00D4FF] mb-6"></i>
+                <h2 class="text-3xl font-bold text-white mb-4">INTERCONNECTED THINKING</h2>
+                <p class="text-white/60 text-lg leading-relaxed">
+                    Like neurons in a brain, we are connected by synapses of innovation. Each founder brings a unique perspective — technology, operations, strategy — but together we form a neural network that powers Miami's business ecosystem. This is not just a platform; it's a living, thinking organism that connects buyers and sellers through the power of collective intelligence.
+                </p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-white/10 py-8 px-4">
+            <div class="max-w-7xl mx-auto text-center">
+                <span class="tech-label">© 2026 305business.LLC — ALL RIGHTS RESERVED</span>
+                <p class="text-white/30 text-xs mt-2">
+                    <i class="fas fa-shield-alt mr-1"></i> Platform Only — Not a Brokerage · Florida LLC
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Neural Network Animation -->
+    <script>
+        const canvas = document.getElementById('neuralCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const nodes = [];
+        const nodeCount = 80;
+        const connectionDistance = 150;
+        
+        class Node {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 1;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0, 212, 255, 0.6)';
+                ctx.fill();
+            }
+        }
+        
+        // Initialize nodes
+        for (let i = 0; i < nodeCount; i++) {
+            nodes.push(new Node());
+        }
+        
+        function drawConnections() {
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < connectionDistance) {
+                        const opacity = (1 - distance / connectionDistance) * 0.3;
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            nodes.forEach(node => {
+                node.update();
+                node.draw();
+            });
+            
+            drawConnections();
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
