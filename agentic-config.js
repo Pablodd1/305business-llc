@@ -7,9 +7,9 @@ window.AGENTIC_CONFIG = {
   api: {
     enabled: true,
     endpoint: 'https://api.305business.llc',
-    fallback: 'localStorage', // Store locally if API fails
-    syncInterval: 30000, // Sync every 30 seconds
-    batchSize: 10 // Batch events before sending
+    fallback: 'localStorage',
+    syncInterval: 30000,
+    batchSize: 10
   },
   
   // Tracking Configuration
@@ -21,7 +21,7 @@ window.AGENTIC_CONFIG = {
     timeOnPage: true,
     conversions: true,
     engagement: true,
-    heatmap: false // Enable for click heatmaps
+    heatmap: false
   },
   
   // SEO Optimization
@@ -31,112 +31,125 @@ window.AGENTIC_CONFIG = {
     ctaButtons: true,
     contentPriority: true,
     schemaOrg: true,
-    dynamicKeywords: true
+    dynamicKeywords: true,
+    abTesting: true
   },
   
-  // Target Keywords for SEO
-  targetKeywords: [
-    'buy business Miami',
-    'sell business Miami',
-    'business marketplace',
-    'business for sale Florida',
-    'Miami business broker',
-    'acquire business Miami',
-    'business valuation Miami',
-    'small business for sale',
-    'Miami business acquisition',
-    'Florida business listings'
-  ],
-  
-  // CTA Variants for A/B Testing
-  ctaVariants: [
-    'List Your Business',
-    'Find a Business',
-    'Get Valuation',
-    'Start Searching',
-    'Connect Now',
-    'Schedule Consultation'
-  ],
-  
-  // Schema.org Types
-  schemaTypes: {
-    homepage: 'Organization',
-    listings: 'ItemList',
-    contact: 'ContactPage',
-    product: 'Product',
-    service: 'Service'
+  // Target Keywords
+  keywords: {
+    primary: [
+      'buy business miami',
+      'sell business miami',
+      'business broker florida',
+      'business valuation miami',
+      'business for sale florida',
+      'miami business marketplace',
+      'buy restaurant miami',
+      'sell healthcare practice',
+      'business acquisition florida',
+      '305business'
+    ],
+    secondary: [
+      'miami business broker',
+      'florida business for sale',
+      'business transfer miami',
+      'sell my business florida'
+    ],
+    longTail: [
+      'how to sell a restaurant in miami',
+      'business valuation services south florida',
+      'confidential business sale miami'
+    ]
   },
   
-  // Social Links (will be injected into schema)
-  socialLinks: {
-    telegram: 'https://t.me/YourTelegramUsername', // Will be updated with real username
-    whatsapp: 'https://wa.me/17866432099',
-    instagram: 'https://instagram.com/305business',
-    facebook: 'https://facebook.com/305business',
-    calendly: 'https://calendly.com/aidynamicpro'
-  },
+  // Target Locations
+  locations: ['Miami', 'Miami-Dade', 'Broward', 'Palm Beach', 'South Florida', 'Fort Lauderdale'],
   
-  // Contact Information
-  contact: {
-    phone: '+1 786-643-2099',
-    email: 'info@305business.llc',
-    address: 'Miami, FL'
-  },
+  // Languages
+  languages: ['English', 'Spanish', 'Russian', 'Haitian Creole'],
   
-  // Automation Rules
-  rules: [
-    {
-      condition: 'search_contains("buy" OR "acquire" OR "purchase")',
-      action: 'highlight_section: "search"',
-      priority: 'high'
-    },
-    {
-      condition: 'search_contains("sell" OR "list" OR "valuation")',
-      action: 'highlight_section: "list-business"',
-      priority: 'high'
-    },
-    {
-      condition: 'click_rate("pricing") > 0.3',
-      action: 'move_section_up: "services"',
-      priority: 'medium'
-    },
-    {
-      condition: 'bounce_rate > 0.6',
-      action: 'simplify_hero_section',
-      priority: 'high'
-    },
-    {
-      condition: 'search_contains("restaurant" OR "cafe" OR "food")',
-      action: 'highlight_section: "listings"',
-      priority: 'medium'
-    },
-    {
-      condition: 'timeOnPage > 120',
-      action: 'show_exit_intent: "schedule_consultation"',
-      priority: 'low'
+  // Conversion Tracking
+  conversions: {
+    goals: [
+      'business_listing_submission',
+      'buyer_inquiry',
+      'broker_match_request',
+      'valuation_request',
+      'demo_request'
+    ],
+    values: {
+      business_listing_submission: 50,
+      buyer_inquiry: 25,
+      broker_match_request: 75,
+      valuation_request: 100,
+      demo_request: 30
     }
-  ],
-  
-  // Mobile Optimization
-  mobile: {
-    hamburgerMenu: true,
-    stickyCTA: true,
-    clickToCall: true,
-    simplifiedForms: true
   },
   
-  // Performance
+  // A/B Testing Configuration
+  abTesting: {
+    enabled: true,
+    variants: {
+      cta: [
+        'List Your Business',
+        'Browse Listings',
+        'Get Valuation',
+        'Find a Broker',
+        'Contact Us'
+      ],
+      headline: [
+        'Miami\'s Premier Business Marketplace',
+        'Buy or Sell a Miami Business',
+        'Your Business Transaction Partner'
+      ]
+    }
+  },
+  
+  // Schema.org Configuration
+  schema: {
+    types: {
+      homepage: 'Organization',
+      services: 'Service',
+      about: 'Organization',
+      contact: 'ContactPage'
+    },
+    organization: {
+      name: '305business.llc',
+      url: 'https://305business.llc',
+      logo: 'https://305business.llc/305business-logo-transparent.png',
+      description: 'Miami\'s premier business marketplace'
+    }
+  },
+  
+  // AI Search Optimization (Google May 2026)
+  aiOptimization: {
+    generateCitations: true,
+    trackFeaturedSnippets: true,
+    monitorAIPresence: true,
+    contentFreshness: 7,
+    structuredDataPriority: ['Organization', 'Service', 'FAQPage']
+  },
+  
+  // Content Strategy
+  content: {
+    blogEnabled: true,
+    autoGenerate: false,
+    freshnessDays: 14,
+    categories: ['Market Updates', 'Business Tips', 'Success Stories', 'Legal Guides']
+  },
+  
+  // Analytics Integration
+  analytics: {
+    googleAnalytics: 'G-PLACEHOLDER',
+    googleTagManager: null,
+    facebookPixel: null,
+    customEvents: true
+  },
+  
+  // Performance Monitoring
   performance: {
-    lazyLoadImages: true,
-    deferNonCritical: true,
-    preloadRoutes: ['list-business.html']
+    trackCoreWebVitals: true,
+    trackPageSpeed: true,
+    alertThreshold: 3000 // Alert if page load > 3s
   }
 };
-
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-  if (typeof AgenticWebsiteAPI !== 'undefined') {
-    window.agentic = new AgenticWebsiteAPI(window.AGENTIC_CONFIG);
-    console.log('🚀 Agentic Website v2.0 initialized');
-  }
-});

@@ -4,10 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>305business.llc — Miami Business Marketplace</title>
-    <meta name="description" content="Buy and sell businesses in Miami. 305business.llc is the premier marketplace for restaurants, retail, healthcare practices, tech startups, and more across South Florida.">
-    <meta name="keywords" content="buy business Miami, sell business Miami, business marketplace Florida, Miami business broker, business for sale South Florida, Miami franchise, small business Miami">
-    <link rel="icon" type="image/png" href="305business-logo-transparent.png">
-    <!-- Google tag (gtag.js) -->
+<<<<<<< HEAD
+    <meta name="description" content="Miami's premier business marketplace. Buy or sell businesses, connect with brokers, get valuations, and access legal support. Serving Miami-Dade, Broward, and Palm Beach." />
+    <meta name="keywords" content="buy business Miami, sell business Miami, business broker Florida, business valuation, Miami business marketplace, 305business, business for sale Florida" />
+    <meta name="author" content="305business.llc" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#1a4a7a" />
+    
+    <!-- Canonical + Hreflang -->
+    <link rel="canonical" href="https://305business.llc" />
+    <link rel="alternate" hreflang="en" href="https://305business.llc" />
+    <link rel="alternate" hreflang="es" href="https://305business.llc" />
+    <link rel="alternate" hreflang="ru" href="https://305business.llc" />
+    <link rel="alternate" hreflang="ht" href="https://305business.llc" />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="305business.llc — Miami Business Marketplace" />
+    <meta property="og:description" content="Buy or sell Miami businesses. Verified listings, broker matching, valuations, and legal support." />
+    <meta property="og:image" content="https://305business.llc/305business-logo-transparent.png" />
+    <meta property="og:url" content="https://305business.llc" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="305business.llc — Miami Business Marketplace" />
+    <meta property="twitter:description" content="Buy or sell Miami businesses. Verified listings, broker matching, valuations, and legal support." />
+    <meta property="twitter:image" content="https://305business.llc/305business-logo-transparent.png" />
+    
+    <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WTHCPMC25C"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -16,9 +40,48 @@
       gtag('config', 'G-WTHCPMC25C');
     </script>
     
-    <!-- Open Graph / Social -->
-    <meta property="og:title" content="305business.llc — Miami Business Marketplace">
-    <meta property="og:description" content="Buy and sell businesses in Miami. Restaurants, retail, healthcare, tech startups, and more.">
+    <!-- AI Search Optimization (Google May 2026) -->
+    <meta name="ai:description" content="305business is Miami's premier business marketplace connecting buyers and sellers of businesses across South Florida." />
+    <meta name="ai:service-area" content="Miami-Dade County, Broward County, Palm Beach County, South Florida" />
+    <meta name="ai:contact" content="info@305business.llc" />
+    <meta name="ai:bot" content="friendly" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "305business.llc",
+          "description": "Miami's premier business marketplace connecting buyers and sellers of businesses across South Florida.",
+          "url": "https://305business.llc",
+          "logo": "https://305business.llc/305business-logo-transparent.png",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "info@305business.llc",
+            "contactType": "customer service",
+            "availableLanguage": ["English", "Spanish", "Russian", "Haitian Creole"]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "name": "305business.llc",
+          "url": "https://305business.llc",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://305business.llc?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Agentic Website Engine -->
+    <script src="agentic-config.js"></script>
+    <script src="agentic-website-engine.js"></script>
+    <link rel="icon" type="image/png" href="305business-logo-transparent.png">
     <meta property="og:url" content="https://305business.llc">
     <meta property="og:site_name" content="305business.llc">
     <meta property="og:image" content="https://305business.llc/305business-logo.png">
@@ -57,7 +120,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #1a4a7a; color: #e0e0e0; min-height: 100vh; }
+        html, body { font-family: 'Inter', sans-serif; background: #1a4a7a; color: #e0e0e0; min-height: 100vh; overflow-x: hidden; }
+        
+        /* Blueprint Grid */
+        .blueprint-bg {
+            background-color: #1a4a7a;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+            background-attachment: fixed;
+        }
         
         /* Authentic Blueprint Grid - Dual scale */
         .blueprint-bg {
@@ -374,6 +449,56 @@
         }
         .modal-content::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
         .modal-content::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+        /* ─── MOBILE RESPONSIVE FIXES ─── */
+        @media (max-width: 768px) {
+            .blueprint-bg {
+                background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+            }
+            .title-block { padding: 1rem !important; }
+            .title-block h1 { font-size: 2rem !important; line-height: 1.2 !important; }
+            .title-block p { font-size: 1rem !important; }
+            .hero-stat-card { padding: 1rem !important; }
+            .stat-number { font-size: 1.75rem !important; }
+            .stat-label { font-size: 0.65rem !important; }
+            .grid.grid-cols-3 { grid-template-columns: 1fr !important; }
+            .grid.lg\\:grid-cols-2 { grid-template-columns: 1fr !important; }
+            .grid.md\\:grid-cols-2 { grid-template-columns: 1fr !important; }
+            .tech-card img { height: auto !important; max-height: 200px; }
+            .schematic-btn { padding: 0.5rem 1rem !important; font-size: 0.8rem !important; }
+            .schematic-btn i { margin-right: 0.25rem !important; }
+            .ticker-bar { padding: 6px 0 !important; }
+            .stock-item { font-size: 11px !important; padding: 0 12px !important; }
+            .flex.gap-4 { gap: 0.5rem !important; }
+            .flex.gap-2 { gap: 0.25rem !important; }
+            .max-w-7xl { padding-left: 1rem !important; padding-right: 1rem !important; }
+            .tech-border { padding: 1rem !important; }
+            .tech-input { font-size: 16px !important; }
+            section { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+            .pt-32 { padding-top: 6rem !important; }
+            .pb-12 { padding-bottom: 2rem !important; }
+            .py-20 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+            .py-12 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+            .py-8 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+            .text-3xl { font-size: 1.5rem !important; }
+            .text-xl { font-size: 1.1rem !important; }
+            .text-lg { font-size: 1rem !important; }
+            h2.text-3xl { font-size: 1.5rem !important; }
+            .data-point { display: none !important; }
+            .hero-stat-card .stat-number { font-size: 1.5rem !important; }
+            .modal-overlay .tech-card { max-width: 95vw !important; width: 95vw !important; }
+            .graph-container { height: 200px !important; }
+        }
+
+        @media (max-width: 480px) {
+            .title-block h1 { font-size: 1.6rem !important; }
+            .grid.grid-cols-3 { grid-template-columns: 1fr !important; }
+            .stat-number { font-size: 1.4rem !important; }
+            .schematic-btn { padding: 0.4rem 0.75rem !important; font-size: 0.75rem !important; }
+            .tech-card { padding: 1rem !important; }
+            .tech-input { padding: 0.5rem 0.75rem !important; }
+            select.tech-input { font-size: 14px !important; }
+            .ticker-bar { display: none !important; }
+        }
     </style>
 
 <!-- AISO + Schema.org Injection (auto-added 2026-05-25) -->
@@ -1625,5 +1750,27 @@
         LanguageToggle.init({ toggleContainerId: 'lang-toggle', basePath: 'shared/translations/' });
       });
     </script>
+    <!-- AI Chatbot Widget -->
+    <script>
+      window.BIZ305_CONFIG = {
+        apiKey: '',
+        apiEndpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent',
+        model: 'gemini-1.5-flash',
+        siteName: '305business',
+        primaryColor: '#FF6B35',
+        secondaryColor: '#1E90FF',
+        position: 'bottom-right',
+        welcomeMessage: {
+          en: "Hi! I'm 305business AI Assistant. I can help you buy or sell a Miami business, connect with brokers, or answer questions about our marketplace. How can I help?",
+          es: "¡Hola! Soy el Asistente AI de 305business. Puedo ayudarte a comprar o vender un negocio en Miami, conectar con corredores, o responder preguntas sobre nuestro marketplace. ¿Cómo puedo ayudarte?",
+          ru: "Здравствуйте! Я ИИ-помощник 305business. Я могу помочь вам купить или продать бизнес в Майами, связаться с брокерами или ответить на вопросы о нашей торговой площадке. Чем могу помочь?",
+          ht: "Bonjou! Mwen se Asistan AI 305business. Mwen ka ede w achte oswa vann yon biznis nan Miami, konekte ak kourtye, oswa reponn kesyon sou marketplace nou an. Kijan mwen ka ede w?"
+        },
+        bookingUrl: 'https://305business.llc/list-business',
+        voiceEnabled: true,
+        languages: ['en', 'es', 'ru', 'ht']
+      };
+    </script>
+    <script src="305business-chatbot-widget.js" defer></script>
 </body>
 </html>
