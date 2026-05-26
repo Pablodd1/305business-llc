@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">Business Detail — 305business.llc</title>
     <link rel="icon" type="image/png" href="305business-logo-transparent.png">
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WTHCPMC25C"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -16,232 +15,56 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="agentic-config.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1a202c; min-height: 100vh; }
-        
-        /* Clean white background with subtle blueprint accents */
-        .detail-page {
-            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
-        }
-        
-        /* Card styles */
-        .detail-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            transition: all 0.3s ease;
-        }
-        .detail-card:hover {
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-        }
-        
-        /* Blueprint accent elements */
-        .blueprint-accent {
-            border-left: 4px solid #1a4a7a;
-        }
-        
-        /* Interactive input styles */
-        .interactive-input {
-            background: #f7fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            transition: all 0.2s;
-            width: 100%;
-        }
-        .interactive-input:focus {
-            outline: none;
-            border-color: #1a4a7a;
-            box-shadow: 0 0 0 3px rgba(26,74,122,0.1);
-        }
-        
-        /* Slider styles */
-        .range-slider {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: #e2e8f0;
-            outline: none;
-        }
-        .range-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: #1a4a7a;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        /* Metric cards */
-        .metric-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-        .metric-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1a4a7a;
-        }
-        .metric-label {
-            font-size: 0.875rem;
-            color: #718096;
-            margin-top: 4px;
-        }
-        
-        /* Section headers */
-        .section-header {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #1a4a7a;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .section-header::before {
-            content: '';
-            width: 24px;
-            height: 2px;
-            background: #1a4a7a;
-        }
-        
-        /* Toggle switches */
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 26px;
-        }
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #e2e8f0;
-            transition: .4s;
-            border-radius: 26px;
-        }
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 20px;
-            width: 20px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        input:checked + .toggle-slider {
-            background-color: #1a4a7a;
-        }
-        input:checked + .toggle-slider:before {
-            transform: translateX(24px);
-        }
-        
-        /* Chart bars */
-        .chart-bar {
-            background: linear-gradient(to top, #1a4a7a, #2d6a9f);
-            border-radius: 4px 4px 0 0;
-            transition: height 0.5s ease;
-        }
-        
-        /* Navigation */
-        .detail-nav {
-            background: white;
-            border-bottom: 1px solid #e2e8f0;
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-        
-        /* Status badge */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
+        .detail-page { background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%); }
+        .detail-card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .blueprint-accent { border-left: 4px solid #1a4a7a; }
+        .btn-primary { background: #1a4a7a; color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; }
+        .btn-primary:hover { background: #2d6a9f; transform: translateY(-1px); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .btn-outline { background: transparent; color: #1a4a7a; padding: 12px 24px; border-radius: 8px; font-weight: 600; border: 2px solid #1a4a7a; cursor: pointer; }
+        .btn-outline:hover { background: #1a4a7a; color: white; }
+        .section-header { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #1a4a7a; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+        .section-header::before { content: ''; width: 24px; height: 2px; background: #1a4a7a; }
+        .form-input { background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: 14px; width: 100%; transition: all 0.2s; }
+        .form-input:focus { outline: none; border-color: #1a4a7a; box-shadow: 0 0 0 3px rgba(26,74,122,0.1); }
+        .form-textarea { background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: 14px; width: 100%; resize: vertical; min-height: 120px; }
+        .chat-widget { position: fixed; bottom: 20px; right: 20px; width: 380px; max-height: 500px; background: white; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 1000; display: none; flex-direction: column; }
+        .chat-widget.active { display: flex; }
+        .chat-header { background: #1a4a7a; color: white; padding: 16px; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center; }
+        .chat-body { flex: 1; overflow-y: auto; padding: 16px; max-height: 300px; }
+        .chat-footer { padding: 12px; border-top: 1px solid #e2e8f0; display: flex; gap: 8px; }
+        .chat-bubble { max-width: 80%; padding: 10px 14px; border-radius: 12px; margin-bottom: 8px; font-size: 14px; }
+        .chat-bubble.buyer { background: #1a4a7a; color: white; align-self: flex-end; }
+        .chat-bubble.seller { background: #f7fafc; color: #1a202c; align-self: flex-start; border: 1px solid #e2e8f0; }
+        .chat-bubble.admin { background: #fffaf0; color: #7b341e; align-self: flex-start; border: 1px solid #ed8936; }
+        .chat-toggle { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #1a4a7a; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 999; font-size: 24px; }
+        .loading-spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 1s ease-in-out infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .status-badge { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
         .status-active { background: #c6f6d5; color: #22543d; }
-        .status-negotiating { background: #fefcbf; color: #744210; }
-        .status-closed { background: #e2e8f0; color: #4a5568; }
-        
-        /* Button styles */
-        .btn-primary {
-            background: #1a4a7a;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-primary:hover {
-            background: #2d6a9f;
-            transform: translateY(-1px);
-        }
-        .btn-outline {
-            background: transparent;
-            color: #1a4a7a;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            border: 2px solid #1a4a7a;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .btn-outline:hover {
-            background: #1a4a7a;
-            color: white;
-        }
-        
-        /* Responsive grid */
-        .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-        @media (min-width: 1024px) {
-            .detail-grid {
-                grid-template-columns: 2fr 1fr;
-            }
-        }
-        
-        /* Print styles */
-        @media print {
-            .no-print { display: none !important; }
-            body { background: white; }
-            .detail-card { box-shadow: none; border: 1px solid #ccc; }
-        }
+        .status-pending { background: #fefcbf; color: #744210; }
+        .status-negotiating { background: #bee3f8; color: #2a4365; }
+        .status-sold { background: #e2e8f0; color: #2d3748; }
+        .metric-card { background: white; border-radius: 8px; padding: 20px; text-align: center; border: 1px solid #e2e8f0; }
+        .metric-value { font-size: 24px; font-weight: 700; color: #1a4a7a; }
+        .metric-label { font-size: 12px; color: #718096; text-transform: uppercase; margin-top: 4px; }
+        .feature-tag { display: inline-block; padding: 6px 12px; background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 20px; font-size: 12px; color: #4a5568; margin: 4px; }
+        .revenue-bar { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+        .revenue-fill { height: 100%; background: linear-gradient(90deg, #1a4a7a, #2d6a9f); border-radius: 4px; }
+        .legal-box { background: #fffaf0; border: 1px solid #ed8936; border-radius: 8px; padding: 16px; margin: 16px 0; }
+        .error-text { color: #e53e3e; font-size: 0.875rem; margin-top: 4px; }
+        .success-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 100; }
+        .success-modal.active { display: flex; }
+        .success-content { background: white; border-radius: 16px; padding: 40px; max-width: 500px; width: 90%; text-align: center; }
+        .success-icon { width: 80px; height: 80px; background: #48bb78; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
     </style>
 </head>
 <body class="detail-page">
-    <!-- Navigation -->
-    <nav class="detail-nav">
+    <nav style="background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
@@ -258,233 +81,266 @@
         </div>
     </nav>
 
-    <!-- Hero Image Section -->
-    <div class="relative h-96 overflow-hidden">
-        <img id="heroImage" src="" alt="Business Location" class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-        <div class="absolute bottom-0 left-0 right-0 p-8">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex items-center gap-3 mb-2">
-                    <span id="businessCategory" class="px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-sm rounded-full"></span>
-                    <span id="businessStatus" class="status-badge"></span>
-                </div>
-                <h1 id="businessName" class="text-4xl md:text-5xl font-bold text-white mb-2"></h1>
-                <p id="businessLocation" class="text-white/80 text-lg"><i class="fas fa-map-marker-alt mr-2"></i><span id="locationText"></span></p>
-            </div>
-        </div>
+    <!-- Loading State -->
+    <div id="loadingState" class="max-w-7xl mx-auto px-4 py-20 text-center">
+        <div class="inline-block w-12 h-12 border-4 border-gray-200 border-t-blue-900 rounded-full animate-spin"></div>
+        <p class="text-gray-500 mt-4">Loading business details...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="errorState" class="max-w-7xl mx-auto px-4 py-20 text-center" style="display:none;">
+        <i class="fas fa-exclamation-triangle text-4xl text-red-400 mb-4"></i>
+        <p class="text-gray-600">Unable to load business details.</p>
+        <button onclick="window.location.reload()" class="btn-primary mt-4">Retry</button>
     </div>
 
     <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="detail-grid">
-            <!-- Left Column -->
-            <div class="space-y-8">
-                <!-- Key Metrics -->
-                <div class="detail-card p-6 blueprint-accent">
-                    <div class="section-header">Key Financials</div>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div class="metric-card">
-                            <div class="metric-value" id="askingPrice"></div>
-                            <div class="metric-label">Asking Price</div>
+    <div id="mainContent" style="display:none;">
+        <!-- Hero Section -->
+        <div class="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span id="listingCategory" class="px-3 py-1 bg-white/20 rounded-full text-sm font-medium"></span>
+                            <span id="listingStatus" class="status-badge"></span>
                         </div>
-                        <div class="metric-card">
-                            <div class="metric-value" id="annualRevenue"></div>
-                            <div class="metric-label">Annual Revenue</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value" id="cashFlow"></div>
-                            <div class="metric-label">Cash Flow</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value" id="multiple"></div>
-                            <div class="metric-label">Multiple</div>
-                        </div>
+                        <h1 id="businessName" class="text-4xl font-bold mb-3"></h1>
+                        <p id="businessLocation" class="text-blue-200 flex items-center gap-2 mb-4">
+                            <i class="fas fa-map-marker-alt"></i><span></span>
+                        </p>
+                        <p id="businessDescription" class="text-blue-100 max-w-2xl leading-relaxed"></p>
                     </div>
-                </div>
-
-                <!-- Interactive Valuation Calculator -->
-                <div class="detail-card p-6">
-                    <div class="section-header">Valuation Calculator</div>
-                    <p class="text-gray-600 mb-4 text-sm">Adjust assumptions to see how they affect business value</p>
-                    
-                    <div class="space-y-6">
-                        <!-- Revenue Growth -->
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <label class="text-sm font-medium text-gray-700">Revenue Growth Rate</label>
-                                <span class="text-sm font-mono text-blue-900" id="growthValue">5%</span>
-                            </div>
-                            <input type="range" min="-10" max="30" value="5" class="range-slider" id="growthSlider" oninput="updateValuation()">
-                            <div class="flex justify-between text-xs text-gray-400 mt-1">
-                                <span>-10%</span>
-                                <span>0%</span>
-                                <span>+30%</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Profit Margin -->
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <label class="text-sm font-medium text-gray-700">Profit Margin</label>
-                                <span class="text-sm font-mono text-blue-900" id="marginValue">20%</span>
-                            </div>
-                            <input type="range" min="5" max="50" value="20" class="range-slider" id="marginSlider" oninput="updateValuation()">
-                            <div class="flex justify-between text-xs text-gray-400 mt-1">
-                                <span>5%</span>
-                                <span>25%</span>
-                                <span>50%</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Industry Multiple -->
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <label class="text-sm font-medium text-gray-700">Industry Multiple</label>
-                                <span class="text-sm font-mono text-blue-900" id="multipleValue">2.5x</span>
-                            </div>
-                            <input type="range" min="1" max="6" step="0.1" value="2.5" class="range-slider" id="multipleSlider" oninput="updateValuation()">
-                            <div class="flex justify-between text-xs text-gray-400 mt-1">
-                                <span>1x</span>
-                                <span>3.5x</span>
-                                <span>6x</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Calculated Value -->
-                        <div class="bg-gray-50 rounded-lg p-4 border-2 border-blue-900/20">
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <p class="text-sm text-gray-600">Calculated Valuation</p>
-                                    <p class="text-3xl font-bold text-blue-900 font-mono" id="calculatedValue">$0</p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-sm text-gray-600">vs. Asking</p>
-                                    <p class="text-lg font-semibold" id="valuationDiff">+0%</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Revenue Chart -->
-                <div class="detail-card p-6">
-                    <div class="section-header">Revenue History & Projection</div>
-                    <div class="h-64 flex items-end justify-between gap-2" id="revenueChart">
-                        <!-- Bars generated by JS -->
-                    </div>
-                    <div class="flex justify-between mt-2 text-xs text-gray-500">
-                        <span>2021</span>
-                        <span>2022</span>
-                        <span>2023</span>
-                        <span>2024</span>
-                        <span>2025 (proj)</span>
-                    </div>
-                </div>
-
-                <!-- Business Details -->
-                <div class="detail-card p-6">
-                    <div class="section-header">Business Details</div>
-                    <div class="grid md:grid-cols-2 gap-4" id="detailsGrid">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-
-                <!-- Features & Assets -->
-                <div class="detail-card p-6">
-                    <div class="section-header">Features & Assets</div>
-                    <div class="grid md:grid-cols-3 gap-3" id="featuresGrid">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-
-                <!-- Financial Breakdown -->
-                <div class="detail-card p-6">
-                    <div class="section-header">Financial Breakdown</div>
-                    <div class="space-y-3" id="financialBreakdown">
-                        <!-- Populated by JS -->
+                    <div class="text-right">
+                        <p class="text-blue-200 text-sm mb-1">Asking Price</p>
+                        <p id="askingPrice" class="text-5xl font-bold"></p>
+                        <p id="pricePerSqFt" class="text-blue-200 text-sm mt-1"></p>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Right Column -->
-            <div class="space-y-6">
-                <!-- Contact Card -->
-                <div class="detail-card p-6 bg-blue-900 text-white">
-                    <div class="section-header text-white/70">Interested?</div>
-                    <h3 class="text-xl font-bold mb-2">Request Information</h3>
-                    <p class="text-white/70 text-sm mb-4">Get detailed financials and schedule a viewing</p>
-                    <button onclick="requestInfo()" class="w-full bg-white text-blue-900 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
-                        Request NDA & Financials
-                    </button>
-                    <button onclick="scheduleViewing()" class="w-full mt-3 bg-transparent border-2 border-white text-white py-3 rounded-lg font-semibold hover:bg-white/10 transition">
-                        Schedule Viewing
-                    </button>
-                </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Left Column: Details -->
+                <div class="lg:col-span-2 space-y-8">
+                    <!-- Key Metrics -->
+                    <div class="detail-card p-6 blueprint-accent">
+                        <div class="section-header">Financial Overview</div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="metric-card">
+                                <div class="metric-value" id="metricRevenue">-</div>
+                                <div class="metric-label">Annual Revenue</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value" id="metricCashFlow">-</div>
+                                <div class="metric-label">Cash Flow</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value" id="metricEmployees">-</div>
+                                <div class="metric-label">Employees</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value" id="metricEstablished">-</div>
+                                <div class="metric-label">Year Established</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Revenue History Chart -->
+                        <div class="mt-6" id="revenueHistorySection" style="display:none;">
+                            <h4 class="text-sm font-semibold text-gray-700 mb-3">Revenue History</h4>
+                            <div id="revenueBars" class="space-y-2"></div>
+                        </div>
+                    </div>
 
-                <!-- Quick Stats -->
-                <div class="detail-card p-6">
-                    <div class="section-header">Quick Stats</div>
-                    <div class="space-y-3" id="quickStats">
-                        <!-- Populated by JS -->
+                    <!-- Business Details -->
+                    <div class="detail-card p-6 blueprint-accent">
+                        <div class="section-header">Business Details</div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-2">Operation</h4>
+                                <ul class="space-y-2 text-sm text-gray-600">
+                                    <li class="flex justify-between"><span>Business Hours:</span> <span id="detailHours" class="font-medium">-</span></li>
+                                    <li class="flex justify-between"><span>Parking:</span> <span id="detailParking" class="font-medium">-</span></li>
+                                    <li class="flex justify-between"><span>Square Footage:</span> <span id="detailSqFt" class="font-medium">-</span></li>
+                                    <li class="flex justify-between"><span>Monthly Rent:</span> <span id="detailRent" class="font-medium">-</span></li>
+                                    <li class="flex justify-between"><span>Lease Terms:</span> <span id="detailLease" class="font-medium">-</span></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-2">Sale Information</h4>
+                                <ul class="space-y-2 text-sm text-gray-600">
+                                    <li class="flex justify-between"><span>Reason for Selling:</span> <span id="detailReason" class="font-medium">-</span></li>
+                                    <li class="flex justify-between"><span>Inventory Included:</span> <span id="detailInventory" class="font-medium">-</span></li>
+                                    <li class="flex justify-between"><span>Training Included:</span> <span id="detailTraining" class="font-medium text-green-600">-</span></li>
+                                    <li class="flex justify-between"><span>Views:</span> <span id="detailViews" class="font-medium">-</span></li>
+                                    <li class="flex justify-between"><span>Inquiries:</span> <span id="detailInquiries" class="font-medium">-</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features & Assets -->
+                    <div class="detail-card p-6 blueprint-accent">
+                        <div class="section-header">Features & Assets Included</div>
+                        <div id="featuresContainer" class="flex flex-wrap"></div>
+                    </div>
+
+                    <!-- Training & Growth -->
+                    <div class="detail-card p-6 blueprint-accent">
+                        <div class="section-header">Training & Growth Opportunities</div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-2">Training & Transition</h4>
+                                <p id="trainingText" class="text-gray-600 text-sm leading-relaxed"></p>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-2">Growth Opportunities</h4>
+                                <p id="growthText" class="text-gray-600 text-sm leading-relaxed"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Legal & Compliance -->
+                    <div class="legal-box">
+                        <h4 class="font-semibold text-orange-800 mb-2"><i class="fas fa-gavel mr-2"></i>Legal Disclosure</h4>
+                        <p class="text-orange-700 text-sm">This listing is provided by the seller. 305business.llc does not guarantee the accuracy of financial information. Buyers are encouraged to conduct due diligence including reviewing financial statements, lease agreements, and conducting independent valuation. All negotiations should be conducted with appropriate legal counsel.</p>
                     </div>
                 </div>
 
-                <!-- Seller Info -->
-                <div class="detail-card p-6">
-                    <div class="section-header">Seller</div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold">
-                            <i class="fas fa-user"></i>
+                <!-- Right Column: Actions -->
+                <div class="space-y-6">
+                    <!-- Contact Card -->
+                    <div class="detail-card p-6">
+                        <div class="section-header">Contact Seller</div>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <p id="contactName" class="font-semibold text-sm"></p>
+                                    <p class="text-xs text-gray-500">Business Owner</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-gray-600">
+                                <i class="fas fa-envelope text-gray-400"></i>
+                                <span id="contactEmail"></span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-gray-600" id="contactPhoneRow">
+                                <i class="fas fa-phone text-gray-400"></i>
+                                <span id="contactPhone"></span>
+                            </div>
                         </div>
-                        <div>
-                            <p class="font-semibold" id="sellerName">Confidential</p>
-                            <p class="text-sm text-gray-500">Verified Seller</p>
-                        </div>
-                    </div>
-                    <div class="mt-4 space-y-2">
-                        <div class="flex items-center gap-2 text-sm text-gray-600">
-                            <i class="fas fa-check-circle text-green-500"></i>
-                            <span>Financials Verified</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-sm text-gray-600">
-                            <i class="fas fa-check-circle text-green-500"></i>
-                            <span>NDA Required</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-sm text-gray-600">
-                            <i class="fas fa-check-circle text-green-500"></i>
-                            <span>Broker Represented</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Comparable Sales -->
-                <div class="detail-card p-6">
-                    <div class="section-header">Comparable Sales</div>
-                    <div class="space-y-3" id="comparableSales">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-
-                <!-- Share -->
-                <div class="detail-card p-6">
-                    <div class="section-header">Share</div>
-                    <div class="flex gap-2">
-                        <button onclick="share('email')" class="flex-1 py-2 border rounded-lg hover:bg-gray-50 transition">
-                            <i class="fas fa-envelope text-gray-600"></i>
+                        
+                        <button onclick="toggleInquiryForm()" class="btn-primary w-full mt-4">
+                            <i class="fas fa-paper-plane mr-2"></i>Send Inquiry
                         </button>
-                        <button onclick="share('linkedin')" class="flex-1 py-2 border rounded-lg hover:bg-gray-50 transition">
-                            <i class="fab fa-linkedin text-blue-700"></i>
+                        <button onclick="toggleChat()" class="btn-outline w-full mt-2">
+                            <i class="fas fa-comments mr-2"></i>Live Chat with Seller
                         </button>
-                        <button onclick="share('twitter')" class="flex-1 py-2 border rounded-lg hover:bg-gray-50 transition">
-                            <i class="fab fa-twitter text-blue-400"></i>
-                        </button>
+                    </div>
+
+                    <!-- Inquiry Form -->
+                    <div id="inquiryForm" class="detail-card p-6" style="display:none;">
+                        <div class="section-header">Send Inquiry</div>
+                        <form id="inquiryFormEl" onsubmit="event.preventDefault(); submitInquiry();">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
+                                    <input type="text" id="inquiryName" class="form-input" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Your Email *</label>
+                                    <input type="email" id="inquiryEmail" class="form-input" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                                    <input type="tel" id="inquiryPhone" class="form-input">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Inquiry Type</label>
+                                    <select id="inquiryType" class="form-input">
+                                        <option value="info">General Information</option>
+                                        <option value="viewing">Schedule Viewing</option>
+                                        <option value="nda">Request NDA</option>
+                                        <option value="offer">Make an Offer</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Message *</label>
+                                    <textarea id="inquiryMessage" class="form-textarea" placeholder="I'm interested in this business because..." required></textarea>
+                                </div>
+                                <button type="submit" id="inquirySubmitBtn" class="btn-primary w-full">
+                                    <span id="inquirySubmitText">Send Inquiry</span>
+                                    <span id="inquirySubmitLoading" style="display:none;"><span class="loading-spinner mr-2"></span>Sending...</span>
+                                </button>
+                                <p class="error-text" id="inquiryError"></p>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Share / Save -->
+                    <div class="detail-card p-6">
+                        <div class="section-header">Actions</div>
+                        <div class="space-y-2">
+                            <button onclick="shareListing()" class="btn-outline w-full text-sm">
+                                <i class="fas fa-share-alt mr-2"></i>Share Listing
+                            </button>
+                            <button onclick="window.print()" class="btn-outline w-full text-sm">
+                                <i class="fas fa-print mr-2"></i>Print Details
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Chat Widget -->
+    <div class="chat-toggle" onclick="toggleChat()">
+        <i class="fas fa-comments"></i>
+    </div>
+    <div id="chatWidget" class="chat-widget">
+        <div class="chat-header">
+            <div>
+                <h4 class="font-semibold">Q&A with Seller</h4>
+                <p class="text-xs text-blue-200">Ask questions about this business</p>
+            </div>
+            <button onclick="toggleChat()" class="text-white hover:text-blue-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="chatBody" class="chat-body">
+            <div class="text-center text-gray-400 text-sm py-4">
+                <i class="fas fa-info-circle mb-2"></i>
+                <p>Enter your name and email to start chatting</p>
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" class="form-input" placeholder="Type your question..." onkeypress="if(event.key==='Enter')sendChatMessage()">
+            <button onclick="sendChatMessage()" class="btn-primary px-4 py-2">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="inquirySuccessModal">
+        <div class="success-content">
+            <div class="success-icon">
+                <i class="fas fa-check text-4xl text-white"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Inquiry Sent!</h2>
+            <p class="text-gray-600 mb-4">Your inquiry has been sent to the seller. You'll receive a response within 24 hours.</p>
+            <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                <p class="text-sm text-gray-500">Reference</p>
+                <p class="text-xl font-mono font-bold text-blue-900" id="inquiryReference">INQ-XXXX</p>
+            </div>
+            <button onclick="document.getElementById('inquirySuccessModal').classList.remove('active'); toggleInquiryForm();" class="btn-primary" style="width: 100%;">Close</button>
+        </div>
+    </div>
+
     <footer class="bg-white border-t border-gray-200 py-8 mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
@@ -498,248 +354,270 @@
     </footer>
 
     <script>
-        // Business data - Miami Beach Café (example)
-        const businessData = {
-            id: 1,
-            name: "Miami Beach Café",
-            category: "Restaurant",
-            status: "active",
-            location: "Miami Beach, FL",
-            price: 185000,
-            revenue: 420000,
-            cashFlow: 85000,
-            multiple: 2.2,
-            employees: 8,
-            established: 2015,
-            sqft: 1200,
-            description: "Established café with ocean views. 45 seats, full kitchen, loyal customer base. Perfect for owner-operator looking for a turn-key operation in prime Miami Beach location.",
-            features: [
-                "45 Seats Indoor",
-                "Full Commercial Kitchen",
-                "Ocean View Terrace",
-                "Beer & Wine License",
-                "Established 2015",
-                "Loyal Customer Base",
-                "Turn-key Operation",
-                "POS System Included"
-            ],
-            details: {
-                "Monthly Rent": "$4,500",
-                "Lease Terms": "5 years remaining",
-                "Hours": "7AM - 10PM Daily",
-                "Cuisine": "American / Breakfast",
-                "Avg Ticket": "$18",
-                "Daily Covers": "120-150",
-                "Parking": "Street + Valet",
-                "Recent Renovation": "2023"
-            },
-            financials: {
-                "Food Costs": { amount: 126000, percent: 30 },
-                "Labor": { amount: 147000, percent: 35 },
-                "Rent": { amount: 54000, percent: 13 },
-                "Utilities": { amount: 12000, percent: 3 },
-                "Insurance": { amount: 8400, percent: 2 },
-                "Other": { amount: 16800, percent: 4 },
-                "Net Profit": { amount: 66000, percent: 16 }
-            },
-            revenueHistory: [280000, 320000, 350000, 420000, 450000],
-            comparableSales: [
-                { name: "South Beach Bistro", price: 210000, multiple: 2.4 },
-                { name: "Ocean Drive Café", price: 165000, multiple: 2.0 },
-                { name: "Collins Ave Diner", price: 195000, multiple: 2.3 }
-            ]
-        };
+        const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:5000/api' : 'https://api.305business.llc/api';
+        let currentListing = null;
+        let currentInquiryId = null;
+        let chatUserName = '';
+        let chatUserEmail = '';
 
-        // Initialize page
-        function initPage() {
-            // Set basic info
-            document.getElementById('pageTitle').textContent = `${businessData.name} — 305business.llc`;
-            document.getElementById('businessName').textContent = businessData.name;
-            document.getElementById('businessCategory').textContent = businessData.category;
-            document.getElementById('locationText').textContent = businessData.location;
-            document.getElementById('heroImage').src = "https://images.unsplash.com/photo-1554118811-1c0d58224f24?w=1200&h=600&fit=crop";
-            
-            // Status badge
-            const statusEl = document.getElementById('businessStatus');
-            statusEl.className = `status-badge status-${businessData.status}`;
-            statusEl.innerHTML = `<i class="fas fa-circle text-xs"></i> ${businessData.status.toUpperCase()}`;
-            
-            // Key metrics
-            document.getElementById('askingPrice').textContent = `$${(businessData.price / 1000).toFixed(0)}K`;
-            document.getElementById('annualRevenue').textContent = `$${(businessData.revenue / 1000).toFixed(0)}K`;
-            document.getElementById('cashFlow').textContent = `$${(businessData.cashFlow / 1000).toFixed(0)}K`;
-            document.getElementById('multiple').textContent = `${businessData.multiple}x`;
-            
-            // Initialize valuation calculator
-            updateValuation();
-            
-            // Render revenue chart
-            renderRevenueChart();
-            
-            // Render details
-            renderDetails();
-            
-            // Render features
-            renderFeatures();
-            
-            // Render financial breakdown
-            renderFinancialBreakdown();
-            
-            // Render quick stats
-            renderQuickStats();
-            
-            // Render comparable sales
-            renderComparableSales();
-        }
+        // Get listing ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const listingId = urlParams.get('id');
 
-        // Valuation Calculator
-        function updateValuation() {
-            const growth = parseFloat(document.getElementById('growthSlider').value);
-            const margin = parseFloat(document.getElementById('marginSlider').value);
-            const multiple = parseFloat(document.getElementById('multipleSlider').value);
-            
-            document.getElementById('growthValue').textContent = `${growth > 0 ? '+' : ''}${growth}%`;
-            document.getElementById('marginValue').textContent = `${margin}%`;
-            document.getElementById('multipleValue').textContent = `${multiple}x`;
-            
-            // Calculate projected revenue
-            const projectedRevenue = businessData.revenue * (1 + growth / 100);
-            const projectedProfit = projectedRevenue * (margin / 100);
-            const valuation = projectedProfit * multiple;
-            
-            document.getElementById('calculatedValue').textContent = `$${(valuation / 1000).toFixed(0)}K`;
-            
-            const diff = ((valuation - businessData.price) / businessData.price * 100);
-            const diffEl = document.getElementById('valuationDiff');
-            diffEl.textContent = `${diff > 0 ? '+' : ''}${diff.toFixed(1)}%`;
-            diffEl.className = `text-lg font-semibold ${diff >= 0 ? 'text-green-600' : 'text-red-600'}`;
-        }
+        async function loadListing() {
+            if (!listingId) {
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('errorState').style.display = 'block';
+                return;
+            }
 
-        // Revenue Chart
-        function renderRevenueChart() {
-            const chart = document.getElementById('revenueChart');
-            const max = Math.max(...businessData.revenueHistory);
-            
-            chart.innerHTML = businessData.revenueHistory.map((rev, i) => {
-                const height = (rev / max) * 100;
-                const isProjected = i === businessData.revenueHistory.length - 1;
-                return `
-                    <div class="flex-1 flex flex-col items-center gap-1">
-                        <div class="chart-bar w-full" style="height: ${height}%; ${isProjected ? 'background: linear-gradient(to top, #2d6a9f, #4a90c2); opacity: 0.7;' : ''}"></div>
-                        <span class="text-xs font-mono text-gray-600">$${(rev / 1000).toFixed(0)}K</span>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Details Grid
-        function renderDetails() {
-            const grid = document.getElementById('detailsGrid');
-            grid.innerHTML = Object.entries(businessData.details).map(([key, value]) => `
-                <div class="flex justify-between items-center py-2 border-b border-gray-100">
-                    <span class="text-gray-600 text-sm">${key}</span>
-                    <span class="font-semibold text-gray-900">${value}</span>
-                </div>
-            `).join('');
-        }
-
-        // Features Grid
-        function renderFeatures() {
-            const grid = document.getElementById('featuresGrid');
-            grid.innerHTML = businessData.features.map(f => `
-                <div class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
-                    <i class="fas fa-check-circle text-green-500"></i>
-                    <span class="text-sm text-gray-700">${f}</span>
-                </div>
-            `).join('');
-        }
-
-        // Financial Breakdown
-        function renderFinancialBreakdown() {
-            const container = document.getElementById('financialBreakdown');
-            const total = Object.values(businessData.financials).reduce((sum, item) => sum + item.amount, 0);
-            
-            container.innerHTML = Object.entries(businessData.financials).map(([key, data]) => {
-                const width = (data.amount / total) * 100;
-                const isProfit = key === 'Net Profit';
-                return `
-                    <div>
-                        <div class="flex justify-between text-sm mb-1">
-                            <span class="text-gray-700">${key}</span>
-                            <span class="font-mono font-semibold ${isProfit ? 'text-green-600' : 'text-gray-900'}">
-                                $${(data.amount / 1000).toFixed(0)}K (${data.percent}%)
-                            </span>
-                        </div>
-                        <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
-                            <div class="h-full ${isProfit ? 'bg-green-500' : 'bg-blue-900'} rounded-full" style="width: ${width}%"></div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Quick Stats
-        function renderQuickStats() {
-            const stats = [
-                { label: 'Days on Market', value: '12', icon: 'fa-calendar' },
-                { label: 'Views', value: '234', icon: 'fa-eye' },
-                { label: 'Inquiries', value: '8', icon: 'fa-envelope' },
-                { label: 'NDAs Signed', value: '3', icon: 'fa-file-signature' }
-            ];
-            
-            document.getElementById('quickStats').innerHTML = stats.map(s => `
-                <div class="flex items-center justify-between py-2">
-                    <div class="flex items-center gap-2 text-gray-600">
-                        <i class="fas ${s.icon} text-gray-400"></i>
-                        <span class="text-sm">${s.label}</span>
-                    </div>
-                    <span class="font-semibold text-gray-900">${s.value}</span>
-                </div>
-            `).join('');
-        }
-
-        // Comparable Sales
-        function renderComparableSales() {
-            const container = document.getElementById('comparableSales');
-            container.innerHTML = businessData.comparableSales.map(sale => `
-                <div class="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
-                    <div>
-                        <p class="font-semibold text-gray-900 text-sm">${sale.name}</p>
-                        <p class="text-xs text-gray-500">${sale.multiple}x multiple</p>
-                    </div>
-                    <span class="font-mono font-semibold text-blue-900">$${(sale.price / 1000).toFixed(0)}K</span>
-                </div>
-            `).join('');
-        }
-
-        // Actions
-        function requestInfo() {
-            alert(`NDA & Financials Requested for ${businessData.name}\n\nReference: REQ-${Math.random().toString(36).substr(2,6).toUpperCase()}\n\nThe seller will contact you within 24 hours.`);
-        }
-
-        function scheduleViewing() {
-            alert(`Viewing Requested for ${businessData.name}\n\nAvailable times:\n• Monday 2PM\n• Wednesday 10AM\n• Friday 4PM\n\nReference: VIEW-${Math.random().toString(36).substr(2,6).toUpperCase()}`);
-        }
-
-        function share(platform) {
-            const url = window.location.href;
-            const text = `Check out ${businessData.name} on 305business.llc`;
-            
-            switch(platform) {
-                case 'email':
-                    window.location.href = `mailto:?subject=${encodeURIComponent(text)}&body=${encodeURIComponent(url)}`;
-                    break;
-                case 'linkedin':
-                    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`);
-                    break;
-                case 'twitter':
-                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`);
-                    break;
+            try {
+                const response = await fetch(`${API_BASE}/listings/${listingId}`);
+                if (!response.ok) throw new Error('Failed to load');
+                
+                currentListing = await response.json();
+                renderListing(currentListing);
+                
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                
+                // Update page title
+                document.title = `${currentListing.business_name} — 305business.llc`;
+                document.getElementById('pageTitle').textContent = `${currentListing.business_name} — 305business.llc`;
+            } catch (err) {
+                console.error('Load error:', err);
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('errorState').style.display = 'block';
             }
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', initPage);
+        function renderListing(data) {
+            const formatCurrency = (val) => val ? `$${val.toLocaleString()}` : 'N/A';
+            const formatNumber = (val) => val ? val.toLocaleString() : 'N/A';
+            
+            document.getElementById('businessName').textContent = data.business_name;
+            document.getElementById('listingCategory').textContent = (data.category || 'business').toUpperCase();
+            
+            const statusEl = document.getElementById('listingStatus');
+            statusEl.textContent = data.status;
+            statusEl.className = `status-badge status-${data.status}`;
+            
+            document.getElementById('businessLocation').innerHTML = `<i class="fas fa-map-marker-alt mr-2"></i>${data.location}`;
+            document.getElementById('businessDescription').textContent = data.description;
+            document.getElementById('askingPrice').textContent = formatCurrency(data.asking_price);
+            
+            const sqft = data.square_footage;
+            const pricePerSqft = sqft && data.asking_price ? Math.round(data.asking_price / sqft) : 0;
+            document.getElementById('pricePerSqFt').textContent = sqft ? `$${pricePerSqft.toLocaleString()} per sq ft` : '';
+            
+            // Metrics
+            document.getElementById('metricRevenue').textContent = formatCurrency(data.annual_revenue);
+            document.getElementById('metricCashFlow').textContent = formatCurrency(data.annual_cash_flow);
+            document.getElementById('metricEmployees').textContent = formatNumber(data.num_employees);
+            document.getElementById('metricEstablished').textContent = data.year_established || 'N/A';
+            
+            // Details
+            document.getElementById('detailHours').textContent = data.business_hours || 'N/A';
+            document.getElementById('detailParking').textContent = data.parking ? data.parking.replace(/_/g, ' ').toUpperCase() : 'N/A';
+            document.getElementById('detailSqFt').textContent = formatNumber(data.square_footage);
+            document.getElementById('detailRent').textContent = formatCurrency(data.monthly_rent) + '/mo';
+            document.getElementById('detailLease').textContent = data.lease_terms || 'N/A';
+            document.getElementById('detailReason').textContent = data.reason_for_selling ? data.reason_for_selling.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'N/A';
+            document.getElementById('detailInventory').textContent = formatCurrency(data.inventory_value);
+            document.getElementById('detailTraining').textContent = data.training_transition ? 'Yes' : 'No';
+            document.getElementById('detailViews').textContent = formatNumber(data.views);
+            document.getElementById('detailInquiries').textContent = formatNumber(data.inquiries_count);
+            
+            // Revenue History
+            const revenues = [
+                { year: '2021', val: data.revenue_2021 },
+                { year: '2022', val: data.revenue_2022 },
+                { year: '2023', val: data.revenue_2023 },
+                { year: '2024', val: data.revenue_2024 },
+                { year: '2025', val: data.revenue_2025 }
+            ].filter(r => r.val);
+            
+            if (revenues.length > 0) {
+                document.getElementById('revenueHistorySection').style.display = 'block';
+                const maxRev = Math.max(...revenues.map(r => r.val));
+                document.getElementById('revenueBars').innerHTML = revenues.map(r => {
+                    const pct = (r.val / maxRev) * 100;
+                    return `
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-gray-500 w-8">${r.year}</span>
+                            <div class="flex-1 revenue-bar">
+                                <div class="revenue-fill" style="width: ${pct}%"></div>
+                            </div>
+                            <span class="text-xs font-medium w-20 text-right">$${(r.val / 1000).toFixed(0)}K</span>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            // Features
+            const features = data.features || [];
+            const featureLabels = {
+                real_estate: '🏢 Real Estate Included',
+                equipment: '🔧 Equipment Included',
+                liquor_license: '🍷 Liquor License',
+                franchise: '📋 Franchise Rights',
+                trademarks: '™️ Trademarks/IP',
+                established_clients: '👥 Established Clients',
+                website: '🌐 Website/E-commerce',
+                social_media: '📱 Social Media Following',
+                pos_system: '💳 POS System'
+            };
+            document.getElementById('featuresContainer').innerHTML = features.map(f => 
+                `<span class="feature-tag">${featureLabels[f] || f.replace(/_/g, ' ').toUpperCase()}</span>`
+            ).join('');
+            
+            // Training & Growth
+            document.getElementById('trainingText').textContent = data.training_transition || 'Not specified';
+            document.getElementById('growthText').textContent = data.growth_opportunities || 'Not specified';
+            
+            // Contact
+            document.getElementById('contactName').textContent = data.contact_name || 'Seller';
+            document.getElementById('contactEmail').textContent = data.contact_email || 'Contact via form';
+            document.getElementById('contactPhone').textContent = data.contact_phone || 'Not provided';
+            if (!data.contact_phone) document.getElementById('contactPhoneRow').style.display = 'none';
+        }
+
+        function toggleInquiryForm() {
+            const form = document.getElementById('inquiryForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        async function submitInquiry() {
+            const btn = document.getElementById('inquirySubmitBtn');
+            const text = document.getElementById('inquirySubmitText');
+            const loading = document.getElementById('inquirySubmitLoading');
+            const errorEl = document.getElementById('inquiryError');
+            
+            btn.disabled = true;
+            text.style.display = 'none';
+            loading.style.display = 'inline';
+            errorEl.textContent = '';
+            
+            try {
+                const response = await fetch(`${API_BASE}/inquiries`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        listing_id: parseInt(listingId),
+                        buyer_name: document.getElementById('inquiryName').value,
+                        buyer_email: document.getElementById('inquiryEmail').value,
+                        buyer_phone: document.getElementById('inquiryPhone').value,
+                        request_type: document.getElementById('inquiryType').value,
+                        message: document.getElementById('inquiryMessage').value
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('inquiryReference').textContent = result.reference;
+                    document.getElementById('inquirySuccessModal').classList.add('active');
+                    document.getElementById('inquiryFormEl').reset();
+                    
+                    // Set chat credentials from inquiry
+                    chatUserName = document.getElementById('inquiryName').value;
+                    chatUserEmail = document.getElementById('inquiryEmail').value;
+                    currentInquiryId = result.id;
+                } else {
+                    errorEl.textContent = result.message || 'Failed to send inquiry';
+                }
+            } catch (err) {
+                errorEl.textContent = 'Network error. Please try again.';
+            } finally {
+                btn.disabled = false;
+                text.style.display = 'inline';
+                loading.style.display = 'none';
+            }
+        }
+
+        function toggleChat() {
+            const widget = document.getElementById('chatWidget');
+            widget.classList.toggle('active');
+        }
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const content = input.value.trim();
+            if (!content) return;
+            
+            // If no inquiry yet, prompt for name/email
+            if (!currentInquiryId) {
+                const name = prompt('Enter your name to start chatting:');
+                if (!name) return;
+                const email = prompt('Enter your email:');
+                if (!email) return;
+                
+                chatUserName = name;
+                chatUserEmail = email;
+                
+                // Create inquiry first
+                try {
+                    const response = await fetch(`${API_BASE}/inquiries`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            listing_id: parseInt(listingId),
+                            buyer_name: name,
+                            buyer_email: email,
+                            message: 'Started chat conversation',
+                            request_type: 'info'
+                        })
+                    });
+                    const result = await response.json();
+                    currentInquiryId = result.id;
+                } catch (e) {
+                    alert('Unable to start chat. Please try again.');
+                    return;
+                }
+            }
+            
+            input.value = '';
+            
+            // Add to UI immediately
+            addChatBubble(content, 'buyer');
+            
+            try {
+                await fetch(`${API_BASE}/messages`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        inquiry_id: currentInquiryId,
+                        sender_name: chatUserName,
+                        sender_role: 'buyer',
+                        content: content
+                    })
+                });
+            } catch (e) {
+                console.error('Chat error:', e);
+            }
+        }
+
+        function addChatBubble(content, role) {
+            const body = document.getElementById('chatBody');
+            const bubble = document.createElement('div');
+            bubble.className = `chat-bubble ${role}`;
+            bubble.textContent = content;
+            body.appendChild(bubble);
+            body.scrollTop = body.scrollHeight;
+        }
+
+        function shareListing() {
+            const url = window.location.href;
+            if (navigator.share) {
+                navigator.share({ title: currentListing?.business_name, url });
+            } else {
+                navigator.clipboard.writeText(url);
+                alert('Link copied to clipboard!');
+            }
+        }
+
+        // Load on page load
+        document.addEventListener('DOMContentLoaded', loadListing);
     </script>
 </body>
 </html>

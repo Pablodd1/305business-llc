@@ -1026,14 +1026,14 @@
 
     <div class="section-divider"></div>
 
-    <!-- Featured Listings -->
+    <!-- Featured Listings - DYNAMICALLY LOADED FROM API -->
     <section id="listings" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
                 <div>
                     <span class="tech-label block mb-2">SHEET: A-1</span>
                     <h2 class="text-3xl font-bold text-white" data-i18n="section_listings">FEATURED LISTINGS</h2>
-                    <p class="text-white/40">20 verified businesses for sale in Miami</p>
+                    <p class="text-white/40" id="listingsCount">Loading listings...</p>
                 </div>
                 <div class="flex gap-2 flex-wrap">
                     <button onclick="filterListings('all')" class="schematic-btn px-4 py-2 active"><span class="relative z-10">ALL</span></button>
@@ -1045,8 +1045,29 @@
                 </div>
             </div>
             
-            <div id="listingsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Listings rendered by JS -->
+            <!-- Loading State -->
+            <div id="listingsLoading" class="text-center py-12">
+                <div class="inline-block w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
+                <p class="text-white/60 mt-4">Loading listings from database...</p>
+            </div>
+            
+            <!-- Listings Grid -->
+            <div id="listingsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" style="display:none;">
+                <!-- Listings rendered by JS from API -->
+            </div>
+            
+            <!-- No Results -->
+            <div id="noListings" class="text-center py-12" style="display:none;">
+                <i class="fas fa-search text-4xl text-white/30 mb-4"></i>
+                <p class="text-white/60">No listings found matching your criteria</p>
+                <button onclick="filterListings('all')" class="schematic-btn mt-4 px-6 py-2"><span class="relative z-10">Show All</span></button>
+            </div>
+            
+            <!-- Error State -->
+            <div id="listingsError" class="text-center py-12" style="display:none;">
+                <i class="fas fa-exclamation-triangle text-4xl text-red-400 mb-4"></i>
+                <p class="text-white/60">Unable to load listings. Please try again later.</p>
+                <button onclick="loadListings()" class="schematic-btn mt-4 px-6 py-2"><span class="relative z-10">Retry</span></button>
             </div>
         </div>
     </section>
@@ -1392,83 +1413,148 @@
         renderTicker();
         setInterval(renderTicker, 300000);
 
-        // ====== BUSINESS LISTINGS DATA ======
-        const listings = [
-            { id: 1, name: "Miami Beach Café", category: "restaurant", price: 185000, revenue: "$420,000/year", location: "Miami Beach, FL", description: "Established café with ocean views. 45 seats, full kitchen, loyal customer base.", image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&h=400&fit=crop", features: ["45 Seats", "Full Kitchen", "Ocean View", "Established 2015"], status: "active", matchScore: 94 },
-            { id: 2, name: "Brickell Wine Bar", category: "restaurant", price: 320000, revenue: "$680,000/year", location: "Brickell, Miami", description: "Upscale wine bar in financial district. Premium clientele, 80+ wine selection.", image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600&h=400&fit=crop", features: ["80+ Wines", "Premium Location", "Financial District"], status: "active", matchScore: 87 },
-            { id: 3, name: "Wynwood Art Gallery", category: "retail", price: 250000, revenue: "$180,000/year", location: "Wynwood, Miami", description: "Contemporary art gallery in trendy Wynwood. 2,000 sq ft, established artists.", image: "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=600&h=400&fit=crop", features: ["2,000 sq ft", "Established Artists", "Event Space"], status: "negotiating", matchScore: 82 },
-            { id: 4, name: "Coral Gables Dental", category: "healthcare", price: 450000, revenue: "$890,000/year", location: "Coral Gables, FL", description: "Well-established dental practice with loyal patient base. 4 chairs, modern equipment.", image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&h=400&fit=crop", features: ["4 Chairs", "Modern Equipment", "Loyal Patients"], status: "active", matchScore: 91 },
-            { id: 5, name: "Downtown Marketing", category: "tech", price: 180000, revenue: "$350,000/year", location: "Downtown Miami", description: "Digital marketing agency with 15+ clients. Remote-friendly, scalable model.", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop", features: ["15+ Clients", "Remote Team", "Scalable"], status: "active", matchScore: 78 },
-            { id: 6, name: "Little Havana Bakery", category: "restaurant", price: 120000, revenue: "$280,000/year", location: "Little Havana, Miami", description: "Traditional Cuban bakery with strong community presence. Family-owned since 2008.", image: "https://images.unsplash.com/photo-1556217477-d325251ece38?w=600&h=400&fit=crop", features: ["Family Owned", "Community Favorite", "Since 2008"], status: "closed", matchScore: 85 },
-            { id: 7, name: "Miami SaaS Startup", category: "tech", price: 850000, revenue: "$1.2M/year", location: "Brickell, Miami", description: "B2B SaaS platform for logistics. 50+ enterprise clients, 95% retention rate.", image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop", features: ["50+ Clients", "95% Retention", "MRR $100K"], status: "active", matchScore: 96 },
-            { id: 8, name: "South Beach Boutique Hotel", category: "hospitality", price: 2500000, revenue: "$1.8M/year", location: "South Beach, Miami", description: "Boutique hotel with 25 rooms. Prime Ocean Drive location, 4.5 star rating.", image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop", features: ["25 Rooms", "Ocean Drive", "4.5 Stars"], status: "active", matchScore: 89 },
-            { id: 9, name: "Doral Logistics", category: "logistics", price: 650000, revenue: "$2.1M/year", location: "Doral, FL", description: "Last-mile delivery company serving Miami-Dade. Fleet of 15 vehicles, 30 drivers.", image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop", features: ["15 Vehicles", "30 Drivers", "Miami-Dade Coverage"], status: "active", matchScore: 83 },
-            { id: 10, name: "Aventura Medical Spa", category: "healthcare", price: 380000, revenue: "$520,000/year", location: "Aventura, FL", description: "Medical spa offering aesthetic treatments. 3 treatment rooms, licensed staff.", image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&h=400&fit=crop", features: ["3 Treatment Rooms", "Licensed Staff", "Established 2019"], status: "active", matchScore: 88 },
-            { id: 11, name: "Wynwood Software Dev", category: "tech", price: 420000, revenue: "$780,000/year", location: "Wynwood, Miami", description: "Custom software development agency. 12 developers, specializing in fintech.", image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop", features: ["12 Developers", "Fintech Focus", "Remote Capable"], status: "active", matchScore: 92 },
-            { id: 12, name: "Miami Auto Repair", category: "automotive", price: 195000, revenue: "$450,000/year", location: "Allapattah, Miami", description: "Full-service auto repair with 4 bays. Established 2010, loyal customer base.", image: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop", features: ["4 Service Bays", "ASE Certified", "Since 2010"], status: "active", matchScore: 79 },
-            { id: 13, name: "Coconut Grove Yoga", category: "wellness", price: 145000, revenue: "$220,000/year", location: "Coconut Grove, Miami", description: "Boutique yoga studio with 3 rooms. 200+ monthly members, retail shop included.", image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&h=400&fit=crop", features: ["3 Studios", "200+ Members", "Retail Shop"], status: "active", matchScore: 81 },
-            { id: 14, name: "Miami AI Consulting", category: "tech", price: 1200000, revenue: "$2.5M/year", location: "Brickell, Miami", description: "AI/ML consulting for enterprise clients. 20 consultants, Fortune 500 clients.", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop", features: ["20 Consultants", "Fortune 500 Clients", "AI/ML Focus"], status: "active", matchScore: 97 },
-            { id: 15, name: "Hialeah Construction", category: "construction", price: 890000, revenue: "$3.2M/year", location: "Hialeah, FL", description: "Residential construction company. 8 crews, licensed in Miami-Dade and Broward.", image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop", features: ["8 Crews", "Licensed", "Miami-Dade/Broward"], status: "active", matchScore: 86 },
-            { id: 16, name: "Design District Fashion", category: "retail", price: 275000, revenue: "$340,000/year", location: "Design District, Miami", description: "High-end fashion boutique in luxury shopping district. Curated designer brands.", image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop", features: ["Designer Brands", "High Foot Traffic", "Established 2017"], status: "active", matchScore: 84 },
-            { id: 17, name: "Miami Fintech Startup", category: "tech", price: 2100000, revenue: "$4.1M/year", location: "Brickell, Miami", description: "Payment processing platform for Latin America. Series A, 100+ merchant clients.", image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop", features: ["Series A", "100+ Merchants", "LatAm Focus"], status: "active", matchScore: 95 },
-            { id: 18, name: "Kendall Daycare", category: "education", price: 320000, revenue: "$480,000/year", location: "Kendall, FL", description: "Licensed daycare with 45 children capacity. Full staff, established 2015.", image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&h=400&fit=crop", features: ["45 Children", "Licensed", "Full Staff"], status: "active", matchScore: 80 },
-            { id: 19, name: "Miami Beach Nightclub", category: "hospitality", price: 750000, revenue: "$1.1M/year", location: "Miami Beach, FL", description: "Popular nightclub on Collins Avenue. Capacity 500, VIP sections, full liquor license.", image: "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=600&h=400&fit=crop", features: ["Capacity 500", "VIP Sections", "Liquor License"], status: "active", matchScore: 90 },
-            { id: 20, name: "Downtown Law Firm", category: "professional", price: 550000, revenue: "$920,000/year", location: "Downtown Miami", description: "Boutique law firm specializing in real estate. 3 partners, established client base.", image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=400&fit=crop", features: ["3 Partners", "Real Estate Focus", "Established 2012"], status: "active", matchScore: 87 }
-        ];
+        // ====== BUSINESS LISTINGS - LOADED FROM API ======
+        const API_BASE = window.location.hostname === 'localhost' 
+            ? 'http://localhost:5000/api' 
+            : 'https://api.305business.llc/api';
+        
+        let listings = [];
+        let allListings = [];
+
+        async function loadListings() {
+            const loadingEl = document.getElementById('listingsLoading');
+            const gridEl = document.getElementById('listingsGrid');
+            const noEl = document.getElementById('noListings');
+            const errorEl = document.getElementById('listingsError');
+            
+            loadingEl.style.display = 'block';
+            gridEl.style.display = 'none';
+            noEl.style.display = 'none';
+            errorEl.style.display = 'none';
+            
+            try {
+                const params = new URLSearchParams();
+                const category = document.querySelector('.schematic-btn.active')?.dataset?.category;
+                if (category && category !== 'all') params.append('category', category);
+                
+                const response = await fetch(`${API_BASE}/listings?${params}`);
+                if (!response.ok) throw new Error('Failed to load');
+                
+                listings = await response.json();
+                allListings = [...listings];
+                
+                document.getElementById('listingsCount').textContent = 
+                    `${listings.length} verified businesses for sale in Miami`;
+                
+                loadingEl.style.display = 'none';
+                
+                if (listings.length === 0) {
+                    noEl.style.display = 'block';
+                } else {
+                    gridEl.style.display = 'grid';
+                    renderListings(listings);
+                }
+            } catch (err) {
+                console.error('Load listings error:', err);
+                loadingEl.style.display = 'none';
+                errorEl.style.display = 'block';
+            }
+        }
 
         // ====== RENDER LISTINGS ======
         function renderListings(filtered = listings) {
             const grid = document.getElementById('listingsGrid');
-            grid.innerHTML = filtered.map(listing => `
+            const categoryIcons = {
+                restaurant: 'fa-utensils',
+                retail: 'fa-store',
+                tech: 'fa-laptop-code',
+                healthcare: 'fa-hospital',
+                hospitality: 'fa-hotel',
+                service: 'fa-briefcase',
+                manufacturing: 'fa-industry',
+                construction: 'fa-hard-hat',
+                automotive: 'fa-car',
+                education: 'fa-graduation-cap',
+                fitness: 'fa-dumbbell',
+                real_estate: 'fa-building',
+                other: 'fa-briefcase'
+            };
+            
+            grid.innerHTML = filtered.map(listing => {
+                const price = listing.asking_price || 0;
+                const revenue = listing.annual_revenue || 0;
+                const icon = categoryIcons[listing.category] || 'fa-briefcase';
+                const status = listing.status || 'active';
+                const features = listing.features || [];
+                const views = listing.views || 0;
+                const inquiries = listing.inquiries_count || 0;
+                
+                return `
                 <div class="tech-card overflow-hidden group cursor-pointer" onclick="viewListing(${listing.id})">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="${listing.image}" alt="${listing.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="relative h-48 overflow-hidden bg-gradient-to-br from-blue-900 to-blue-800 flex items-center justify-center">
+                        <i class="fas ${icon} text-6xl text-white/20"></i>
                         <div class="absolute top-4 right-4">
-                            <span class="status-${listing.status} px-3 py-1 text-xs font-bold uppercase">${listing.status}</span>
+                            <span class="status-${status} px-3 py-1 text-xs font-bold uppercase">${status}</span>
                         </div>
                         <div class="absolute top-4 left-4">
-                            <span class="px-3 py-1 border border-white/20 text-xs text-white font-bold">${listing.matchScore}% MATCH</span>
+                            <span class="px-3 py-1 border border-white/20 text-xs text-white font-bold">${views} VIEWS</span>
                         </div>
                     </div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-white">${listing.name}</h3>
-                            <p class="text-2xl font-bold text-[#00D4FF]">$${listing.price.toLocaleString()}</p>
+                            <h3 class="text-xl font-bold text-white">${listing.business_name}</h3>
+                            <p class="text-2xl font-bold text-[#00D4FF]">$${price.toLocaleString()}</p>
                         </div>
-                        <p class="text-white/40 text-sm mb-3">${listing.description}</p>
+                        <p class="text-white/40 text-sm mb-3">${listing.description?.substring(0, 100)}${listing.description?.length > 100 ? '...' : ''}</p>
                         <div class="flex items-center gap-2 text-sm text-white/30 mb-4">
                             <i class="fas fa-map-marker-alt text-[#00D4FF]"></i>
                             <span>${listing.location}</span>
                         </div>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            ${listing.features.map(f => `<span class="px-2 py-1 border border-white/10 text-xs text-white/40">${f}</span>`).join('')}
+                            ${features.slice(0, 3).map(f => `<span class="px-2 py-1 border border-white/10 text-xs text-white/40">${f.replace(/_/g, ' ').toUpperCase()}</span>`).join('')}
                         </div>
                         <div class="flex items-center justify-between pt-4 border-t border-white/10">
                             <div>
                                 <p class="tech-label">REVENUE</p>
-                                <p class="font-semibold text-[#00FF88]">${listing.revenue}</p>
+                                <p class="font-semibold text-[#00FF88]">${revenue ? '$' + revenue.toLocaleString() + '/yr' : 'N/A'}</p>
                             </div>
-                            <button onclick="window.location.href='business-detail.html?id=${listing.id}'" class="schematic-btn px-4 py-2">
-                                <span class="relative z-10">VIEW DETAILS →</span>
-                            </button>
+                            <div class="text-right">
+                                <p class="tech-label">INQUIRIES</p>
+                                <p class="text-white font-semibold">${inquiries}</p>
+                            </div>
                         </div>
+                        <button onclick="window.location.href='business-detail.html?id=${listing.id}'" class="schematic-btn w-full mt-4 py-2">
+                            <span class="relative z-10">VIEW DETAILS →</span>
+                        </button>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         // ====== FILTER FUNCTIONS ======
         function filterListings(category) {
-            const filtered = category === 'all' ? listings : listings.filter(l => l.category === category);
-            renderListings(filtered);
+            // Update active button
+            document.querySelectorAll('#listings .schematic-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(category === 'all' ? 'all' : category)) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            if (category === 'all') {
+                renderListings(allListings);
+            } else {
+                const filtered = allListings.filter(l => l.category === category);
+                renderListings(filtered);
+            }
         }
 
         function quickFilter(type) {
             let filtered;
             if (type === 'under-500k') {
-                filtered = listings.filter(l => l.price < 500000);
+                filtered = allListings.filter(l => (l.asking_price || 0) < 500000);
             } else {
-                filtered = listings.filter(l => l.category === type);
+                filtered = allListings.filter(l => l.category === type);
             }
             renderListings(filtered);
             document.getElementById('listings').scrollIntoView({ behavior: 'smooth' });
@@ -1477,12 +1563,13 @@
         function performSearch() {
             const term = document.getElementById('heroSearch').value.toLowerCase();
             const category = document.getElementById('heroCategory').value;
-            let filtered = listings;
+            
+            let filtered = allListings;
             if (term) {
                 filtered = filtered.filter(l => 
-                    l.name.toLowerCase().includes(term) || 
-                    l.description.toLowerCase().includes(term) ||
-                    l.location.toLowerCase().includes(term)
+                    (l.business_name || '').toLowerCase().includes(term) || 
+                    (l.description || '').toLowerCase().includes(term) ||
+                    (l.location || '').toLowerCase().includes(term)
                 );
             }
             if (category) {
@@ -1490,6 +1577,10 @@
             }
             renderListings(filtered);
             document.getElementById('listings').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function viewListing(id) {
+            window.location.href = `business-detail.html?id=${id}`;
         }
 
         // ====== AI MATCHING ======
@@ -1701,7 +1792,7 @@
 
         // Initialize hero elements
         document.addEventListener('DOMContentLoaded', () => {
-            renderListings();
+            loadListings();
             initHeroGraph();
             updateActivityFeed();
             animateStats();

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List Your Business — 305business.llc</title>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WTHCPMC25C"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -17,231 +16,62 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="agentic-config.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1a202c; min-height: 100vh; }
-        
-        /* Clean white background with subtle blueprint accents */
-        .list-page {
-            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
-        }
-        
-        /* Card styles */
-        .form-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            transition: all 0.3s ease;
-        }
-        .form-card:hover {
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-        }
-        
-        /* Blueprint accent elements */
-        .blueprint-accent {
-            border-left: 4px solid #1a4a7a;
-        }
-        
-        /* Section headers */
-        .section-header {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #1a4a7a;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .section-header::before {
-            content: '';
-            width: 24px;
-            height: 2px;
-            background: #1a4a7a;
-        }
-        
-        /* Input styles */
-        .form-input {
-            background: #f7fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-size: 14px;
-            transition: all 0.2s;
-            width: 100%;
-        }
-        .form-input:focus {
-            outline: none;
-            border-color: #1a4a7a;
-            box-shadow: 0 0 0 3px rgba(26,74,122,0.1);
-        }
-        
-        /* Select styles */
-        .form-select {
-            background: #f7fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-size: 14px;
-            transition: all 0.2s;
-            width: 100%;
-            cursor: pointer;
-        }
-        .form-select:focus {
-            outline: none;
-            border-color: #1a4a7a;
-            box-shadow: 0 0 0 3px rgba(26,74,122,0.1);
-        }
-        
-        /* Textarea styles */
-        .form-textarea {
-            background: #f7fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-size: 14px;
-            transition: all 0.2s;
-            width: 100%;
-            resize: vertical;
-            min-height: 120px;
-        }
-        .form-textarea:focus {
-            outline: none;
-            border-color: #1a4a7a;
-            box-shadow: 0 0 0 3px rgba(26,74,122,0.1);
-        }
-        
-        /* Checkbox styles */
-        .form-checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 4px;
-            cursor: pointer;
-            accent-color: #1a4a7a;
-        }
-        
-        /* Button styles */
-        .btn-primary {
-            background: #1a4a7a;
-            color: white;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-        .btn-primary:hover {
-            background: #2d6a9f;
-            transform: translateY(-1px);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            color: #1a4a7a;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            border: 2px solid #1a4a7a;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .btn-outline:hover {
-            background: #1a4a7a;
-            color: white;
-        }
-        
-        /* Progress bar */
-        .progress-bar {
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #1a4a7a, #2d6a9f);
-            border-radius: 4px;
-            transition: width 0.5s ease;
-        }
-        
-        /* Navigation */
-        .detail-nav {
-            background: white;
-            border-bottom: 1px solid #e2e8f0;
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-        
-        /* Help text */
-        .help-text {
-            font-size: 0.875rem;
-            color: #718096;
-            margin-top: 4px;
-        }
-        
-        /* Required indicator */
-        .required::after {
-            content: ' *';
-            color: #e53e3e;
-        }
-        
-        /* Form grid */
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-        @media (min-width: 768px) {
-            .form-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        /* Step indicator */
-        .step-indicator {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .step-dot {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: #e2e8f0;
-            color: #718096;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 14px;
-        }
-        .step-dot.active {
-            background: #1a4a7a;
-            color: white;
-        }
-        .step-dot.completed {
-            background: #48bb78;
-            color: white;
-        }
-        .step-line {
-            width: 40px;
-            height: 2px;
-            background: #e2e8f0;
-        }
-        .step-line.completed {
-            background: #48bb78;
-        }
+        .list-page { background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%); }
+        .form-card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+        .form-card:hover { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        .blueprint-accent { border-left: 4px solid #1a4a7a; }
+        .section-header { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #1a4a7a; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+        .section-header::before { content: ''; width: 24px; height: 2px; background: #1a4a7a; }
+        .form-input { background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: 14px; transition: all 0.2s; width: 100%; }
+        .form-input:focus { outline: none; border-color: #1a4a7a; box-shadow: 0 0 0 3px rgba(26,74,122,0.1); }
+        .form-select { background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: 14px; transition: all 0.2s; width: 100%; cursor: pointer; }
+        .form-select:focus { outline: none; border-color: #1a4a7a; box-shadow: 0 0 0 3px rgba(26,74,122,0.1); }
+        .form-textarea { background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: 14px; transition: all 0.2s; width: 100%; resize: vertical; min-height: 120px; }
+        .form-textarea:focus { outline: none; border-color: #1a4a7a; box-shadow: 0 0 0 3px rgba(26,74,122,0.1); }
+        .form-checkbox { width: 20px; height: 20px; border: 2px solid #e2e8f0; border-radius: 4px; cursor: pointer; accent-color: #1a4a7a; }
+        .btn-primary { background: #1a4a7a; color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 16px; transition: all 0.2s; border: none; cursor: pointer; width: 100%; }
+        .btn-primary:hover { background: #2d6a9f; transform: translateY(-1px); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .btn-outline { background: transparent; color: #1a4a7a; padding: 12px 24px; border-radius: 8px; font-weight: 600; border: 2px solid #1a4a7a; cursor: pointer; transition: all 0.2s; }
+        .btn-outline:hover { background: #1a4a7a; color: white; }
+        .btn-success { background: #48bb78; color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 16px; border: none; cursor: pointer; }
+        .btn-success:hover { background: #38a169; }
+        .btn-danger { background: #e53e3e; color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 16px; border: none; cursor: pointer; }
+        .btn-danger:hover { background: #c53030; }
+        .progress-bar { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #1a4a7a, #2d6a9f); border-radius: 4px; transition: width 0.5s ease; }
+        .detail-nav { background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
+        .help-text { font-size: 0.875rem; color: #718096; margin-top: 4px; }
+        .required::after { content: ' *'; color: #e53e3e; }
+        .form-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        @media (min-width: 768px) { .form-grid { grid-template-columns: 1fr 1fr; } }
+        .step-indicator { display: flex; align-items: center; gap: 8px; }
+        .step-dot { width: 32px; height: 32px; border-radius: 50%; background: #e2e8f0; color: #718096; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; }
+        .step-dot.active { background: #1a4a7a; color: white; }
+        .step-dot.completed { background: #48bb78; color: white; }
+        .step-line { width: 40px; height: 2px; background: #e2e8f0; }
+        .step-line.completed { background: #48bb78; }
+        .photo-upload { border: 2px dashed #e2e8f0; border-radius: 12px; padding: 24px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .photo-upload:hover { border-color: #1a4a7a; background: #f7fafc; }
+        .photo-preview { display: inline-block; width: 100px; height: 100px; border-radius: 8px; object-fit: cover; margin: 4px; }
+        .legal-box { background: #fffaf0; border: 1px solid #ed8936; border-radius: 8px; padding: 16px; margin: 16px 0; }
+        .legal-box h4 { color: #c05621; font-weight: 600; margin-bottom: 8px; }
+        .legal-box p { color: #7b341e; font-size: 0.875rem; }
+        .success-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 100; }
+        .success-modal.active { display: flex; }
+        .success-content { background: white; border-radius: 16px; padding: 40px; max-width: 500px; width: 90%; text-align: center; }
+        .success-icon { width: 80px; height: 80px; background: #48bb78; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+        .loading-spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 1s ease-in-out infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .error-text { color: #e53e3e; font-size: 0.875rem; margin-top: 4px; }
+        .form-input.error { border-color: #e53e3e; box-shadow: 0 0 0 3px rgba(229,62,62,0.1); }
     </style>
 </head>
 <body class="list-page">
-    <!-- Navigation -->
     <nav class="detail-nav">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -251,20 +81,6 @@
                     <span class="text-xs text-gray-500 font-mono">.LLC</span>
                 </div>
                 <div class="flex items-center gap-4">
-                    <div class="flex items-center gap-3 mr-4">
-                        <a href="https://t.me/28729102e2163caa3555992f580e1013" target="_blank" class="text-gray-500 hover:text-blue-900 transition" title="Telegram">
-                            <i class="fab fa-telegram text-lg"></i>
-                        </a>
-                        <a href="https://wa.me/17866432099" target="_blank" class="text-gray-500 hover:text-blue-900 transition" title="WhatsApp">
-                            <i class="fab fa-whatsapp text-lg"></i>
-                        </a>
-                        <a href="https://instagram.com/305business" target="_blank" class="text-gray-500 hover:text-blue-900 transition" title="Instagram">
-                            <i class="fab fa-instagram text-lg"></i>
-                        </a>
-                        <a href="https://facebook.com/305business" target="_blank" class="text-gray-500 hover:text-blue-900 transition" title="Facebook">
-                            <i class="fab fa-facebook text-lg"></i>
-                        </a>
-                    </div>
                     <button onclick="window.location.href='index.html'" class="text-gray-600 hover:text-gray-900 transition">
                         <i class="fas fa-arrow-left mr-2"></i>Back to Listings
                     </button>
@@ -273,7 +89,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <div class="bg-blue-900 text-white py-12">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-4xl font-bold mb-4">List Your Business</h1>
@@ -281,7 +96,6 @@
         </div>
     </div>
 
-    <!-- Progress Steps -->
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="flex justify-center items-center">
             <div class="step-indicator">
@@ -302,24 +116,23 @@
         </div>
     </div>
 
-    <!-- Form Container -->
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        <form id="listingForm" onsubmit="event.preventDefault(); submitForm();">
+        <form id="listingForm" onsubmit="event.preventDefault();">
             
-            <!-- Step 1: Basic Information -->
             <div id="section1" class="form-card p-8 mb-8 blueprint-accent">
                 <div class="section-header">Step 1: Basic Information</div>
                 
                 <div class="form-grid">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2 required">Business Name</label>
-                        <input type="text" class="form-input" placeholder="e.g., Miami Beach Café" required>
+                        <input type="text" id="business_name" class="form-input" placeholder="e.g., Miami Beach Café" required>
                         <p class="help-text">The official name of your business</p>
+                        <p class="error-text" id="error-business_name"></p>
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2 required">Business Category</label>
-                        <select class="form-select" required>
+                        <select id="category" class="form-select" required>
                             <option value="">Select category...</option>
                             <option value="restaurant">Restaurant / Food Service</option>
                             <option value="retail">Retail Store</option>
@@ -332,25 +145,59 @@
                             <option value="automotive">Automotive</option>
                             <option value="education">Education / Daycare</option>
                             <option value="fitness">Fitness / Wellness</option>
+                            <option value="real_estate">Real Estate / Property</option>
                             <option value="other">Other</option>
                         </select>
+                        <p class="error-text" id="error-category"></p>
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2 required">Year Established</label>
-                        <input type="number" class="form-input" placeholder="e.g., 2015" min="1900" max="2026" required>
+                        <input type="number" id="year_established" class="form-input" placeholder="e.g., 2015" min="1900" max="2026" required>
+                        <p class="error-text" id="error-year_established"></p>
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2 required">Location</label>
-                        <input type="text" class="form-input" placeholder="e.g., Miami Beach, FL" required>
+                        <input type="text" id="location" class="form-input" placeholder="e.g., Miami Beach, FL" required>
+                        <p class="error-text" id="error-location"></p>
                     </div>
                 </div>
                 
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2 required">Business Description</label>
-                    <textarea class="form-textarea" placeholder="Describe your business, its history, and what makes it unique..." required></textarea>
+                    <textarea id="description" class="form-textarea" placeholder="Describe your business, its history, and what makes it unique..." required></textarea>
                     <p class="help-text">This will appear on your listing page. Be specific about what the buyer gets.</p>
+                    <p class="error-text" id="error-description"></p>
+                </div>
+                
+                <div class="mt-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2 required">Business Photos</label>
+                    <div class="photo-upload" onclick="document.getElementById('photoUpload').click()">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                        <p class="text-gray-600 font-medium">Click to upload photos</p>
+                        <p class="text-gray-400 text-sm mt-1">JPG, PNG up to 5MB each</p>
+                        <input type="file" id="photoUpload" multiple accept="image/*" style="display:none" onchange="handlePhotoUpload(this)">
+                    </div>
+                    <div id="photoPreviewContainer" class="mt-3"></div>
+                    <p class="help-text">Upload at least 3 photos: exterior, interior, and key equipment/assets</p>
+                </div>
+                
+                <div class="mt-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2 required">Your Contact Name</label>
+                    <input type="text" id="contact_name" class="form-input" placeholder="e.g., John Smith" required>
+                </div>
+                
+                <div class="mt-4 form-grid">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2 required">Contact Email</label>
+                        <input type="email" id="contact_email" class="form-input" placeholder="your@email.com" required>
+                        <p class="error-text" id="error-contact_email"></p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Contact Phone</label>
+                        <input type="tel" id="contact_phone" class="form-input" placeholder="(305) 555-0100">
+                    </div>
                 </div>
                 
                 <div class="mt-6 flex justify-end">
@@ -360,32 +207,32 @@
                 </div>
             </div>
 
-            <!-- Step 2: Financial Information -->
             <div id="section2" class="form-card p-8 mb-8 blueprint-accent hidden">
                 <div class="section-header">Step 2: Financial Information</div>
                 
                 <div class="form-grid">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2 required">Asking Price ($)</label>
-                        <input type="number" class="form-input" placeholder="e.g., 185000" min="0" required>
+                        <input type="number" id="asking_price" class="form-input" placeholder="e.g., 185000" min="0" required>
                         <p class="help-text">What you want to sell the business for</p>
+                        <p class="error-text" id="error-asking_price"></p>
                     </div>
                     
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2 required">Annual Revenue ($)</label>
-                        <input type="number" class="form-input" placeholder="e.g., 420000" min="0" required>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Annual Revenue ($)</label>
+                        <input type="number" id="annual_revenue" class="form-input" placeholder="e.g., 420000" min="0">
                         <p class="help-text">Total sales in the last 12 months</p>
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Annual Cash Flow / Net Profit ($)</label>
-                        <input type="number" class="form-input" placeholder="e.g., 85000" min="0">
+                        <input type="number" id="annual_cash_flow" class="form-input" placeholder="e.g., 85000" min="0">
                         <p class="help-text">Net income after all expenses</p>
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Inventory Value ($)</label>
-                        <input type="number" class="form-input" placeholder="e.g., 15000" min="0">
+                        <input type="number" id="inventory_value" class="form-input" placeholder="e.g., 15000" min="0">
                         <p class="help-text">Value of inventory included in sale</p>
                     </div>
                 </div>
@@ -393,33 +240,33 @@
                 <div class="mt-6 form-grid">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Monthly Rent ($)</label>
-                        <input type="number" class="form-input" placeholder="e.g., 4500" min="0">
+                        <input type="number" id="monthly_rent" class="form-input" placeholder="e.g., 4500" min="0">
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Lease Terms</label>
-                        <input type="text" class="form-input" placeholder="e.g., 5 years remaining">
+                        <input type="text" id="lease_terms" class="form-input" placeholder="e.g., 5 years remaining">
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Number of Employees</label>
-                        <input type="number" class="form-input" placeholder="e.g., 8" min="0">
+                        <input type="number" id="num_employees" class="form-input" placeholder="e.g., 8" min="0">
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Square Footage</label>
-                        <input type="number" class="form-input" placeholder="e.g., 1200" min="0">
+                        <input type="number" id="square_footage" class="form-input" placeholder="e.g., 1200" min="0">
                     </div>
                 </div>
                 
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Revenue History (Last 5 Years)</label>
                     <div class="form-grid">
-                        <input type="number" class="form-input" placeholder="2021 Revenue">
-                        <input type="number" class="form-input" placeholder="2022 Revenue">
-                        <input type="number" class="form-input" placeholder="2023 Revenue">
-                        <input type="number" class="form-input" placeholder="2024 Revenue">
-                        <input type="number" class="form-input" placeholder="2025 Revenue (Projected)">
+                        <input type="number" id="revenue_2021" class="form-input" placeholder="2021 Revenue">
+                        <input type="number" id="revenue_2022" class="form-input" placeholder="2022 Revenue">
+                        <input type="number" id="revenue_2023" class="form-input" placeholder="2023 Revenue">
+                        <input type="number" id="revenue_2024" class="form-input" placeholder="2024 Revenue">
+                        <input type="number" id="revenue_2025" class="form-input" placeholder="2025 Revenue (Projected)">
                     </div>
                 </div>
                 
@@ -433,19 +280,18 @@
                 </div>
             </div>
 
-            <!-- Step 3: Business Details -->
             <div id="section3" class="form-card p-8 mb-8 blueprint-accent hidden">
                 <div class="section-header">Step 3: Business Details</div>
                 
                 <div class="form-grid">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Business Hours</label>
-                        <input type="text" class="form-input" placeholder="e.g., Mon-Sat 7AM-10PM">
+                        <input type="text" id="business_hours" class="form-input" placeholder="e.g., Mon-Sat 7AM-10PM">
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Parking Available</label>
-                        <select class="form-select">
+                        <select id="parking" class="form-select">
                             <option value="">Select...</option>
                             <option value="street">Street Parking</option>
                             <option value="lot">Parking Lot</option>
@@ -460,35 +306,35 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">Key Features & Assets</label>
                     <div class="grid md:grid-cols-2 gap-3">
                         <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
-                            <input type="checkbox" class="form-checkbox">
+                            <input type="checkbox" class="form-checkbox feature-checkbox" value="real_estate">
                             <span>Real Estate Included</span>
                         </label>
                         <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
-                            <input type="checkbox" class="form-checkbox">
+                            <input type="checkbox" class="form-checkbox feature-checkbox" value="equipment">
                             <span>Equipment Included</span>
                         </label>
                         <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
-                            <input type="checkbox" class="form-checkbox">
+                            <input type="checkbox" class="form-checkbox feature-checkbox" value="liquor_license">
                             <span>Liquor License</span>
                         </label>
                         <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
-                            <input type="checkbox" class="form-checkbox">
+                            <input type="checkbox" class="form-checkbox feature-checkbox" value="franchise">
                             <span>Franchise Rights</span>
                         </label>
                         <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
-                            <input type="checkbox" class="form-checkbox">
+                            <input type="checkbox" class="form-checkbox feature-checkbox" value="trademarks">
                             <span>Trademarks / IP</span>
                         </label>
                         <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
-                            <input type="checkbox" class="form-checkbox">
+                            <input type="checkbox" class="form-checkbox feature-checkbox" value="established_clients">
                             <span>Established Client Base</span>
                         </label>
                         <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
-                            <input type="checkbox" class="form-checkbox">
+                            <input type="checkbox" class="form-checkbox feature-checkbox" value="website">
                             <span>Website / E-commerce</span>
                         </label>
                         <label class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition">
-                            <input type="checkbox" class="form-checkbox">
+                            <input type="checkbox" class="form-checkbox feature-checkbox" value="social_media">
                             <span>Social Media Following</span>
                         </label>
                     </div>
@@ -496,7 +342,7 @@
                 
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Reason for Selling</label>
-                    <select class="form-select">
+                    <select id="reason_for_selling" class="form-select">
                         <option value="">Select reason...</option>
                         <option value="retirement">Retirement</option>
                         <option value="relocation">Relocation</option>
@@ -510,12 +356,12 @@
                 
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Training & Transition</label>
-                    <textarea class="form-textarea" placeholder="Describe what training and support you'll provide to the new owner..."></textarea>
+                    <textarea id="training_transition" class="form-textarea" placeholder="Describe what training and support you'll provide to the new owner..."></textarea>
                 </div>
                 
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Growth Opportunities</label>
-                    <textarea class="form-textarea" placeholder="Describe potential growth opportunities for the new owner..."></textarea>
+                    <textarea id="growth_opportunities" class="form-textarea" placeholder="Describe potential growth opportunities for the new owner..."></textarea>
                 </div>
                 
                 <div class="mt-6 flex justify-between">
@@ -528,7 +374,6 @@
                 </div>
             </div>
 
-            <!-- Step 4: Review & Submit -->
             <div id="section4" class="form-card p-8 mb-8 blueprint-accent hidden">
                 <div class="section-header">Step 4: Review & Submit</div>
                 
@@ -539,20 +384,32 @@
                     </div>
                 </div>
                 
+                <div class="legal-box">
+                    <h4><i class="fas fa-gavel mr-2"></i>Legal Compliance & Disclosure</h4>
+                    <p>By submitting this listing, you confirm that all financial information provided is accurate to the best of your knowledge. Misrepresentation may result in legal liability under Florida law.</p>
+                </div>
+                
                 <div class="space-y-4 mb-6">
                     <label class="flex items-start gap-3">
-                        <input type="checkbox" class="form-checkbox mt-1" required>
-                        <span class="text-sm text-gray-700">I confirm that all information provided is accurate to the best of my knowledge. I understand that false information may result in my listing being removed.</span>
+                        <input type="checkbox" id="confirmAccuracy" class="form-checkbox mt-1" required>
+                        <span class="text-sm text-gray-700">I confirm that all information provided is accurate to the best of my knowledge. I understand that false information may result in my listing being removed and potential legal action.</span>
                     </label>
+                    <p class="error-text" id="error-confirmAccuracy"></p>
                     
                     <label class="flex items-start gap-3">
-                        <input type="checkbox" class="form-checkbox mt-1" required>
+                        <input type="checkbox" id="confirmResponse" class="form-checkbox mt-1" required>
                         <span class="text-sm text-gray-700">I agree to respond to buyer inquiries within 24 hours. I understand that responsiveness improves my chances of selling.</span>
                     </label>
+                    <p class="error-text" id="error-confirmResponse"></p>
                     
                     <label class="flex items-start gap-3">
-                        <input type="checkbox" class="form-checkbox mt-1">
-                        <span class="text-sm text-gray-700">I want to upgrade to a Featured Listing ($99) for priority placement and highlighted display.</span>
+                        <input type="checkbox" id="ndaRequired" class="form-checkbox mt-1">
+                        <span class="text-sm text-gray-700">I require buyers to sign an NDA before accessing detailed financial information. (Recommended for businesses with sensitive data)</span>
+                    </label>
+                    
+                    <label class="flex items-start gap-3">
+                        <input type="checkbox" id="featuredListing" class="form-checkbox mt-1">
+                        <span class="text-sm text-gray-700">I want to upgrade to a <b>Featured Listing ($99)</b> for priority placement, highlighted display, and top search results.</span>
                     </label>
                 </div>
                 
@@ -560,15 +417,40 @@
                     <button type="button" onclick="prevStep(3)" class="btn-outline">
                         <i class="fas fa-arrow-left mr-2"></i>Back
                     </button>
-                    <button type="submit" class="btn-primary" style="width: auto;">
-                        <i class="fas fa-check-circle mr-2"></i>Submit Listing
+                    <button type="button" onclick="submitForm()" id="submitBtn" class="btn-primary" style="width: auto;">
+                        <span id="submitText"><i class="fas fa-check-circle mr-2"></i>Submit Listing</span>
+                        <span id="submitLoading" style="display:none;"><span class="loading-spinner mr-2"></span>Submitting...</span>
                     </button>
                 </div>
             </div>
         </form>
     </div>
 
-    <!-- Footer -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-icon">
+                <i class="fas fa-check text-4xl text-white"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Listing Submitted!</h2>
+            <p class="text-gray-600 mb-4">Your business listing has been received and is pending review.</p>
+            <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                <p class="text-sm text-gray-500">Reference Number</p>
+                <p class="text-xl font-mono font-bold text-blue-900" id="referenceNumber">LIST-XXXX</p>
+            </div>
+            <div class="text-left text-sm text-gray-600 mb-6 space-y-2">
+                <p><i class="fas fa-clock text-blue-600 mr-2"></i><b>Review time:</b> 24-48 hours</p>
+                <p><i class="fas fa-bell text-blue-600 mr-2"></i><b>You'll receive:</b> Email confirmation + Telegram notification</p>
+                <p><i class="fas fa-eye text-blue-600 mr-2"></i><b>Once approved:</b> Your listing goes live immediately</p>
+            </div>
+            <button onclick="window.location.href='index.html'" class="btn-primary" style="width: 100%;">
+                Browse Listings
+            </button>
+            <p class="mt-4 text-sm text-gray-500">
+                Questions? <a href="https://t.me/28729102e2163caa3555992f580e1013" target="_blank" class="text-blue-600 hover:underline">Contact us on Telegram</a>
+            </p>
+        </div>
+    </div>
+
     <footer class="bg-white border-t border-gray-200 py-8 mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
@@ -582,28 +464,25 @@
     </footer>
 
     <script>
+        // API Configuration
+        const API_BASE = window.location.hostname === 'localhost' 
+            ? 'http://localhost:5000/api' 
+            : 'https://api.305business.llc/api';
+        
         let currentStep = 1;
         const totalSteps = 4;
+        let uploadedPhotos = [];
 
         function nextStep(step) {
-            // Hide current section
+            if (!validateStep(currentStep)) return;
+            
             document.getElementById(`section${currentStep}`).classList.add('hidden');
-            
-            // Show new section
             document.getElementById(`section${step}`).classList.remove('hidden');
-            
-            // Update progress
             updateProgress(step);
-            
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            
             currentStep = step;
             
-            // If step 4, generate preview
-            if (step === 4) {
-                generatePreview();
-            }
+            if (step === 4) generatePreview();
         }
 
         function prevStep(step) {
@@ -633,39 +512,213 @@
             }
         }
 
+        function validateStep(step) {
+            let valid = true;
+            const requiredFields = {
+                1: ['business_name', 'category', 'year_established', 'location', 'description', 'contact_name', 'contact_email'],
+                2: ['asking_price'],
+                3: [],
+                4: ['confirmAccuracy', 'confirmResponse']
+            };
+            
+            // Clear previous errors
+            document.querySelectorAll('.error-text').forEach(el => el.textContent = '');
+            document.querySelectorAll('.form-input').forEach(el => el.classList.remove('error'));
+            
+            requiredFields[step].forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field) return;
+                
+                const value = field.type === 'checkbox' ? field.checked : field.value.trim();
+                
+                if (!value) {
+                    valid = false;
+                    const errorEl = document.getElementById(`error-${fieldId}`);
+                    if (errorEl) errorEl.textContent = 'This field is required';
+                    if (field.classList.contains('form-input')) field.classList.add('error');
+                }
+                
+                // Email validation
+                if (fieldId === 'contact_email' && value) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(value)) {
+                        valid = false;
+                        const errorEl = document.getElementById(`error-${fieldId}`);
+                        if (errorEl) errorEl.textContent = 'Please enter a valid email address';
+                        field.classList.add('error');
+                    }
+                }
+            });
+            
+            return valid;
+        }
+
+        function handlePhotoUpload(input) {
+            const container = document.getElementById('photoPreviewContainer');
+            const files = Array.from(input.files);
+            
+            files.forEach(file => {
+                if (file.size > 5 * 1024 * 1024) {
+                    alert(`File "${file.name}" is too large. Max size is 5MB.`);
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    uploadedPhotos.push({
+                        file: file,
+                        preview: e.target.result
+                    });
+                    renderPhotoPreviews();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function renderPhotoPreviews() {
+            const container = document.getElementById('photoPreviewContainer');
+            container.innerHTML = uploadedPhotos.map((photo, index) => `
+                <div style="display:inline-block;position:relative;">
+                    <img src="${photo.preview}" class="photo-preview">
+                    <button onclick="removePhoto(${index})" style="position:absolute;top:-8px;right:-8px;background:#e53e3e;color:white;border:none;border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:12px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function removePhoto(index) {
+            uploadedPhotos.splice(index, 1);
+            renderPhotoPreviews();
+        }
+
         function generatePreview() {
             const preview = document.getElementById('listingPreview');
+            const name = document.getElementById('business_name').value;
+            const category = document.getElementById('category');
+            const categoryText = category.options[category.selectedIndex].text;
+            const location = document.getElementById('location').value;
+            const price = parseFloat(document.getElementById('asking_price').value) || 0;
+            const revenue = parseFloat(document.getElementById('annual_revenue').value) || 0;
+            const description = document.getElementById('description').value;
+            
             preview.innerHTML = `
                 <div class="grid md:grid-cols-2 gap-4">
                     <div>
                         <p class="text-sm text-gray-500">Business Name</p>
-                        <p class="font-semibold">Miami Beach Café (Sample)</p>
+                        <p class="font-semibold">${name || 'Not provided'}</p>
                     </div>
                     <div>
                         <p class="text-sm text-gray-500">Category</p>
-                        <p class="font-semibold">Restaurant / Food Service</p>
+                        <p class="font-semibold">${categoryText}</p>
                     </div>
                     <div>
                         <p class="text-sm text-gray-500">Asking Price</p>
-                        <p class="font-semibold text-blue-900">$185,000</p>
+                        <p class="font-semibold text-blue-900">${price ? '$' + price.toLocaleString() : 'Not provided'}</p>
                     </div>
                     <div>
                         <p class="text-sm text-gray-500">Annual Revenue</p>
-                        <p class="font-semibold">$420,000</p>
+                        <p class="font-semibold">${revenue ? '$' + revenue.toLocaleString() : 'Not provided'}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Location</p>
+                        <p class="font-semibold">${location || 'Not provided'}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Photos</p>
+                        <p class="font-semibold">${uploadedPhotos.length} uploaded</p>
                     </div>
                 </div>
                 <div class="mt-4 p-4 bg-white rounded-lg">
                     <p class="text-sm text-gray-500 mb-2">Description Preview</p>
-                    <p class="text-gray-700">Established café with ocean views. 45 seats, full kitchen, loyal customer base. Perfect for owner-operator looking for a turn-key operation in prime Miami Beach location.</p>
+                    <p class="text-gray-700">${description || 'No description provided.'}</p>
                 </div>
             `;
         }
 
-        function submitForm() {
-            alert('Listing Submitted Successfully!\n\nReference: LIST-' + Math.random().toString(36).substr(2, 6).toUpperCase() + '\n\nWhat happens next:\n1. Our team reviews your listing (24-48 hours)\n2. We may request additional documentation\n3. Once approved, your listing goes live\n4. You receive buyer inquiries via email\n\nThank you for choosing 305business.llc!');
+        async function submitForm() {
+            if (!validateStep(4)) return;
             
-            // Redirect to home
-            window.location.href = 'index.html';
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const submitLoading = document.getElementById('submitLoading');
+            
+            submitBtn.disabled = true;
+            submitText.style.display = 'none';
+            submitLoading.style.display = 'inline';
+            
+            try {
+                // Collect features
+                const features = Array.from(document.querySelectorAll('.feature-checkbox:checked'))
+                    .map(cb => cb.value);
+                
+                // Build listing data
+                const listingData = {
+                    business_name: document.getElementById('business_name').value,
+                    category: document.getElementById('category').value,
+                    year_established: parseInt(document.getElementById('year_established').value) || null,
+                    location: document.getElementById('location').value,
+                    description: document.getElementById('description').value,
+                    asking_price: parseFloat(document.getElementById('asking_price').value) || 0,
+                    annual_revenue: parseFloat(document.getElementById('annual_revenue').value) || null,
+                    annual_cash_flow: parseFloat(document.getElementById('annual_cash_flow').value) || null,
+                    inventory_value: parseFloat(document.getElementById('inventory_value').value) || null,
+                    monthly_rent: parseFloat(document.getElementById('monthly_rent').value) || null,
+                    lease_terms: document.getElementById('lease_terms').value,
+                    num_employees: parseInt(document.getElementById('num_employees').value) || null,
+                    square_footage: parseInt(document.getElementById('square_footage').value) || null,
+                    business_hours: document.getElementById('business_hours').value,
+                    parking: document.getElementById('parking').value,
+                    reason_for_selling: document.getElementById('reason_for_selling').value,
+                    training_transition: document.getElementById('training_transition').value,
+                    growth_opportunities: document.getElementById('growth_opportunities').value,
+                    features: features,
+                    contact_name: document.getElementById('contact_name').value,
+                    contact_email: document.getElementById('contact_email').value,
+                    contact_phone: document.getElementById('contact_phone').value,
+                    revenue_2021: parseFloat(document.getElementById('revenue_2021').value) || null,
+                    revenue_2022: parseFloat(document.getElementById('revenue_2022').value) || null,
+                    revenue_2023: parseFloat(document.getElementById('revenue_2023').value) || null,
+                    revenue_2024: parseFloat(document.getElementById('revenue_2024').value) || null,
+                    revenue_2025: parseFloat(document.getElementById('revenue_2025').value) || null,
+                };
+                
+                // Submit to API
+                const response = await fetch(`${API_BASE}/listings`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(listingData)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    // Upload photos if any
+                    if (uploadedPhotos.length > 0) {
+                        for (const photo of uploadedPhotos) {
+                            const formData = new FormData();
+                            formData.append('file', photo.file);
+                            await fetch(`${API_BASE}/upload/photo`, {
+                                method: 'POST',
+                                body: formData
+                            });
+                        }
+                    }
+                    
+                    // Show success modal
+                    document.getElementById('referenceNumber').textContent = result.reference;
+                    document.getElementById('successModal').classList.add('active');
+                } else {
+                    alert('Error submitting listing: ' + (result.message || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Submit error:', error);
+                alert('Network error. Please check your connection and try again.');
+            } finally {
+                submitBtn.disabled = false;
+                submitText.style.display = 'inline';
+                submitLoading.style.display = 'none';
+            }
         }
 
         // Initialize
