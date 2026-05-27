@@ -341,7 +341,7 @@
     </button>
 
     <script>
-        const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:5000/api' : 'https://api.305business.llc/api';
+        const API_BASE = window.API_BASE || (window.location.hostname === 'localhost' ? 'http://localhost:5000/api' : '/api');
         let authToken = localStorage.getItem('305business_admin_token');
         let currentSection = 'dashboard';
         let allListings = [];
