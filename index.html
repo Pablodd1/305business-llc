@@ -667,6 +667,7 @@
 <!-- END AISO + Schema.org Injection -->
 
     <script src="supabase-client.js"></script>
+    <script src="supabase-client.js"></script>
 </head>
 <body class="blueprint-bg">
 
@@ -1436,10 +1437,10 @@
                 const category = document.querySelector('.schematic-btn.active')?.dataset?.category;
                 if (category && category !== 'all') params.append('category', category);
                 
-                const response = await fetch(`${API_BASE}/listings?${params}`);
-                if (!response.ok) throw new Error('Failed to load');
+                // Use Supabase client
+                const businesses = await window.supabase305.getBusinesses({ limit: 100 });
                 
-                listings = await response.json();
+                listings = businesses || [];
                 allListings = [...listings];
                 
                 document.getElementById('listingsCount').textContent = 

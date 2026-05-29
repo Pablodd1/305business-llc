@@ -3,6 +3,7 @@
 
 const SUPABASE_URL = 'https://uakiregrnzcwuwqjkaxr.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_BhHyFZplUB8DE6-E2jBxvA_MUrqfQq0';
+const SERVICE_ROLE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVha2lyZWdybnpjd3V3cWprYXhyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDA2MDczNywiZXhwIjoyMDk1NjM2NzM3fQ.7wTezXqO9IYYKxa2HLJXkRdcFvOEr_DctcsoNTgQnN8';
 
 class SupabaseClient {
     constructor() {
