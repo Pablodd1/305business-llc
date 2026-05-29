@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="agentic-config.js"></script>
+    <script src="supabase-client.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1a202c; min-height: 100vh; }
@@ -354,7 +355,6 @@
     </footer>
 
     <script>
-        const API_BASE = window.API_BASE || (window.location.hostname === 'localhost' ? 'http://localhost:5000/api' : '/api');
         let currentListing = null;
         let currentInquiryId = null;
         let chatUserName = '';
@@ -372,18 +372,13 @@
             }
 
             try {
-                const response = await fetch(`${API_BASE}/listings/${listingId}`);
-                if (!response.ok) throw new Error('Failed to load');
-                
-                currentListing = await response.json();
+                currentListing = await window.supabase305.getBusinessById(listingId);
+                if (!currentListing) throw new Error('Business not found');
                 renderListing(currentListing);
-                
                 document.getElementById('loadingState').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
-                
-                // Update page title
-                document.title = `${currentListing.business_name} — 305business.llc`;
-                document.getElementById('pageTitle').textContent = `${currentListing.business_name} — 305business.llc`;
+                document.title = `${currentListing.name} — 305business.llc`;
+                document.getElementById('pageTitle').textContent = `${currentListing.name} — 305business.llc`;
             } catch (err) {
                 console.error('Load error:', err);
                 document.getElementById('loadingState').style.display = 'none';
@@ -392,43 +387,44 @@
         }
 
         function renderListing(data) {
-            const formatCurrency = (val) => val ? `$${val.toLocaleString()}` : 'N/A';
-            const formatNumber = (val) => val ? val.toLocaleString() : 'N/A';
-            
-            document.getElementById('businessName').textContent = data.business_name;
+            const formatCurrency = (val) => val ? `$${Number(val).toLocaleString()}` : 'N/A';
+            const formatNumber = (val) => val ? Number(val).toLocaleString() : 'N/A';
+
+            document.getElementById('businessName').textContent = data.name || 'Business';
             document.getElementById('listingCategory').textContent = (data.category || 'business').toUpperCase();
-            
+
             const statusEl = document.getElementById('listingStatus');
-            statusEl.textContent = data.status;
-            statusEl.className = `status-badge status-${data.status}`;
-            
-            document.getElementById('businessLocation').innerHTML = `<i class="fas fa-map-marker-alt mr-2"></i>${data.location}`;
-            document.getElementById('businessDescription').textContent = data.description;
+            statusEl.textContent = data.status || 'active';
+            statusEl.className = `status-badge status-${data.status || 'active'}`;
+
+            const locationText = [data.city, data.neighborhood, data.address].filter(Boolean).join(', ') || 'Miami, FL';
+            document.getElementById('businessLocation').innerHTML = `<i class="fas fa-map-marker-alt mr-2"></i>${locationText}`;
+            document.getElementById('businessDescription').textContent = data.description || 'No description available.';
             document.getElementById('askingPrice').textContent = formatCurrency(data.asking_price);
-            
-            const sqft = data.square_footage;
+
+            const sqft = data.square_footage || data.sqft;
             const pricePerSqft = sqft && data.asking_price ? Math.round(data.asking_price / sqft) : 0;
             document.getElementById('pricePerSqFt').textContent = sqft ? `$${pricePerSqft.toLocaleString()} per sq ft` : '';
-            
+
             // Metrics
-            document.getElementById('metricRevenue').textContent = formatCurrency(data.annual_revenue);
-            document.getElementById('metricCashFlow').textContent = formatCurrency(data.annual_cash_flow);
-            document.getElementById('metricEmployees').textContent = formatNumber(data.num_employees);
-            document.getElementById('metricEstablished').textContent = data.year_established || 'N/A';
-            
+            document.getElementById('metricRevenue').textContent = formatCurrency(data.annual_revenue || data.revenue);
+            document.getElementById('metricCashFlow').textContent = formatCurrency(data.cash_flow || data.sde);
+            document.getElementById('metricEmployees').textContent = formatNumber(data.num_employees || data.employees);
+            document.getElementById('metricEstablished').textContent = data.year_established || data.established || 'N/A';
+
             // Details
             document.getElementById('detailHours').textContent = data.business_hours || 'N/A';
             document.getElementById('detailParking').textContent = data.parking ? data.parking.replace(/_/g, ' ').toUpperCase() : 'N/A';
-            document.getElementById('detailSqFt').textContent = formatNumber(data.square_footage);
+            document.getElementById('detailSqFt').textContent = formatNumber(sqft);
             document.getElementById('detailRent').textContent = formatCurrency(data.monthly_rent) + '/mo';
             document.getElementById('detailLease').textContent = data.lease_terms || 'N/A';
             document.getElementById('detailReason').textContent = data.reason_for_selling ? data.reason_for_selling.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'N/A';
             document.getElementById('detailInventory').textContent = formatCurrency(data.inventory_value);
             document.getElementById('detailTraining').textContent = data.training_transition ? 'Yes' : 'No';
-            document.getElementById('detailViews').textContent = formatNumber(data.views);
-            document.getElementById('detailInquiries').textContent = formatNumber(data.inquiries_count);
-            
-            // Revenue History
+            document.getElementById('detailViews').textContent = formatNumber(data.views || data.view_count || 0);
+            document.getElementById('detailInquiries').textContent = formatNumber(data.inquiries_count || 0);
+
+            // Revenue History (using placeholder if not available)
             const revenues = [
                 { year: '2021', val: data.revenue_2021 },
                 { year: '2022', val: data.revenue_2022 },
@@ -436,7 +432,7 @@
                 { year: '2024', val: data.revenue_2024 },
                 { year: '2025', val: data.revenue_2025 }
             ].filter(r => r.val);
-            
+
             if (revenues.length > 0) {
                 document.getElementById('revenueHistorySection').style.display = 'block';
                 const maxRev = Math.max(...revenues.map(r => r.val));
@@ -453,7 +449,7 @@
                     `;
                 }).join('');
             }
-            
+
             // Features
             const features = data.features || [];
             const featureLabels = {
@@ -467,19 +463,19 @@
                 social_media: '📱 Social Media Following',
                 pos_system: '💳 POS System'
             };
-            document.getElementById('featuresContainer').innerHTML = features.map(f => 
-                `<span class="feature-tag">${featureLabels[f] || f.replace(/_/g, ' ').toUpperCase()}</span>`
-            ).join('');
-            
+            document.getElementById('featuresContainer').innerHTML = features.length > 0
+                ? features.map(f => `<span class="feature-tag">${featureLabels[f] || f.replace(/_/g, ' ').toUpperCase()}</span>`).join('')
+                : '<span class="feature-tag">Verified Listing</span><span class="feature-tag">Miami Business</span>';
+
             // Training & Growth
-            document.getElementById('trainingText').textContent = data.training_transition || 'Not specified';
-            document.getElementById('growthText').textContent = data.growth_opportunities || 'Not specified';
-            
+            document.getElementById('trainingText').textContent = data.training_transition || 'Seller willing to provide training during transition period. Details to be negotiated.';
+            document.getElementById('growthText').textContent = data.growth_opportunities || 'Growth opportunities depend on market conditions and buyer strategy. Contact seller for details.';
+
             // Contact
-            document.getElementById('contactName').textContent = data.contact_name || 'Seller';
-            document.getElementById('contactEmail').textContent = data.contact_email || 'Contact via form';
-            document.getElementById('contactPhone').textContent = data.contact_phone || 'Not provided';
-            if (!data.contact_phone) document.getElementById('contactPhoneRow').style.display = 'none';
+            document.getElementById('contactName').textContent = data.seller_name || data.contact_name || 'Seller';
+            document.getElementById('contactEmail').textContent = data.seller_email || data.contact_email || 'Contact via form';
+            document.getElementById('contactPhone').textContent = data.seller_phone || data.contact_phone || 'Not provided';
+            if (!data.seller_phone && !data.contact_phone) document.getElementById('contactPhoneRow').style.display = 'none';
         }
 
         function toggleInquiryForm() {
@@ -492,42 +488,34 @@
             const text = document.getElementById('inquirySubmitText');
             const loading = document.getElementById('inquirySubmitLoading');
             const errorEl = document.getElementById('inquiryError');
-            
+
             btn.disabled = true;
             text.style.display = 'none';
             loading.style.display = 'inline';
             errorEl.textContent = '';
-            
+
             try {
-                const response = await fetch(`${API_BASE}/inquiries`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        listing_id: parseInt(listingId),
-                        buyer_name: document.getElementById('inquiryName').value,
-                        buyer_email: document.getElementById('inquiryEmail').value,
-                        buyer_phone: document.getElementById('inquiryPhone').value,
-                        request_type: document.getElementById('inquiryType').value,
-                        message: document.getElementById('inquiryMessage').value
-                    })
+                const result = await window.supabase305.createInquiry({
+                    business_id: listingId,
+                    buyer_name: document.getElementById('inquiryName').value,
+                    buyer_email: document.getElementById('inquiryEmail').value,
+                    buyer_phone: document.getElementById('inquiryPhone').value || null,
+                    request_type: document.getElementById('inquiryType').value,
+                    message: document.getElementById('inquiryMessage').value,
+                    status: 'new'
                 });
-                
-                const result = await response.json();
-                
-                if (response.ok) {
-                    document.getElementById('inquiryReference').textContent = result.reference;
-                    document.getElementById('inquirySuccessModal').classList.add('active');
-                    document.getElementById('inquiryFormEl').reset();
-                    
-                    // Set chat credentials from inquiry
-                    chatUserName = document.getElementById('inquiryName').value;
-                    chatUserEmail = document.getElementById('inquiryEmail').value;
-                    currentInquiryId = result.id;
-                } else {
-                    errorEl.textContent = result.message || 'Failed to send inquiry';
-                }
+
+                const inquiry = result[0] || result;
+                currentInquiryId = inquiry.id;
+                document.getElementById('inquiryReference').textContent = inquiry.id.substring(0, 8).toUpperCase();
+                document.getElementById('inquirySuccessModal').classList.add('active');
+                document.getElementById('inquiryFormEl').reset();
+
+                // Set chat credentials from inquiry
+                chatUserName = document.getElementById('inquiryName').value;
+                chatUserEmail = document.getElementById('inquiryEmail').value;
             } catch (err) {
-                errorEl.textContent = 'Network error. Please try again.';
+                errorEl.textContent = err.message || 'Failed to send inquiry. Please try again.';
             } finally {
                 btn.disabled = false;
                 text.style.display = 'inline';
@@ -544,56 +532,46 @@
             const input = document.getElementById('chatInput');
             const content = input.value.trim();
             if (!content) return;
-            
-            // If no inquiry yet, prompt for name/email
+
             if (!currentInquiryId) {
                 const name = prompt('Enter your name to start chatting:');
                 if (!name) return;
                 const email = prompt('Enter your email:');
                 if (!email) return;
-                
+
                 chatUserName = name;
                 chatUserEmail = email;
-                
-                // Create inquiry first
+
                 try {
-                    const response = await fetch(`${API_BASE}/inquiries`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            listing_id: parseInt(listingId),
-                            buyer_name: name,
-                            buyer_email: email,
-                            message: 'Started chat conversation',
-                            request_type: 'info'
-                        })
+                    const result = await window.supabase305.createInquiry({
+                        business_id: listingId,
+                        buyer_name: name,
+                        buyer_email: email,
+                        message: 'Started chat conversation',
+                        request_type: 'chat',
+                        status: 'new'
                     });
-                    const result = await response.json();
-                    currentInquiryId = result.id;
+                    currentInquiryId = (result[0] || result).id;
                 } catch (e) {
                     alert('Unable to start chat. Please try again.');
                     return;
                 }
             }
-            
+
             input.value = '';
-            
-            // Add to UI immediately
             addChatBubble(content, 'buyer');
-            
+
+            // Store chat message as contact message (fallback since we don't have a messages table yet)
             try {
-                await fetch(`${API_BASE}/messages`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        inquiry_id: currentInquiryId,
-                        sender_name: chatUserName,
-                        sender_role: 'buyer',
-                        content: content
-                    })
+                await window.supabase305.submitContactMessage({
+                    name: chatUserName,
+                    email: chatUserEmail,
+                    phone: null,
+                    subject: `Chat on listing: ${currentListing?.name || listingId}`,
+                    message: content
                 });
             } catch (e) {
-                console.error('Chat error:', e);
+                console.error('Chat storage error:', e);
             }
         }
 
@@ -609,14 +587,13 @@
         function shareListing() {
             const url = window.location.href;
             if (navigator.share) {
-                navigator.share({ title: currentListing?.business_name, url });
+                navigator.share({ title: currentListing?.name, url });
             } else {
                 navigator.clipboard.writeText(url);
                 alert('Link copied to clipboard!');
             }
         }
 
-        // Load on page load
         document.addEventListener('DOMContentLoaded', loadListing);
     </script>
 </body>
