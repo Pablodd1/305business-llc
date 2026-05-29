@@ -70,6 +70,7 @@
         .error-text { color: #e53e3e; font-size: 0.875rem; margin-top: 4px; }
         .form-input.error { border-color: #e53e3e; box-shadow: 0 0 0 3px rgba(229,62,62,0.1); }
     </style>
+    <script src="supabase-client.js"></script>
 </head>
 <body class="list-page">
     <nav class="detail-nav">
@@ -650,68 +651,40 @@
                 const features = Array.from(document.querySelectorAll('.feature-checkbox:checked'))
                     .map(cb => cb.value);
                 
-                // Build listing data
+                // Build listing data for Supabase
                 const listingData = {
                     business_name: document.getElementById('business_name').value,
                     category: document.getElementById('category').value,
                     year_established: parseInt(document.getElementById('year_established').value) || null,
-                    location: document.getElementById('location').value,
+                    address: document.getElementById('location').value,
+                    city: 'Miami',
+                    state: 'FL',
                     description: document.getElementById('description').value,
                     asking_price: parseFloat(document.getElementById('asking_price').value) || 0,
                     annual_revenue: parseFloat(document.getElementById('annual_revenue').value) || null,
-                    annual_cash_flow: parseFloat(document.getElementById('annual_cash_flow').value) || null,
+                    cash_flow: parseFloat(document.getElementById('annual_cash_flow').value) || null,
                     inventory_value: parseFloat(document.getElementById('inventory_value').value) || null,
-                    monthly_rent: parseFloat(document.getElementById('monthly_rent').value) || null,
                     lease_terms: document.getElementById('lease_terms').value,
-                    num_employees: parseInt(document.getElementById('num_employees').value) || null,
+                    employee_count: parseInt(document.getElementById('num_employees').value) || null,
                     square_footage: parseInt(document.getElementById('square_footage').value) || null,
-                    business_hours: document.getElementById('business_hours').value,
-                    parking: document.getElementById('parking').value,
                     reason_for_selling: document.getElementById('reason_for_selling').value,
-                    training_transition: document.getElementById('training_transition').value,
-                    growth_opportunities: document.getElementById('growth_opportunities').value,
-                    features: features,
-                    contact_name: document.getElementById('contact_name').value,
-                    contact_email: document.getElementById('contact_email').value,
-                    contact_phone: document.getElementById('contact_phone').value,
-                    revenue_2021: parseFloat(document.getElementById('revenue_2021').value) || null,
-                    revenue_2022: parseFloat(document.getElementById('revenue_2022').value) || null,
-                    revenue_2023: parseFloat(document.getElementById('revenue_2023').value) || null,
-                    revenue_2024: parseFloat(document.getElementById('revenue_2024').value) || null,
-                    revenue_2025: parseFloat(document.getElementById('revenue_2025').value) || null,
+                    seller_name: document.getElementById('contact_name').value,
+                    seller_email: document.getElementById('contact_email').value,
+                    seller_phone: document.getElementById('contact_phone').value,
+                    equipment_included: JSON.stringify(features),
+                    status: 'pending_review'
                 };
                 
-                // Submit to API
-                const response = await fetch(`${API_BASE}/listings`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(listingData)
-                });
+                // Submit to Supabase
+                const result = await window.supabase305.submitListing(listingData);
                 
-                const result = await response.json();
+                // Show success modal with reference
+                document.getElementById('referenceNumber').textContent = 'LIST-' + result[0].id.substring(0, 8).toUpperCase();
+                document.getElementById('successModal').classList.add('active');
                 
-                if (response.ok) {
-                    // Upload photos if any
-                    if (uploadedPhotos.length > 0) {
-                        for (const photo of uploadedPhotos) {
-                            const formData = new FormData();
-                            formData.append('file', photo.file);
-                            await fetch(`${API_BASE}/upload/photo`, {
-                                method: 'POST',
-                                body: formData
-                            });
-                        }
-                    }
-                    
-                    // Show success modal
-                    document.getElementById('referenceNumber').textContent = result.reference;
-                    document.getElementById('successModal').classList.add('active');
-                } else {
-                    alert('Error submitting listing: ' + (result.message || 'Unknown error'));
-                }
             } catch (error) {
                 console.error('Submit error:', error);
-                alert('Network error. Please check your connection and try again.');
+                alert('Error submitting listing: ' + error.message);
             } finally {
                 submitBtn.disabled = false;
                 submitText.style.display = 'inline';

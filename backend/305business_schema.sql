@@ -1,422 +1,361 @@
---
--- 305business.llc Supabase Database Schema
--- Miami Business Marketplace — Complete Data Layer
---
+-- 305business.llc Supabase Schema
+-- Created: 2026-05-29
 
--- ───────────────────────────────────────────────────────────────────────────
--- 1. BUSINESS LISTINGS
--- ───────────────────────────────────────────────────────────────────────────
-CREATE TABLE listings (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+-- Enable UUID extension
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- Businesses table (main listings)
+CREATE TABLE businesses (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     
-    -- Basic Info
-    business_name VARCHAR(255) NOT NULL,
-    slug VARCHAR(255) UNIQUE,
-    category VARCHAR(100) NOT NULL,
-    subcategory VARCHAR(100),
-    year_established INTEGER,
+    -- Business info
+    name TEXT NOT NULL,
+    slug TEXT UNIQUE,
+    category TEXT,
+    subcategory TEXT,
+    description TEXT,
     
     -- Location
-    location VARCHAR(255) NOT NULL,
-    city VARCHAR(100) DEFAULT 'Miami',
-    county VARCHAR(100) DEFAULT 'Miami-Dade',
-    state VARCHAR(50) DEFAULT 'FL',
-    zip_code VARCHAR(20),
-    latitude DECIMAL(10,8),
-    longitude DECIMAL(11,8),
-    
-    -- Description & SEO
-    description TEXT NOT NULL,
-    short_description VARCHAR(500),
-    seo_title VARCHAR(255),
-    seo_description VARCHAR(500),
-    seo_keywords TEXT[],
-    ai_generated_description BOOLEAN DEFAULT FALSE,
+    address TEXT,
+    city TEXT DEFAULT 'Miami',
+    state TEXT DEFAULT 'FL',
+    zip TEXT,
+    neighborhood TEXT,
     
     -- Financials
     asking_price DECIMAL(12,2),
     annual_revenue DECIMAL(12,2),
-    annual_cash_flow DECIMAL(12,2),
+    cash_flow DECIMAL(12,2),
     inventory_value DECIMAL(12,2),
-    monthly_rent DECIMAL(10,2),
-    lease_terms VARCHAR(255),
-    num_employees INTEGER,
+    real_estate_included BOOLEAN DEFAULT FALSE,
+    
+    -- Details
+    year_established INTEGER,
+    employee_count INTEGER,
     square_footage INTEGER,
+    lease_terms TEXT,
+    reason_for_selling TEXT,
     
-    -- Revenue History
-    revenue_2021 DECIMAL(12,2),
-    revenue_2022 DECIMAL(12,2),
-    revenue_2023 DECIMAL(12,2),
-    revenue_2024 DECIMAL(12,2),
-    revenue_2025 DECIMAL(12,2),
+    -- Assets
+    equipment_included TEXT,
+    intellectual_property TEXT,
     
-    -- Business Details
-    business_hours VARCHAR(200),
-    parking VARCHAR(100),
-    reason_for_selling VARCHAR(100),
-    training_transition TEXT,
-    growth_opportunities TEXT,
+    -- Contact (seller info - private)
+    seller_name TEXT,
+    seller_email TEXT,
+    seller_phone TEXT,
     
-    -- Features (array)
-    features TEXT[] DEFAULT '{}',
+    -- Status
+    status TEXT DEFAULT 'active' CHECK (status IN ('active', 'pending', 'sold', 'withdrawn')),
+    featured BOOLEAN DEFAULT FALSE,
+    verified BOOLEAN DEFAULT FALSE,
     
     -- Media
-    photos TEXT[] DEFAULT '{}',
-    documents TEXT[] DEFAULT '{}',
-    logo_url VARCHAR(500),
+    logo_url TEXT,
+    images JSONB DEFAULT '[]',
+    documents JSONB DEFAULT '[]',
     
-    -- Status
-    status VARCHAR(50) DEFAULT 'pending' CHECK (status IN ('pending', 'active', 'negotiating', 'sold', 'rejected', 'featured')),
-    is_featured BOOLEAN DEFAULT FALSE,
-    is_verified BOOLEAN DEFAULT FALSE,
+    -- SEO
+    meta_title TEXT,
+    meta_description TEXT,
     
-    -- SEO / AI
-    ai_score INTEGER DEFAULT 0,
-    search_rank INTEGER DEFAULT 0,
+    -- Listing type
+    listing_type TEXT DEFAULT 'standard' CHECK (listing_type IN ('standard', 'premium', 'featured')),
+    
+    -- Views/engagement
     view_count INTEGER DEFAULT 0,
-    inquiry_count INTEGER DEFAULT 0,
-    
-    -- Subscription Tier
-    tier VARCHAR(50) DEFAULT 'free' CHECK (tier IN ('free', 'pro', 'enterprise', 'featured')),
-    tier_expires_at TIMESTAMPTZ,
-    
-    -- Seller Info
-    seller_name VARCHAR(255),
-    seller_email VARCHAR(255) NOT NULL,
-    seller_phone VARCHAR(50),
-    seller_id UUID, -- references users if auth enabled
-    
-    -- Metadata
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW(),
-    published_at TIMESTAMPTZ,
-    
-    -- Structured Data
-    schema_org_type VARCHAR(100) DEFAULT 'LocalBusiness',
-    schema_org_data JSONB
+    inquiry_count INTEGER DEFAULT 0
 );
 
-CREATE INDEX idx_listings_status ON listings(status);
-CREATE INDEX idx_listings_category ON listings(category);
-CREATE INDEX idx_listings_location ON listings(location);
-CREATE INDEX idx_listings_city ON listings(city);
-CREATE INDEX idx_listings_price ON listings(asking_price);
-CREATE INDEX idx_listings_featured ON listings(is_featured) WHERE is_featured = TRUE;
-CREATE INDEX idx_listings_tier ON listings(tier);
-CREATE INDEX idx_listings_slug ON listings(slug);
-CREATE INDEX idx_listings_seo ON listings USING GIN(seo_keywords);
-CREATE INDEX idx_listings_search ON listings USING gin(to_tsvector('english', business_name || ' ' || COALESCE(description, '')));
+-- Create index for slug
+CREATE INDEX idx_businesses_slug ON businesses(slug);
+CREATE INDEX idx_businesses_category ON businesses(category);
+CREATE INDEX idx_businesses_status ON businesses(status);
+CREATE INDEX idx_businesses_featured ON businesses(featured) WHERE featured = TRUE;
+CREATE INDEX idx_businesses_city ON businesses(city);
+CREATE INDEX idx_businesses_price ON businesses(asking_price);
 
--- ───────────────────────────────────────────────────────────────────────────
--- 2. USER ACCOUNTS (Sellers, Buyers, Brokers)
--- ───────────────────────────────────────────────────────────────────────────
-CREATE TABLE users (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR(255),
-    name VARCHAR(255) NOT NULL,
-    phone VARCHAR(50),
-    role VARCHAR(50) DEFAULT 'seller' CHECK (role IN ('seller', 'buyer', 'broker', 'admin')),
-    
-    -- Profile
-    company VARCHAR(255),
-    title VARCHAR(100),
-    bio TEXT,
-    avatar_url VARCHAR(500),
-    
-    -- Verification
-    is_verified BOOLEAN DEFAULT FALSE,
-    is_email_verified BOOLEAN DEFAULT FALSE,
-    verification_documents TEXT[] DEFAULT '{}',
-    
-    -- Subscription
-    subscription_tier VARCHAR(50) DEFAULT 'free',
-    subscription_status VARCHAR(50) DEFAULT 'active',
-    stripe_customer_id VARCHAR(255),
-    stripe_subscription_id VARCHAR(255),
-    
-    -- Activity
-    last_login_at TIMESTAMPTZ,
-    login_count INTEGER DEFAULT 0,
-    
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
+-- Categories table
+CREATE TABLE categories (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    name TEXT UNIQUE NOT NULL,
+    slug TEXT UNIQUE,
+    icon TEXT,
+    description TEXT,
+    business_count INTEGER DEFAULT 0,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
-CREATE INDEX idx_users_email ON users(email);
-CREATE INDEX idx_users_role ON users(role);
+-- Insert default categories
+INSERT INTO categories (name, slug, icon, description) VALUES
+('Restaurant & Food', 'restaurant-food', 'utensils', 'Restaurants, cafes, food trucks, catering businesses'),
+('Retail & Stores', 'retail-stores', 'store', 'Shops, boutiques, convenience stores, e-commerce'),
+('Healthcare & Medical', 'healthcare-medical', 'heartbeat', 'Medical practices, dental offices, clinics, pharmacies'),
+('Service & Trade', 'service-trade', 'tools', 'Auto repair, plumbing, electrical, landscaping, cleaning'),
+('Professional Services', 'professional-services', 'briefcase', 'Law firms, accounting, consulting, marketing agencies'),
+('Technology & Software', 'technology-software', 'laptop-code', 'SaaS, app development, IT services, tech startups'),
+('Hospitality & Tourism', 'hospitality-tourism', 'hotel', 'Hotels, motels, vacation rentals, travel agencies'),
+('Fitness & Wellness', 'fitness-wellness', 'dumbbell', 'Gyms, yoga studios, spas, wellness centers'),
+('Education & Training', 'education-training', 'graduation-cap', 'Schools, tutoring, training centers, daycares'),
+('Real Estate & Property', 'real-estate-property', 'building', 'Property management, real estate brokerages, construction'),
+('Manufacturing & Industrial', 'manufacturing-industrial', 'industry', 'Factories, warehouses, production facilities'),
+('Entertainment & Recreation', 'entertainment-recreation', 'gamepad', 'Bars, nightclubs, arcades, event venues'),
+('Wholesale & Distribution', 'wholesale-distribution', 'truck', 'Distributors, wholesalers, import/export businesses'),
+('Automotive & Transportation', 'automotive-transportation', 'car', 'Car dealerships, auto shops, transport companies'),
+('Other', 'other', 'ellipsis-h', 'Businesses that dont fit other categories');
 
--- ───────────────────────────────────────────────────────────────────────────
--- 3. INQUIRIES / LEADS
--- ───────────────────────────────────────────────────────────────────────────
+-- Inquiries table (buyer inquiries)
 CREATE TABLE inquiries (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    listing_id UUID REFERENCES listings(id) ON DELETE CASCADE,
-    buyer_name VARCHAR(255) NOT NULL,
-    buyer_email VARCHAR(255) NOT NULL,
-    buyer_phone VARCHAR(50),
-    buyer_message TEXT,
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     
-    -- Buyer Profile
-    buyer_budget DECIMAL(12,2),
-    buyer_timeline VARCHAR(100),
-    buyer_financing VARCHAR(100),
+    business_id UUID REFERENCES businesses(id) ON DELETE CASCADE,
+    
+    -- Buyer info
+    buyer_name TEXT NOT NULL,
+    buyer_email TEXT NOT NULL,
+    buyer_phone TEXT,
+    
+    -- Message
+    subject TEXT,
+    message TEXT,
     
     -- Status
-    status VARCHAR(50) DEFAULT 'new' CHECK (status IN ('new', 'contacted', 'qualified', 'negotiating', 'closed', 'archived')),
+    status TEXT DEFAULT 'new' CHECK (status IN ('new', 'contacted', 'negotiating', 'closed', 'archived')),
     
-    -- Assignment
-    assigned_to UUID REFERENCES users(id),
+    -- NDA
+    nda_signed BOOLEAN DEFAULT FALSE,
+    nda_signed_at TIMESTAMP WITH TIME ZONE,
     
     -- Follow-up
     notes TEXT,
-    follow_up_date TIMESTAMPTZ,
-    
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
+    assigned_to TEXT
 );
 
-CREATE INDEX idx_inquiries_listing ON inquiries(listing_id);
+CREATE INDEX idx_inquiries_business_id ON inquiries(business_id);
 CREATE INDEX idx_inquiries_status ON inquiries(status);
-CREATE INDEX idx_inquiries_created ON inquiries(created_at DESC);
 
--- ───────────────────────────────────────────────────────────────────────────
--- 4. SUBSCRIPTIONS / PAYMENTS
--- ───────────────────────────────────────────────────────────────────────────
-CREATE TABLE subscriptions (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-    listing_id UUID REFERENCES listings(id) ON DELETE SET NULL,
+-- Valuations table (valuation requests)
+CREATE TABLE valuations (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     
-    -- Plan
-    plan_name VARCHAR(100) NOT NULL, -- 'pro_monthly', 'enterprise_monthly', 'featured_weekly'
-    plan_tier VARCHAR(50) NOT NULL,
+    -- Business info
+    business_name TEXT NOT NULL,
+    category TEXT,
     
-    -- Pricing
-    amount DECIMAL(10,2) NOT NULL,
-    currency VARCHAR(10) DEFAULT 'USD',
-    interval VARCHAR(50) DEFAULT 'month', -- month, year, week
+    -- Financials
+    annual_revenue DECIMAL(12,2),
+    net_profit DECIMAL(12,2),
+    total_assets DECIMAL(12,2),
+    total_liabilities DECIMAL(12,2),
     
-    -- Stripe
-    stripe_subscription_id VARCHAR(255),
-    stripe_customer_id VARCHAR(255),
-    stripe_price_id VARCHAR(255),
+    -- Contact
+    contact_name TEXT NOT NULL,
+    contact_email TEXT NOT NULL,
+    contact_phone TEXT,
     
     -- Status
-    status VARCHAR(50) DEFAULT 'active' CHECK (status IN ('active', 'canceled', 'past_due', 'unpaid', 'trialing')),
+    status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'in_progress', 'completed', 'cancelled')),
     
-    -- Dates
-    current_period_start TIMESTAMPTZ,
-    current_period_end TIMESTAMPTZ,
-    trial_end TIMESTAMPTZ,
-    canceled_at TIMESTAMPTZ,
+    -- Results (filled after valuation is done)
+    estimated_value_low DECIMAL(12,2),
+    estimated_value_high DECIMAL(12,2),
+    valuation_report_url TEXT,
+    notes TEXT,
     
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
+    -- Payment
+    paid BOOLEAN DEFAULT FALSE,
+    paid_at TIMESTAMP WITH TIME ZONE,
+    amount_paid DECIMAL(8,2) DEFAULT 495.00
 );
 
-CREATE INDEX idx_subscriptions_user ON subscriptions(user_id);
-CREATE INDEX idx_subscriptions_status ON subscriptions(status);
+CREATE INDEX idx_valuations_status ON valuations(status);
+CREATE INDEX idx_valuations_email ON valuations(contact_email);
 
--- ───────────────────────────────────────────────────────────────────────────
--- 5. PAYMENTS
--- ───────────────────────────────────────────────────────────────────────────
-CREATE TABLE payments (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    subscription_id UUID REFERENCES subscriptions(id),
-    user_id UUID REFERENCES users(id),
+-- Listing submissions (from list-business.html form)
+CREATE TABLE listing_submissions (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     
-    -- Payment Details
-    amount DECIMAL(10,2) NOT NULL,
-    currency VARCHAR(10) DEFAULT 'USD',
-    status VARCHAR(50) DEFAULT 'pending' CHECK (status IN ('pending', 'succeeded', 'failed', 'refunded')),
-    
-    -- Stripe
-    stripe_payment_intent_id VARCHAR(255),
-    stripe_charge_id VARCHAR(255),
-    
-    -- Metadata
-    description VARCHAR(255),
-    failure_message VARCHAR(500),
-    
-    created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- ───────────────────────────────────────────────────────────────────────────
--- 6. CATEGORIES
--- ───────────────────────────────────────────────────────────────────────────
-CREATE TABLE categories (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    name VARCHAR(100) NOT NULL UNIQUE,
-    slug VARCHAR(100) UNIQUE,
+    -- Business info
+    business_name TEXT NOT NULL,
+    category TEXT,
     description TEXT,
-    icon VARCHAR(100),
     
-    -- SEO
-    seo_title VARCHAR(255),
-    seo_description VARCHAR(500),
+    -- Location
+    address TEXT,
+    city TEXT,
+    state TEXT,
+    zip TEXT,
     
-    -- Stats
-    listing_count INTEGER DEFAULT 0,
+    -- Financials
+    asking_price DECIMAL(12,2),
+    annual_revenue DECIMAL(12,2),
     
-    created_at TIMESTAMPTZ DEFAULT NOW()
+    -- Contact
+    seller_name TEXT NOT NULL,
+    seller_email TEXT NOT NULL,
+    seller_phone TEXT,
+    
+    -- Status
+    status TEXT DEFAULT 'pending_review' CHECK (status IN ('pending_review', 'approved', 'rejected', 'needs_info')),
+    
+    -- Admin
+    reviewed_by TEXT,
+    reviewed_at TIMESTAMP WITH TIME ZONE,
+    notes TEXT,
+    
+    -- Converted to real business listing
+    business_id UUID REFERENCES businesses(id)
 );
 
--- Seed categories
-INSERT INTO categories (name, slug, description, icon) VALUES
-    ('Restaurants & Food', 'restaurants-food', 'Restaurants, cafes, food trucks, catering businesses', 'utensils'),
-    ('Retail & Stores', 'retail-stores', 'Retail stores, boutiques, convenience stores', 'store'),
-    ('Healthcare & Medical', 'healthcare-medical', 'Medical practices, clinics, dental offices', 'hospital'),
-    ('Professional Services', 'professional-services', 'Law firms, accounting, consulting', 'briefcase'),
-    ('Automotive', 'automotive', 'Auto repair, car washes, dealerships', 'car'),
-    ('Beauty & Wellness', 'beauty-wellness', 'Salons, spas, gyms, wellness centers', 'spa'),
-    ('Technology', 'technology', 'Tech companies, software, IT services', 'laptop'),
-    ('Manufacturing', 'manufacturing', 'Manufacturing, distribution, warehouses', 'industry'),
-    ('Construction', 'construction', 'Construction, contracting, trades', 'hard-hat'),
-    ('Hospitality', 'hospitality', 'Hotels, motels, vacation rentals', 'hotel'),
-    ('Real Estate', 'real-estate', 'Property management, real estate agencies', 'home'),
-    ('Education', 'education', 'Schools, tutoring, training centers', 'graduation-cap'),
-    ('Transportation', 'transportation', 'Logistics, delivery, moving services', 'truck'),
-    ('Entertainment', 'entertainment', 'Bars, clubs, event venues, recreation', 'cocktail'),
-    ('Other', 'other', 'Miscellaneous businesses', 'ellipsis');
+CREATE INDEX idx_listing_submissions_status ON listing_submissions(status);
 
--- ───────────────────────────────────────────────────────────────────────────
--- 7. ACTIVITY LOG
--- ───────────────────────────────────────────────────────────────────────────
+-- Contact messages (general contact form)
+CREATE TABLE contact_messages (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    phone TEXT,
+    subject TEXT,
+    message TEXT NOT NULL,
+    
+    -- Status
+    status TEXT DEFAULT 'unread' CHECK (status IN ('unread', 'read', 'replied', 'archived')),
+    
+    -- Admin
+    replied_at TIMESTAMP WITH TIME ZONE,
+    replied_by TEXT
+);
+
+CREATE INDEX idx_contact_messages_status ON contact_messages(status);
+
+-- Activity log (for admin dashboard)
 CREATE TABLE activity_log (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id UUID REFERENCES users(id) ON DELETE SET NULL,
-    listing_id UUID REFERENCES listings(id) ON DELETE SET NULL,
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     
-    activity_type VARCHAR(50) CHECK (activity_type IN (
-        'listing_created', 'listing_updated', 'listing_viewed',
-        'inquiry_sent', 'inquiry_replied', 'subscription_created',
-        'payment_succeeded', 'payment_failed', 'user_registered'
-    )),
-    
-    description TEXT,
-    metadata JSONB,
-    ip_address INET,
-    
-    created_at TIMESTAMPTZ DEFAULT NOW()
+    action TEXT NOT NULL,
+    entity_type TEXT,
+    entity_id UUID,
+    user_email TEXT,
+    details JSONB,
+    ip_address TEXT
 );
 
-CREATE INDEX idx_activity_log_listing ON activity_log(listing_id);
-CREATE INDEX idx_activity_log_user ON activity_log(user_id);
-CREATE INDEX idx_activity_log_type ON activity_log(activity_type);
+CREATE INDEX idx_activity_log_created_at ON activity_log(created_at DESC);
 
--- ───────────────────────────────────────────────────────────────────────────
--- VIEWS
--- ───────────────────────────────────────────────────────────────────────────
+-- Row Level Security (RLS) policies
 
--- Active Listings View
-CREATE VIEW active_listings AS
-SELECT 
-    l.*,
-    c.name as category_name,
-    u.name as seller_name,
-    u.phone as seller_phone
-FROM listings l
-LEFT JOIN categories c ON l.category = c.name
-LEFT JOIN users u ON l.seller_id = u.id
-WHERE l.status = 'active'
-ORDER BY l.is_featured DESC, l.created_at DESC;
+-- Enable RLS on all tables
+ALTER TABLE businesses ENABLE ROW LEVEL SECURITY;
+ALTER TABLE inquiries ENABLE ROW LEVEL SECURITY;
+ALTER TABLE valuations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE listing_submissions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE contact_messages ENABLE ROW LEVEL SECURITY;
 
--- Featured Listings View
-CREATE VIEW featured_listings AS
-SELECT * FROM listings
-WHERE status = 'active' AND is_featured = TRUE
-ORDER BY created_at DESC;
+-- Businesses: anyone can read active listings, only admin can write
+CREATE POLICY businesses_read ON businesses
+    FOR SELECT USING (status = 'active' OR auth.role() = 'authenticated');
 
--- Category Stats View
-CREATE VIEW category_stats AS
-SELECT 
-    c.id,
-    c.name,
-    c.slug,
-    COUNT(l.id) as listing_count,
-    AVG(l.asking_price) as avg_price,
-    MIN(l.asking_price) as min_price,
-    MAX(l.asking_price) as max_price
-FROM categories c
-LEFT JOIN listings l ON l.category = c.name AND l.status = 'active'
-GROUP BY c.id, c.name, c.slug;
+CREATE POLICY businesses_insert ON businesses
+    FOR INSERT WITH CHECK (auth.role() = 'authenticated');
 
--- Daily Inquiries View
-CREATE VIEW daily_inquiries AS
-SELECT 
-    DATE_TRUNC('day', created_at) as day,
-    COUNT(*) as inquiry_count,
-    COUNT(CASE WHEN status = 'new' THEN 1 END) as new_count,
-    COUNT(CASE WHEN status = 'qualified' THEN 1 END) as qualified_count
-FROM inquiries
-GROUP BY DATE_TRUNC('day', created_at);
+CREATE POLICY businesses_update ON businesses
+    FOR UPDATE USING (auth.role() = 'authenticated');
 
--- ───────────────────────────────────────────────────────────────────────────
--- FUNCTIONS
--- ───────────────────────────────────────────────────────────────────────────
+-- Inquiries: users can read their own, admin can read all
+CREATE POLICY inquiries_select ON inquiries
+    FOR SELECT USING (buyer_email = auth.jwt()->>'email' OR auth.role() = 'service_role');
 
--- Update timestamp trigger
-CREATE OR REPLACE FUNCTION update_updated_at()
+CREATE POLICY inquiries_insert ON inquiries
+    FOR INSERT WITH CHECK (true); -- Anyone can submit an inquiry
+
+-- Valuations: users can read their own
+CREATE POLICY valuations_select ON valuations
+    FOR SELECT USING (contact_email = auth.jwt()->>'email' OR auth.role() = 'service_role');
+
+CREATE POLICY valuations_insert ON valuations
+    FOR INSERT WITH CHECK (true);
+
+-- Listing submissions: anyone can submit, admin reviews
+CREATE POLICY listing_submissions_select ON listing_submissions
+    FOR SELECT USING (seller_email = auth.jwt()->>'email' OR auth.role() = 'service_role');
+
+CREATE POLICY listing_submissions_insert ON listing_submissions
+    FOR INSERT WITH CHECK (true);
+
+-- Contact messages: admin only reads
+CREATE POLICY contact_messages_select ON contact_messages
+    FOR SELECT USING (auth.role() = 'service_role');
+
+CREATE POLICY contact_messages_insert ON contact_messages
+    FOR INSERT WITH CHECK (true);
+
+-- Functions
+
+-- Update updated_at timestamp
+CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = NOW();
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ language 'plpgsql';
 
-CREATE TRIGGER listings_updated_at BEFORE UPDATE ON listings
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
-CREATE TRIGGER users_updated_at BEFORE UPDATE ON users
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
-CREATE TRIGGER inquiries_updated_at BEFORE UPDATE ON inquiries
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
-CREATE TRIGGER subscriptions_updated_at BEFORE UPDATE ON subscriptions
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+CREATE TRIGGER update_businesses_updated_at BEFORE UPDATE ON businesses
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
--- Generate slug function
-CREATE OR REPLACE FUNCTION generate_slug(business_name TEXT)
-RETURNS TEXT AS $$
-DECLARE
-    base_slug TEXT;
-    new_slug TEXT;
-    counter INTEGER := 1;
+-- Increment view count
+CREATE OR REPLACE FUNCTION increment_business_view(business_id UUID)
+RETURNS VOID AS $$
 BEGIN
-    base_slug := lower(regexp_replace(business_name, '[^a-zA-Z0-9]+', '-', 'g'));
-    base_slug := trim(both '-' from base_slug);
-    new_slug := base_slug;
-    
-    WHILE EXISTS(SELECT 1 FROM listings WHERE slug = new_slug) LOOP
-        new_slug := base_slug || '-' || counter;
-        counter := counter + 1;
-    END LOOP;
-    
-    RETURN new_slug;
+    UPDATE businesses SET view_count = view_count + 1 WHERE id = business_id;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
--- ───────────────────────────────────────────────────────────────────────────
--- RLS POLICIES
--- ───────────────────────────────────────────────────────────────────────────
+-- Increment inquiry count
+CREATE OR REPLACE FUNCTION increment_business_inquiry(business_id UUID)
+RETURNS VOID AS $$
+BEGIN
+    UPDATE businesses SET inquiry_count = inquiry_count + 1 WHERE id = business_id;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
-ALTER TABLE listings ENABLE ROW LEVEL SECURITY;
-ALTER TABLE users ENABLE ROW LEVEL SECURITY;
-ALTER TABLE inquiries ENABLE ROW LEVEL SECURITY;
-ALTER TABLE subscriptions ENABLE ROW LEVEL SECURITY;
-ALTER TABLE payments ENABLE ROW LEVEL SECURITY;
+-- Views for admin dashboard
+CREATE VIEW dashboard_stats AS
+SELECT
+    (SELECT COUNT(*) FROM businesses WHERE status = 'active') as active_listings,
+    (SELECT COUNT(*) FROM businesses WHERE status = 'pending') as pending_listings,
+    (SELECT COUNT(*) FROM inquiries WHERE status = 'new') as new_inquiries,
+    (SELECT COUNT(*) FROM valuations WHERE status = 'pending') as pending_valuations,
+    (SELECT COUNT(*) FROM listing_submissions WHERE status = 'pending_review') as pending_submissions,
+    (SELECT COUNT(*) FROM contact_messages WHERE status = 'unread') as unread_messages,
+    (SELECT SUM(view_count) FROM businesses) as total_views,
+    (SELECT SUM(inquiry_count) FROM businesses) as total_inquiries;
 
--- Anyone can read active listings
-CREATE POLICY active_listings_select ON listings FOR SELECT
-    USING (status = 'active');
+CREATE VIEW recent_activity AS
+SELECT 
+    'inquiry' as type,
+    i.created_at,
+    i.buyer_name,
+    i.buyer_email,
+    b.name as business_name,
+    i.status
+FROM inquiries i
+LEFT JOIN businesses b ON i.business_id = b.id
+ORDER BY i.created_at DESC
+LIMIT 50;
 
--- Sellers can manage their own listings
-CREATE POLICY own_listings_manage ON listings FOR ALL TO authenticated
-    USING (seller_id::text = auth.uid()::text);
-
--- Admins can do everything
-CREATE POLICY admin_all ON listings FOR ALL TO authenticated
-    USING (auth.jwt() ->> 'role' = 'admin');
-
--- ───────────────────────────────────────────────────────────────────────────
--- END
--- ───────────────────────────────────────────────────────────────────────────
+-- Grant permissions
+GRANT ALL ON ALL TABLES IN SCHEMA public TO authenticated;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO authenticated;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO service_role;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO authenticated;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO service_role;

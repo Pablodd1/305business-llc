@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works — 305business.llc</title>
+    <meta name="description" content="Learn how to buy or sell a business in Miami. Step-by-step process, market research, and expert guidance from 305business.llc." />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="305business-logo-transparent.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Inter', sans-serif; background: #1a4a7a; color: #e0e0e0; min-height: 100vh; overflow-x: hidden; }
+        
+        .blueprint-bg {
+            background-color: #1a4a7a;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+            background-attachment: fixed;
+        }
+        
+        .blueprint-nav {
+            background: rgba(26,74,122,0.95);
+            border-bottom: 1.5px solid rgba(255,255,255,0.2);
+        }
+        
+        .tech-card {
+            background: rgba(255,255,255,0.03); 
+            border: 1.5px solid rgba(255,255,255,0.25); 
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .tech-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 20%, rgba(255,255,255,0.5) 80%, transparent 100%);
+        }
+        .tech-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.35);
+            transform: translateY(-2px);
+        }
+        
+        .schematic-btn {
+            background: transparent; border: 1.5px solid rgba(255,255,255,0.3); color: white;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.05em;
+            position: relative; overflow: hidden; cursor: pointer;
+        }
+        .schematic-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.08); transition: left 0.3s;
+        }
+        .schematic-btn:hover::before { left: 0; }
+        
+        .tech-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6);
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: repeating-linear-gradient(90deg, rgba(255,255,255,0.3) 0px, rgba(255,255,255,0.3) 15px, transparent 15px, transparent 25px);
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .step-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 48px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.15);
+            line-height: 1;
+        }
+        
+        .human-text {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.85);
+        }
+        
+        .human-text h3 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+        }
+        
+        .human-text p {
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+        }
+        
+        .process-block {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 4px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+        
+        .process-block:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.25);
+        }
+        
+        .icon-circle {
+            width: 48px;
+            height: 48px;
+            border: 1.5px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        
+        .quote-block {
+            border-left: 3px solid rgba(255,255,255,0.3);
+            padding-left: 24px;
+            margin: 24px 0;
+            font-style: italic;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .check-item i {
+            color: rgba(0,255,136,0.7);
+            margin-top: 4px;
+            font-size: 14px;
+        }
+        
+        .tab-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.7);
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .tab-btn.active {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.4);
+            color: #fff;
+        }
+        
+        .tab-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .real-story {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 24px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .real-story .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 12px;
+        }
+        
+        .highlight-box {
+            background: rgba(0,255,136,0.05);
+            border: 1px solid rgba(0,255,136,0.2);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .warning-box {
+            background: rgba(255,193,7,0.05);
+            border: 1px solid rgba(255,193,7,0.2);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(26,74,122,0.98);
+            z-index: 100;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+        }
+        
+        .mobile-menu.active { display: flex; }
+        
+        @media (max-width: 768px) {
+            .desktop-nav { display: none; }
+        }
+    </style>
+</head>
+<body class="blueprint-bg">
+    <!-- Navigation -->
+    <nav class="blueprint-nav fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center gap-2">
+                    <img src="305business-logo-transparent.png" alt="305business" class="h-10 w-auto">
+                    <span class="text-white font-semibold text-sm hidden sm:block">305business.llc</span>
+                </a>
+                <div class="desktop-nav hidden md:flex items-center gap-6">
+                    <a href="index.html" class="tech-label hover:text-white transition">MARKET</a>
+                    <a href="index.html#listings" class="tech-label hover:text-white transition">LISTINGS</a>
+                    <a href="how-it-works.html" class="tech-label text-white transition">HOW IT WORKS</a>
+                    <a href="founders.html" class="tech-label hover:text-white transition">FOUNDERS</a>
+                    <button onclick="window.location.href='list-business.html'" class="schematic-btn px-4 py-2">
+                        LIST YOUR BUSINESS
+                    </button>
+                </div>
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu">
+        <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 text-white">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+        <a href="index.html" class="text-white text-lg" onclick="toggleMobileMenu()">MARKET</a>
+        <a href="index.html#listings" class="text-white text-lg" onclick="toggleMobileMenu()">LISTINGS</a>
+        <a href="how-it-works.html" class="text-white text-lg" onclick="toggleMobileMenu()">HOW IT WORKS</a>
+        <a href="founders.html" class="text-white text-lg" onclick="toggleMobileMenu()">FOUNDERS</a>
+        <a href="list-business.html" class="text-white text-lg" onclick="toggleMobileMenu()">LIST YOUR BUSINESS</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <div class="tech-label mb-4">THE PROCESS</div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">How It Actually Works</h1>
+            <p class="text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
+                Buying or selling a business isn't like selling a car. There's no Kelley Blue Book, no test drive, and definitely no returns. Here's what actually happens — from the first search to the handshake at closing.
+            </p>
+        </div>
+
+        <!-- Tab Switcher -->
+        <div class="flex justify-center gap-2 mb-12 flex-wrap">
+            <button class="tab-btn active" onclick="switchTab('buying')">I WANT TO BUY</button>
+            <button class="tab-btn" onclick="switchTab('selling')">I WANT TO SELL</button>
+            <button class="tab-btn" onclick="switchTab('research')">MARKET RESEARCH</button>
+        </div>
+
+        <!-- BUYING TAB -->
+        <div id="buying" class="tab-content active">
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">01</div>
+                    <div class="human-text flex-1">
+                        <h3>Figure Out What You Actually Want</h3>
+                        <p>
+                            Sounds obvious, but most people skip this. They browse listings like they're on Zillow, clicking everything that looks interesting. Six months later, they're still "looking."
+                        </p>
+                        <p>
+                            Before you even open our search, ask yourself: Do you want a business that runs itself (passive income), or do you want to be hands-on every day? Do you have industry experience, or are you buying the expertise along with the business? What's your real budget — not just the purchase price, but 6 months of operating capital while you learn the ropes?
+                        </p>
+                        <div class="highlight-box">
+                            <strong style="color: #fff;">Pro tip from our brokers:</strong> The buyers who close fastest aren't the ones with the most money. They're the ones who know exactly what they want before they start looking.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">02</div>
+                    <div class="human-text flex-1">
+                        <h3>Search Like a Local, Not a Tourist</h3>
+                        <p>
+                            Miami's business market is weird. A restaurant in Wynwood isn't the same as a restaurant in Kendall. A medical practice in Coral Gables has different insurance networks than one in Hialeah. Location matters more than you think.
+                        </p>
+                        <p>
+                            Use our filters, but also talk to people. Call a broker who knows the neighborhood. Ask about foot traffic patterns, parking situations, and whether that "up-and-coming" area is actually up-and-coming or just expensive.
+                        </p>
+                        <div class="check-item">
+                            <i class="fas fa-check"></i>
+                            <span>Filter by industry, location, and price range</span>
+                        </div>
+                        <div class="check-item">
+                            <i class="fas fa-check"></i>
+                            <span>Read the full listing — not just the headline</span>
+                        </div>
+                        <div class="check-item">
+                            <i class="fas fa-check"></i>
+                            <span>Save listings and compare side-by-side</span>
+                        </div>
+                        <div class="check-item">
+                            <i class="fas fa-check"></i>
+                            <span>Note red flags: vague financials, "motivated seller," no pictures of the actual location</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">03</div>
+                    <div class="human-text flex-1">
+                        <h3>Get the Real Numbers (Not the Pretty Ones)</h3>
+                        <p>
+                            Every seller has a story. "We did $500K last year!" Okay, but what were the expenses? Was that revenue or profit? Did they include their own salary in the expenses, or are they taking money out on the side? Are the numbers from the tax returns (conservative) or from their "internal records" (optimistic)?
+                        </p>
+                        <div class="real-story">
+                            <div class="label">Real Story</div>
+                            <p>"I looked at a cafe that showed $300K revenue. Sounded great. Then I asked for the POS reports. Turns out they were counting gift card sales as revenue — but half those gift cards were never redeemed. Real revenue was closer to $220K. Saved myself $80K of bad math." — Marco, bought a cafe in Little Havana through 305business</p>
+                        </div>
+                        <p>
+                            Ask for: tax returns (last 3 years), profit & loss statements, balance sheets, and a current accounts receivable aging report. If they hesitate, that's your answer.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">04</div>
+                    <div class="human-text flex-1">
+                        <h3>See It With Your Own Eyes</h3>
+                        <p>
+                            Pictures lie. Virtual tours lie. Even video walkthroughs are shot at the best angle on the best day. Go there. Sit in the parking lot for an hour. Count how many people walk in. Watch the staff. Are they busy or bored? Are customers happy or frustrated?
+                        </p>
+                        <p>
+                            Visit at different times — Tuesday morning is different from Saturday night. If it's a restaurant, eat there. If it's a retail shop, shop there. If it's a service business, call them and see how they handle a new customer.
+                        </p>
+                        <div class="warning-box">
+                            <strong style="color: #FFC107;">Watch out for:</strong> Sellers who only want to meet at their office (not the business location), who rush you through a tour, or who won't let you talk to employees. These are not coincidences.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">05</div>
+                    <div class="human-text flex-1">
+                        <h3>Make an Offer That Makes Sense</h3>
+                        <p>
+                            Don't lowball just because you saw it on TV. Don't overpay because you're emotionally attached. A fair offer is based on real numbers: 2-3x annual profit for most small businesses, adjusted for assets, liabilities, and growth potential.
+                        </p>
+                        <p>
+                            Structure matters too. Are you paying all cash? Seller financing? SBA loan? Each has trade-offs. Cash gets you the best price but ties up your money. Seller financing costs more but gives you flexibility. SBA loans have the longest process but the lowest rates.
+                        </p>
+                        <div class="highlight-box">
+                            <strong style="color: #fff;">Our valuation tool:</strong> For $495, we'll give you a real market analysis — not just a multiple, but what similar businesses actually sold for in Miami over the last 12 months. <a href="valuation.html" style="color: #00FF88; text-decoration: underline;">Get a valuation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">06</div>
+                    <div class="human-text flex-1">
+                        <h3>Due Diligence — The Boring Part That Saves You</h3>
+                        <p>
+                            This is where deals die or survive. You're checking everything: lease terms (can you actually stay in the space?), licenses and permits (are they transferable?), employee contracts, vendor agreements, pending lawsuits, equipment condition, and whether the seller's "proprietary customer list" is actually just a spreadsheet they bought online.
+                        </p>
+                        <p>
+                            Hire a lawyer. Not your cousin who does real estate — a real business attorney. Budget $2,000-5,000 for this. It's cheaper than buying a lawsuit.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">07</div>
+                    <div class="human-text flex-1">
+                        <h3>Close the Deal and Take the Keys</h3>
+                        <p>
+                            Closing day is anticlimactic in the best way. You sign a stack of papers, wire the money, and suddenly you're the owner. The seller hands you a folder (or a Google Drive link) with passwords, vendor contacts, and employee info. Then they leave, and it's just you and the business.
+                        </p>
+                        <p>
+                            Don't change everything on day one. The customers came here for a reason. The employees know things you don't. Make changes slowly, and only after you understand why things are done the way they are.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SELLING TAB -->
+        <div id="selling" class="tab-content">
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">01</div>
+                    <div class="human-text flex-1">
+                        <h3>Decide If You're Really Ready</h3>
+                        <p>
+                            Selling a business is emotional. You've built it. Your name is on it. Your customers know your face. Walking away is harder than the paperwork.
+                        </p>
+                        <p>
+                            Be honest: Are you selling because you're burned out, or because there's a real opportunity? Burnout sellers take bad deals. Strategic sellers get good ones. If you're burned out, fix that first — raise prices, hire help, take a vacation. Then sell from a position of strength.
+                        </p>
+                        <div class="real-story">
+                            <div class="label">Broker Wisdom</div>
+                            <p>"The sellers who get the best multiples are the ones who don't need to sell. Desperation shows in the numbers — declining revenue, deferred maintenance, key employees leaving. Buyers smell it." — Maria, 305business broker partner</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">02</div>
+                    <div class="human-text flex-1">
+                        <h3>Get Your Books in Order (For Real)</h3>
+                        <p>
+                            Buyers will look at your tax returns. If you've been running personal expenses through the business — stop that now. If your books are a mess, hire a bookkeeper for 3 months to clean them up. It's worth it.
+                        </p>
+                        <p>
+                            What buyers want to see: 3 years of clean tax returns, current P&L, balance sheet, cash flow statement, and a list of assets with actual values. The more transparent you are, the faster the deal closes and the better the price you get.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">03</div>
+                    <div class="human-text flex-1">
+                        <h3>Know What Your Business Is Actually Worth</h3>
+                        <p>
+                            Don't guess. Don't use a random online calculator. Get a real valuation from someone who knows the Miami market. We charge $495 for a comprehensive valuation that includes comparable sales, market conditions, and a realistic asking price range.
+                        </p>
+                        <p>
+                            Overpricing kills deals. Your listing sits there for 6 months, gets stale, and buyers start wondering what's wrong with it. Underpricing leaves money on the table. The sweet spot is 10-15% above what you'd actually accept, giving room to negotiate.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">04</div>
+                    <div class="human-text flex-1">
+                        <h3>List It Right</h3>
+                        <p>
+                            Your listing is your first impression. Bad photos, vague descriptions, and missing financials are the fastest way to get ignored. Good listings have: clear photos of the actual business (not stock images), a real description of what you do, honest financials, and a reason why you're selling that doesn't sound desperate.
+                        </p>
+                        <p>
+                            On 305business, you can list for free. We verify listings to keep the quality high. Include: business type, location, annual revenue, asking price, real estate included or not, and whether you'll offer seller financing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">05</div>
+                    <div class="human-text flex-1">
+                        <h3>Handle Inquiries Without Wasting Time</h3>
+                        <p>
+                            You'll get three types of inquiries: tire kickers (just looking, no money), competitors (fishing for info), and real buyers. Learn to tell the difference quickly. Ask for proof of funds or a pre-qualification letter. Serious buyers will have one.
+                        </p>
+                        <p>
+                            Don't give out sensitive info (customer lists, vendor pricing, employee salaries) without a signed NDA. We provide a standard NDA template in our broker portal. Use it.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">06</div>
+                    <div class="human-text flex-1">
+                        <h3>Negotiate Without Ego</h3>
+                        <p>
+                            Buyers will offer less than asking. That's not an insult — it's how this works. The question isn't whether they'll negotiate, but whether you can handle it without taking it personally.
+                        </p>
+                        <p>
+                            Know your walk-away number. Know what terms matter to you (price vs. timeline vs. seller financing). Be flexible on things that don't matter, firm on things that do. And never negotiate against yourself — if they make an offer, counter. Don't preemptively lower your price because you think they'll object.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">07</div>
+                    <div class="human-text flex-1">
+                        <h3>Close Clean and Move On</h3>
+                        <p>
+                            The best deals end with both parties satisfied. You got your price, they got a good business, and nobody feels like they got taken advantage of. Hand over everything cleanly: books, contacts, passwords, training. Offer 30 days of transition support (included in most deals).
+                        </p>
+                        <p>
+                            Then let go. Don't call the new owner every week. Don't check the Google reviews. Don't drive by "just to see." You sold it. Go build something new, or take that vacation, or start that other project you've been thinking about. The business will be fine without you — and so will you.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESEARCH TAB -->
+        <div id="research" class="tab-content">
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">01</div>
+                    <div class="human-text flex-1">
+                        <h3>Market Research Is Not Optional</h3>
+                        <p>
+                            Whether you're buying or selling, you need to know what the market actually looks like. Not what you think it looks like. Not what your friend told you. The real numbers, real trends, and real comparable sales.
+                        </p>
+                        <p>
+                            Miami's business market moves fast. A neighborhood that was hot last year might be oversaturated now. An industry that looked risky pre-pandemic might be booming. The only way to know is to look at the data.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">02</div>
+                    <div class="human-text flex-1">
+                        <h3>What We Track at 305business</h3>
+                        <p>
+                            Our market reports aren't just scraped listings. We talk to brokers, analyze closed deals, and track trends across Miami-Dade, Broward, and Palm Beach. Here's what we watch:
+                        </p>
+                        <div class="check-item">
+                            <i class="fas fa-check"></i>
+                            <span><strong>Median sale prices</strong> by industry — restaurants, retail, medical practices, service businesses, tech</span>
+                        </div>
+                        <div class="check-item">
+                            <i class="fas fa-check"></i>
+                            <span><strong>Days on market</strong> — how long listings sit before selling</span>
+                        </div>
+                        <div class="check-item">
+                            <i class="fas fa-check"></i>
+                            <span><strong>Price-to-revenue multiples</strong> — what buyers actually pay vs. what sellers ask</span>
+                        </div>
+                        <div class="check-item">
+                            <i class="fas fa-check"></i>
+                            <span><strong>Financing trends</strong> — cash vs. SBA vs. seller financing</span>
+                        </div>
+                        <div class="check-item">
+                            <i class="fas fa-check"></i>
+                            <span><strong>Neighborhood hotspots</strong> — where the action is moving</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">03</div>
+                    <div class="human-text flex-1">
+                        <h3>How to Use Market Data</h3>
+                        <p>
+                            <strong>If you're buying:</strong> Use market data to set realistic expectations. A restaurant in Wynwood isn't going to sell for the same multiple as a dental practice in Coral Gables. Know the range before you fall in love with a listing.
+                        </p>
+                        <p>
+                            <strong>If you're selling:</strong> Use market data to justify your asking price. When a buyer says "that's too high," you can point to three similar businesses that sold for the same or more. Data beats opinions.
+                        </p>
+                        <div class="real-story">
+                            <div class="label">Example</div>
+                            <p>"I wanted $350K for my auto repair shop. My broker showed me that similar shops in Hialeah had sold for $280-320K in the last year. We listed at $325K, got an offer at $300K, and closed at $310K. Without that data, I would have overpriced it and sat on the market for months." — Roberto, sold his shop through 305business</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">04</div>
+                    <div class="human-text flex-1">
+                        <h3>Free Market Reports</h3>
+                        <p>
+                            We publish quarterly market reports for Miami-Dade, Broward, and Palm Beach. They're free. No email gate, no "schedule a call" requirement. Just data.
+                        </p>
+                        <p>
+                            Reports include: industry breakdowns, neighborhood trends, financing statistics, and a list of all closed deals we can verify. We also include our broker partners' insights — what they're seeing on the ground, what buyers are asking for, and what sellers are getting wrong.
+                        </p>
+                        <div class="highlight-box">
+                            <strong style="color: #fff;">Get the latest report:</strong> <a href="index.html" style="color: #00FF88; text-decoration: underline;">Download Q2 2026 Miami Business Market Report</a> (PDF, 2.3 MB)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-block">
+                <div class="flex items-start gap-6">
+                    <div class="step-number">05</div>
+                    <div class="human-text flex-1">
+                        <h3>Custom Research for Serious Buyers</h3>
+                        <p>
+                            Looking at a specific industry? We can build a custom report: comparable sales, competitor analysis, growth projections, and risk factors. Starting at $995 for a full industry deep-dive.
+                        </p>
+                        <p>
+                            This isn't just for buyers. Sellers use custom research to justify asking prices and identify improvement opportunities before listing. A cafe that knows its customer acquisition cost vs. the industry average can make targeted changes that increase the sale price by 20%.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom CTA -->
+        <div class="text-center mt-16 mb-8">
+            <div class="section-divider mb-8"></div>
+            <h2 class="text-2xl font-bold text-white mb-4">Ready to Start?</h2>
+            <p class="text-white/70 mb-8 max-w-xl mx-auto">
+                Whether you're buying your first business or selling your fifth, you don't have to figure it out alone. Browse listings, get a valuation, or just ask us a question.
+            </p>
+            <div class="flex justify-center gap-4 flex-wrap">
+                <a href="index.html#listings" class="schematic-btn px-6 py-3 text-sm">
+                    BROWSE LISTINGS
+                </a>
+                <a href="list-business.html" class="schematic-btn px-6 py-3 text-sm">
+                    LIST YOUR BUSINESS
+                </a>
+                <a href="valuation.html" class="schematic-btn px-6 py-3 text-sm">
+                    GET A VALUATION
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="border-t border-white/10 pt-8 pb-8 mt-16">
+            <div class="max-w-6xl mx-auto px-4 text-center">
+                <p class="text-white/50 text-sm">
+                    305business.llc — Miami's Business Marketplace<br>
+                    Serving Miami-Dade, Broward, and Palm Beach
+                </p>
+                <div class="flex justify-center gap-6 mt-4">
+                    <a href="https://t.me/28729102e2163caa3555992f580e1013" target="_blank" class="text-white/40 hover:text-white transition">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://wa.me/17866432099" target="_blank" class="text-white/40 hover:text-white transition">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://instagram.com/305business" target="_blank" class="text-white/40 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://facebook.com/305business" target="_blank" class="text-white/40 hover:text-white transition">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            // Activate button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

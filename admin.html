@@ -8,801 +8,331 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="agentic-config.js"></script>
+    <script src="supabase-client.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
-        .admin-layout { display: flex; min-height: 100vh; }
-        .sidebar { width: 260px; background: #1e293b; border-right: 1px solid #334155; position: fixed; height: 100vh; overflow-y: auto; z-index: 50; }
-        .main-content { flex: 1; margin-left: 260px; min-height: 100vh; }
-        .stat-card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; }
-        .stat-value { font-size: 32px; font-weight: 700; color: #f8fafc; }
-        .stat-label { font-size: 12px; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.1em; margin-top: 4px; }
-        .stat-change { font-size: 12px; padding: 4px 8px; border-radius: 4px; margin-top: 8px; display: inline-block; }
-        .stat-change.up { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
-        .stat-change.down { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+        body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1a202c; min-height: 100vh; }
+        .admin-nav { background: #1a4a7a; color: white; }
+        .stat-card { background: white; border-radius: 8px; padding: 24px; border: 1px solid #e2e8f0; }
+        .stat-value { font-size: 2rem; font-weight: 700; color: #1a4a7a; }
+        .stat-label { font-size: 0.875rem; color: #718096; margin-top: 4px; }
         .data-table { width: 100%; border-collapse: collapse; }
-        .data-table th { text-align: left; padding: 12px 16px; font-size: 12px; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.05em; border-bottom: 1px solid #334155; font-weight: 600; }
-        .data-table td { padding: 16px; border-bottom: 1px solid #334155; font-size: 14px; }
-        .data-table tr:hover { background: rgba(255,255,255,0.02); }
-        .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
-        .status-pending { background: rgba(234, 179, 8, 0.2); color: #facc15; }
-        .status-active { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
-        .status-rejected { background: rgba(239, 68, 68, 0.2); color: #f87171; }
-        .status-negotiating { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
-        .status-new { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
-        .btn-sm { padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; }
-        .btn-green { background: #22c55e; color: white; }
-        .btn-green:hover { background: #16a34a; }
-        .btn-red { background: #ef4444; color: white; }
-        .btn-red:hover { background: #dc2626; }
-        .btn-blue { background: #3b82f6; color: white; }
-        .btn-blue:hover { background: #2563eb; }
-        .nav-link { display: flex; align-items: center; gap: 12px; padding: 12px 20px; color: #94a3b8; text-decoration: none; font-size: 14px; transition: all 0.2s; border-radius: 8px; margin: 4px 12px; }
-        .nav-link:hover, .nav-link.active { background: rgba(59, 130, 246, 0.1); color: #60a5fa; }
-        .tab-btn { padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; border: none; cursor: pointer; background: transparent; color: #94a3b8; transition: all 0.2s; }
-        .tab-btn.active { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
-        .section-card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; overflow: hidden; }
-        .login-page { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-        .login-card { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 40px; width: 100%; max-width: 400px; }
-        .form-input { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 12px 16px; color: #e2e8f0; width: 100%; font-size: 14px; }
-        .form-input:focus { outline: none; border-color: #3b82f6; }
-        .chat-thread { max-height: 400px; overflow-y: auto; padding: 16px; }
-        .chat-msg { margin-bottom: 12px; }
-        .chat-msg-header { display: flex; justify-content: space-between; font-size: 12px; color: #94a3b8; margin-bottom: 4px; }
-        .chat-msg-body { padding: 10px 14px; border-radius: 8px; font-size: 14px; }
-        .chat-msg.buyer .chat-msg-body { background: rgba(59, 130, 246, 0.15); color: #93c5fd; }
-        .chat-msg.seller .chat-msg-body { background: rgba(34, 197, 94, 0.15); color: #86efac; }
-        .chat-msg.admin .chat-msg-body { background: rgba(168, 85, 247, 0.15); color: #d8b4fe; }
-        .refresh-btn { position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px; background: #3b82f6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(59,130,246,0.4); z-index: 100; font-size: 20px; border: none; transition: all 0.3s; }
-        .refresh-btn:hover { transform: scale(1.1); }
-        .refresh-btn.spinning { animation: spin 1s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .toast { position: fixed; top: 20px; right: 20px; padding: 16px 24px; border-radius: 8px; color: white; font-weight: 500; z-index: 1000; transform: translateX(400px); transition: transform 0.3s ease; }
-        .toast.show { transform: translateX(0); }
-        .toast.success { background: #22c55e; }
-        .toast.error { background: #ef4444; }
+        .data-table th { background: #f7fafc; text-align: left; padding: 12px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #718096; border-bottom: 2px solid #e2e8f0; }
+        .data-table td { padding: 12px; border-bottom: 1px solid #e2e8f0; font-size: 0.875rem; }
+        .data-table tr:hover { background: #f7fafc; }
+        .status-badge { padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+        .status-pending { background: #fffaf0; color: #c05621; }
+        .status-active { background: #f0fff4; color: #276749; }
+        .status-rejected { background: #fff5f5; color: #c53030; }
+        .btn-action { padding: 6px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; cursor: pointer; border: none; }
+        .btn-approve { background: #48bb78; color: white; }
+        .btn-reject { background: #e53e3e; color: white; }
+        .btn-view { background: #1a4a7a; color: white; }
+        .tab-btn { padding: 12px 24px; border: none; background: transparent; cursor: pointer; font-size: 0.875rem; font-weight: 500; color: #718096; border-bottom: 2px solid transparent; }
+        .tab-btn.active { color: #1a4a7a; border-bottom-color: #1a4a7a; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
     </style>
 </head>
 <body>
-    <!-- LOGIN PAGE -->
-    <div id="loginPage" class="login-page">
-        <div class="login-card">
-            <div class="text-center mb-8">
-                <img src="305business-logo-transparent.png" alt="305business" class="h-12 mx-auto mb-4">
-                <h1 class="text-2xl font-bold text-white">Admin Dashboard</h1>
-                <p class="text-slate-400 text-sm mt-2">305business.llc Management</p>
-            </div>
-            <form id="loginForm" onsubmit="event.preventDefault(); doLogin();">
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm text-slate-400 mb-1">Email</label>
-                        <input type="email" id="loginEmail" class="form-input" placeholder="admin@305business.llc" value="admin@305business.llc">
-                    </div>
-                    <div>
-                        <label class="block text-sm text-slate-400 mb-1">Password</label>
-                        <input type="password" id="loginPassword" class="form-input" placeholder="••••••••">
-                    </div>
-                    <button type="submit" id="loginBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-lg font-semibold transition">
-                        <span id="loginText">Sign In</span>
-                        <span id="loginLoading" style="display:none;"><i class="fas fa-spinner fa-spin mr-2"></i>Signing in...</span>
-                    </button>
+    <nav class="admin-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-3">
+                    <img src="305business-logo-transparent.png" alt="305business" class="h-8 w-auto">
+                    <span class="font-bold">Admin Dashboard</span>
                 </div>
-            </form>
-            <p class="text-center text-slate-500 text-sm mt-6">Default: admin@305business.llc / admin305</p>
+                <div class="flex items-center gap-4">
+                    <a href="index.html" class="text-white/80 hover:text-white text-sm">View Website</a>
+                    <span class="text-white/60 text-sm">jasmel@305business.llc</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="stat-card">
+                <div class="stat-value" id="stat-listings">0</div>
+                <div class="stat-label">Active Listings</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-pending">0</div>
+                <div class="stat-label">Pending Review</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-inquiries">0</div>
+                <div class="stat-label">New Inquiries</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-valuations">0</div>
+                <div class="stat-label">Pending Valuations</div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="bg-white rounded-t-lg border-b border-gray-200">
+            <button class="tab-btn active" onclick="switchTab('submissions')">Listing Submissions</button>
+            <button class="tab-btn" onclick="switchTab('inquiries')">Inquiries</button>
+            <button class="tab-btn" onclick="switchTab('valuations')">Valuations</button>
+            <button class="tab-btn" onclick="switchTab('businesses')">All Businesses</button>
+        </div>
+
+        <!-- Listing Submissions Tab -->
+        <div id="tab-submissions" class="tab-content active">
+            <div class="bg-white rounded-b-lg p-6">
+                <div class="overflow-x-auto">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Business Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Seller</th>
+                                <th>Submitted</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="submissions-table">
+                            <tr><td colspan="7" class="text-center text-gray-500 py-8">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inquiries Tab -->
+        <div id="tab-inquiries" class="tab-content">
+            <div class="bg-white rounded-b-lg p-6">
+                <div class="overflow-x-auto">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Buyer</th>
+                                <th>Business</th>
+                                <th>Subject</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inquiries-table">
+                            <tr><td colspan="6" class="text-center text-gray-500 py-8">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Valuations Tab -->
+        <div id="tab-valuations" class="tab-content">
+            <div class="bg-white rounded-b-lg p-6">
+                <div class="overflow-x-auto">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Business Name</th>
+                                <th>Category</th>
+                                <th>Contact</th>
+                                <th>Revenue</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="valuations-table">
+                            <tr><td colspan="7" class="text-center text-gray-500 py-8">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Businesses Tab -->
+        <div id="tab-businesses" class="tab-content">
+            <div class="bg-white rounded-b-lg p-6">
+                <div class="overflow-x-auto">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Location</th>
+                                <th>Views</th>
+                                <th>Inquiries</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="businesses-table">
+                            <tr><td colspan="8" class="text-center text-gray-500 py-8">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- ADMIN DASHBOARD -->
-    <div id="adminDashboard" class="admin-layout" style="display:none;">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="p-6 border-b border-slate-700">
-                <div class="flex items-center gap-3">
-                    <img src="305business-logo-transparent.png" alt="305business" class="h-8 w-auto">
-                    <div>
-                        <p class="font-bold text-white text-sm">305business</p>
-                        <p class="text-xs text-slate-500 font-mono">ADMIN</p>
-                    </div>
-                </div>
-            </div>
-            <nav class="py-4">
-                <a href="#" onclick="showSection('dashboard')" class="nav-link active" id="nav-dashboard">
-                    <i class="fas fa-chart-line w-5"></i> Dashboard
-                </a>
-                <a href="#" onclick="showSection('listings')" class="nav-link" id="nav-listings">
-                    <i class="fas fa-building w-5"></i> Listings
-                    <span id="pendingBadge" class="ml-auto bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded text-xs font-bold hidden">0</span>
-                </a>
-                <a href="#" onclick="showSection('inquiries')" class="nav-link" id="nav-inquiries">
-                    <i class="fas fa-envelope w-5"></i> Inquiries
-                    <span id="newInquiryBadge" class="ml-auto bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded text-xs font-bold hidden">0</span>
-                </a>
-                <a href="#" onclick="showSection('chat')" class="nav-link" id="nav-chat">
-                    <i class="fas fa-comments w-5"></i> Chat Monitor
-                </a>
-                <a href="#" onclick="showSection('users')" class="nav-link" id="nav-users">
-                    <i class="fas fa-users w-5"></i> Users
-                </a>
-                <div class="border-t border-slate-700 my-4 mx-4"></div>
-                <a href="#" onclick="doLogout()" class="nav-link text-red-400">
-                    <i class="fas fa-sign-out-alt w-5"></i> Logout
-                </a>
-            </nav>
-            <div class="p-4 mt-auto border-t border-slate-700">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                        <i class="fas fa-user text-white text-xs"></i>
-                    </div>
-                    <div>
-                        <p class="text-sm text-white" id="adminName">Admin</p>
-                        <p class="text-xs text-slate-500" id="adminEmail">admin@305business.llc</p>
-                    </div>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Top Bar -->
-            <div class="bg-slate-800/50 border-b border-slate-700 px-8 py-4 flex justify-between items-center sticky top-0 z-40 backdrop-blur">
-                <div>
-                    <h2 class="text-xl font-bold text-white" id="pageHeader">Dashboard</h2>
-                    <p class="text-sm text-slate-400" id="lastUpdated">Last updated: Just now</p>
-                </div>
-                <div class="flex items-center gap-4">
-                    <button onclick="refreshAll()" class="text-slate-400 hover:text-white transition">
-                        <i class="fas fa-sync-alt"></i> Refresh
-                    </button>
-                    <span class="text-sm text-slate-500">305business.llc</span>
-                </div>
-            </div>
-
-            <div class="p-8">
-                <!-- DASHBOARD SECTION -->
-                <div id="section-dashboard">
-                    <!-- Stats Grid -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
-                        <div class="stat-card">
-                            <p class="stat-value" id="statTotalListings">0</p>
-                            <p class="stat-label">Total Listings</p>
-                        </div>
-                        <div class="stat-card">
-                            <p class="stat-value" id="statActive">0</p>
-                            <p class="stat-label">Active</p>
-                            <span class="stat-change up"><i class="fas fa-arrow-up mr-1"></i>Live</span>
-                        </div>
-                        <div class="stat-card">
-                            <p class="stat-value" id="statPending">0</p>
-                            <p class="stat-label">Pending Review</p>
-                            <span class="stat-change down">Needs Action</span>
-                        </div>
-                        <div class="stat-card">
-                            <p class="stat-value" id="statInquiries">0</p>
-                            <p class="stat-label">Total Inquiries</p>
-                        </div>
-                        <div class="stat-card">
-                            <p class="stat-value" id="statNewInquiries">0</p>
-                            <p class="stat-label">New Inquiries</p>
-                        </div>
-                        <div class="stat-card">
-                            <p class="stat-value" id="statViews">0</p>
-                            <p class="stat-label">Total Views</p>
-                        </div>
-                    </div>
-
-                    <!-- Recent Activity -->
-                    <div class="grid lg:grid-cols-2 gap-6">
-                        <div class="section-card">
-                            <div class="p-6 border-b border-slate-700 flex justify-between items-center">
-                                <h3 class="font-bold text-white"><i class="fas fa-clock mr-2 text-blue-400"></i>Recent Listings</h3>
-                                <button onclick="showSection('listings')" class="text-blue-400 text-sm hover:underline">View All</button>
-                            </div>
-                            <div id="recentListingsList" class="divide-y divide-slate-700">
-                                <p class="p-6 text-slate-500 text-center">Loading...</p>
-                            </div>
-                        </div>
-                        <div class="section-card">
-                            <div class="p-6 border-b border-slate-700 flex justify-between items-center">
-                                <h3 class="font-bold text-white"><i class="fas fa-envelope mr-2 text-purple-400"></i>Recent Inquiries</h3>
-                                <button onclick="showSection('inquiries')" class="text-blue-400 text-sm hover:underline">View All</button>
-                            </div>
-                            <div id="recentInquiriesList" class="divide-y divide-slate-700">
-                                <p class="p-6 text-slate-500 text-center">Loading...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- LISTINGS SECTION -->
-                <div id="section-listings" style="display:none;">
-                    <div class="flex justify-between items-center mb-6">
-                        <div class="flex gap-2">
-                            <button onclick="filterListings('all')" class="tab-btn active" id="tab-all">All</button>
-                            <button onclick="filterListings('pending')" class="tab-btn" id="tab-pending">Pending</button>
-                            <button onclick="filterListings('active')" class="tab-btn" id="tab-active">Active</button>
-                            <button onclick="filterListings('rejected')" class="tab-btn" id="tab-rejected">Rejected</button>
-                        </div>
-                        <button onclick="refreshListings()" class="text-slate-400 hover:text-white"><i class="fas fa-sync-alt mr-1"></i>Refresh</button>
-                    </div>
-                    <div class="section-card">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Business</th>
-                                    <th>Category</th>
-                                    <th>Price</th>
-                                    <th>Revenue</th>
-                                    <th>Status</th>
-                                    <th>Views</th>
-                                    <th>Inquiries</th>
-                                    <th>Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="listingsTableBody">
-                                <tr><td colspan="10" class="text-center text-slate-500 py-8">Loading listings...</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- INQUIRIES SECTION -->
-                <div id="section-inquiries" style="display:none;">
-                    <div class="flex justify-between items-center mb-6">
-                        <div class="flex gap-2">
-                            <button onclick="filterInquiries('all')" class="tab-btn active" id="tab-inq-all">All</button>
-                            <button onclick="filterInquiries('new')" class="tab-btn" id="tab-inq-new">New</button>
-                            <button onclick="filterInquiries('contacted')" class="tab-btn" id="tab-inq-contacted">Contacted</button>
-                        </div>
-                        <button onclick="refreshInquiries()" class="text-slate-400 hover:text-white"><i class="fas fa-sync-alt mr-1"></i>Refresh</button>
-                    </div>
-                    <div class="section-card">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Listing</th>
-                                    <th>Buyer</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Type</th>
-                                    <th>Message</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="inquiriesTableBody">
-                                <tr><td colspan="10" class="text-center text-slate-500 py-8">Loading inquiries...</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- CHAT MONITOR SECTION -->
-                <div id="section-chat" style="display:none;">
-                    <div class="grid lg:grid-cols-2 gap-6">
-                        <div class="section-card">
-                            <div class="p-6 border-b border-slate-700">
-                                <h3 class="font-bold text-white"><i class="fas fa-list mr-2 text-blue-400"></i>Active Conversations</h3>
-                            </div>
-                            <div id="chatInquiriesList" class="divide-y divide-slate-700 max-h-96 overflow-y-auto">
-                                <p class="p-6 text-slate-500 text-center">Select an inquiry to view chat</p>
-                            </div>
-                        </div>
-                        <div class="section-card">
-                            <div class="p-6 border-b border-slate-700">
-                                <h3 class="font-bold text-white"><i class="fas fa-comments mr-2 text-green-400"></i>Chat Thread</h3>
-                                <p class="text-sm text-slate-400 mt-1" id="chatThreadTitle">Select a conversation</p>
-                            </div>
-                            <div id="chatThreadBody" class="chat-thread">
-                                <p class="text-slate-500 text-center py-8">Select an inquiry to view messages</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- USERS SECTION -->
-                <div id="section-users" style="display:none;">
-                    <div class="section-card">
-                        <div class="p-6 border-b border-slate-700">
-                            <h3 class="font-bold text-white"><i class="fas fa-users mr-2 text-blue-400"></i>Registered Users</h3>
-                        </div>
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Role</th>
-                                    <th>Verified</th>
-                                    <th>Joined</th>
-                                </tr>
-                            </thead>
-                            <tbody id="usersTableBody">
-                                <tr><td colspan="7" class="text-center text-slate-500 py-8">Loading users...</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Toast -->
-    <div id="toast" class="toast"><span id="toastMessage"></span></div>
-
-    <!-- Floating Refresh Button -->
-    <button onclick="refreshAll()" id="refreshBtn" class="refresh-btn">
-        <i class="fas fa-sync-alt"></i>
-    </button>
-
     <script>
-        const API_BASE = window.API_BASE || (window.location.hostname === 'localhost' ? 'http://localhost:5000/api' : '/api');
-        let authToken = localStorage.getItem('305business_admin_token');
-        let currentSection = 'dashboard';
-        let allListings = [];
-        let allInquiries = [];
-        let currentInquiryId = null;
-
-        // Check auth on load
-        if (authToken) {
-            showDashboard();
-            refreshAll();
-        }
-
-        async function doLogin() {
-            const btn = document.getElementById('loginBtn');
-            const text = document.getElementById('loginText');
-            const loading = document.getElementById('loginLoading');
-            
-            btn.disabled = true;
-            text.style.display = 'none';
-            loading.style.display = 'inline';
-            
+        // Load dashboard data
+        async function loadDashboard() {
             try {
-                const response = await fetch(`${API_BASE}/auth/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        email: document.getElementById('loginEmail').value,
-                        password: document.getElementById('loginPassword').value
-                    })
-                });
-                
-                const result = await response.json();
-                
-                if (response.ok && result.user.role === 'admin') {
-                    authToken = result.token;
-                    localStorage.setItem('305business_admin_token', authToken);
-                    document.getElementById('adminName').textContent = result.user.name;
-                    document.getElementById('adminEmail').textContent = result.user.email;
-                    showDashboard();
-                    refreshAll();
-                    showToast('Welcome back, ' + result.user.name, 'success');
-                } else {
-                    showToast(result.message || 'Invalid credentials or not an admin', 'error');
-                }
-            } catch (err) {
-                showToast('Network error. Is the backend running?', 'error');
-            } finally {
-                btn.disabled = false;
-                text.style.display = 'inline';
-                loading.style.display = 'none';
+                // Get submissions
+                const submissions = await window.supabase305.request('listing_submissions?order=created_at.desc');
+                renderSubmissions(submissions);
+                document.getElementById('stat-pending').textContent = submissions.filter(s => s.status === 'pending_review').length;
+
+                // Get businesses
+                const businesses = await window.supabase305.getBusinesses({ limit: 100 });
+                renderBusinesses(businesses);
+                document.getElementById('stat-listings').textContent = businesses.filter(b => b.status === 'active').length;
+
+                // Get inquiries
+                const inquiries = await window.supabase305.request('inquiries?order=created_at.desc');
+                renderInquiries(inquiries);
+                document.getElementById('stat-inquiries').textContent = inquiries.filter(i => i.status === 'new').length;
+
+                // Get valuations
+                const valuations = await window.supabase305.request('valuations?order=created_at.desc');
+                renderValuations(valuations);
+                document.getElementById('stat-valuations').textContent = valuations.filter(v => v.status === 'pending').length;
+
+            } catch (error) {
+                console.error('Dashboard load error:', error);
             }
         }
 
-        function doLogout() {
-            localStorage.removeItem('305business_admin_token');
-            authToken = null;
-            location.reload();
-        }
-
-        function showDashboard() {
-            document.getElementById('loginPage').style.display = 'none';
-            document.getElementById('adminDashboard').style.display = 'flex';
-        }
-
-        function showSection(section) {
-            // Hide all sections
-            ['dashboard', 'listings', 'inquiries', 'chat', 'users'].forEach(s => {
-                document.getElementById(`section-${s}`).style.display = 'none';
-                document.getElementById(`nav-${s}`).classList.remove('active');
-            });
-            
-            // Show selected
-            document.getElementById(`section-${section}`).style.display = 'block';
-            document.getElementById(`nav-${section}`).classList.add('active');
-            currentSection = section;
-            
-            // Update header
-            const headers = {
-                dashboard: 'Dashboard',
-                listings: 'Listings Management',
-                inquiries: 'Buyer Inquiries',
-                chat: 'Chat Monitor',
-                users: 'User Management'
-            };
-            document.getElementById('pageHeader').textContent = headers[section];
-            
-            // Refresh data for section
-            if (section === 'listings') refreshListings();
-            if (section === 'inquiries') refreshInquiries();
-            if (section === 'chat') loadChatInquiries();
-            if (section === 'users') refreshUsers();
-        }
-
-        async function apiRequest(endpoint, options = {}) {
-            const url = `${API_BASE}${endpoint}`;
-            const opts = {
-                ...options,
-                headers: {
-                    ...options.headers,
-                    'Authorization': `Bearer ${authToken}`
-                }
-            };
-            
-            const response = await fetch(url, opts);
-            if (response.status === 401) {
-                doLogout();
-                return null;
-            }
-            return response;
-        }
-
-        async function refreshAll() {
-            const btn = document.getElementById('refreshBtn');
-            btn.classList.add('spinning');
-            
-            await Promise.all([
-                refreshStats(),
-                refreshListings(),
-                refreshInquiries(),
-                refreshUsers()
-            ]);
-            
-            document.getElementById('lastUpdated').textContent = 'Last updated: ' + new Date().toLocaleTimeString();
-            btn.classList.remove('spinning');
-        }
-
-        async function refreshStats() {
-            try {
-                const response = await apiRequest('/admin/stats');
-                if (!response) return;
-                const data = await response.json();
-                
-                const s = data.stats;
-                document.getElementById('statTotalListings').textContent = s.total_listings;
-                document.getElementById('statActive').textContent = s.active_listings;
-                document.getElementById('statPending').textContent = s.pending_listings;
-                document.getElementById('statInquiries').textContent = s.total_inquiries;
-                document.getElementById('statNewInquiries').textContent = s.new_inquiries;
-                document.getElementById('statViews').textContent = s.total_views.toLocaleString();
-                
-                // Badges
-                const pendingBadge = document.getElementById('pendingBadge');
-                if (s.pending_listings > 0) {
-                    pendingBadge.textContent = s.pending_listings;
-                    pendingBadge.classList.remove('hidden');
-                }
-                
-                const newBadge = document.getElementById('newInquiryBadge');
-                if (s.new_inquiries > 0) {
-                    newBadge.textContent = s.new_inquiries;
-                    newBadge.classList.remove('hidden');
-                }
-                
-                // Recent listings
-                document.getElementById('recentListingsList').innerHTML = data.recent_listings.map(l => `
-                    <div class="p-4 flex justify-between items-center hover:bg-slate-800/50 transition cursor-pointer" onclick="viewListingDetail(${l.id})">
-                        <div>
-                            <p class="font-semibold text-white text-sm">${l.business_name}</p>
-                            <p class="text-xs text-slate-500">${l.location} • ${l.category}</p>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-sm font-bold text-blue-400">$${l.asking_price?.toLocaleString() || 'N/A'}</p>
-                            <span class="status-badge status-${l.status} text-xs">${l.status}</span>
-                        </div>
-                    </div>
-                `).join('');
-                
-                // Recent inquiries
-                document.getElementById('recentInquiriesList').innerHTML = data.recent_inquiries.map(i => `
-                    <div class="p-4 flex justify-between items-center hover:bg-slate-800/50 transition">
-                        <div>
-                            <p class="font-semibold text-white text-sm">${i.buyer_name}</p>
-                            <p class="text-xs text-slate-500">${i.listing_name} • ${i.request_type}</p>
-                        </div>
-                        <div class="text-right">
-                            <span class="status-badge status-${i.status} text-xs">${i.status}</span>
-                            <p class="text-xs text-slate-500 mt-1">${new Date(i.created_at).toLocaleDateString()}</p>
-                        </div>
-                    </div>
-                `).join('');
-                
-            } catch (err) {
-                console.error('Stats error:', err);
-            }
-        }
-
-        async function refreshListings() {
-            try {
-                const response = await apiRequest('/admin/listings');
-                if (!response) return;
-                allListings = await response.json();
-                renderListingsTable(allListings);
-            } catch (err) {
-                console.error('Listings error:', err);
-            }
-        }
-
-        function renderListingsTable(listings) {
-            const tbody = document.getElementById('listingsTableBody');
-            if (listings.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="10" class="text-center text-slate-500 py-8">No listings found</td></tr>';
+        function renderSubmissions(submissions) {
+            const tbody = document.getElementById('submissions-table');
+            if (submissions.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center text-gray-500 py-8">No submissions yet</td></tr>';
                 return;
             }
-            
-            tbody.innerHTML = listings.map(l => `
+            tbody.innerHTML = submissions.map(s => `
                 <tr>
-                    <td class="font-mono text-xs">${l.id}</td>
-                    <td class="font-semibold text-white">${l.business_name}</td>
-                    <td>${l.category}</td>
-                    <td class="font-bold text-blue-400">$${l.asking_price?.toLocaleString()}</td>
-                    <td>$${l.annual_revenue?.toLocaleString() || 'N/A'}</td>
-                    <td><span class="status-badge status-${l.status}">${l.status}</span></td>
-                    <td>${l.views || 0}</td>
-                    <td>${l.inquiries_count || 0}</td>
-                    <td class="text-xs">${new Date(l.created_at).toLocaleDateString()}</td>
+                    <td class="font-semibold">${s.business_name}</td>
+                    <td>${s.category || '-'}</td>
+                    <td>$${(s.asking_price || 0).toLocaleString()}</td>
+                    <td>${s.seller_name}<br><span class="text-gray-500 text-xs">${s.seller_email}</span></td>
+                    <td>${new Date(s.created_at).toLocaleDateString()}</td>
+                    <td><span class="status-badge status-${s.status === 'pending_review' ? 'pending' : s.status}">${s.status}</span></td>
                     <td>
-                        <div class="flex gap-2">
-                            ${l.status === 'pending' ? `
-                                <button onclick="approveListing(${l.id})" class="btn-sm btn-green"><i class="fas fa-check mr-1"></i>Approve</button>
-                                <button onclick="rejectListing(${l.id})" class="btn-sm btn-red"><i class="fas fa-times mr-1"></i>Reject</button>
-                            ` : ''}
-                            <a href="business-detail.html?id=${l.id}" target="_blank" class="btn-sm btn-blue"><i class="fas fa-eye"></i></a>
-                        </div>
+                        <button class="btn-action btn-view" onclick="viewSubmission('${s.id}')">View</button>
+                        ${s.status === 'pending_review' ? `
+                            <button class="btn-action btn-approve" onclick="approveSubmission('${s.id}')">Approve</button>
+                            <button class="btn-action btn-reject" onclick="rejectSubmission('${s.id}')">Reject</button>
+                        ` : ''}
                     </td>
                 </tr>
             `).join('');
         }
 
-        function filterListings(status) {
-            document.querySelectorAll('#section-listings .tab-btn').forEach(t => t.classList.remove('active'));
-            document.getElementById(`tab-${status}`).classList.add('active');
-            
-            if (status === 'all') {
-                renderListingsTable(allListings);
-            } else {
-                renderListingsTable(allListings.filter(l => l.status === status));
-            }
-        }
-
-        async function approveListing(id) {
-            if (!confirm('Approve this listing? It will go live immediately.')) return;
-            try {
-                const response = await apiRequest(`/admin/listings/${id}/approve`, { method: 'POST' });
-                if (response?.ok) {
-                    showToast('Listing approved and is now live!', 'success');
-                    refreshAll();
-                }
-            } catch (err) {
-                showToast('Error approving listing', 'error');
-            }
-        }
-
-        async function rejectListing(id) {
-            const reason = prompt('Reason for rejection (optional):');
-            if (reason === null) return;
-            try {
-                const response = await apiRequest(`/admin/listings/${id}/reject`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ reason })
-                });
-                if (response?.ok) {
-                    showToast('Listing rejected', 'success');
-                    refreshAll();
-                }
-            } catch (err) {
-                showToast('Error rejecting listing', 'error');
-            }
-        }
-
-        async function refreshInquiries() {
-            try {
-                const response = await apiRequest('/admin/inquiries');
-                if (!response) return;
-                allInquiries = await response.json();
-                renderInquiriesTable(allInquiries);
-            } catch (err) {
-                console.error('Inquiries error:', err);
-            }
-        }
-
-        function renderInquiriesTable(inquiries) {
-            const tbody = document.getElementById('inquiriesTableBody');
+        function renderInquiries(inquiries) {
+            const tbody = document.getElementById('inquiries-table');
             if (inquiries.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="10" class="text-center text-slate-500 py-8">No inquiries found</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center text-gray-500 py-8">No inquiries yet</td></tr>';
                 return;
             }
-            
             tbody.innerHTML = inquiries.map(i => `
                 <tr>
-                    <td class="font-mono text-xs">${i.id}</td>
-                    <td class="font-semibold text-white">${i.listing_name}</td>
-                    <td>${i.buyer_name}</td>
-                    <td class="text-xs">${i.buyer_email}</td>
-                    <td class="text-xs">${i.buyer_phone || '-'}</td>
-                    <td><span class="status-badge status-${i.request_type}">${i.request_type}</span></td>
-                    <td class="max-w-xs truncate" title="${i.message}">${i.message?.substring(0, 50) || '-'}${i.message?.length > 50 ? '...' : ''}</td>
-                    <td><span class="status-badge status-${i.status}">${i.status}</span></td>
-                    <td class="text-xs">${new Date(i.created_at).toLocaleDateString()}</td>
+                    <td>${i.buyer_name}<br><span class="text-gray-500 text-xs">${i.buyer_email}</span></td>
+                    <td>${i.business_id ? 'Business ID: ' + i.business_id.substring(0, 8) : '-'}</td>
+                    <td>${i.subject || '-'}</td>
+                    <td>${new Date(i.created_at).toLocaleDateString()}</td>
+                    <td><span class="status-badge status-${i.status === 'new' ? 'pending' : 'active'}">${i.status}</span></td>
                     <td>
-                        <div class="flex gap-2">
-                            <button onclick="markInquiryContacted(${i.id})" class="btn-sm btn-green" title="Mark Contacted"><i class="fas fa-check"></i></button>
-                            <button onclick="viewChat(${i.id}, '${i.buyer_name}', '${i.listing_name}')" class="btn-sm btn-blue" title="View Chat"><i class="fas fa-comments"></i></button>
-                        </div>
+                        <button class="btn-action btn-view">Reply</button>
                     </td>
                 </tr>
             `).join('');
         }
 
-        function filterInquiries(status) {
-            document.querySelectorAll('#section-inquiries .tab-btn').forEach(t => t.classList.remove('active'));
-            document.getElementById(`tab-inq-${status}`).classList.add('active');
-            
-            if (status === 'all') {
-                renderInquiriesTable(allInquiries);
-            } else {
-                renderInquiriesTable(allInquiries.filter(i => i.status === status));
-            }
-        }
-
-        async function markInquiryContacted(id) {
-            try {
-                const response = await apiRequest(`/inquiries/${id}/status`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ status: 'contacted' })
-                });
-                if (response?.ok) {
-                    showToast('Marked as contacted', 'success');
-                    refreshInquiries();
-                }
-            } catch (err) {
-                showToast('Error updating inquiry', 'error');
-            }
-        }
-
-        async function loadChatInquiries() {
-            // Use inquiries that have messages or are new
-            renderChatInquiryList(allInquiries);
-        }
-
-        function renderChatInquiryList(inquiries) {
-            const container = document.getElementById('chatInquiriesList');
-            if (inquiries.length === 0) {
-                container.innerHTML = '<p class="p-6 text-slate-500 text-center">No inquiries yet</p>';
+        function renderValuations(valuations) {
+            const tbody = document.getElementById('valuations-table');
+            if (valuations.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center text-gray-500 py-8">No valuation requests yet</td></tr>';
                 return;
             }
-            
-            container.innerHTML = inquiries.map(i => `
-                <div onclick="viewChat(${i.id}, '${i.buyer_name}', '${i.listing_name}')" 
-                     class="p-4 cursor-pointer hover:bg-slate-800/50 transition ${currentInquiryId === i.id ? 'bg-slate-800/50 border-l-2 border-blue-400' : ''}">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="font-semibold text-white text-sm">${i.buyer_name}</p>
-                            <p class="text-xs text-slate-500">${i.listing_name}</p>
-                        </div>
-                        <span class="status-badge status-${i.status} text-xs">${i.status}</span>
-                    </div>
-                    <p class="text-xs text-slate-400 mt-1 truncate">${i.message?.substring(0, 60) || 'No message'}</p>
-                </div>
-            `).join('');
-        }
-
-        async function viewChat(inquiryId, buyerName, listingName) {
-            currentInquiryId = inquiryId;
-            document.getElementById('chatThreadTitle').textContent = `${buyerName} — ${listingName}`;
-            
-            // Highlight selected
-            renderChatInquiryList(allInquiries);
-            
-            try {
-                const response = await apiRequest(`/messages/${inquiryId}`);
-                if (!response) return;
-                const messages = await response.json();
-                
-                const body = document.getElementById('chatThreadBody');
-                if (messages.length === 0) {
-                    body.innerHTML = '<p class="text-slate-500 text-center py-8">No messages yet</p>';
-                    return;
-                }
-                
-                body.innerHTML = messages.map(m => `
-                    <div class="chat-msg ${m.sender_role}">
-                        <div class="chat-msg-header">
-                            <span>${m.sender_name} <span class="text-xs opacity-50">(${m.sender_role})</span></span>
-                            <span>${new Date(m.created_at).toLocaleString()}</span>
-                        </div>
-                        <div class="chat-msg-body">${m.content}</div>
-                    </div>
-                `).join('');
-                
-                body.scrollTop = body.scrollHeight;
-            } catch (err) {
-                console.error('Chat load error:', err);
-            }
-        }
-
-        async function refreshUsers() {
-            try {
-                const response = await apiRequest('/admin/users');
-                if (!response) return;
-                // Note: /admin/users endpoint may not exist, fallback to showing from inquiries
-                const users = await response.json();
-                renderUsersTable(users);
-            } catch (err) {
-                // Fallback: extract unique users from inquiries
-                const uniqueUsers = [];
-                const seen = new Set();
-                allInquiries.forEach(i => {
-                    if (!seen.has(i.buyer_email)) {
-                        seen.add(i.buyer_email);
-                        uniqueUsers.push({
-                            name: i.buyer_name,
-                            email: i.buyer_email,
-                            phone: i.buyer_phone,
-                            role: 'buyer',
-                            created_at: i.created_at
-                        });
-                    }
-                });
-                renderUsersTable(uniqueUsers);
-            }
-        }
-
-        function renderUsersTable(users) {
-            const tbody = document.getElementById('usersTableBody');
-            if (users.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" class="text-center text-slate-500 py-8">No users found</td></tr>';
-                return;
-            }
-            
-            tbody.innerHTML = users.map((u, idx) => `
+            tbody.innerHTML = valuations.map(v => `
                 <tr>
-                    <td class="font-mono text-xs">${idx + 1}</td>
-                    <td class="font-semibold text-white">${u.name}</td>
-                    <td>${u.email}</td>
-                    <td>${u.phone || '-'}</td>
-                    <td><span class="status-badge status-${u.role === 'admin' ? 'active' : 'pending'}">${u.role}</span></td>
-                    <td>${u.is_verified ? '<i class="fas fa-check text-green-400"></i>' : '<i class="fas fa-times text-slate-500"></i>'}</td>
-                    <td class="text-xs">${u.created_at ? new Date(u.created_at).toLocaleDateString() : '-'}</td>
+                    <td class="font-semibold">${v.business_name}</td>
+                    <td>${v.category || '-'}</td>
+                    <td>${v.contact_name}<br><span class="text-gray-500 text-xs">${v.contact_email}</span></td>
+                    <td>$${(v.annual_revenue || 0).toLocaleString()}</td>
+                    <td>${new Date(v.created_at).toLocaleDateString()}</td>
+                    <td><span class="status-badge status-${v.status === 'pending' ? 'pending' : 'active'}">${v.status}</span></td>
+                    <td>
+                        <button class="btn-action btn-view">Process</button>
+                    </td>
                 </tr>
             `).join('');
         }
 
-        function viewListingDetail(id) {
-            window.open(`business-detail.html?id=${id}`, '_blank');
-        }
-
-        function showToast(message, type) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMessage').textContent = message;
-            toast.className = `toast ${type} show`;
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-
-        // Auto-refresh every 60 seconds
-        setInterval(() => {
-            if (authToken && currentSection === 'dashboard') {
-                refreshStats();
+        function renderBusinesses(businesses) {
+            const tbody = document.getElementById('businesses-table');
+            if (businesses.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center text-gray-500 py-8">No businesses yet</td></tr>';
+                return;
             }
-        }, 60000);
+            tbody.innerHTML = businesses.map(b => `
+                <tr>
+                    <td class="font-semibold">${b.name}</td>
+                    <td>${b.category || '-'}</td>
+                    <td>$${(b.asking_price || 0).toLocaleString()}</td>
+                    <td>${b.city || 'Miami'}, ${b.state || 'FL'}</td>
+                    <td>${b.view_count || 0}</td>
+                    <td>${b.inquiry_count || 0}</td>
+                    <td><span class="status-badge status-${b.status === 'active' ? 'active' : 'pending'}">${b.status}</span></td>
+                    <td>
+                        <button class="btn-action btn-view">Edit</button>
+                        <button class="btn-action btn-reject">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        async function approveSubmission(id) {
+            if (!confirm('Approve this listing? It will go live immediately.')) return;
+            try {
+                await window.supabase305.request(`listing_submissions?id=eq.${id}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({ status: 'approved', reviewed_at: new Date().toISOString() })
+                });
+                loadDashboard();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        async function rejectSubmission(id) {
+            if (!confirm('Reject this listing?')) return;
+            try {
+                await window.supabase305.request(`listing_submissions?id=eq.${id}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({ status: 'rejected', reviewed_at: new Date().toISOString() })
+                });
+                loadDashboard();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        function viewSubmission(id) {
+            alert('View submission: ' + id);
+        }
+
+        // Load on page load
+        document.addEventListener('DOMContentLoaded', loadDashboard);
     </script>
 </body>
 </html>
