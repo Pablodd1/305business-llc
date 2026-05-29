@@ -677,7 +677,15 @@
                 
                 // Submit to Supabase
                 const result = await window.supabase305.submitListing(listingData);
-                
+
+                // Send email notification
+                window.supabase305.sendNotification('new_listing', {
+                    business_name: listingData.business_name,
+                    seller_name: listingData.seller_name,
+                    seller_email: listingData.seller_email,
+                    category: listingData.category
+                }).catch(() => {}); // Fail silently
+
                 // Show success modal with reference
                 document.getElementById('referenceNumber').textContent = 'LIST-' + result[0].id.substring(0, 8).toUpperCase();
                 document.getElementById('successModal').classList.add('active');

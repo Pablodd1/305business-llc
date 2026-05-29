@@ -292,6 +292,14 @@
                             notes: `Tier: ${document.getElementById('valTier').value}\n\n${document.getElementById('valNotes').value || 'No additional notes'}`
                         });
 
+                        // Send email notification
+                        window.supabase305.sendNotification('new_valuation', {
+                            business_name: document.getElementById('valBusinessName').value,
+                            contact_name: document.getElementById('valContactName').value,
+                            contact_email: document.getElementById('valContactEmail').value,
+                            tier_requested: document.getElementById('valTier').value
+                        }).catch(() => {}); // Fail silently
+
                         document.getElementById('valRef').textContent = result[0].id.substring(0, 8).toUpperCase();
                         success.classList.remove('hidden');
                         document.getElementById('valuationForm').reset();

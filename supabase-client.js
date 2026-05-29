@@ -4,6 +4,10 @@
 const SUPABASE_URL = 'https://uakiregrnzcwuwqjkaxr.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_BhHyFZplUB8DE6-E2jBxvA_MUrqfQq0';
 
+// Email notification server endpoint
+// Default: localhost for testing. Override with window.EMAIL_SERVER_URL
+const EMAIL_SERVER_URL = window.EMAIL_SERVER_URL || (window.location.hostname === 'localhost' ? 'http://localhost:8081' : '');
+
 class SupabaseClient {
     constructor() {
         this.baseUrl = SUPABASE_URL;
@@ -30,6 +34,26 @@ class SupabaseClient {
         }
 
         return response.json();
+    }
+
+    // ── Email Notifications ──
+    async sendNotification(eventType, data) {
+        if (!EMAIL_SERVER_URL) {
+            console.warn('Email server URL not configured. Skipping notification.');
+            return { skipped: true };
+        }
+        try {
+            const response = await fetch(`${EMAIL_SERVER_URL}/api/notify`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ event_type: eventType, ...data })
+            });
+            if (!response.ok) throw new Error('Notification failed');
+            return await response.json();
+        } catch (err) {
+            console.warn('Email notification failed:', err.message);
+            return { error: err.message };
+        }
     }
 
     // ── Businesses ──

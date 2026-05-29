@@ -505,6 +505,15 @@
                     status: 'new'
                 });
 
+                // Send email notification
+                window.supabase305.sendNotification('new_inquiry', {
+                    business_name: currentListing?.name || 'Your listing',
+                    buyer_name: document.getElementById('inquiryName').value,
+                    buyer_email: document.getElementById('inquiryEmail').value,
+                    message: document.getElementById('inquiryMessage').value,
+                    seller_email: currentListing?.seller_email || currentListing?.contact_email || null
+                }).catch(() => {}); // Fail silently
+
                 const inquiry = result[0] || result;
                 currentInquiryId = inquiry.id;
                 document.getElementById('inquiryReference').textContent = inquiry.id.substring(0, 8).toUpperCase();
