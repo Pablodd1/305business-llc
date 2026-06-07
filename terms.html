@@ -17,6 +17,36 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Schema.org: WebPage + Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://305business.llc/#organization",
+          "name": "305business.llc",
+          "url": "https://305business.llc",
+          "logo": "https://305business.llc/305business-logo-transparent.png",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "info@305business.llc",
+            "contactType": "customer service",
+            "availableLanguage": ["English", "Spanish", "Russian", "Haitian Creole"]
+          }
+        },
+        {
+          "@type": "WebPage",
+          "name": "Terms of Service",
+          "description": "Terms of Service for 305business.llc — Miami Business Marketplace.",
+          "url": "https://305business.llc/terms.html",
+          "isPartOf": { "@id": "https://305business.llc/#organization" },
+          "inLanguage": "en"
+        }
+      ]
+    }
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #1a4a7a; color: #e0e0e0; min-height: 100vh; }

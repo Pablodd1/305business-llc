@@ -45,17 +45,21 @@
     <meta name="ai:contact" content="info@305business.llc" />
     <meta name="ai:bot" content="friendly" />
 
-    <!-- Structured Data -->
+    <!-- Schema.org: Enhanced LocalBusiness, Organization, WebSite, Service -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "Organization",
+          "@id": "https://305business.llc/#organization",
           "name": "305business.llc",
           "description": "Miami's premier business marketplace connecting buyers and sellers of businesses across South Florida.",
           "url": "https://305business.llc",
           "logo": "https://305business.llc/305business-logo-transparent.png",
+          "sameAs": [
+            "https://305business.llc"
+          ],
           "contactPoint": {
             "@type": "ContactPoint",
             "email": "info@305business.llc",
@@ -65,13 +69,67 @@
         },
         {
           "@type": "WebSite",
+          "@id": "https://305business.llc/#website",
           "name": "305business.llc",
           "url": "https://305business.llc",
+          "publisher": { "@id": "https://305business.llc/#organization" },
           "potentialAction": {
             "@type": "SearchAction",
             "target": "https://305business.llc?q={search_term_string}",
             "query-input": "required name=search_term_string"
           }
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://305business.llc/#localbusiness",
+          "name": "305business.llc",
+          "description": "Miami's premier business marketplace for buying and selling restaurants, retail, healthcare practices, tech startups, and more across South Florida.",
+          "url": "https://305business.llc",
+          "logo": "https://305business.llc/305business-logo-transparent.png",
+          "image": "https://305business.llc/305business-logo.png",
+          "telephone": "+1-305-000-0000",
+          "email": "info@305business.llc",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Miami",
+            "addressRegion": "FL",
+            "addressCountry": "US"
+          },
+          "areaServed": [
+            { "@type": "City", "name": "Miami" },
+            { "@type": "AdministrativeArea", "name": "Miami-Dade County" },
+            { "@type": "AdministrativeArea", "name": "Broward County" },
+            { "@type": "AdministrativeArea", "name": "Palm Beach County" },
+            { "@type": "Place", "name": "South Florida" }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Business Services",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Business Listing & Broker Matching" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Business Valuation" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Legal Support & NDA Templates" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Financial Forecasting" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Investor Pitch Decks" } }
+            ]
+          },
+          "priceRange": "$$$",
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://305business.llc/#marketplace",
+          "name": "Miami Business Marketplace",
+          "description": "Buy or sell businesses in Miami. Verified listings, broker matching, valuations, and legal support.",
+          "provider": { "@id": "https://305business.llc/#organization" },
+          "areaServed": { "@id": "https://305business.llc/#localbusiness" },
+          "serviceType": "Business Brokerage Platform",
+          "category": "Business Marketplace"
         }
       ]
     }
@@ -99,23 +157,6 @@
     <link rel="canonical" href="https://305business.llc">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 
-    <!-- Schema.org -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "305business.llc",
-      "url": "https://305business.llc",
-      "logo": "https://305business.llc/305business-logo.png",
-      "description": "Miami's premier business marketplace for buying and selling restaurants, retail, healthcare practices, tech startups, and more across South Florida.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Miami",
-        "addressRegion": "FL",
-        "addressCountry": "US"
-      }
-    }
-    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -500,6 +541,14 @@
             select.tech-input { font-size: 14px !important; }
             .ticker-bar { display: none !important; }
         }
+        @keyframes heatPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        /* Heat Level Colors for Trending Cards */
+        .heat-hot { border-color: #EF4444 !important; background: rgba(239,68,68,0.08) !important; }
+        .heat-warm { border-color: #F97316 !important; background: rgba(249,115,22,0.08) !important; }
+        .heat-trending { border-color: #EAB308 !important; background: rgba(234,179,8,0.08) !important; }
     </style>
 
 <!-- AISO + Schema.org Injection (auto-added 2026-05-25) -->
@@ -667,6 +716,16 @@
 </script>
 <!-- END AISO + Schema.org Injection -->
 
+<!-- Microsoft Clarity - Heatmaps, Session Recordings, AI Insights -->
+<!-- IMPORTANT: Replace CLARITY_305B with your actual Clarity Project ID from https://clarity.microsoft.com -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "CLARITY_305B");
+</script>
+<!-- End Microsoft Clarity -->
 </head>
 <body class="blueprint-bg">
 
@@ -1021,6 +1080,44 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- TRENDING HEATMAP — Real-time buyer interest visualization -->
+    <section id="trending" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
+                <div>
+                    <span class="tech-label block mb-2">SHEET: H-1</span>
+                    <h2 class="text-3xl font-bold text-white">🔥 TRENDING NOW</h2>
+                    <p class="text-white/40" id="trendingCount">Loading heatmap data...</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="tech-label">HEAT KEY:</span>
+                    <span class="flex items-center gap-2 text-xs text-white/60"><span class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></span> HOT</span>
+                    <span class="flex items-center gap-2 text-xs text-white/60"><span class="w-3 h-3 rounded-full bg-orange-500"></span> WARM</span>
+                    <span class="flex items-center gap-2 text-xs text-white/60"><span class="w-3 h-3 rounded-full bg-yellow-500"></span> TRENDING</span>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="trendingLoading" class="text-center py-12">
+                <div class="inline-block w-12 h-12 border-4 border-white/20 border-t-red-500 rounded-full animate-spin"></div>
+                <p class="text-white/60 mt-4">Analyzing buyer interest signals...</p>
+            </div>
+
+            <!-- Trending Grid -->
+            <div id="trendingGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" style="display:none;">
+                <!-- Trending cards rendered by JS from API -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="trendingEmpty" class="text-center py-12" style="display:none;">
+                <i class="fas fa-fire text-4xl text-white/20 mb-4"></i>
+                <p class="text-white/60">Heatmap data updating. Check back soon.</p>
             </div>
         </div>
     </section>
@@ -1546,7 +1643,7 @@
                 const inquiries = listing.inquiries_count || 0;
 
                 return `
-                <div class="tech-card overflow-hidden group cursor-pointer" onclick="viewListing(${listing.id})">
+                <div class="tech-card overflow-hidden group cursor-pointer" onclick="trackListingClick(${listing.id}, 'featured')">
                     <div class="relative h-48 overflow-hidden bg-gradient-to-br from-blue-900 to-blue-800 flex items-center justify-center">
                         <i class="fas ${icon} text-6xl text-white/20"></i>
                         <div class="absolute top-4 right-4">
@@ -1579,7 +1676,7 @@
                                 <p class="text-white font-semibold">${inquiries}</p>
                             </div>
                         </div>
-                        <button onclick="window.location.href='business-detail.html?id=${listing.id}'" class="schematic-btn w-full mt-4 py-2">
+                        <button onclick="event.stopPropagation(); trackListingClick(${listing.id}, 'featured_button');" class="schematic-btn w-full mt-4 py-2">
                             <span class="relative z-10">VIEW DETAILS →</span>
                         </button>
                     </div>
@@ -1636,7 +1733,8 @@
         }
 
         function viewListing(id) {
-            window.location.href = `business-detail.html?id=${id}`;
+            // Track the click before navigating
+            trackListingClick(id, 'featured');
         }
 
         // ====== AI MATCHING ======
@@ -1758,6 +1856,165 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // ====== TRENDING HEATMAP — Real-time buyer interest visualization ======
+        let trendingListings = [];
+
+        const HEAT_COLORS = {
+            hot: { border: '#EF4444', bg: 'rgba(239,68,68,0.08)', label: '🔥 HOT', pulse: true },
+            warm: { border: '#F97316', bg: 'rgba(249,115,22,0.08)', label: '🔥 WARM', pulse: false },
+            trending: { border: '#EAB308', bg: 'rgba(234,179,8,0.08)', label: '⚡ TRENDING', pulse: false },
+            normal: { border: 'rgba(255,255,255,0.25)', bg: 'rgba(255,255,255,0.03)', label: '', pulse: false }
+        };
+
+        async function loadTrending() {
+            const loadingEl = document.getElementById('trendingLoading');
+            const gridEl = document.getElementById('trendingGrid');
+            const emptyEl = document.getElementById('trendingEmpty');
+            const countEl = document.getElementById('trendingCount');
+
+            loadingEl.style.display = 'block';
+            gridEl.style.display = 'none';
+            emptyEl.style.display = 'none';
+
+            try {
+                // Try API first, fallback to local data if API is down
+                const response = await fetch('/api/trending?limit=6');
+                if (response.ok) {
+                    const data = await response.json();
+                    trendingListings = data.trending || [];
+                } else {
+                    // Fallback: use existing listings sorted by view_count
+                    trendingListings = [...allListings]
+                        .sort((a, b) => (b.views || b.view_count || 0) - (a.views || a.view_count || 0))
+                        .slice(0, 6)
+                        .map(l => ({
+                            ...l,
+                            heat_score: (l.views || l.view_count || 0) + ((l.inquiries || l.inquiry_count || 0) * 3),
+                            heat_level: ((l.views || l.view_count || 0) + ((l.inquiries || l.inquiry_count || 0) * 3)) >= 20 ? 'warm' : 'trending'
+                        }));
+                }
+
+                loadingEl.style.display = 'none';
+                countEl.textContent = `${trendingListings.length} businesses getting the most buyer attention right now`;
+
+                if (trendingListings.length === 0) {
+                    emptyEl.style.display = 'block';
+                } else {
+                    gridEl.style.display = 'grid';
+                    renderTrending(trendingListings);
+                }
+            } catch (err) {
+                console.error('Trending load error:', err);
+                loadingEl.style.display = 'none';
+                // Fallback: show some from allListings
+                if (allListings.length > 0) {
+                    trendingListings = [...allListings]
+                        .sort((a, b) => (b.views || b.view_count || 0) - (a.views || a.view_count || 0))
+                        .slice(0, 6)
+                        .map(l => ({
+                            ...l,
+                            heat_score: (l.views || l.view_count || 0) + ((l.inquiries || l.inquiry_count || 0) * 3),
+                            heat_level: 'warm'
+                        }));
+                    countEl.textContent = `${trendingListings.length} businesses getting the most buyer attention right now`;
+                    gridEl.style.display = 'grid';
+                    renderTrending(trendingListings);
+                } else {
+                    emptyEl.style.display = 'block';
+                }
+            }
+        }
+
+        function renderTrending(items) {
+            const grid = document.getElementById('trendingGrid');
+            const categoryIcons = {
+                restaurant: 'fa-utensils', retail: 'fa-store', tech: 'fa-laptop-code',
+                healthcare: 'fa-hospital', hospitality: 'fa-hotel', service: 'fa-briefcase',
+                manufacturing: 'fa-industry', construction: 'fa-hard-hat', automotive: 'fa-car',
+                education: 'fa-graduation-cap', fitness: 'fa-dumbbell', real_estate: 'fa-building',
+                other: 'fa-briefcase'
+            };
+
+            grid.innerHTML = items.map((listing, i) => {
+                const heat = HEAT_COLORS[listing.heat_level || 'normal'] || HEAT_COLORS.normal;
+                const price = listing.asking_price || listing.price || 0;
+                const revenue = listing.annual_revenue || listing.revenue || 0;
+                const icon = categoryIcons[listing.category] || 'fa-briefcase';
+                const views = listing.views || listing.view_count || 0;
+                const inquiries = listing.inquiries || listing.inquiry_count || 0;
+                const heatScore = listing.heat_score || 0;
+                const rank = i + 1;
+
+                return `
+                <div class="tech-card overflow-hidden group cursor-pointer relative"
+                     style="border-color: ${heat.border}; background: ${heat.bg}"
+                     onclick="trackListingClick('${listing.id || listing.slug || i}', 'trending')">
+                    <!-- Heat indicator stripe -->
+                    <div class="absolute top-0 left-0 right-0 h-1" style="background: ${heat.border}; ${heat.pulse ? 'animation: heatPulse 2s ease-in-out infinite' : ''}"></div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 border border-white/20 flex items-center justify-center rounded-lg" style="border-color: ${heat.border}">
+                                    <i class="fas ${icon} text-xl" style="color: ${heat.border}"></i>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-xs font-mono text-white/40">#${rank}</span>
+                                        <h4 class="font-bold text-white text-sm">${listing.business_name || listing.name || 'Business'}</h4>
+                                    </div>
+                                    <p class="text-white/40 text-xs">${(listing.category || 'Business').toUpperCase()} • ${(listing.location || 'Miami').toUpperCase()}</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                ${heat.label ? `<span class="px-2 py-1 text-xs font-bold rounded" style="background: ${heat.border}; color: white; ${heat.pulse ? 'animation: heatPulse 2s ease-in-out infinite' : ''}">${heat.label}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-end mt-3">
+                            <div>
+                                <p class="text-2xl font-bold text-white">$${price.toLocaleString()}</p>
+                                <p class="text-white/30 text-xs">${revenue ? `Revenue: $${revenue.toLocaleString()}/yr` : ''}</p>
+                            </div>
+                            <div class="text-right text-xs text-white/40">
+                                <p><i class="fas fa-eye mr-1"></i>${views} views</p>
+                                <p><i class="fas fa-envelope mr-1"></i>${inquiries} inquiries</p>
+                                ${heatScore > 0 ? `<p class="font-mono text-${listing.heat_level === 'hot' ? 'red' : listing.heat_level === 'warm' ? 'orange' : 'yellow'}-400">Score: ${heatScore}</p>` : ''}
+                            </div>
+                        </div>
+                        <div class="mt-3 pt-3 border-t border-white/10">
+                            <p class="text-white/50 text-xs italic">"${getTrendingReason(heatScore, views, inquiries)}"</p>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function getTrendingReason(score, views, inquiries) {
+            if (score >= 50) return 'Getting serious buyer attention — multiple inquiries this week';
+            if (score >= 20) return 'Rising interest — buyers are actively viewing this listing';
+            if (score >= 5) return 'Steady views — add to your watchlist before it sells';
+            return 'New listing — be the first to inquire';
+        }
+
+        async function trackListingClick(listingId, source) {
+            // Track the click locally
+            const listing = allListings.find(l => l.id === listingId || l.slug === listingId);
+            if (listing) {
+                listing.views = (listing.views || 0) + 1;
+            }
+            // Try to send to backend
+            try {
+                await fetch('/api/track-click', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ listing_id: listingId, type: 'click', source: source })
+                });
+            } catch (e) { /* silent fail */ }
+
+            // Navigate to business detail
+            window.location.href = `business-detail.html?id=${listingId}`;
+        }
+
         // ====== HERO DYNAMIC ELEMENTS ======
         function initHeroGraph() {
             const container = document.getElementById('heroGraph');
@@ -1849,6 +2106,7 @@
         // Initialize hero elements
         document.addEventListener('DOMContentLoaded', () => {
             loadListings();
+            loadTrending(); // Load trending heatmap
             initHeroGraph();
             updateActivityFeed();
             animateStats();
@@ -1862,6 +2120,9 @@
                 const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
                 document.getElementById('lastUpdate').textContent = `UPDATED: ${time}`;
             }, 1000);
+
+            // Refresh trending heatmap every 60 seconds
+            setInterval(loadTrending, 60000);
         });
     </script>
     <!-- Agentic Website Engine -->
@@ -1897,27 +2158,61 @@
         LanguageToggle.init({ toggleContainerId: 'lang-toggle', basePath: 'shared/translations/' });
       });
     </script>
-    <!-- AI Chatbot Widget -->
+    <!-- ===== AGENTIC WEBSITE ENGINE v3.0 + AI CHATBOT v3.0 ===== -->
+    <script src="agentic-website-engine-v3.js"></script>
+    <script src="agentic-chatbot-v3.js"></script>
     <script>
-      window.BIZ305_CONFIG = {
-        apiKey: '',
-        apiEndpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent',
-        model: 'gemini-1.5-flash',
+      // Initialize Agentic Engine for 305business
+      window._agenticInstance = new AgenticWebsite({
+        siteId: '305business',
+        apiEndpoint: '/api/agentic',
+        abTesting: {
+          enabled: true,
+          variants: {
+            headline: [
+              'Miami\'s #1 Business Marketplace',
+              'Buy \u0026 Sell Miami Businesses',
+              'Your Miami Business Connection'
+            ],
+            cta: [
+              'Browse Listings',
+              'Find Your Business',
+              'Get Started'
+            ]
+          }
+        }
+      });
+
+      // Initialize AI Chatbot for 305business
+      window.AGENTIC_CHATBOT_CONFIG = {
         siteName: '305business',
         primaryColor: '#FF6B35',
         secondaryColor: '#1E90FF',
         position: 'bottom-right',
+        languages: ['en', 'es', 'ru', 'ht'],
+        defaultLanguage: 'en',
         welcomeMessage: {
-          en: "Hi! I'm 305business AI Assistant. I can help you buy or sell a Miami business, connect with brokers, or answer questions about our marketplace. How can I help?",
-          es: "¡Hola! Soy el Asistente AI de 305business. Puedo ayudarte a comprar o vender un negocio en Miami, conectar con corredores, o responder preguntas sobre nuestro marketplace. ¿Cómo puedo ayudarte?",
-          ru: "Здравствуйте! Я ИИ-помощник 305business. Я могу помочь вам купить или продать бизнес в Майами, связаться с брокерами или ответить на вопросы о нашей торговой площадке. Чем могу помочь?",
-          ht: "Bonjou! Mwen se Asistan AI 305business. Mwen ka ede w achte oswa vann yon biznis nan Miami, konekte ak kourtye, oswa reponn kesyon sou marketplace nou an. Kijan mwen ka ede w?"
+          en: "🏢 Welcome to 305business! I'm your Smart Front Desk AI.\n\nI can help you:\n• Find and buy a Miami business\n• List your business for sale\n• Get a valuation or broker match\n• Compare options with dynamic blocks\n• Navigate our marketplace features\n\nWhat brings you here today?",
+          es: "🏢 ¡Bienvenido a 305business! Soy tu AI Recepcionista.\n\n¿Qué te trae por aquí hoy?",
+          ru: "🏢 Добро пожаловать! Я ваш ИИ-ассистент.\n\nЧем могу помочь?",
+          ht: "🏢 Byenveni nan 305business! Mwen se AI ou.\n\nKi sa ki mennen ou isit?"
         },
-        bookingUrl: 'https://305business.llc/list-business',
-        voiceEnabled: true,
-        languages: ['en', 'es', 'ru', 'ht']
+        knowledgeBase: `You are 305business.llc's AI Assistant. You help users buy, sell, and value Miami businesses.\n\nSERVICES:\n• Business Listings - Browse verified businesses for sale\n• Business Valuation - $495 professional valuation\n• Broker Matching - Connect with verified brokers\n• Legal Support - NDA templates, contract guides\n• Free Consultation - 30-min via Google Meet\n\nTRENDING HEATMAP: Shows hottest listings by views + inquiries. Red = HOT, Orange = WARM, Yellow = TRENDING.\n\nHOW IT WORKS: SEARCH → CONNECT → NEGOTIATE → CLOSE (4-step process).\n\nWhen users ask about pricing, generate a pricing block. When they ask about comparison, generate a comparison block. When they want to book, scroll to the contact form.`,
+        pricingTiers: [
+          { name: 'Basic Listing', price: 'Free', features: ['Standard listing', '30-day visibility', 'Basic analytics'], cta: 'List Now' },
+          { name: 'Featured Listing', price: '$199/mo', features: ['Priority placement', '90-day visibility', 'Heatmap highlight', 'Broker alerts'], cta: 'Get Featured', highlighted: true },
+          { name: 'Premium Package', price: '$499', features: ['Everything in Featured', 'Professional valuation', 'Broker matching', 'Legal document templates', 'Priority support'], cta: 'Go Premium' }
+        ],
+        suggestions: [
+          'How do I buy a business?',
+          'Show me pricing',
+          'How much is my business worth?',
+          'Find me a broker',
+          'What\'s trending right now?'
+        ]
       };
+      window._agenticChatbot = new AgenticChatbot(window.AGENTIC_CHATBOT_CONFIG);
     </script>
-    <script src="305business-chatbot-widget.js" defer></script>
+    <!-- Legacy chatbot kept for reference: 305business-chatbot-widget.js -->
 </body>
 </html>

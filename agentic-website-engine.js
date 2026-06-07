@@ -8,6 +8,8 @@ class AgenticWebsite {
     this.trackers = {};
     this.optimizations = [];
     this.config = config; // Store full config
+    this.sendTimeout = null;
+    this.eventQueue = [];
     this.init();
   }
 
@@ -167,7 +169,7 @@ class AgenticWebsite {
     };
 
     this.patterns = patterns;
-    this.applyOptimizations(patterns);
+    // Patterns are analyzed here; optimizations are applied by checkOptimizations()
   }
 
   extractSearchTerms(events) {
@@ -539,16 +541,6 @@ class AgenticWebsite {
       }
     }
   }
-
-  logOptimization(action, reason) {
-    console.log(`[Agentic] ${action}: ${reason}`);
-    this.sendToServer({
-      type: 'optimization_applied',
-      data: { action, reason },
-      timestamp: new Date().toISOString()
-    });
-  }
-}
 }
 
 // Initialize on page load

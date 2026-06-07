@@ -18,6 +18,40 @@
     <script src="agentic-config.js"></script>
     <script>window.EMAIL_SERVER_URL = 'https://305business-llc.vercel.app';</script>
     <script src="supabase-client.js"></script>
+
+    <!-- Schema.org: Product + Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://305business.llc/#organization",
+          "name": "305business.llc",
+          "url": "https://305business.llc",
+          "logo": "https://305business.llc/305business-logo-transparent.png",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "info@305business.llc",
+            "contactType": "customer service",
+            "availableLanguage": ["English", "Spanish", "Russian", "Haitian Creole"]
+          }
+        },
+        {
+          "@type": "Product",
+          "name": "Business for Sale",
+          "description": "Verified business listing available for acquisition in Miami, Florida.",
+          "brand": { "@id": "https://305business.llc/#organization" },
+          "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "priceCurrency": "USD",
+            "seller": { "@id": "https://305business.llc/#organization" }
+          }
+        }
+      ]
+    }
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1a202c; min-height: 100vh; }

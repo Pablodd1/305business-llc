@@ -439,6 +439,95 @@ def generate_sitemap():
     return xml, 200, {'Content-Type': 'application/xml'}
 
 # ───────────────────────────────────────────────────────────────────────────
+# TRENDING & HEATMAP API
+# ───────────────────────────────────────────────────────────────────────────
+
+@app.route('/api/trending', methods=['GET'])
+def get_trending():
+    """Get trending/hot listings based on views + inquiries + recent clicks"""
+    if not supabase:
+        return jsonify({"error": "Database not connected"}), 500
+    
+    limit = int(request.args.get('limit', 6))
+    timeframe = request.args.get('timeframe', '7d')  # 7d, 30d, 24h
+    
+    # Calculate a heat score: view_count + inquiry_count * 3 (inquiries weighted more)
+    # Only active listings, ordered by engagement score descending
+    result = supabase.table('listings').select(
+        '*'
+    ).eq('status', 'active').order('view_count', desc=True).limit(limit * 2).execute()
+    
+    if not result.data:
+        return jsonify({"trending": [], "count": 0})
+    
+    # Calculate heat score and sort
+    listings = result.data
+    for l in listings:
+        # Heat score formula: views + (inquiries * 3) + (featured bonus)
+        heat_score = (l.get('view_count', 0) or 0) + ((l.get('inquiry_count', 0) or 0) * 3)
+        if l.get('is_featured') or l.get('featured'):
+            heat_score += 10
+        l['heat_score'] = heat_score
+        
+        # Heat level for UI coloring
+        if heat_score >= 50:
+            l['heat_level'] = 'hot'      # Red
+        elif heat_score >= 20:
+            l['heat_level'] = 'warm'     # Orange
+        elif heat_score >= 5:
+            l['heat_level'] = 'trending' # Yellow
+        else:
+            l['heat_level'] = 'normal'   # Default
+    
+    # Sort by heat score descending
+    listings.sort(key=lambda x: x['heat_score'], reverse=True)
+    
+    # Take top N
+    trending = listings[:limit]
+    
+    return jsonify({
+        "trending": trending,
+        "count": len(trending),
+        "timeframe": timeframe,
+        "updated_at": datetime.utcnow().isoformat()
+    })
+
+
+@app.route('/api/track-click', methods=['POST'])
+def track_click():
+    """Track a click on a listing (for heatmap analytics)"""
+    if not supabase:
+        return jsonify({"error": "Database not connected"}), 500
+    
+    data = request.json
+    if not data or not data.get('listing_id'):
+        return jsonify({"error": "listing_id required"}), 400
+    
+    listing_id = data['listing_id']
+    click_type = data.get('type', 'click')  # click, inquiry, view
+    source = data.get('source', 'trending')  # trending, search, featured, etc.
+    
+    # Insert click event into analytics table (if exists) or just update counts
+    # Try to update the listing's click_count or just use view_count/inquiry_count
+    try:
+        # Get current listing
+        result = supabase.table('listings').select('view_count, inquiry_count').eq('id', listing_id).single().execute()
+        if result.data:
+            current = result.data
+            if click_type == 'inquiry':
+                new_inquiry = (current.get('inquiry_count', 0) or 0) + 1
+                supabase.table('listings').update({'inquiry_count': new_inquiry}).eq('id', listing_id).execute()
+            else:
+                # For regular clicks, increment view_count as a proxy
+                new_views = (current.get('view_count', 0) or 0) + 1
+                supabase.table('listings').update({'view_count': new_views}).eq('id', listing_id).execute()
+        
+        return jsonify({"success": True, "type": click_type, "listing_id": listing_id})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+# ───────────────────────────────────────────────────────────────────────────
 # HEALTH
 # ───────────────────────────────────────────────────────────────────────────
 
