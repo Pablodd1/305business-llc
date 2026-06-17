@@ -76,6 +76,8 @@
         .btn-success:hover { background: #38a169; }
         .btn-danger { background: #e53e3e; color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 16px; border: none; cursor: pointer; }
         .btn-danger:hover { background: #c53030; }
+        .btn-secondary { background: #edf2f7; color: #4a5568; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 14px; border: none; cursor: pointer; transition: all 0.2s; }
+        .btn-secondary:hover { background: #e2e8f0; }
         .progress-bar { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, #1a4a7a, #2d6a9f); border-radius: 4px; transition: width 0.5s ease; }
         .detail-nav { background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
@@ -103,11 +105,95 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         .error-text { color: #e53e3e; font-size: 0.875rem; margin-top: 4px; }
         .form-input.error { border-color: #e53e3e; box-shadow: 0 0 0 3px rgba(229,62,62,0.1); }
+
+        /* Auth overlays */
+        .auth-loading-overlay { position: fixed; inset: 0; background: #f0f4f8; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 200; }
+        .auth-loading-overlay.hidden { display: none; }
+        .auth-login-overlay { position: fixed; inset: 0; background: #f0f4f8; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 199; }
+        .auth-login-overlay.active { display: flex; }
+        .auth-login-card { background: white; border-radius: 16px; padding: 48px; max-width: 420px; width: 90%; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        .auth-login-icon { width: 80px; height: 80px; background: #1a4a7a; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+        .draft-saved { color: #48bb78; font-size: 0.875rem; font-weight: 500; }
+        .nav-auth-container { display: flex; align-items: center; gap: 12px; }
+        .nav-user-avatar { width: 32px; height: 32px; border-radius: 50%; background: #1a4a7a; color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; }
+        .nav-user-menu { position: relative; }
+        .nav-user-dropdown { position: absolute; right: 0; top: 100%; margin-top: 8px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); min-width: 180px; display: none; z-index: 60; }
+        .nav-user-menu:hover .nav-user-dropdown { display: block; }
+        .nav-user-dropdown a, .nav-user-dropdown button { display: block; width: 100%; text-align: left; padding: 10px 16px; font-size: 14px; color: #4a5568; text-decoration: none; background: none; border: none; cursor: pointer; }
+        .nav-user-dropdown a:hover, .nav-user-dropdown button:hover { background: #f7fafc; color: #1a4a7a; }
+        .nav-user-dropdown .divider { height: 1px; background: #e2e8f0; margin: 4px 0; }
     </style>
     <script>window.EMAIL_SERVER_URL = 'https://305business-llc.vercel.app';</script>
     <script src="supabase-client.js"></script>
+    <script src="js/email-notify.js"></script>
+    <script src="js/auth.js" type="module"></script>
+    <!-- Auth Navigation Script -->
+    <script type="module">
+        import { auth } from './js/auth.js';
+        document.addEventListener('DOMContentLoaded', async () => {
+            await auth.init();
+            // Update nav auth container
+            const navAuth = document.getElementById('navAuthContainer');
+            if (navAuth) {
+                if (auth.isAuthenticated()) {
+                    const email = auth.getEmail() || 'User';
+                    const initial = email.charAt(0).toUpperCase();
+                    navAuth.innerHTML = `
+                        <a href="list-business.html" class="text-sm text-gray-600 hover:text-gray-900 transition hidden md:inline"><i class="fas fa-plus mr-1"></i>List Business</a>
+                        <a href="dashboard.html" class="text-sm text-gray-600 hover:text-gray-900 transition hidden md:inline">My Listings</a>
+                        <div class="nav-user-menu">
+                            <button class="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition">
+                                <div class="nav-user-avatar">${initial}</div>
+                                <span class="hidden md:inline text-sm">${email.split('@')[0]}</span>
+                                <i class="fas fa-chevron-down text-xs text-gray-400"></i>
+                            </button>
+                            <div class="nav-user-dropdown">
+                                <a href="dashboard.html"><i class="fas fa-tachometer-alt mr-2 text-gray-400"></i>Dashboard</a>
+                                <a href="list-business.html"><i class="fas fa-plus mr-2 text-gray-400"></i>List Business</a>
+                                <div class="divider"></div>
+                                <button onclick="window.auth.logout()"><i class="fas fa-sign-out-alt mr-2 text-gray-400"></i>Logout</button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    navAuth.innerHTML = `
+                        <a href="login.html" class="text-sm text-gray-600 hover:text-gray-900 transition">Log In</a>
+                        <a href="signup.html" class="btn-primary text-sm" style="width: auto; padding: 8px 20px;">Get Started</a>
+                    `;
+                }
+            }
+        });
+    </script>
 </head>
-<body class="list-page">
+<body class="list-page" data-auth="required">
+    <!-- Auth Loading Overlay -->
+    <div id="authLoadingOverlay" class="auth-loading-overlay">
+        <div class="inline-block w-12 h-12 border-4 border-gray-200 border-t-blue-900 rounded-full animate-spin"></div>
+        <p class="text-gray-500 mt-4">Checking authentication...</p>
+    </div>
+
+    <!-- Login Required Overlay -->
+    <div id="authLoginOverlay" class="auth-login-overlay">
+        <div class="auth-login-card">
+            <div class="auth-login-icon">
+                <i class="fas fa-lock text-3xl text-white"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Login Required</h2>
+            <p class="text-gray-600 mb-6">You need to be logged in to list your business on 305business.llc. Create a free account or sign in to get started.</p>
+            <div class="space-y-3">
+                <a href="login.html?redirect=list-business.html" class="btn-primary block" style="text-decoration: none;">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Log In
+                </a>
+                <a href="signup.html?redirect=list-business.html" class="btn-outline block" style="text-decoration: none;">
+                    <i class="fas fa-user-plus mr-2"></i>Create Free Account
+                </a>
+                <button onclick="window.location.href='index.html'" class="btn-secondary w-full mt-2">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Listings
+                </button>
+            </div>
+        </div>
+    </div>
+
     <nav class="detail-nav">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -116,23 +202,21 @@
                     <span class="font-bold text-lg text-gray-900 tracking-wider">305business</span>
                     <span class="text-xs text-gray-500 font-mono">.LLC</span>
                 </div>
-                <div class="flex items-center gap-4">
-                    <button onclick="window.location.href='index.html'" class="text-gray-600 hover:text-gray-900 transition">
-                        <i class="fas fa-arrow-left mr-2"></i>Back to Listings
-                    </button>
+                <div class="flex items-center gap-4" id="navAuthContainer">
+                    <!-- Auth nav injected here -->
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="bg-blue-900 text-white py-12">
+    <div class="bg-blue-900 text-white py-12" id="pageHeader">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-4xl font-bold mb-4">List Your Business</h1>
             <p class="text-blue-200 text-lg">Complete the form below to create your business listing. All information helps buyers make informed decisions.</p>
         </div>
     </div>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8" id="stepIndicator">
         <div class="flex justify-center items-center">
             <div class="step-indicator">
                 <div class="step-dot active" id="step1">1</div>
@@ -152,12 +236,12 @@
         </div>
     </div>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12" id="listingFormContainer">
         <form id="listingForm" onsubmit="event.preventDefault();">
-            
+
             <div id="section1" class="form-card p-8 mb-8 blueprint-accent">
                 <div class="section-header">Step 1: Basic Information</div>
-                
+
                 <div class="form-grid">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2 required">Business Name</label>
@@ -165,7 +249,7 @@
                         <p class="help-text">The official name of your business</p>
                         <p class="error-text" id="error-business_name"></p>
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2 required">Business Category</label>
                         <select id="category" class="form-select" required>
@@ -186,27 +270,27 @@
                         </select>
                         <p class="error-text" id="error-category"></p>
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2 required">Year Established</label>
                         <input type="number" id="year_established" class="form-input" placeholder="e.g., 2015" min="1900" max="2026" required>
                         <p class="error-text" id="error-year_established"></p>
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2 required">Location</label>
                         <input type="text" id="location" class="form-input" placeholder="e.g., Miami Beach, FL" required>
                         <p class="error-text" id="error-location"></p>
                     </div>
                 </div>
-                
+
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2 required">Business Description</label>
                     <textarea id="description" class="form-textarea" placeholder="Describe your business, its history, and what makes it unique..." required></textarea>
                     <p class="help-text">This will appear on your listing page. Be specific about what the buyer gets.</p>
                     <p class="error-text" id="error-description"></p>
                 </div>
-                
+
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2 required">Business Photos</label>
                     <div class="photo-upload" onclick="document.getElementById('photoUpload').click()">
@@ -218,24 +302,24 @@
                     <div id="photoPreviewContainer" class="mt-3"></div>
                     <p class="help-text">Upload at least 3 photos: exterior, interior, and key equipment/assets</p>
                 </div>
-                
+
                 <div class="mt-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-2 required">Your Contact Name</label>
-                    <input type="text" id="contact_name" class="form-input" placeholder="e.g., John Smith" required>
+                    <label class="block text-sm font-medium text-gray-700 mb-2 required">Your Name</label>
+                    <input type="text" id="seller_name" class="form-input" placeholder="e.g., John Smith" required>
                 </div>
-                
+
                 <div class="mt-4 form-grid">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2 required">Contact Email</label>
-                        <input type="email" id="contact_email" class="form-input" placeholder="your@email.com" required>
-                        <p class="error-text" id="error-contact_email"></p>
+                        <label class="block text-sm font-medium text-gray-700 mb-2 required">Email</label>
+                        <input type="email" id="seller_email" class="form-input" placeholder="your@email.com" required>
+                        <p class="error-text" id="error-seller_email"></p>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Contact Phone</label>
-                        <input type="tel" id="contact_phone" class="form-input" placeholder="(305) 555-0100">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                        <input type="tel" id="seller_phone" class="form-input" placeholder="(305) 555-0100">
                     </div>
                 </div>
-                
+
                 <div class="mt-6 flex justify-end">
                     <button type="button" onclick="nextStep(2)" class="btn-primary" style="width: auto;">
                         Next: Financials <i class="fas fa-arrow-right ml-2"></i>
@@ -245,7 +329,7 @@
 
             <div id="section2" class="form-card p-8 mb-8 blueprint-accent hidden">
                 <div class="section-header">Step 2: Financial Information</div>
-                
+
                 <div class="form-grid">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2 required">Asking Price ($)</label>
@@ -253,48 +337,48 @@
                         <p class="help-text">What you want to sell the business for</p>
                         <p class="error-text" id="error-asking_price"></p>
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Annual Revenue ($)</label>
                         <input type="number" id="annual_revenue" class="form-input" placeholder="e.g., 420000" min="0">
                         <p class="help-text">Total sales in the last 12 months</p>
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Annual Cash Flow / Net Profit ($)</label>
                         <input type="number" id="annual_cash_flow" class="form-input" placeholder="e.g., 85000" min="0">
                         <p class="help-text">Net income after all expenses</p>
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Inventory Value ($)</label>
                         <input type="number" id="inventory_value" class="form-input" placeholder="e.g., 15000" min="0">
                         <p class="help-text">Value of inventory included in sale</p>
                     </div>
                 </div>
-                
+
                 <div class="mt-6 form-grid">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Monthly Rent ($)</label>
                         <input type="number" id="monthly_rent" class="form-input" placeholder="e.g., 4500" min="0">
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Lease Terms</label>
                         <input type="text" id="lease_terms" class="form-input" placeholder="e.g., 5 years remaining">
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Number of Employees</label>
                         <input type="number" id="num_employees" class="form-input" placeholder="e.g., 8" min="0">
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Square Footage</label>
                         <input type="number" id="square_footage" class="form-input" placeholder="e.g., 1200" min="0">
                     </div>
                 </div>
-                
+
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Revenue History (Last 5 Years)</label>
                     <div class="form-grid">
@@ -305,7 +389,7 @@
                         <input type="number" id="revenue_2025" class="form-input" placeholder="2025 Revenue (Projected)">
                     </div>
                 </div>
-                
+
                 <div class="mt-6 flex justify-between">
                     <button type="button" onclick="prevStep(1)" class="btn-outline">
                         <i class="fas fa-arrow-left mr-2"></i>Back
@@ -318,13 +402,13 @@
 
             <div id="section3" class="form-card p-8 mb-8 blueprint-accent hidden">
                 <div class="section-header">Step 3: Business Details</div>
-                
+
                 <div class="form-grid">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Business Hours</label>
                         <input type="text" id="business_hours" class="form-input" placeholder="e.g., Mon-Sat 7AM-10PM">
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Parking Available</label>
                         <select id="parking" class="form-select">
@@ -337,7 +421,7 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Key Features & Assets</label>
                     <div class="grid md:grid-cols-2 gap-3">
@@ -375,7 +459,7 @@
                         </label>
                     </div>
                 </div>
-                
+
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Reason for Selling</label>
                     <select id="reason_for_selling" class="form-select">
@@ -389,17 +473,17 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
-                
+
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Training & Transition</label>
                     <textarea id="training_transition" class="form-textarea" placeholder="Describe what training and support you'll provide to the new owner..."></textarea>
                 </div>
-                
+
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Growth Opportunities</label>
                     <textarea id="growth_opportunities" class="form-textarea" placeholder="Describe potential growth opportunities for the new owner..."></textarea>
                 </div>
-                
+
                 <div class="mt-6 flex justify-between">
                     <button type="button" onclick="prevStep(2)" class="btn-outline">
                         <i class="fas fa-arrow-left mr-2"></i>Back
@@ -412,47 +496,53 @@
 
             <div id="section4" class="form-card p-8 mb-8 blueprint-accent hidden">
                 <div class="section-header">Step 4: Review & Submit</div>
-                
+
                 <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
                     <h3 class="font-bold text-blue-900 mb-4">Listing Preview</h3>
                     <div id="listingPreview" class="space-y-4">
                         <!-- Preview content populated by JS -->
                     </div>
                 </div>
-                
+
                 <div class="legal-box">
                     <h4><i class="fas fa-gavel mr-2"></i>Legal Compliance & Disclosure</h4>
                     <p>By submitting this listing, you confirm that all financial information provided is accurate to the best of your knowledge. Misrepresentation may result in legal liability under Florida law.</p>
                 </div>
-                
+
                 <div class="space-y-4 mb-6">
                     <label class="flex items-start gap-3">
                         <input type="checkbox" id="confirmAccuracy" class="form-checkbox mt-1" required>
                         <span class="text-sm text-gray-700">I confirm that all information provided is accurate to the best of my knowledge. I understand that false information may result in my listing being removed and potential legal action.</span>
                     </label>
                     <p class="error-text" id="error-confirmAccuracy"></p>
-                    
+
                     <label class="flex items-start gap-3">
                         <input type="checkbox" id="confirmResponse" class="form-checkbox mt-1" required>
                         <span class="text-sm text-gray-700">I agree to respond to buyer inquiries within 24 hours. I understand that responsiveness improves my chances of selling.</span>
                     </label>
                     <p class="error-text" id="error-confirmResponse"></p>
-                    
+
                     <label class="flex items-start gap-3">
                         <input type="checkbox" id="ndaRequired" class="form-checkbox mt-1">
                         <span class="text-sm text-gray-700">I require buyers to sign an NDA before accessing detailed financial information. (Recommended for businesses with sensitive data)</span>
                     </label>
-                    
+
                     <label class="flex items-start gap-3">
                         <input type="checkbox" id="featuredListing" class="form-checkbox mt-1">
                         <span class="text-sm text-gray-700">I want to upgrade to a <b>Featured Listing ($99)</b> for priority placement, highlighted display, and top search results.</span>
                     </label>
                 </div>
-                
-                <div class="mt-6 flex justify-between">
-                    <button type="button" onclick="prevStep(3)" class="btn-outline">
-                        <i class="fas fa-arrow-left mr-2"></i>Back
-                    </button>
+
+                <div class="mt-6 flex justify-between items-center">
+                    <div class="flex gap-3">
+                        <button type="button" onclick="prevStep(3)" class="btn-outline">
+                            <i class="fas fa-arrow-left mr-2"></i>Back
+                        </button>
+                        <button type="button" onclick="saveDraft()" class="btn-secondary">
+                            <i class="fas fa-save mr-2"></i>Save Draft
+                        </button>
+                        <span id="draftStatus" class="draft-saved hidden"><i class="fas fa-check mr-1"></i>Draft saved</span>
+                    </div>
                     <button type="button" onclick="submitForm()" id="submitBtn" class="btn-primary" style="width: auto;">
                         <span id="submitText"><i class="fas fa-check-circle mr-2"></i>Submit Listing</span>
                         <span id="submitLoading" style="display:none;"><span class="loading-spinner mr-2"></span>Submitting...</span>
@@ -502,20 +592,21 @@
     <script>
         // API Configuration
         const API_BASE = window.API_BASE || (window.location.hostname === 'localhost' ? 'http://localhost:5000/api' : '/api');
-        
+
         let currentStep = 1;
         const totalSteps = 4;
         let uploadedPhotos = [];
+        let userProfile = null;
 
         function nextStep(step) {
             if (!validateStep(currentStep)) return;
-            
+
             document.getElementById(`section${currentStep}`).classList.add('hidden');
             document.getElementById(`section${step}`).classList.remove('hidden');
             updateProgress(step);
             window.scrollTo({ top: 0, behavior: 'smooth' });
             currentStep = step;
-            
+
             if (step === 4) generatePreview();
         }
 
@@ -531,7 +622,7 @@
             for (let i = 1; i <= totalSteps; i++) {
                 const dot = document.getElementById(`step${i}`);
                 const line = document.getElementById(`line${i}`);
-                
+
                 if (i < step) {
                     dot.classList.add('completed');
                     dot.classList.remove('active');
@@ -549,31 +640,31 @@
         function validateStep(step) {
             let valid = true;
             const requiredFields = {
-                1: ['business_name', 'category', 'year_established', 'location', 'description', 'contact_name', 'contact_email'],
+                1: ['business_name', 'category', 'year_established', 'location', 'description', 'seller_name', 'seller_email'],
                 2: ['asking_price'],
                 3: [],
                 4: ['confirmAccuracy', 'confirmResponse']
             };
-            
+
             // Clear previous errors
             document.querySelectorAll('.error-text').forEach(el => el.textContent = '');
             document.querySelectorAll('.form-input').forEach(el => el.classList.remove('error'));
-            
+
             requiredFields[step].forEach(fieldId => {
                 const field = document.getElementById(fieldId);
                 if (!field) return;
-                
+
                 const value = field.type === 'checkbox' ? field.checked : field.value.trim();
-                
+
                 if (!value) {
                     valid = false;
                     const errorEl = document.getElementById(`error-${fieldId}`);
                     if (errorEl) errorEl.textContent = 'This field is required';
                     if (field.classList.contains('form-input')) field.classList.add('error');
                 }
-                
+
                 // Email validation
-                if (fieldId === 'contact_email' && value) {
+                if (fieldId === 'seller_email' && value) {
                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                     if (!emailRegex.test(value)) {
                         valid = false;
@@ -583,20 +674,20 @@
                     }
                 }
             });
-            
+
             return valid;
         }
 
         function handlePhotoUpload(input) {
             const container = document.getElementById('photoPreviewContainer');
             const files = Array.from(input.files);
-            
+
             files.forEach(file => {
                 if (file.size > 5 * 1024 * 1024) {
                     alert(`File "${file.name}" is too large. Max size is 5MB.`);
                     return;
                 }
-                
+
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     uploadedPhotos.push({
@@ -635,7 +726,7 @@
             const price = parseFloat(document.getElementById('asking_price').value) || 0;
             const revenue = parseFloat(document.getElementById('annual_revenue').value) || 0;
             const description = document.getElementById('description').value;
-            
+
             preview.innerHTML = `
                 <div class="grid md:grid-cols-2 gap-4">
                     <div>
@@ -670,61 +761,145 @@
             `;
         }
 
+        // Collect all form data into an object
+        function collectFormData() {
+            const features = Array.from(document.querySelectorAll('.feature-checkbox:checked'))
+                .map(cb => cb.value);
+
+            return {
+                business_name: document.getElementById('business_name').value,
+                category: document.getElementById('category').value,
+                year_established: parseInt(document.getElementById('year_established').value) || null,
+                address: document.getElementById('location').value,
+                city: 'Miami',
+                state: 'FL',
+                description: document.getElementById('description').value,
+                asking_price: parseFloat(document.getElementById('asking_price').value) || 0,
+                annual_revenue: parseFloat(document.getElementById('annual_revenue').value) || null,
+                cash_flow: parseFloat(document.getElementById('annual_cash_flow').value) || null,
+                inventory_value: parseFloat(document.getElementById('inventory_value').value) || null,
+                lease_terms: document.getElementById('lease_terms').value,
+                employee_count: parseInt(document.getElementById('num_employees').value) || null,
+                square_footage: parseInt(document.getElementById('square_footage').value) || null,
+                reason_for_selling: document.getElementById('reason_for_selling').value,
+                seller_name: document.getElementById('seller_name').value,
+                seller_email: document.getElementById('seller_email').value,
+                seller_phone: document.getElementById('seller_phone').value,
+                equipment_included: JSON.stringify(features),
+                status: 'pending_review',
+                business_hours: document.getElementById('business_hours').value,
+                parking: document.getElementById('parking').value,
+                training_transition: document.getElementById('training_transition').value,
+                growth_opportunities: document.getElementById('growth_opportunities').value,
+                monthly_rent: parseFloat(document.getElementById('monthly_rent').value) || null,
+                revenue_2021: parseFloat(document.getElementById('revenue_2021').value) || null,
+                revenue_2022: parseFloat(document.getElementById('revenue_2022').value) || null,
+                revenue_2023: parseFloat(document.getElementById('revenue_2023').value) || null,
+                revenue_2024: parseFloat(document.getElementById('revenue_2024').value) || null,
+                revenue_2025: parseFloat(document.getElementById('revenue_2025').value) || null,
+                nda_required: document.getElementById('ndaRequired').checked,
+                featured_listing: document.getElementById('featuredListing').checked
+            };
+        }
+
+        // Save draft to localStorage
+        function saveDraft() {
+            const draft = collectFormData();
+            draft._savedAt = new Date().toISOString();
+            draft._photos = uploadedPhotos.map(p => p.preview);
+            localStorage.setItem('listingDraft', JSON.stringify(draft));
+
+            const status = document.getElementById('draftStatus');
+            status.classList.remove('hidden');
+            setTimeout(() => status.classList.add('hidden'), 3000);
+        }
+
+        // Restore draft from localStorage
+        function restoreDraft() {
+            const saved = localStorage.getItem('listingDraft');
+            if (!saved) return;
+
+            try {
+                const draft = JSON.parse(saved);
+                const fields = [
+                    'business_name', 'category', 'year_established', 'location', 'description',
+                    'seller_name', 'seller_email', 'seller_phone', 'asking_price', 'annual_revenue',
+                    'annual_cash_flow', 'inventory_value', 'monthly_rent', 'lease_terms',
+                    'num_employees', 'square_footage', 'business_hours', 'parking',
+                    'reason_for_selling', 'training_transition', 'growth_opportunities',
+                    'revenue_2021', 'revenue_2022', 'revenue_2023', 'revenue_2024', 'revenue_2025'
+                ];
+
+                fields.forEach(field => {
+                    const el = document.getElementById(field);
+                    if (el && draft[field] !== undefined && draft[field] !== null) {
+                        el.value = draft[field];
+                    }
+                });
+
+                // Restore checkboxes
+                if (draft.equipment_included) {
+                    try {
+                        const features = JSON.parse(draft.equipment_included);
+                        document.querySelectorAll('.feature-checkbox').forEach(cb => {
+                            cb.checked = features.includes(cb.value);
+                        });
+                    } catch (e) {}
+                }
+
+                // Restore photos (preview only, files can't be restored)
+                if (draft._photos && draft._photos.length) {
+                    // Photos would need re-upload, we just note it
+                }
+            } catch (e) {
+                console.error('Failed to restore draft:', e);
+            }
+        }
+
         async function submitForm() {
             if (!validateStep(4)) return;
-            
+
             const submitBtn = document.getElementById('submitBtn');
             const submitText = document.getElementById('submitText');
             const submitLoading = document.getElementById('submitLoading');
-            
+
             submitBtn.disabled = true;
             submitText.style.display = 'none';
             submitLoading.style.display = 'inline';
-            
+
             try {
-                // Collect features
-                const features = Array.from(document.querySelectorAll('.feature-checkbox:checked'))
-                    .map(cb => cb.value);
-                
-                // Build listing data for Supabase
-                const listingData = {
-                    business_name: document.getElementById('business_name').value,
-                    category: document.getElementById('category').value,
-                    year_established: parseInt(document.getElementById('year_established').value) || null,
-                    address: document.getElementById('location').value,
-                    city: 'Miami',
-                    state: 'FL',
-                    description: document.getElementById('description').value,
-                    asking_price: parseFloat(document.getElementById('asking_price').value) || 0,
-                    annual_revenue: parseFloat(document.getElementById('annual_revenue').value) || null,
-                    cash_flow: parseFloat(document.getElementById('annual_cash_flow').value) || null,
-                    inventory_value: parseFloat(document.getElementById('inventory_value').value) || null,
-                    lease_terms: document.getElementById('lease_terms').value,
-                    employee_count: parseInt(document.getElementById('num_employees').value) || null,
-                    square_footage: parseInt(document.getElementById('square_footage').value) || null,
-                    reason_for_selling: document.getElementById('reason_for_selling').value,
-                    seller_name: document.getElementById('contact_name').value,
-                    seller_email: document.getElementById('contact_email').value,
-                    seller_phone: document.getElementById('contact_phone').value,
-                    equipment_included: JSON.stringify(features),
-                    status: 'pending_review'
-                };
-                
+                const listingData = collectFormData();
+
                 // Submit to Supabase
                 const result = await window.supabase305.submitListing(listingData);
 
-                // Send email notification
-                window.supabase305.sendNotification('new_listing', {
-                    business_name: listingData.business_name,
-                    seller_name: listingData.seller_name,
-                    seller_email: listingData.seller_email,
-                    category: listingData.category
-                }).catch(() => {}); // Fail silently
+                // Send email notification via email-notify.js
+                if (window.emailNotify && window.emailNotify.sendListingAlert) {
+                    window.emailNotify.sendListingAlert(listingData);
+                }
+
+                // Also try the legacy supabase notification as fallback
+                try {
+                    await window.supabase305.sendNotification('new_listing', {
+                        business_name: listingData.business_name,
+                        seller_name: listingData.seller_name,
+                        seller_email: listingData.seller_email,
+                        seller_phone: listingData.seller_phone || null,
+                        category: listingData.category,
+                        asking_price: listingData.asking_price,
+                        annual_revenue: listingData.annual_revenue,
+                        location: listingData.address,
+                        description: listingData.description
+                    });
+                } catch (e) { /* fail silently */ }
+
+                // Clear draft on successful submission
+                localStorage.removeItem('listingDraft');
 
                 // Show success modal with reference
                 document.getElementById('referenceNumber').textContent = 'LIST-' + result[0].id.substring(0, 8).toUpperCase();
                 document.getElementById('successModal').classList.add('active');
-                
+
             } catch (error) {
                 console.error('Submit error:', error);
                 alert('Error submitting listing: ' + error.message);
@@ -736,8 +911,67 @@
         }
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             updateProgress(1);
+
+            // Wait for auth module to be ready
+            let authReady = false;
+            let attempts = 0;
+            while (!authReady && attempts < 50) {
+                if (window.auth && typeof window.auth.isAuthenticated === 'function') {
+                    authReady = true;
+                } else {
+                    await new Promise(r => setTimeout(r, 100));
+                    attempts++;
+                }
+            }
+
+            const loadingOverlay = document.getElementById('authLoadingOverlay');
+            const loginOverlay = document.getElementById('authLoginOverlay');
+
+            if (!authReady) {
+                // Auth module failed to load - graceful degradation
+                console.warn('Auth module not available - showing form anyway');
+                loadingOverlay.classList.add('hidden');
+                // Show the form but without pre-fill
+                restoreDraft();
+                return;
+            }
+
+            if (!window.auth.isAuthenticated()) {
+                // Not authenticated - show login overlay
+                loadingOverlay.classList.add('hidden');
+                loginOverlay.classList.add('active');
+                // Hide form content
+                document.getElementById('pageHeader').style.display = 'none';
+                document.getElementById('stepIndicator').style.display = 'none';
+                document.getElementById('listingFormContainer').style.display = 'none';
+                return;
+            }
+
+            // Authenticated - proceed
+            loadingOverlay.classList.add('hidden');
+
+            // Try to fetch profile and pre-fill seller info
+            try {
+                userProfile = await window.auth.getProfile();
+                if (userProfile) {
+                    if (userProfile.full_name) {
+                        document.getElementById('seller_name').value = userProfile.full_name;
+                    }
+                    if (window.auth.getEmail()) {
+                        document.getElementById('seller_email').value = window.auth.getEmail();
+                    }
+                    if (userProfile.phone) {
+                        document.getElementById('seller_phone').value = userProfile.phone;
+                    }
+                }
+            } catch (e) {
+                console.warn('Could not fetch profile:', e);
+            }
+
+            // Restore any saved draft (draft overrides profile pre-fill if user has edited)
+            restoreDraft();
         });
     </script>
 </body>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard — 305business.llc</title>
+    <link rel="icon" type="image/png" href="305business-logo-transparent.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="supabase-client.js"></script>
+    <script src="js/auth.js" type="module"></script>
+    <script src="js/auth-guard.js"></script>
+    <script src="js/dashboard.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Inter', sans-serif; background: #1a4a7a; color: #e0e0e0; min-height: 100vh; overflow-x: hidden; }
+
+        .blueprint-bg {
+            background-color: #1a4a7a;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+            background-attachment: fixed;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px; min-height: 100vh; background: rgba(10,25,50,0.6);
+            border-right: 1.5px solid rgba(255,255,255,0.12);
+            position: fixed; top: 0; left: 0; z-index: 100;
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(12px);
+        }
+        .sidebar.closed { transform: translateX(-100%); }
+
+        .sidebar-logo { padding: 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .sidebar-logo img { height: 36px; width: auto; }
+        .sidebar-logo .brand { font-weight: 800; font-size: 1.1rem; letter-spacing: 0.05em; }
+        .sidebar-logo .brand-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; }
+
+        .nav-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 20px; color: rgba(255,255,255,0.6);
+            font-size: 14px; font-weight: 500; cursor: pointer;
+            transition: all 0.2s; border-left: 3px solid transparent;
+            text-decoration: none;
+        }
+        .nav-item:hover, .nav-item.active {
+            background: rgba(0,212,255,0.08); color: #fff;
+            border-left-color: #00D4FF;
+        }
+        .nav-item i { width: 20px; text-align: center; }
+
+        .sidebar-footer {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 12px; color: rgba(255,255,255,0.4);
+        }
+
+        /* Main Content */
+        .main-content { margin-left: 260px; min-height: 100vh; }
+
+        /* Top Bar */
+        .topbar {
+            background: rgba(10,25,50,0.5); border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 16px 28px; display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px);
+        }
+        .topbar-title { font-size: 1.25rem; font-weight: 700; }
+        .topbar-actions { display: flex; align-items: center; gap: 16px; }
+
+        /* Stats Cards */
+        .stat-card-dash {
+            background: rgba(255,255,255,0.04);
+            border: 1.5px solid rgba(255,255,255,0.15);
+            padding: 24px; border-radius: 4px;
+            position: relative; overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .stat-card-dash::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0,212,255,0.5), transparent);
+        }
+        .stat-card-dash:hover {
+            border-color: rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.06);
+            transform: translateY(-2px);
+        }
+        .stat-card-dash .stat-icon {
+            width: 40px; height: 40px; border-radius: 4px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; margin-bottom: 12px;
+        }
+        .stat-card-dash .stat-value {
+            font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700;
+        }
+        .stat-card-dash .stat-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: rgba(255,255,255,0.5); margin-top: 4px;
+        }
+
+        /* Table */
+        .dash-table {
+            width: 100%; border-collapse: collapse;
+        }
+        .dash-table thead th {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: rgba(255,255,255,0.5); text-align: left;
+            padding: 14px 16px; border-bottom: 1.5px solid rgba(255,255,255,0.12);
+            font-weight: 500; white-space: nowrap;
+        }
+        .dash-table tbody td {
+            padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-size: 14px; vertical-align: middle;
+        }
+        .dash-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+        .dash-table tbody tr:last-child td { border-bottom: none; }
+
+        /* Status badges */
+        .status-badge-dash {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 4px 12px; border-radius: 4px; font-size: 12px;
+            font-weight: 600; white-space: nowrap;
+            border: 1.5px solid; font-family: 'Inter', sans-serif;
+        }
+        .status-active    { color: #00FF88; border-color: rgba(0,255,136,0.4); background: rgba(0,255,136,0.08); }
+        .status-pending   { color: #FFC107; border-color: rgba(255,193,7,0.4); background: rgba(255,193,7,0.08); }
+        .status-rejected  { color: #FF4757; border-color: rgba(255,71,87,0.4); background: rgba(255,71,87,0.08); }
+        .status-sold      { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); }
+        .status-withdrawn { color: rgba(255,255,255,0.4); border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.03); }
+
+        /* Buttons */
+        .btn-dash {
+            padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 600;
+            cursor: pointer; border: 1.5px solid; transition: all 0.2s;
+            font-family: 'Inter', sans-serif; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn-dash:hover { transform: translateY(-1px); }
+        .btn-primary { color: #00D4FF; border-color: rgba(0,212,255,0.4); background: rgba(0,212,255,0.08); }
+        .btn-primary:hover { background: rgba(0,212,255,0.15); }
+        .btn-success { color: #00FF88; border-color: rgba(0,255,136,0.4); background: rgba(0,255,136,0.08); }
+        .btn-success:hover { background: rgba(0,255,136,0.15); }
+        .btn-danger { color: #FF4757; border-color: rgba(255,71,87,0.4); background: rgba(255,71,87,0.08); }
+        .btn-danger:hover { background: rgba(255,71,87,0.15); }
+        .btn-ghost { color: rgba(255,255,255,0.5); border-color: rgba(255,255,255,0.15); background: transparent; }
+        .btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+
+        /* Section Card */
+        .section-card {
+            background: rgba(255,255,255,0.03);
+            border: 1.5px solid rgba(255,255,255,0.12);
+            border-radius: 4px; overflow: hidden;
+        }
+        .section-card-header {
+            padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .section-card-body { padding: 0; }
+
+        /* Tab buttons */
+        .filter-tab {
+            padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 500;
+            cursor: pointer; border: 1px solid rgba(255,255,255,0.15);
+            background: transparent; color: rgba(255,255,255,0.6);
+            transition: all 0.2s;
+        }
+        .filter-tab:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
+        .filter-tab.active {
+            background: rgba(0,212,255,0.1); border-color: rgba(0,212,255,0.4); color: #00D4FF;
+        }
+
+        /* Search input */
+        .dash-input {
+            background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.15);
+            color: white; font-family: 'Inter', sans-serif; font-size: 14px;
+            padding: 8px 14px; border-radius: 4px; outline: none; width: 100%;
+        }
+        .dash-input:focus { border-color: rgba(0,212,255,0.5); }
+        .dash-input::placeholder { color: rgba(255,255,255,0.3); }
+
+        /* Loading */
+        .loading-spinner {
+            width: 40px; height: 40px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #00D4FF; border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Empty state */
+        .empty-state { text-align: center; padding: 60px 20px; }
+        .empty-state i { font-size: 48px; color: rgba(255,255,255,0.15); margin-bottom: 16px; }
+        .empty-state p { color: rgba(255,255,255,0.4); font-size: 14px; }
+
+        /* Mobile overlay */
+        .mobile-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+            z-index: 99; display: none;
+        }
+        .mobile-overlay.active { display: block; }
+
+        /* Profile card */
+        .profile-card {
+            background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.12);
+            border-radius: 4px; padding: 24px;
+        }
+        .profile-avatar {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: linear-gradient(135deg, #00D4FF, #1a4a7a);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px; font-weight: 700; color: white;
+            margin-bottom: 16px;
+        }
+
+        /* Inquiry row */
+        .inquiry-row {
+            padding: 16px; border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .inquiry-row:last-child { border-bottom: none; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main-content { margin-left: 0; }
+        }
+        @media (max-width: 768px) {
+            .topbar { padding: 12px 16px; }
+            .topbar-title { font-size: 1rem; }
+            .dash-table { display: block; overflow-x: auto; white-space: nowrap; }
+            .stat-card-dash .stat-value { font-size: 1.5rem; }
+            .section-card-header { flex-direction: column; gap: 12px; align-items: flex-start; }
+            .dash-table thead th, .dash-table tbody td { padding: 10px 12px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body class="blueprint-bg" data-auth="required">
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <div class="flex items-center gap-3">
+                <img src="305business-logo-transparent.png" alt="305business">
+                <div>
+                    <div class="brand text-white">305business</div>
+                    <div class="brand-sub">SELLER DASHBOARD</div>
+                </div>
+            </div>
+        </div>
+
+        <nav style="padding: 12px 0;">
+            <a href="#profile" class="nav-item active" onclick="switchSection('profile', this)">
+                <i class="fas fa-user"></i> Profile
+            </a>
+            <a href="#listings" class="nav-item" onclick="switchSection('listings', this)">
+                <i class="fas fa-building"></i> My Listings
+            </a>
+            <a href="#inquiries" class="nav-item" onclick="switchSection('inquiries', this)">
+                <i class="fas fa-envelope"></i> Inquiries
+                <span id="inquiryBadge" class="ml-auto text-xs px-2 py-0.5 rounded" style="background:rgba(0,212,255,0.15);color:#00D4FF;display:none;">0</span>
+            </a>
+            <a href="#settings" class="nav-item" onclick="switchSection('settings', this)">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="flex items-center gap-2 mb-2">
+                <i class="fas fa-circle text-xs" style="color:#00FF88;"></i>
+                <span>Connected to Supabase</span>
+            </div>
+            <div>305business.llc © 2026</div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <div class="topbar">
+            <div class="flex items-center gap-4">
+                <button class="lg:hidden text-white/60 hover:text-white" onclick="toggleSidebar()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <h1 class="topbar-title text-white" id="pageTitle">Profile</h1>
+            </div>
+            <div class="topbar-actions">
+                <a href="index.html" class="text-sm text-white/50 hover:text-white transition">
+                    <i class="fas fa-arrow-left mr-1"></i> Back to Site
+                </a>
+                <div class="hidden md:flex items-center gap-2 text-sm text-white/50">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="sellerEmailDisplay">Not set</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div style="padding: 28px;">
+
+            <!-- ========== PROFILE SECTION ========== -->
+            <section id="section-profile" class="dash-section">
+                <div class="grid lg:grid-cols-3 gap-6">
+                    <!-- Profile Card -->
+                    <div class="lg:col-span-1">
+                        <div class="profile-card">
+                            <div class="profile-avatar" id="profileAvatar">?</div>
+                            <h2 class="text-white font-bold text-lg mb-1" id="profileName">Seller Name</h2>
+                            <p class="text-sm text-white/40 mb-4" id="profileEmail">email@example.com</p>
+
+                            <div class="space-y-3">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-white/40">Phone</span>
+                                    <span class="text-white" id="profilePhone">-</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-white/40">Listings</span>
+                                    <span class="text-white font-mono" id="profileListingsCount">0</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-white/40">Active</span>
+                                    <span class="text-[#00FF88] font-mono" id="profileActiveCount">0</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-white/40">Total Views</span>
+                                    <span class="text-white font-mono" id="profileViewsCount">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats + Email Setup -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="profile-card">
+                            <h3 class="text-white font-bold mb-4"><i class="fas fa-key mr-2 text-[#00D4FF]"></i> Seller Authentication</h3>
+                            <p class="text-sm text-white/50 mb-4">Enter your email to view your listings. This matches the email you used when submitting your business.</p>
+                            <div class="flex gap-3">
+                                <input type="email" id="sellerEmailInput" class="dash-input flex-1" placeholder="your@email.com" value="">
+                                <button onclick="loadSellerData()" class="btn-dash btn-primary">
+                                    <i class="fas fa-sync-alt"></i> Load Listings
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="stat-card-dash">
+                                <div class="stat-icon" style="background:rgba(0,212,255,0.1);color:#00D4FF;"><i class="fas fa-building"></i></div>
+                                <div class="stat-value text-white" id="statTotal">0</div>
+                                <div class="stat-label">Total Listings</div>
+                            </div>
+                            <div class="stat-card-dash">
+                                <div class="stat-icon" style="background:rgba(0,255,136,0.1);color:#00FF88;"><i class="fas fa-check-circle"></i></div>
+                                <div class="stat-value text-[#00FF88]" id="statActive">0</div>
+                                <div class="stat-label">Active</div>
+                            </div>
+                            <div class="stat-card-dash">
+                                <div class="stat-icon" style="background:rgba(255,193,7,0.1);color:#FFC107;"><i class="fas fa-clock"></i></div>
+                                <div class="stat-value text-[#FFC107]" id="statPending">0</div>
+                                <div class="stat-label">Pending</div>
+                            </div>
+                            <div class="stat-card-dash">
+                                <div class="stat-icon" style="background:rgba(255,71,87,0.1);color:#FF4757;"><i class="fas fa-envelope"></i></div>
+                                <div class="stat-value text-[#FF4757]" id="statInquiries">0</div>
+                                <div class="stat-label">Inquiries</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== LISTINGS SECTION ========== -->
+            <section id="section-listings" class="dash-section" style="display:none;">
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <div>
+                            <h2 class="text-white font-bold text-lg">My Listings</h2>
+                            <p class="text-sm text-white/40 mt-1">Manage your business listings and track performance</p>
+                        </div>
+                        <a href="list-business.html" class="btn-dash btn-success">
+                            <i class="fas fa-plus"></i> New Listing
+                        </a>
+                    </div>
+                    <div style="padding: 16px 24px; border-bottom: 1px solid rgba(255,255,255,0.06);">
+                        <div class="flex flex-wrap items-center gap-3">
+                            <span class="text-sm text-white/40">Filter:</span>
+                            <button class="filter-tab active" onclick="filterListings('all', this)">All</button>
+                            <button class="filter-tab" onclick="filterListings('active', this)">Active</button>
+                            <button class="filter-tab" onclick="filterListings('pending', this)">Pending</button>
+                            <button class="filter-tab" onclick="filterListings('rejected', this)">Rejected</button>
+                            <button class="filter-tab" onclick="filterListings('sold', this)">Sold</button>
+                            <button class="filter-tab" onclick="filterListings('withdrawn', this)">Withdrawn</button>
+                        </div>
+                    </div>
+                    <div class="section-card-body">
+                        <div id="listingsLoading" class="flex justify-center py-12">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <div id="listingsEmpty" class="empty-state" style="display:none;">
+                            <i class="fas fa-building"></i>
+                            <p class="mb-2">No listings found for this email.</p>
+                            <p class="text-xs">Submit your first business to get started.</p>
+                            <a href="list-business.html" class="btn-dash btn-primary mt-4 inline-flex">
+                                <i class="fas fa-plus mr-1"></i> List a Business
+                            </a>
+                        </div>
+                        <div id="listingsTableWrap" style="display:none;">
+                            <table class="dash-table">
+                                <thead>
+                                    <tr>
+                                        <th>Business Name</th>
+                                        <th>Category</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Views</th>
+                                        <th>Inquiries</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listingsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== INQUIRIES SECTION ========== -->
+            <section id="section-inquiries" class="dash-section" style="display:none;">
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <div>
+                            <h2 class="text-white font-bold text-lg">Buyer Inquiries</h2>
+                            <p class="text-sm text-white/40 mt-1">Messages from interested buyers</p>
+                        </div>
+                    </div>
+                    <div class="section-card-body" id="inquiriesBody">
+                        <div class="empty-state">
+                            <i class="fas fa-envelope-open"></i>
+                            <p>No inquiries yet. Active listings will appear here.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== SETTINGS SECTION ========== -->
+            <section id="section-settings" class="dash-section" style="display:none;">
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <div class="profile-card">
+                        <h3 class="text-white font-bold mb-4"><i class="fas fa-user-edit mr-2 text-[#00D4FF]"></i> Profile Settings</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm text-white/50 mb-2">Display Name</label>
+                                <input type="text" class="dash-input" placeholder="Your name" id="settingsName">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-white/50 mb-2">Email</label>
+                                <input type="email" class="dash-input" placeholder="your@email.com" id="settingsEmail">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-white/50 mb-2">Phone</label>
+                                <input type="tel" class="dash-input" placeholder="+1 (305) 000-0000" id="settingsPhone">
+                            </div>
+                            <button class="btn-dash btn-primary" onclick="saveSettings()">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <h3 class="text-white font-bold mb-4"><i class="fas fa-bell mr-2 text-[#FFC107]"></i> Notifications</h3>
+                        <div class="space-y-4">
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" checked class="w-4 h-4 accent-[#00D4FF]">
+                                <span class="text-sm">Email when inquiry received</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" checked class="w-4 h-4 accent-[#00D4FF]">
+                                <span class="text-sm">Email when listing approved</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" class="w-4 h-4 accent-[#00D4FF]">
+                                <span class="text-sm">Weekly performance summary</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" class="w-4 h-4 accent-[#00D4FF]">
+                                <span class="text-sm">SMS notifications</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        // ── Globals ──
+        const app = new DashboardApp({ onUpdate: updateStats });
+        const toast = new ToastSystem();
+        let currentFilter = 'all';
+        let sellerInquiries = [];
+
+        // ── Sidebar ──
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('mobileOverlay').classList.toggle('active');
+        }
+
+        function switchSection(sectionId, navEl) {
+            document.querySelectorAll('.dash-section').forEach(s => s.style.display = 'none');
+            document.getElementById('section-' + sectionId).style.display = 'block';
+            document.getElementById('pageTitle').textContent = navEl.textContent.trim();
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            navEl.classList.add('active');
+            if (window.innerWidth < 1024) toggleSidebar();
+        }
+
+        // ── Load Data ──
+        async function loadSellerData() {
+            const emailInput = document.getElementById('sellerEmailInput');
+            const email = emailInput.value.trim();
+            if (!email) {
+                toast.show('Please enter your email address', 'warning');
+                return;
+            }
+            if (!email.includes('@')) {
+                toast.show('Please enter a valid email', 'warning');
+                return;
+            }
+
+            toast.show('Loading your listings...', 'info');
+            document.getElementById('listingsLoading').style.display = 'flex';
+            document.getElementById('listingsEmpty').style.display = 'none';
+            document.getElementById('listingsTableWrap').style.display = 'none';
+
+            try {
+                const listings = await app.fetchListingsBySeller(email);
+                const listingIds = listings.map(l => l.id);
+
+                if (listingIds.length > 0) {
+                    await app.fetchInquiriesForListings(listingIds);
+                } else {
+                    app.inquiries = [];
+                }
+
+                // Update profile
+                updateProfile(listings, email);
+                updateStats();
+                renderListingsTable();
+                renderInquiries();
+
+                document.getElementById('sellerEmailDisplay').textContent = email;
+                toast.show(`Loaded ${listings.length} listing(s)`, 'success');
+
+            } catch (err) {
+                console.error(err);
+                toast.show('Error loading listings: ' + err.message, 'error');
+            }
+        }
+
+        function updateProfile(listings, email) {
+            const name = listings[0]?.seller_name || 'Seller';
+            const phone = listings[0]?.seller_phone || '-';
+            document.getElementById('profileName').textContent = name;
+            document.getElementById('profileEmail').textContent = email;
+            document.getElementById('profilePhone').textContent = phone;
+            document.getElementById('profileAvatar').textContent = name.charAt(0).toUpperCase();
+            document.getElementById('settingsName').value = name;
+            document.getElementById('settingsEmail').value = email;
+            document.getElementById('settingsPhone').value = phone === '-' ? '' : phone;
+        }
+
+        function updateStats() {
+            const stats = app.getStats();
+            document.getElementById('statTotal').textContent = stats.total;
+            document.getElementById('statActive').textContent = stats.active;
+            document.getElementById('statPending').textContent = stats.pending;
+            document.getElementById('statInquiries').textContent = stats.totalInquiries;
+            document.getElementById('profileListingsCount').textContent = stats.total;
+            document.getElementById('profileActiveCount').textContent = stats.active;
+            document.getElementById('profileViewsCount').textContent = stats.totalViews.toLocaleString();
+
+            const badge = document.getElementById('inquiryBadge');
+            if (stats.totalInquiries > 0) {
+                badge.textContent = stats.totalInquiries;
+                badge.style.display = 'inline-block';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        // ── Listings Table ──
+        function renderListingsTable() {
+            const loading = document.getElementById('listingsLoading');
+            const empty = document.getElementById('listingsEmpty');
+            const wrap = document.getElementById('listingsTableWrap');
+            const tbody = document.getElementById('listingsTableBody');
+
+            loading.style.display = 'none';
+
+            let filtered = app.listings;
+            if (currentFilter !== 'all') {
+                filtered = app.listings.filter(l => l.status === currentFilter);
+            }
+
+            if (filtered.length === 0) {
+                empty.style.display = 'block';
+                wrap.style.display = 'none';
+                return;
+            }
+
+            empty.style.display = 'none';
+            wrap.style.display = 'block';
+
+            tbody.innerHTML = filtered.map(listing => {
+                const status = DashboardApp.getStatusBadge(listing.status);
+                const inquiryCount = app.getInquiryCount(listing.id);
+                return `
+                    <tr>
+                        <td>
+                            <div class="font-semibold text-white">${listing.name}</div>
+                            <div class="text-xs text-white/30 mt-0.5">${listing.slug || ''}</div>
+                        </td>
+                        <td class="text-white/70">${listing.category || '-'}</td>
+                        <td class="font-mono text-white">${DashboardApp.formatCurrency(listing.asking_price)}</td>
+                        <td><span class="status-badge-dash ${status.class}">${status.emoji} ${status.label}</span></td>
+                        <td class="font-mono text-white/70">${listing.view_count || 0}</td>
+                        <td class="font-mono text-white/70">${inquiryCount}</td>
+                        <td class="text-white/50 text-sm">${DashboardApp.formatDate(listing.created_at)}</td>
+                        <td>
+                            <div class="flex items-center gap-2">
+                                <button onclick="viewListing('${listing.id}')" class="btn-dash btn-ghost" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button onclick="editListing('${listing.id}')" class="btn-dash btn-primary" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                ${listing.status !== 'withdrawn' && listing.status !== 'sold' ? `
+                                    <button onclick="withdrawListing('${listing.id}')" class="btn-dash btn-danger" title="Withdraw">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                                ` : ''}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function filterListings(status, btn) {
+            currentFilter = status;
+            document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderListingsTable();
+        }
+
+        // ── Inquiries ──
+        function renderInquiries() {
+            const container = document.getElementById('inquiriesBody');
+            if (app.inquiries.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-envelope-open"></i>
+                        <p>No inquiries yet. Active listings will appear here.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = app.inquiries.map(iq => {
+                const listing = app.listings.find(l => l.id === iq.business_id);
+                return `
+                    <div class="inquiry-row">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <span class="font-semibold text-white">${iq.buyer_name}</span>
+                                <span class="text-white/40 text-sm ml-2">${iq.buyer_email}</span>
+                            </div>
+                            <span class="text-xs text-white/30">${DashboardApp.formatDateTime(iq.created_at)}</span>
+                        </div>
+                        <div class="text-sm text-[#00D4FF] mb-2">
+                            <i class="fas fa-building mr-1"></i> ${listing?.name || 'Unknown Listing'}
+                        </div>
+                        <p class="text-sm text-white/60" style="line-height:1.5;">${iq.message || 'No message'}</p>
+                        <div class="flex gap-2 mt-3">
+                            <a href="mailto:${iq.buyer_email}" class="btn-dash btn-primary text-xs">
+                                <i class="fas fa-reply"></i> Reply
+                            </a>
+                            <a href="tel:${iq.buyer_phone}" class="btn-dash btn-ghost text-xs">
+                                <i class="fas fa-phone"></i> Call
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ── Actions ──
+        function viewListing(id) {
+            window.open(`business-detail.html?id=${id}`, '_blank');
+        }
+
+        function editListing(id) {
+            toast.show('Edit feature coming soon', 'info');
+        }
+
+        async function withdrawListing(id) {
+            if (!confirm('Withdraw this listing? It will no longer be visible to buyers.')) return;
+            try {
+                await app.withdrawListing(id);
+                toast.show('Listing withdrawn', 'success');
+                renderListingsTable();
+                updateStats();
+            } catch (err) {
+                toast.show('Error: ' + err.message, 'error');
+            }
+        }
+
+        function saveSettings() {
+            const name = document.getElementById('settingsName').value;
+            const email = document.getElementById('settingsEmail').value;
+            const phone = document.getElementById('settingsPhone').value;
+            localStorage.setItem('seller_name', name);
+            localStorage.setItem('seller_email', email);
+            localStorage.setItem('seller_phone', phone);
+            toast.show('Settings saved', 'success');
+        }
+
+        // ── Init ──
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedEmail = localStorage.getItem('seller_email');
+            if (savedEmail) {
+                document.getElementById('sellerEmailInput').value = savedEmail;
+                loadSellerData();
+            } else {
+                document.getElementById('listingsLoading').style.display = 'none';
+                document.getElementById('listingsEmpty').style.display = 'block';
+            }
+        });
+    </script>
+    <!-- Auth Guard -->
+    <script type="module" src="js/auth.js"></script>
+    <script src="js/auth-guard.js"></script>
+
+</body>
+</html>

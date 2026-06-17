@@ -38,6 +38,18 @@ class SupabaseClient {
 
     // ── Email Notifications ──
     async sendNotification(eventType, data) {
+        // Try the new EmailNotify module first (Brevo API)
+        if (typeof window !== 'undefined' && window.EmailNotify) {
+            try {
+                const result = await window.EmailNotify.notifyAdmin(eventType, data);
+                if (result.success) return result;
+                console.warn('[Supabase305] Brevo email failed, trying fallback:', result.error);
+            } catch (err) {
+                console.warn('[Supabase305] EmailNotify error:', err.message);
+            }
+        }
+
+        // Fallback: legacy email server endpoint
         if (!EMAIL_SERVER_URL) {
             console.warn('Email server URL not configured. Skipping notification.');
             return { skipped: true };

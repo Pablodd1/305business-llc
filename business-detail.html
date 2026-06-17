@@ -18,6 +18,45 @@
     <script src="agentic-config.js"></script>
     <script>window.EMAIL_SERVER_URL = 'https://305business-llc.vercel.app';</script>
     <script src="supabase-client.js"></script>
+    <script src="js/email-notify.js"></script>
+    <script src="js/auth.js" type="module"></script>
+    <!-- Auth Navigation Script -->
+    <script type="module">
+        import { auth } from './js/auth.js';
+        document.addEventListener('DOMContentLoaded', async () => {
+            await auth.init();
+            // Update nav auth container
+            const navAuth = document.getElementById('navAuthContainer');
+            if (navAuth) {
+                if (auth.isAuthenticated()) {
+                    const email = auth.getEmail() || 'User';
+                    const initial = email.charAt(0).toUpperCase();
+                    navAuth.innerHTML = `
+                        <a href="list-business.html" class="text-sm text-gray-600 hover:text-gray-900 transition hidden md:inline"><i class="fas fa-plus mr-1"></i>List Business</a>
+                        <a href="dashboard.html" class="text-sm text-gray-600 hover:text-gray-900 transition hidden md:inline">My Listings</a>
+                        <div class="nav-user-menu">
+                            <button class="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition">
+                                <div class="nav-user-avatar">${initial}</div>
+                                <span class="hidden md:inline text-sm">${email.split('@')[0]}</span>
+                                <i class="fas fa-chevron-down text-xs text-gray-400"></i>
+                            </button>
+                            <div class="nav-user-dropdown">
+                                <a href="dashboard.html"><i class="fas fa-tachometer-alt mr-2 text-gray-400"></i>Dashboard</a>
+                                <a href="list-business.html"><i class="fas fa-plus mr-2 text-gray-400"></i>List Business</a>
+                                <div class="divider"></div>
+                                <button onclick="window.auth.logout()"><i class="fas fa-sign-out-alt mr-2 text-gray-400"></i>Logout</button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    navAuth.innerHTML = `
+                        <a href="login.html" class="text-sm text-gray-600 hover:text-gray-900 transition">Log In</a>
+                        <a href="signup.html" class="btn-primary text-sm" style="width: auto; padding: 8px 20px;">Get Started</a>
+                    `;
+                }
+            }
+        });
+    </script>
 
     <!-- Schema.org: Product + Organization -->
     <script type="application/ld+json">
@@ -97,6 +136,22 @@
         .success-modal.active { display: flex; }
         .success-content { background: white; border-radius: 16px; padding: 40px; max-width: 500px; width: 90%; text-align: center; }
         .success-icon { width: 80px; height: 80px; background: #48bb78; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+
+        /* Auth styles */
+        .nav-auth-container { display: flex; align-items: center; gap: 12px; }
+        .nav-user-avatar { width: 32px; height: 32px; border-radius: 50%; background: #1a4a7a; color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; }
+        .nav-user-menu { position: relative; }
+        .nav-user-dropdown { position: absolute; right: 0; top: 100%; margin-top: 8px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); min-width: 180px; display: none; z-index: 60; }
+        .nav-user-menu:hover .nav-user-dropdown { display: block; }
+        .nav-user-dropdown a, .nav-user-dropdown button { display: block; width: 100%; text-align: left; padding: 10px 16px; font-size: 14px; color: #4a5568; text-decoration: none; background: none; border: none; cursor: pointer; }
+        .nav-user-dropdown a:hover, .nav-user-dropdown button:hover { background: #f7fafc; color: #1a4a7a; }
+        .nav-user-dropdown .divider { height: 1px; background: #e2e8f0; margin: 4px 0; }
+
+        /* Inquiry auth prompt */
+        .inquiry-auth-prompt { background: #f7fafc; border: 2px dashed #e2e8f0; border-radius: 12px; padding: 24px; text-align: center; }
+        .inquiry-auth-prompt i { font-size: 2rem; color: #1a4a7a; margin-bottom: 12px; }
+        .inquiry-auth-prompt h4 { font-size: 1rem; font-weight: 600; color: #1a202c; margin-bottom: 8px; }
+        .inquiry-auth-prompt p { font-size: 0.875rem; color: #718096; margin-bottom: 16px; }
     </style>
 </head>
 <body class="detail-page">
@@ -108,10 +163,8 @@
                     <span class="font-bold text-lg text-gray-900 tracking-wider">305business</span>
                     <span class="text-xs text-gray-500 font-mono">.LLC</span>
                 </div>
-                <div class="flex items-center gap-4">
-                    <button onclick="window.location.href='index.html'" class="text-gray-600 hover:text-gray-900 transition">
-                        <i class="fas fa-arrow-left mr-2"></i>Back to Listings
-                    </button>
+                <div class="flex items-center gap-4" id="navAuthContainer">
+                    <!-- Auth nav injected here -->
                 </div>
             </div>
         </div>
@@ -181,7 +234,7 @@
                                 <div class="metric-label">Year Established</div>
                             </div>
                         </div>
-                        
+
                         <!-- Revenue History Chart -->
                         <div class="mt-6" id="revenueHistorySection" style="display:none;">
                             <h4 class="text-sm font-semibold text-gray-700 mb-3">Revenue History</h4>
@@ -268,7 +321,7 @@
                                 <span id="contactPhone"></span>
                             </div>
                         </div>
-                        
+
                         <button onclick="toggleInquiryForm()" class="btn-primary w-full mt-4">
                             <i class="fas fa-paper-plane mr-2"></i>Send Inquiry
                         </button>
@@ -277,43 +330,61 @@
                         </button>
                     </div>
 
-                    <!-- Inquiry Form -->
+                    <!-- Inquiry Form (Authenticated) -->
                     <div id="inquiryForm" class="detail-card p-6" style="display:none;">
                         <div class="section-header">Send Inquiry</div>
-                        <form id="inquiryFormEl" onsubmit="event.preventDefault(); submitInquiry();">
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
-                                    <input type="text" id="inquiryName" class="form-input" required>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Your Email *</label>
-                                    <input type="email" id="inquiryEmail" class="form-input" required>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                                    <input type="tel" id="inquiryPhone" class="form-input">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Inquiry Type</label>
-                                    <select id="inquiryType" class="form-input">
-                                        <option value="info">General Information</option>
-                                        <option value="viewing">Schedule Viewing</option>
-                                        <option value="nda">Request NDA</option>
-                                        <option value="offer">Make an Offer</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Message *</label>
-                                    <textarea id="inquiryMessage" class="form-textarea" placeholder="I'm interested in this business because..." required></textarea>
-                                </div>
-                                <button type="submit" id="inquirySubmitBtn" class="btn-primary w-full">
-                                    <span id="inquirySubmitText">Send Inquiry</span>
-                                    <span id="inquirySubmitLoading" style="display:none;"><span class="loading-spinner mr-2"></span>Sending...</span>
-                                </button>
-                                <p class="error-text" id="inquiryError"></p>
+                        <div id="inquiryAuthContent">
+                            <!-- Auth check: show form or login prompt -->
+                            <div id="inquiryFormWrapper">
+                                <form id="inquiryFormEl" onsubmit="event.preventDefault(); submitInquiry();">
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
+                                            <input type="text" id="buyer_name" class="form-input" required>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Your Email *</label>
+                                            <input type="email" id="buyer_email" class="form-input" required>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                                            <input type="tel" id="buyer_phone" class="form-input">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Inquiry Type</label>
+                                            <select id="inquiryType" class="form-input">
+                                                <option value="info">General Information</option>
+                                                <option value="viewing">Schedule Viewing</option>
+                                                <option value="nda">Request NDA</option>
+                                                <option value="offer">Make an Offer</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Message *</label>
+                                            <textarea id="inquiryMessage" class="form-textarea" placeholder="I'm interested in this business because..." required></textarea>
+                                        </div>
+                                        <button type="submit" id="inquirySubmitBtn" class="btn-primary w-full">
+                                            <span id="inquirySubmitText">Send Inquiry</span>
+                                            <span id="inquirySubmitLoading" style="display:none;"><span class="loading-spinner mr-2"></span>Sending...</span>
+                                        </button>
+                                        <p class="error-text" id="inquiryError"></p>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                            <div id="inquiryLoginPrompt" style="display:none;">
+                                <div class="inquiry-auth-prompt">
+                                    <i class="fas fa-lock"></i>
+                                    <h4>Login Required</h4>
+                                    <p>Please log in or create a free account to send an inquiry to the seller.</p>
+                                    <a href="login.html" class="btn-primary block mb-2" style="text-decoration: none;">
+                                        <i class="fas fa-sign-in-alt mr-2"></i>Log In
+                                    </a>
+                                    <a href="signup.html" class="btn-outline block" style="text-decoration: none;">
+                                        <i class="fas fa-user-plus mr-2"></i>Create Free Account
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Share / Save -->
@@ -394,6 +465,8 @@
         let currentInquiryId = null;
         let chatUserName = '';
         let chatUserEmail = '';
+        let isAuthenticated = false;
+        let userProfile = null;
 
         // Get listing ID from URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -515,7 +588,45 @@
 
         function toggleInquiryForm() {
             const form = document.getElementById('inquiryForm');
-            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+            const isVisible = form.style.display !== 'none';
+
+            if (!isVisible) {
+                // Check auth before showing form
+                updateInquiryAuthState();
+                form.style.display = 'block';
+            } else {
+                form.style.display = 'none';
+            }
+        }
+
+        function updateInquiryAuthState() {
+            const formWrapper = document.getElementById('inquiryFormWrapper');
+            const loginPrompt = document.getElementById('inquiryLoginPrompt');
+
+            if (isAuthenticated) {
+                formWrapper.style.display = 'block';
+                loginPrompt.style.display = 'none';
+                // Pre-fill buyer info from profile
+                prefillBuyerInfo();
+            } else {
+                formWrapper.style.display = 'none';
+                loginPrompt.style.display = 'block';
+            }
+        }
+
+        function prefillBuyerInfo() {
+            if (userProfile) {
+                if (userProfile.full_name) {
+                    document.getElementById('buyer_name').value = userProfile.full_name;
+                }
+                if (window.auth && window.auth.getEmail) {
+                    const email = window.auth.getEmail();
+                    if (email) document.getElementById('buyer_email').value = email;
+                }
+                if (userProfile.phone) {
+                    document.getElementById('buyer_phone').value = userProfile.phone;
+                }
+            }
         }
 
         async function submitInquiry() {
@@ -530,24 +641,43 @@
             errorEl.textContent = '';
 
             try {
-                const result = await window.supabase305.createInquiry({
+                const inquiryData = {
                     business_id: listingId,
-                    buyer_name: document.getElementById('inquiryName').value,
-                    buyer_email: document.getElementById('inquiryEmail').value,
-                    buyer_phone: document.getElementById('inquiryPhone').value || null,
+                    buyer_name: document.getElementById('buyer_name').value,
+                    buyer_email: document.getElementById('buyer_email').value,
+                    buyer_phone: document.getElementById('buyer_phone').value || null,
                     request_type: document.getElementById('inquiryType').value,
                     message: document.getElementById('inquiryMessage').value,
                     status: 'new'
-                });
+                };
 
-                // Send email notification
-                window.supabase305.sendNotification('new_inquiry', {
-                    business_name: currentListing?.name || 'Your listing',
-                    buyer_name: document.getElementById('inquiryName').value,
-                    buyer_email: document.getElementById('inquiryEmail').value,
-                    message: document.getElementById('inquiryMessage').value,
-                    seller_email: currentListing?.seller_email || currentListing?.contact_email || null
-                }).catch(() => {}); // Fail silently
+                const result = await window.supabase305.createInquiry(inquiryData);
+
+                // Send email notification via email-notify.js
+                if (window.emailNotify && window.emailNotify.sendInquiryAlert) {
+                    window.emailNotify.sendInquiryAlert({
+                        business_name: currentListing?.name || 'Unknown Listing',
+                        buyer_name: inquiryData.buyer_name,
+                        buyer_email: inquiryData.buyer_email,
+                        buyer_phone: inquiryData.buyer_phone,
+                        inquiry_type: inquiryData.request_type,
+                        message: inquiryData.message,
+                        seller_email: currentListing?.seller_email || currentListing?.contact_email || null
+                    });
+                }
+
+                // Also try legacy supabase notification as fallback
+                try {
+                    await window.supabase305.sendNotification('new_inquiry', {
+                        business_name: currentListing?.name || 'Your listing',
+                        buyer_name: inquiryData.buyer_name,
+                        buyer_email: inquiryData.buyer_email,
+                        buyer_phone: inquiryData.buyer_phone,
+                        inquiry_type: inquiryData.request_type || 'General',
+                        message: inquiryData.message,
+                        seller_email: currentListing?.seller_email || currentListing?.contact_email || null
+                    });
+                } catch (e) { /* fail silently */ }
 
                 const inquiry = result[0] || result;
                 currentInquiryId = inquiry.id;
@@ -555,9 +685,12 @@
                 document.getElementById('inquirySuccessModal').classList.add('active');
                 document.getElementById('inquiryFormEl').reset();
 
+                // Re-pre-fill after reset if still authenticated
+                prefillBuyerInfo();
+
                 // Set chat credentials from inquiry
-                chatUserName = document.getElementById('inquiryName').value;
-                chatUserEmail = document.getElementById('inquiryEmail').value;
+                chatUserName = inquiryData.buyer_name;
+                chatUserEmail = inquiryData.buyer_email;
             } catch (err) {
                 errorEl.textContent = err.message || 'Failed to send inquiry. Please try again.';
             } finally {
@@ -638,7 +771,35 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadListing);
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Start loading listing data immediately
+            loadListing();
+
+            // Wait for auth module
+            let authReady = false;
+            let attempts = 0;
+            while (!authReady && attempts < 50) {
+                if (window.auth && typeof window.auth.isAuthenticated === 'function') {
+                    authReady = true;
+                } else {
+                    await new Promise(r => setTimeout(r, 100));
+                    attempts++;
+                }
+            }
+
+            if (authReady && window.auth.isAuthenticated()) {
+                isAuthenticated = true;
+                try {
+                    userProfile = await window.auth.getProfile();
+                } catch (e) {
+                    console.warn('Could not fetch profile:', e);
+                }
+            }
+
+            // Update inquiry form auth state
+            updateInquiryAuthState();
+        });
     </script>
 </body>
 </html>

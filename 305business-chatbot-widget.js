@@ -479,6 +479,14 @@ Toujou pwofesyonèl, ede, espesifik. Referans non paj, ID seksyon, ak URL reyèl
       addMessage('bot', CONFIG.welcomeMessage[currentLang]);
       // Add quick action buttons
       addQuickActions();
+      // Add Twilio SMS/Voice buttons
+      if (window.TwilioIntegration) {
+        window.TwilioIntegration.addButtons('305business', messagesContainer, {
+          name: 'User',
+          phone: '',
+          interest: 'business marketplace'
+        });
+      }
     }
   });
 

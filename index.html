@@ -136,6 +136,9 @@
     </script>
     <script>window.EMAIL_SERVER_URL = 'https://305business-llc.vercel.app';</script>
     <script src="supabase-client.js"></script>
+    <script src="js/auth.js" type="module"></script>
+    <script src="js/nav.js" type="module"></script>
+    <script src="js/email-notify.js"></script>
 
     <!-- Agentic Website Engine -->
     <script src="agentic-config.js"></script>
@@ -752,6 +755,11 @@
                     <button onclick="window.location.href='list-business.html'" class="schematic-btn px-4 py-2" data-i18n="nav_list_business">
                         <span class="relative z-10">+ LIST BUSINESS</span>
                     </button>
+                    <div id="nav-auth" class="flex items-center gap-2 ml-2">
+                        <!-- Auth links injected by auth.js -->
+                        <a href="/login.html" class="text-white/80 hover:text-white transition text-sm font-medium">Log In</a>
+                        <a href="/signup.html" class="bg-[#23d9b0] text-[#050249] px-3 py-1.5 rounded-lg text-sm font-bold hover:bg-[#1bc9a0] transition">Get Started</a>
+                    </div>
                     <div class="flex items-center gap-2 ml-2">
                         <a href="https://t.me/28729102e2163caa3555992f580e1013" target="_blank" class="text-white/60 hover:text-white transition" title="Telegram">
                             <i class="fab fa-telegram text-lg"></i>
@@ -1353,7 +1361,9 @@
                         window.supabase305.sendNotification('new_contact', {
                             name: document.getElementById('contactName').value,
                             email: document.getElementById('contactEmail').value,
+                            phone: document.getElementById('contactPhone').value || null,
                             subject: document.getElementById('contactCategory').value || 'General Inquiry',
+                            revenue_range: document.getElementById('contactRevenue').value || null,
                             message: document.getElementById('contactMessage').value || 'No message provided'
                         }).catch(() => {}); // Fail silently — not critical
 
@@ -2161,6 +2171,8 @@
     <!-- ===== AGENTIC WEBSITE ENGINE v3.0 + AI CHATBOT v3.0 ===== -->
     <script src="agentic-website-engine-v3.js"></script>
     <script src="agentic-chatbot-v3.js"></script>
+    <script src="twilio-frontend.js"></script>
+    <script>window.TWILIO_API_BASE = 'https://twilio-305business.vercel.app';</script>
     <script>
       // Initialize Agentic Engine for 305business
       window._agenticInstance = new AgenticWebsite({
