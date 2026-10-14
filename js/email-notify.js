@@ -16,14 +16,18 @@
     // ═══════════════════════════════════════════════════════════
     // CONFIGURATION
     // ═══════════════════════════════════════════════════════════
+    // BREVO KEY: paste a SEND-ONLY key below (Brevo dashboard → SMTP & API →
+    // API Keys → Create → scope: send transactional emails only).
+    // Never paste the master account key — this file is public on GitHub.
+    var SITE_BREVO_KEY = ''; // ← e.g. 'xkeysib-...'
     var CONFIG = {
         BREVO_API_URL: 'https://api.brevo.com/v3/smtp/email',
-        API_KEY: global.SENDINBLUE_API_KEY || '',
-        FROM_EMAIL: 'info@305business.llc',
+        API_KEY: global.SENDINBLUE_API_KEY || SITE_BREVO_KEY || '',
+        FROM_EMAIL: 'jasmel@medicalbillingmb.com', /* verified sender on the Brevo account; swap to jasmel@305business.llc once its SPF/DKIM pass in Brevo */
         FROM_NAME: '305business.llc Notifications',
         NOTIFY_EMAIL: 'jasmelacosta@gmail.com',
         NOTIFY_NAME: 'Jasmel Acosta',
-        REPLY_TO: 'info@305business.llc'
+        REPLY_TO: 'jasmelacosta@gmail.com'
     };
 
     // ═══════════════════════════════════════════════════════════

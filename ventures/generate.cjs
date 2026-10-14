@@ -240,6 +240,7 @@ ${NAV}
                 return false;
             }
         }
+        if (window.EmailNotify && EmailNotify.ready && !EmailNotify.ready()) console.warn('[EmailNotify] no Brevo key — using mailto fallback');
         const body = 'Venture: ' + name + ' (' + slug + ')\\nListed: $' + listed.toLocaleString('en-US') + '\\nMy offer: ' + offerStr + '\\n\\nName: ' + f.name.value + '\\nEmail: ' + f.email.value + '\\nNotes: ' + (f.msg.value || '-');
         location.href = 'mailto:jasmelacosta@gmail.com?subject=' + encodeURIComponent('Acquisition Offer — ' + name) + '&body=' + encodeURIComponent(body);
         f.innerHTML = '<p style="color:#00FF88;font-family:JetBrains Mono,monospace;font-size:13px;padding:16px 0" class="text-center"><i class="fas fa-envelope mr-2"></i>DRAFT OPENED IN YOUR EMAIL APP</p>';
