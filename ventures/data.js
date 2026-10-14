@@ -3,6 +3,19 @@
    "Make an offer" enabled on every venture. Status labels are honest. */
 window.VENTURES = [
   {
+    slug: "zero-g-simulation",
+    name: "Zero-G Simulation",
+    tagline: "Multi-agent economic simulation & forecasting engine",
+    industry: "Data Intelligence",
+    status: "FUNCTIONAL",
+    price: 50000,
+    support: 199,
+    featured: true,
+    summary: "A multi-agent economic simulation platform used to stress-test products, pricing, and market strategy before committing capital. Simulates populations of psychologically realistic AI agents — needs, mood, stress, memory, social networks, behavioral economics — inside time-compressed markets. 500 agents across 26 weeks and 8 scenarios (recession, boom, hurricane, competitor entry, policy change) in seconds. ML forecasting ensemble (TimesFM, Prophet, Greykite) with changepoint detection, real-world data ingestion (news, economics, markets, weather), and seasonality modeling.",
+    capabilities: ["Multi-agent simulation","Behavioral economics","ML forecasting ensemble","Scenario stress-testing","Real-world data feeds","Seasonality modeling","REST API","Time-compressed markets"],
+    target: "Funds, venture studios, enterprises making major market bets"
+  },
+  {
     slug: "hotel-rate-intelligence",
     name: "Hotel Rate Intelligence",
     tagline: "Automated hospitality pricing & competitive intelligence",

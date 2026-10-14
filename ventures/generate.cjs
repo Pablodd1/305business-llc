@@ -76,6 +76,7 @@ function page(v, related) {
   .st-RD{background:rgba(184,41,221,.12);color:#d98ae8;border:1px solid rgba(184,41,221,.4)}
   .st-PROTOTYPE{background:rgba(255,0,110,.1);color:var(--pink);border:1px solid rgba(255,0,110,.35)}
   .st-AVAILABLE{background:rgba(30,90,160,.25);color:#7db8ff;border:1px solid rgba(125,184,255,.35)}
+  .st-FUNCTIONAL{background:rgba(238,244,251,.08);color:#eef4fb;border:1px solid rgba(238,244,251,.35)}
   .meta{display:flex;gap:12px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
   .ind{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
   .pricepanel{background:linear-gradient(160deg,var(--bg2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:28px;position:sticky;top:96px}

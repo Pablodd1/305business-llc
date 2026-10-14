@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Venture Portfolio — 23 Companies For Acquisition | 305business</title>
-<meta name="description" content="Explore 23 operating companies and products available for one-time acquisition. Healthcare AI, sports tech, computer vision, marketplaces, and growth systems — with optional support plans." />
+<title>Venture Portfolio — 24 Companies For Acquisition | 305business</title>
+<meta name="description" content="Explore 24 operating companies and products available for one-time acquisition. Healthcare AI, sports tech, computer vision, marketplaces, and growth systems — with optional support plans." />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <link rel="canonical" href="https://305business.llc/ventures/" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="305business Venture Portfolio — 23 Companies For Acquisition" />
+<meta property="og:title" content="305business Venture Portfolio — 24 Companies For Acquisition" />
 <meta property="og:description" content="Healthcare AI, sports tech, computer vision, marketplaces. One-time acquisition. Make an offer." />
 <meta property="og:image" content="https://305business.llc/305business-logo-transparent.png" />
 <meta property="og:url" content="https://305business.llc/ventures/" />
@@ -80,6 +80,7 @@
   .st-RD{background:rgba(184,41,221,.12);color:#d98ae8;border:1px solid rgba(184,41,221,.4)}
   .st-PROTOTYPE{background:rgba(255,0,110,.1);color:var(--pink);border:1px solid rgba(255,0,110,.35)}
   .st-AVAILABLE{background:rgba(30,90,160,.25);color:#7db8ff;border:1px solid rgba(125,184,255,.35)}
+.st-FUNCTIONAL{background:rgba(238,244,251,.08);color:#eef4fb;border:1px solid rgba(238,244,251,.35)}
   .card h3{font-size:20px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
   .tag{color:var(--cyan);font-size:13.5px;margin-top:6px;font-weight:600}
   .sum{color:var(--dim);font-size:13.5px;line-height:1.6;margin-top:12px;flex:1}
@@ -118,9 +119,9 @@
   <div class="wrap">
     <div class="kicker">305business — Venture Studio</div>
     <h1>We build companies.<br/>You can <em>own</em> one.</h1>
-    <p>Twenty-three operating products and platforms — engineered across healthcare AI, sports science, computer vision, and intelligent commerce. Each available for one-time acquisition, with optional support. Every stage labeled honestly. Every offer reviewed.</p>
+    <p>Twenty-four operating products and platforms — engineered across healthcare AI, sports science, computer vision, and intelligent commerce. Each available for one-time acquisition, with optional support. Every stage labeled honestly. Every offer reviewed.</p>
     <div class="herostats">
-      <div class="hs"><div class="n" id="statN">23</div><div class="l">Ventures</div></div>
+      <div class="hs"><div class="n" id="statN">24</div><div class="l">Ventures</div></div>
       <div class="hs"><div class="n" id="statLive">–</div><div class="l">Live / Production</div></div>
       <div class="hs"><div class="n">7</div><div class="l">Industries</div></div>
       <div class="hs"><div class="n">100%</div><div class="l">Offers Reviewed</div></div>
@@ -143,7 +144,7 @@
   <div class="wrap foot">
     <div>© 2026 305business.LLC — Miami, FL</div>
     <div>Venture Studio · Business Marketplace · Wealth Intelligence</div>
-    <div class="mono" style="font-size:11px">PORTFOLIO REV 2.0 · ALL OFFERS CONFIDENTIAL</div>
+    <div class="mono" style="font-size:11px">PORTFOLIO REV 2.1 · ALL OFFERS CONFIDENTIAL</div>
   </div>
 </footer>
 
@@ -157,6 +158,7 @@
   let fInd = 'All', fSt = 'All';
 
   // live count
+  document.getElementById('statN').textContent = V.length;
   document.getElementById('statLive').textContent = V.filter(v=>['LIVE','PRODUCTION'].includes(v.status)).length;
 
   function chipRow(el, items, key){
