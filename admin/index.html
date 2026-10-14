@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>MISSION CONTROL — 305business.llc</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+:root{--cyan:#00D4FF;--green:#00FF88;--amber:#FFC107;--red:#FF6B6B;--blue:#1a4a7a;}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Space Grotesk',sans-serif;color:#fff;min-height:100vh;
+background-color:var(--blue);
+background-image:linear-gradient(rgba(255,255,255,0.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.12) 1px,transparent 1px),linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);
+background-size:100px 100px,100px 100px,20px 20px,20px 20px;}
+.mono{font-family:'JetBrains Mono',monospace}
+.panel{background:rgba(26,74,122,0.55);backdrop-filter:blur(8px);border:1.5px solid rgba(255,255,255,0.25);border-radius:2px;position:relative}
+.panel::before{content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan)}
+.panel::after{content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan)}
+.tech-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;color:rgba(255,255,255,0.6);text-transform:uppercase}
+.inp{background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.3);color:#fff;padding:8px 10px;font-family:'JetBrains Mono',monospace;font-size:12px;width:100%;border-radius:2px}
+.inp:focus{outline:none;border-color:var(--cyan);background:rgba(0,212,255,0.06)}
+select.inp option{background:#123a5e;color:#fff}
+.btn{border:1.5px solid rgba(255,255,255,0.5);padding:9px 18px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;cursor:pointer;background:rgba(255,255,255,0.08);color:#fff;transition:all .15s;border-radius:2px;text-transform:uppercase}
+.btn:hover{background:rgba(255,255,255,0.2)}
+.btn-cyan{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,0.08)}
+.btn-cyan:hover{background:rgba(0,212,255,0.22)}
+.tab{padding:10px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;cursor:pointer;border-bottom:2px solid transparent;color:rgba(255,255,255,0.55);text-transform:uppercase}
+.tab.on{color:#fff;border-color:var(--cyan)}
+.badge{font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 8px;letter-spacing:1px;border:1px solid;border-radius:2px}
+.b-on{color:var(--green);border-color:var(--green);background:rgba(0,255,136,0.08)}
+.b-off{color:var(--red);border-color:var(--red);background:rgba(255,107,107,0.08)}
+.b-warn{color:var(--amber);border-color:var(--amber);background:rgba(255,193,7,0.08)}
+.msg{border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.04);padding:12px;margin-bottom:10px}
+.rowline{display:grid;grid-template-columns:180px 1fr 1fr;gap:8px;align-items:center;padding:6px 8px;border-bottom:1px dashed rgba(255,255,255,0.12)}
+.rowline:hover{background:rgba(255,255,255,0.04)}
+.flash{animation:fl 1.2s ease}@keyframes fl{0%{background:rgba(0,212,255,0.3)}100%{background:transparent}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN GATE -->
+<div id="gate" class="min-h-screen flex items-center justify-center p-4">
+  <div class="panel p-8 w-full max-w-md">
+    <div class="tech-label mb-2">RESTRICTED / SHEET A-0</div>
+    <h1 class="text-2xl font-bold tracking-tight mb-1">MISSION CONTROL</h1>
+    <p class="text-white/60 text-sm mb-6">305business.llc — administrator panel</p>
+    <input id="pw" type="password" class="inp mb-3" placeholder="PASSPHRASE" autocomplete="off">
+    <button class="btn btn-cyan w-full" onclick="unlock()">AUTHENTICATE →</button>
+    <div id="gateErr" class="text-red-400 text-xs mono mt-3 hidden">ACCESS DENIED — wrong passphrase</div>
+    <p class="text-white/35 text-[11px] mt-6 mono" id="gateHint">Gate v1: passphrase check runs in-browser. Do not reuse a password you use elsewhere.</p>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden min-h-screen">
+  <header class="border-b border-white/20 sticky top-0 z-20" style="background:rgba(26,74,122,0.92);backdrop-filter:blur(8px)">
+    <div class="max-w-7xl mx-auto px-4 flex items-center justify-between flex-wrap">
+      <div class="py-3">
+        <span class="tech-label">305BUSINESS.LLC</span>
+        <span class="font-bold text-lg ml-3">MISSION CONTROL</span>
+      </div>
+      <nav class="flex">
+        <div class="tab on" data-tab="inbox" onclick="showTab('inbox')">Inbox</div>
+        <div class="tab" data-tab="ventures" onclick="showTab('ventures')">Ventures</div>
+        <div class="tab" data-tab="comms" onclick="showTab('comms')">Communications</div>
+        <div class="tab" data-tab="settings" onclick="showTab('settings')">Settings</div>
+      </nav>
+      <button class="btn text-[10px] py-1.5 px-3 mb-0" onclick="lock()">LOCK</button>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-8">
+
+    <!-- INBOX -->
+    <section id="tab-inbox">
+      <div class="flex items-center justify-between flex-wrap gap-3 mb-6">
+        <div>
+          <h2 class="text-xl font-bold">Inquiries Inbox</h2>
+          <p class="text-white/60 text-sm">Contact-form messages and acquisition offers, newest first.</p>
+        </div>
+        <button class="btn btn-cyan" onclick="loadInbox()">⟳ REFRESH</button>
+      </div>
+      <div id="backendStatus" class="panel p-4 mb-6 text-sm"></div>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div><div class="tech-label mb-3">CONTACT MESSAGES</div><div id="boxContact"><div class="text-white/40 text-sm mono">Not loaded.</div></div></div>
+        <div><div class="tech-label mb-3">ACQUISITION OFFERS</div><div id="boxOffers"><div class="text-white/40 text-sm mono">Not loaded.</div></div></div>
+      </div>
+    </section>
+
+    <!-- VENTURES -->
+    <section id="tab-ventures" class="hidden">
+      <div class="flex items-center justify-between flex-wrap gap-3 mb-6">
+        <div>
+          <h2 class="text-xl font-bold">Venture Registry Editor</h2>
+          <p class="text-white/60 text-sm">Edits are drafts until you download the new data.js and publish it (send it to Kimi Claw or commit to the repo).</p>
+        </div>
+        <div class="flex gap-2 items-center">
+          <span id="draftCount" class="tech-label"></span>
+          <button class="btn" onclick="resetDraft()">RESET</button>
+          <button class="btn btn-cyan" onclick="downloadData()">⬇ DOWNLOAD data.js</button>
+        </div>
+      </div>
+      <input id="vsearch" class="inp mb-4" placeholder="SEARCH VENTURES…" oninput="renderVentures()">
+      <div id="vList"></div>
+    </section>
+
+    <!-- COMMS -->
+    <section id="tab-comms" class="hidden">
+      <h2 class="text-xl font-bold mb-2">Communications Status</h2>
+      <p class="text-white/60 text-sm mb-6">How users reach you, and what's live right now.</p>
+      <div class="grid md:grid-cols-2 gap-6" id="commsGrid"></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="tab-settings" class="hidden">
+      <h2 class="text-xl font-bold mb-6">Settings</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="panel p-6">
+          <div class="tech-label mb-3">BACKEND — SUPABASE PROJECT</div>
+          <p class="text-white/60 text-sm mb-4">Messages save to Supabase. The old project is offline (NXDOMAIN). Create a free project at supabase.com, then paste its URL and anon key here. This stores config only in YOUR browser.</p>
+          <input id="sbUrl" class="inp mb-3" placeholder="https://YOURPROJECT.supabase.co">
+          <input id="sbKey" class="inp mb-4" placeholder="anon / publishable key">
+          <button class="btn btn-cyan" onclick="saveBackend()">SAVE + TEST</button>
+          <div id="sbTest" class="text-xs mono mt-3"></div>
+        </div>
+        <div class="panel p-6">
+          <div class="tech-label mb-3">PASSPHRASE</div>
+          <p class="text-white/60 text-sm mb-4">To change the gate passphrase, edit <code class="mono text-cyan-300">admin/index.html</code> line with <code class="mono text-cyan-300">GATE_HASH</code> — generate a hash: <code class="mono text-cyan-300">echo -n 'newpass' | sha256sum</code>. Ask Kimi Claw to do it for you in seconds.</p>
+          <div class="tech-label mb-3">EMAIL DELIVERY (BREVO)</div>
+          <p class="text-white/60 text-sm">Instant email delivery of offers/messages needs a Brevo API key set as <code class="mono text-cyan-300">window.SENDINBLUE_API_KEY</code> on the site. Keys are never stored in this panel.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+/* ============ GATE ============ */
+const GATE_HASH = 'ef3b5531e571535a00310c5964588938b324ef1cd8a660c940c64fbad2e9c204'; // ventures305
+async function sha(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function unlock(){
+  const h=await sha(document.getElementById('pw').value);
+  if(h===GATE_HASH){sessionStorage.setItem('mc_auth','1');boot();}
+  else document.getElementById('gateErr').classList.remove('hidden');
+}
+document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
+function lock(){sessionStorage.removeItem('mc_auth');location.reload()}
+function boot(){document.getElementById('gate').classList.add('hidden');document.getElementById('app').classList.remove('hidden');initAll()}
+if(sessionStorage.getItem('mc_auth'))boot();
+
+/* ============ TABS ============ */
+function showTab(t){
+  ['inbox','ventures','comms','settings'].forEach(x=>document.getElementById('tab-'+x).classList.toggle('hidden',x!==t));
+  document.querySelectorAll('.tab').forEach(el=>el.classList.toggle('on',el.dataset.tab===t));
+}
+
+/* ============ BACKEND ============ */
+const DEFAULT_SB={url:'https://uakiregrnzcwuwqjkaxr.supabase.co',key:'sb_publishable_BhHyFZplUB8DE6-E2jBxvA_MUrqfQq0'};
+function sbCfg(){return JSON.parse(localStorage.getItem('mc_sb')||'null')||DEFAULT_SB}
+async function sbFetch(table,query){
+  const c=sbCfg();
+  const r=await fetch(c.url+'/rest/v1/'+table+(query||''),{headers:{apikey:c.key,Authorization:'Bearer '+c.key}});
+  if(!r.ok)throw new Error('HTTP '+r.status);
+  return r.json();
+}
+async function checkBackend(){
+  const el=document.getElementById('backendStatus');
+  try{await sbFetch('contact_messages','?select=id&limit=1');el.innerHTML='<span class="badge b-on">BACKEND ONLINE</span> <span class="text-white/70 ml-2 mono text-xs">'+sbCfg().url+'</span>'}
+  catch(e){el.innerHTML='<span class="badge b-off">BACKEND OFFLINE</span> <span class="text-white/70 ml-2 mono text-xs">'+sbCfg().url+' — '+(e.message||'unreachable')+'</span><div class="mt-3 text-white/70">Contact form and offers are NOT being stored. Until you connect a new Supabase project (Settings tab), messages fall back to opening your email app — nothing is lost. One-time fix, ~10 minutes.</div>'}
+}
+function saveBackend(){
+  localStorage.setItem('mc_sb',JSON.stringify({url:document.getElementById('sbUrl').value.trim(),key:document.getElementById('sbKey').value.trim()}));
+  checkBackend().then(()=>{document.getElementById('sbTest').textContent='Saved. Status shown above.';loadInbox()});
+}
+async function loadInbox(){
+  await checkBackend();
+  const fmt=rows=>rows.length?rows.map(m=>`<div class="msg"><div class="flex justify-between flex-wrap gap-2"><b>${esc(m.name||m.buyer_name||'')}</b><span class="tech-label">${(m.created_at||'').slice(0,16).replace('T',' ')}</span></div><div class="text-cyan-300 text-xs mono mt-1">${esc(m.email||m.buyer_email||'')}${m.phone?' · '+esc(m.phone):''}</div>${m.subject?`<div class="text-white/80 text-sm mt-2">${esc(m.subject)}</div>`:''}${m.message?`<div class="text-white/70 text-sm mt-1 whitespace-pre-wrap">${esc(m.message)}</div>`:''}${m.offer_amount?`<div class="text-green-400 mono text-sm mt-1">OFFER: ${esc(m.offer_amount)}</div>`:''}</div>`).join(''):'<div class="text-white/40 text-sm mono">Empty.</div>';
+  try{
+    const cm=await sbFetch('contact_messages','?select=*&order=created_at.desc&limit=50');
+    document.getElementById('boxContact').innerHTML=fmt(cm);
+  }catch(e){document.getElementById('boxContact').innerHTML='<div class="text-white/40 text-sm mono">Unavailable — backend offline.</div>'}
+  try{
+    const iq=await sbFetch('inquiries','?select=*&order=created_at.desc&limit=50');
+    document.getElementById('boxOffers').innerHTML=fmt(iq);
+  }catch(e){document.getElementById('boxOffers').innerHTML='<div class="text-white/40 text-sm mono">Unavailable — backend offline.</div>'}
+}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ============ VENTURES EDITOR ============ */
+const STATUSES=['LIVE','PRODUCTION','FUNCTIONAL','PILOT','IN DEVELOPMENT','R&D','PROTOTYPE','AVAILABLE'];
+let VENTURES=[],DRAFT={};
+function initAll(){
+  checkBackend();renderComms();loadVentures();
+  const c=sbCfg();document.getElementById('sbUrl').value=c.url===DEFAULT_SB.url?'':c.url;document.getElementById('sbKey').value=c.key===DEFAULT_SB.key?'':c.key;
+}
+async function loadVentures(){
+  const s=document.createElement('script');s.src='/ventures/data.js';
+  s.onload=()=>{VENTURES=JSON.parse(JSON.stringify(window.VENTURES));DRAFT=JSON.parse(localStorage.getItem('mc_draft')||'{}');renderVentures()};
+  document.head.appendChild(s);
+}
+function getD(slug){return DRAFT[slug]||{}}
+function setD(slug,k,v){const d=DRAFT[slug]||(DRAFT[slug]={});d[k]=v;localStorage.setItem('mc_draft',JSON.stringify(DRAFT));updateDraftCount()}
+function updateDraftCount(){const n=Object.keys(DRAFT).length;document.getElementById('draftCount').textContent=n?('DRAFT CHANGES: '+n):''}
+function renderVentures(){
+  const q=(document.getElementById('vsearch').value||'').toLowerCase();
+  const list=VENTURES.filter(v=>(v.name+v.slug+v.industry).toLowerCase().includes(q));
+  document.getElementById('vList').innerHTML=list.map(v=>{
+    const d=getD(v.slug);
+    const price=d.price??v.price, sup=d.support??v.support, st=d.status||v.status, tg=d.tagline??v.tagline, feat=d.featured??v.featured;
+    return `<div class="panel p-4 mb-3" id="row-${v.slug}">
+      <div class="flex justify-between items-start flex-wrap gap-2 mb-3">
+        <div><b class="text-lg">${esc(v.name)}</b> <span class="tech-label ml-2">${esc(v.slug)}</span></div>
+        <label class="flex items-center gap-2 text-xs mono cursor-pointer"><input type="checkbox" ${feat?'checked':''} onchange="setD('${v.slug}','featured',this.checked);flash('${v.slug}')"> FEATURED ON HOMEPAGE</label>
+      </div>
+      <div class="grid md:grid-cols-4 gap-3">
+        <div><div class="tech-label mb-1">PRICE $</div><input type="number" class="inp" value="${price}" onchange="setD('${v.slug}','price',+this.value);flash('${v.slug}')"></div>
+        <div><div class="tech-label mb-1">SUPPORT $/MO</div><input type="number" class="inp" value="${sup}" onchange="setD('${v.slug}','support',+this.value);flash('${v.slug}')"></div>
+        <div><div class="tech-label mb-1">STATUS</div><select class="inp" onchange="setD('${v.slug}','status',this.value);flash('${v.slug}')">${STATUSES.map(s=>`<option ${s===st?'selected':''}>${s}</option>`).join('')}</select></div>
+        <div><div class="tech-label mb-1">INDUSTRY</div><input class="inp" value="${esc(v.industry)}" disabled></div>
+      </div>
+      <div class="mt-3"><div class="tech-label mb-1">TAGLINE</div><input class="inp" value="${esc(tg)}" onchange="setD('${v.slug}','tagline',this.value);flash('${v.slug}')"></div>
+    </div>`;
+  }).join('')||'<div class="text-white/40 mono text-sm">No matches.</div>';
+  updateDraftCount();
+}
+function flash(slug){const el=document.getElementById('row-'+slug);if(el){el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash')}}
+function resetDraft(){if(confirm('Discard all draft edits?')){DRAFT={};localStorage.removeItem('mc_draft');renderVentures()}}
+function downloadData(){
+  const merged=VENTURES.map(v=>Object.assign({},v,DRAFT[v.slug]||{}));
+  const body='/* 305business Venture Portfolio — master data registry\n   One-time acquisition model: buy the app/product, optional monthly support.\n   "Make an offer" enabled on every venture. Status labels are honest. */\nwindow.VENTURES = '+JSON.stringify(merged,null,2)+';\n';
+  const blob=new Blob([body],{type:'text/javascript'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='data.js';a.click();
+}
+
+/* ============ COMMS ============ */
+function renderComms(){
+  const cards=[
+    {t:'OFFER FORMS (24 VENTURE PAGES)',s:'on',d:'Every "Make an Offer" button falls back to opening the visitor\'s email app addressed to info@305business.llc. Works today, no setup. Emails arrive in whichever inbox receives 305business mail.'},
+    {t:'CONTACT FORM (HOMEPAGE)',s:'warn',d:'Tries to save to Supabase first. The project behind it is OFFLINE (NXDOMAIN), so it now auto-falls back to your email app — message fully prefilled. Fixed tonight; nothing gets lost.'},
+    {t:'EMAIL NOTIFICATIONS (INSTANT)',s:'off',d:'Brevo key not configured on the site yet. Once set (window.SENDINBLUE_API_KEY), offers + contacts ALSO arrive as instant formatted emails — no mailto needed. Reuse your existing Brevo account; needs one verified sender for 305business.'},
+    {t:'ADMIN INBOX (THIS PANEL)',s:'warn',d:'Reads Supabase directly. Shows messages/offers the moment a live project is connected (Settings tab). ~10-minute one-time setup.'}
+  ];
+  document.getElementById('commsGrid').innerHTML=cards.map(c=>`<div class="panel p-6"><div class="flex justify-between items-center mb-3"><span class="font-bold">${c.t}</span><span class="badge b-${c.s}">${c.s==='on'?'LIVE':c.s==='warn'?'FALLBACK':'NOT SET'}</span></div><p class="text-white/65 text-sm">${c.d}</p></div>`).join('');
+}
+</script>
+</body>
+</html>

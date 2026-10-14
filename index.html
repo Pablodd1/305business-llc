@@ -1703,7 +1703,11 @@
                         success.classList.remove('hidden');
                         document.getElementById('contactForm').reset();
                     } catch (error) {
-                        err.textContent = 'Error: ' + error.message;
+                        // Supabase unreachable — fall back to guaranteed mailto delivery so no inquiry is lost
+                        const subject = 'Contact Inquiry — ' + (document.getElementById('contactCategory').value || 'General');
+                        const body = 'Name: ' + document.getElementById('contactName').value + '\nEmail: ' + document.getElementById('contactEmail').value + '\nPhone: ' + (document.getElementById('contactPhone').value || '—') + '\nRevenue: ' + (document.getElementById('contactRevenue').value || '—') + '\n\n' + (document.getElementById('contactMessage').value || '');
+                        location.href = 'mailto:info@305business.llc?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+                        err.textContent = 'Form service unreachable — opening your email app as backup. You can also email info@305business.llc directly.';
                         err.classList.remove('hidden');
                     } finally {
                         btn.disabled = false;
