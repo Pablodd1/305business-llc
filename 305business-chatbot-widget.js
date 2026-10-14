@@ -100,7 +100,7 @@ When a user asks something, detect their intent and route them:
 7. Close with broker support
 
 === CONTACT INFO ===
-• Email: info@305business.llc
+• Email: jasmelacosta@gmail.com
 • Phone: +1-786-643-2099
 • Location: Miami, FL
 • WhatsApp: +1 786-643-2099
@@ -180,7 +180,7 @@ Always be professional, helpful, and specific. Reference page names, section IDs
 7. Cerrar con soporte de corredor
 
 === CONTACTO ===
-• Email: info@305business.llc
+• Email: jasmelacosta@gmail.com
 • Teléfono: +1-786-643-2099
 • WhatsApp: +1 786-643-2099
 • Reserva: https://oem-flex-spots-poll.trycloudflare.com/?company=305business
@@ -257,7 +257,7 @@ Sé profesional, servicial y específico. Referencia nombres de páginas, IDs de
 7. Закрытие с поддержкой брокера
 
 === КОНТАКТЫ ===
-• Email: info@305business.llc
+• Email: jasmelacosta@gmail.com
 • Телефон: +1-786-643-2099
 • WhatsApp: +1 786-643-2099
 • Бронирование: https://oem-flex-spots-poll.trycloudflare.com/?company=305business
@@ -334,7 +334,7 @@ Sé profesional, servicial y específico. Referencia nombres de páginas, IDs de
 7. Fèmen ak sipò kourtye
 
 === KONTAK ===
-• Email: info@305business.llc
+• Email: jasmelacosta@gmail.com
 • Telefòn: +1-786-643-2099
 • WhatsApp: +1 786-643-2099
 • Rezèvasyon: https://oem-flex-spots-poll.trycloudflare.com/?company=305business
@@ -535,10 +535,10 @@ Toujou pwofesyonèl, ede, espesifik. Referans non paj, ID seksyon, ak URL reyèl
     }).catch(err => {
       showTyping(false);
       const errorMsgs = {
-        en: "I'm having trouble connecting. Please try again or contact us at info@305business.llc",
-        es: "Estoy teniendo problemas de conexión. Por favor intenta de nuevo o contáctanos en info@305business.llc",
-        ru: "У меня проблемы с подключением. Пожалуйста, попробуйте еще раз или свяжитесь с нами по адресу info@305business.llc",
-        ht: "Mwen gen pwoblèm koneksyon. Tanpri eseye ankò oswa kontakte nou nan info@305business.llc"
+        en: "I'm having trouble connecting. Please try again or contact us at jasmelacosta@gmail.com",
+        es: "Estoy teniendo problemas de conexión. Por favor intenta de nuevo o contáctanos en jasmelacosta@gmail.com",
+        ru: "У меня проблемы с подключением. Пожалуйста, попробуйте еще раз или свяжитесь с нами по адресу jasmelacosta@gmail.com",
+        ht: "Mwen gen pwoblèm koneksyon. Tanpri eseye ankò oswa kontakte nou nan jasmelacosta@gmail.com"
       };
       addMessage('bot', errorMsgs[currentLang] || errorMsgs.en);
       console.error('Chatbot error:', err);
@@ -694,12 +694,12 @@ Toujou pwofesyonèl, ede, espesifik. Referans non paj, ID seksyon, ak URL reyèl
         broker: "🤝 **Broker Matching Service**\n\n305business has a verified network of Miami business brokers specializing in:\n• Restaurants & food service\n• Healthcare practices (dental, medical, chiropractic)\n• Retail & franchises\n• Tech startups & SaaS\n• Professional services\n\n**How matching works:**\n1. Submit your business details\n2. We match you with 2-3 brokers based on industry expertise\n3. Interview brokers, choose your fit\n4. Broker handles marketing, screening, negotiation, closing\n\nTypical broker commission: 8-12% of sale price\n\n👉 [Find a Broker](https://305business.llc/broker-portal)",
         legal: "📄 **Legal Support Resources**\n\n305business provides free and premium legal resources:\n\n**FREE:**\n• NDA template (buyer-seller confidentiality)\n• Due diligence checklist\n• Closing checklist\n• Contract review guide\n\n**PREMIUM (via partner attorneys):**\n• Purchase agreement drafting\n• Asset vs. stock sale structuring\n• Lease transfer negotiation\n• Licensing transfer assistance\n\nAll resources are Florida-specific and reviewed by Miami business attorneys.\n\n👉 [Access Legal Resources](https://305business.llc/legal-support)",
         price: "💵 **Pricing & Fees**\n\n| Service | Price |\n|---------|-------|\n| List a business | **FREE** |\n| Business Valuation | $495 |\n| Financial Forecasting (3-year) | $895 |\n| Investor Pitch Deck | $695 |\n| Broker Match | **FREE** |\n| Featured Listing (30 days) | $99 |\n| Legal Document Review | $250/hr |\n\n**Broker commissions:** Typically 8-12% of final sale price (paid by seller at closing)\n\nNo hidden fees. No monthly charges for basic listings.\n\n👉 [View All Services](https://305business.llc/#services)",
-        contact: "📞 **Contact 305business**\n\n• **Email:** info@305business.llc\n• **Phone:** +1-786-643-2099\n• **WhatsApp:** +1 786-643-2099\n• **Telegram:** [Message us](https://t.me/28729102e2163caa3555992f580e1013)\n• **Instagram:** @305business\n• **Facebook:** 305business\n\n**Office Hours:** Mon-Fri 9AM-6PM EST\n**Platform:** Available 24/7\n\n**Book a FREE 30-minute consultation:**\n👉 [Schedule Now](https://oem-flex-spots-poll.trycloudflare.com/?company=305business)\n\nGoogle Meet link auto-generated. You'll get email confirmation + calendar invite.",
+        contact: "📞 **Contact 305business**\n\n• **Email:** jasmelacosta@gmail.com\n• **Phone:** +1-786-643-2099\n• **WhatsApp:** +1 786-643-2099\n• **Telegram:** [Message us](https://t.me/28729102e2163caa3555992f580e1013)\n• **Instagram:** @305business\n• **Facebook:** 305business\n\n**Office Hours:** Mon-Fri 9AM-6PM EST\n**Platform:** Available 24/7\n\n**Book a FREE 30-minute consultation:**\n👉 [Schedule Now](https://oem-flex-spots-poll.trycloudflare.com/?company=305business)\n\nGoogle Meet link auto-generated. You'll get email confirmation + calendar invite.",
         location: "📍 **305business Coverage Area**\n\nWe serve all of South Florida:\n\n• **Miami-Dade County** — Miami, Miami Beach, Coral Gables, Doral, Aventura, Brickell, Wynwood, Little Havana, Kendall\n• **Broward County** — Fort Lauderdale, Hollywood, Pompano Beach, Plantation\n• **Palm Beach County** — West Palm Beach, Boca Raton, Palm Beach\n• **Also:** Monroe County (Key West), Collier County (Naples)\n\nOur marketplace focuses on businesses in the 305 area code and surrounding regions.\n\nWhether you're buying a restaurant on South Beach or selling a dental practice in Coral Gables, we've got you covered.",
         trending: "🔥 **Trending Heatmap — Real-Time Buyer Interest**\n\nThe heatmap shows which businesses are getting the most attention RIGHT NOW:\n\n• **🔴 HOT (red, pulsing):** Score ≥50 — Multiple inquiries, serious buyer interest\n• **🟠 WARM (orange):** Score ≥20 — Rising views, buyers actively exploring\n• **🟡 TRENDING (yellow):** Score ≥5 — Steady interest, worth watching\n\n**How it works:**\n• Every click and view is tracked in real-time\n• Heat score = views + (inquiries × 3) + featured bonus\n• Auto-refreshes every 60 seconds\n• Creates social proof — "If other buyers are interested, maybe I should look too"\n\n👉 [View Live Heatmap](https://305business.llc/#trending)",
         services: "🛠️ **All 305business Services**\n\n| Service | Price | What You Get |\n|---------|-------|-------------|\n| **Business Listing** | FREE | Standard listing on marketplace, visible to all buyers |\n| **Featured Listing** | $99/mo | Top placement, heatmap priority, homepage spotlight |\n| **Business Valuation** | $495 | Certified valuation report, market analysis, 3-5 days |\n| **Financial Forecasting** | $895 | 3-year financial model, projections, investor-ready |\n| **Investor Pitch Deck** | $695 | Custom-designed deck, 12-15 slides, professional design |\n| **Broker Matching** | FREE | Matched with 2-3 verified brokers, interview & choose |\n| **Legal Document Review** | $250/hr | Attorney-reviewed contracts, Florida-specific |\n| **NDA Templates** | FREE | Download ready-to-use confidentiality agreements |\n\n👉 [Explore Services](https://305business.llc/#services)",
         ai: "🤖 **AI-Powered Features**\n\n305business uses cutting-edge AI to make buying and selling easier:\n\n• **AI Matching** — Input your budget, industry, location → get personalized business recommendations with match scores\n• **Trending Heatmap** — Real-time buyer interest visualization, social proof for hot listings\n• **Smart Front Desk (this chatbot)** — Trained on full site content, guides buyers/sellers, answers questions in 4 languages\n• **Agentic SEO Engine** — Self-optimizing website that adapts meta titles, descriptions, and CTAs based on user behavior\n• **A/B Testing** — Automatically tests headline and CTA variants to maximize conversions\n• **AI Search Optimization** — Optimized for Google AI Overviews, ChatGPT, Perplexity, Claude\n• **Dynamic Content** — Freshness alerts, content priority scoring, structured data injection\n\n👉 [Try AI Matching](https://305business.llc/#matching)",
-        default: "That's a great question. Let me connect you with the right resource.\n\nFor detailed help, you can:\n• 📞 **Book a free consultation** — [Schedule 30-min call](https://oem-flex-spots-poll.trycloudflare.com/?company=305business)\n• 📧 **Email us:** info@305business.llc\n• 🔍 **Browse listings:** [View marketplace](https://305business.llc/#listings)\n• 🔥 **Check trending deals:** [Live heatmap](https://305business.llc/#trending)\n\nWhat specific aspect would you like to explore?"
+        default: "That's a great question. Let me connect you with the right resource.\n\nFor detailed help, you can:\n• 📞 **Book a free consultation** — [Schedule 30-min call](https://oem-flex-spots-poll.trycloudflare.com/?company=305business)\n• 📧 **Email us:** jasmelacosta@gmail.com\n• 🔍 **Browse listings:** [View marketplace](https://305business.llc/#listings)\n• 🔥 **Check trending deals:** [Live heatmap](https://305business.llc/#trending)\n\nWhat specific aspect would you like to explore?"
       }
     };
 
