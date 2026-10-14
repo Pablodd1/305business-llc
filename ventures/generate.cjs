@@ -1,0 +1,176 @@
+#!/usr/bin/env node
+/* Generates 23 static venture detail pages from data.js — unique meta + JSON-LD per page. */
+const fs = require('fs');
+global.window = {};
+eval(fs.readFileSync(__dirname + '/data.js', 'utf8'));
+const V = global.window.VENTURES;
+const fmt = n => '$' + n.toLocaleString('en-US');
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+
+function page(v, related) {
+  const stClass = 'st-' + v.status.replace(/[\s&]+/g,'_');
+  const sup = v.support ? `Optional support: ${fmt(v.support)}/mo` : 'Support included';
+  const rel = related.map(r => `
+      <a class="rcard" href="/ventures/${r.slug}.html">
+        <div class="top"><span class="ind">${r.industry}</span><span class="status st-${r.status.replace(/[\s&]+/g,'_')}">${r.status}</span></div>
+        <h4>${r.name}</h4><div class="tag">${r.tagline}</div>
+        <div class="ramt">${fmt(r.price)} <span>one-time</span></div>
+      </a>`).join('');
+  const demoBtns = [
+    v.links?.demo ? `<a class="btn" href="${v.links.demo}" target="_blank" rel="noopener">Live Demo</a>` : '',
+    v.links?.website ? `<a class="btn ghost" href="${v.links.website}" target="_blank" rel="noopener">Website</a>` : ''
+  ].join('');
+  const ld = {
+    "@context":"https://schema.org","@type":"SoftwareApplication",
+    "name":v.name,"description":v.summary,"applicationCategory":"BusinessApplication","operatingSystem":"Web",
+    "offers":{"@type":"Offer","price":v.price,"priceCurrency":"USD","availability":"https://schema.org/InStock","url":`https://305business.llc/ventures/${v.slug}.html`},
+    "brand":{"@type":"Brand","name":v.name}
+  };
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${esc(v.name)} — ${esc(v.tagline)} | Acquisition: ${fmt(v.price)} | 305business Ventures</title>
+<meta name="description" content="${esc(v.summary.slice(0,155))}" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://305business.llc/ventures/${v.slug}.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="${esc(v.name)} — available for acquisition" />
+<meta property="og:description" content="${esc(v.tagline)}. One-time acquisition ${fmt(v.price)}. Status: ${v.status}." />
+<meta property="og:image" content="https://305business.llc/305business-logo-transparent.png" />
+<meta property="og:url" content="https://305business.llc/ventures/${v.slug}.html" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#0a1628" />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<script type="application/ld+json">${JSON.stringify(ld)}</script>
+<style>
+  :root{--bg:#0a1628;--bg2:#0d1d33;--panel:#101f36;--line:rgba(0,212,255,.14);--ink:#eef4fb;--dim:#8ea3bd;--cyan:#00D4FF;--green:#00FF88;--amber:#FFC107;--violet:#B829DD;--pink:#FF006E;--blue:#1a4a7a}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  header.site{border-bottom:1px solid var(--line);background:rgba(10,22,40,.9);position:sticky;top:0;z-index:50;backdrop-filter:blur(10px)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px}
+  .brand img{height:32px}
+  .navlinks{display:flex;gap:24px;font-size:14px;color:var(--dim)}
+  .navlinks a:hover{color:var(--cyan)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--cyan);color:#04222e;font-weight:700;font-size:14px;padding:10px 20px;border-radius:8px;border:0;cursor:pointer}
+  .btn:hover{box-shadow:0 6px 24px rgba(0,212,255,.35)}
+  .btn.ghost{background:transparent;color:var(--cyan);border:1px solid var(--line)}
+  @media(max-width:860px){.navlinks{display:none}}
+  .crumb{padding:22px 0 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim)}
+  .crumb a:hover{color:var(--cyan)}
+  .vhero{padding:36px 0 48px;border-bottom:1px solid var(--line)}
+  .vhead{display:grid;grid-template-columns:1.6fr 1fr;gap:48px;align-items:start}
+  @media(max-width:900px){.vhead{grid-template-columns:1fr}}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:var(--cyan);text-transform:uppercase;margin-bottom:14px}
+  h1{font-size:clamp(30px,4vw,46px);font-weight:800;line-height:1.06;letter-spacing:-.02em}
+  .tag{color:var(--cyan);font-size:16px;margin-top:10px;font-weight:600}
+  .lead{color:#c2d2e6;font-size:16.5px;line-height:1.7;margin-top:20px}
+  .status{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.1em;padding:5px 12px;border-radius:100px;text-transform:uppercase;white-space:nowrap}
+  .st-LIVE,.st-PRODUCTION{background:rgba(0,255,136,.12);color:var(--green);border:1px solid rgba(0,255,136,.35)}
+  .st-PILOT{background:rgba(255,193,7,.12);color:var(--amber);border:1px solid rgba(255,193,7,.35)}
+  .st-IN_DEVELOPMENT{background:rgba(0,212,255,.1);color:var(--cyan);border:1px solid rgba(0,212,255,.35)}
+  .st-RD{background:rgba(184,41,221,.12);color:#d98ae8;border:1px solid rgba(184,41,221,.4)}
+  .st-PROTOTYPE{background:rgba(255,0,110,.1);color:var(--pink);border:1px solid rgba(255,0,110,.35)}
+  .st-AVAILABLE{background:rgba(30,90,160,.25);color:#7db8ff;border:1px solid rgba(125,184,255,.35)}
+  .meta{display:flex;gap:12px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+  .ind{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+  .pricepanel{background:linear-gradient(160deg,var(--bg2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:28px;position:sticky;top:96px}
+  .pricepanel .one{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.14em;text-transform:uppercase}
+  .pricepanel .amt{font-family:'JetBrains Mono',monospace;font-size:42px;font-weight:700;margin:8px 0 2px}
+  .pricepanel .sup{font-size:13px;color:var(--dim);margin-bottom:20px}
+  .pricepanel form{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+  .pricepanel input,.pricepanel textarea{background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:12px 14px;border-radius:8px;font-size:14px;font-family:inherit;width:100%}
+  .pricepanel input:focus,.pricepanel textarea:focus{outline:none;border-color:var(--cyan)}
+  .pricepanel button{margin-top:4px;width:100%;justify-content:center}
+  .note{font-size:11.5px;color:var(--dim);margin-top:12px;line-height:1.5}
+  section.block{padding:48px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:24px;font-weight:800;letter-spacing:-.01em;margin-bottom:22px}
+  .caps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:760px){.caps{grid-template-columns:repeat(2,1fr)}}
+  .cap{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#c2d2e6}
+  .cap:before{content:"◆ ";color:var(--cyan)}
+  .tuser{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;color:#c2d2e6;font-size:15px}
+  .relgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:860px){.relgrid{grid-template-columns:1fr}}
+  .rcard{background:linear-gradient(160deg,var(--bg2),var(--panel));border:1px solid var(--line);border-radius:12px;padding:20px;display:block;transition:transform .15s,border-color .15s}
+  .rcard:hover{transform:translateY(-3px);border-color:rgba(0,212,255,.4)}
+  .rcard .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .rcard h4{font-size:16px;font-weight:800}
+  .rcard .tag{font-size:12.5px;margin-top:5px}
+  .ramt{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;margin-top:14px}
+  .ramt span{font-size:11px;color:var(--dim);font-weight:400}
+  footer{padding:40px 0;color:var(--dim);font-size:13px}
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap nav">
+  <a class="brand" href="https://305business.llc"><img src="https://305business.llc/305business-logo-transparent.png" alt="305business"/>305business<span style="color:var(--cyan)">.LLC</span></a>
+  <nav class="navlinks"><a href="https://305business.llc">Marketplace</a><a href="/ventures/" style="color:var(--cyan)">Ventures</a><a href="https://305business.llc/how-it-works.html">How It Works</a><a href="https://305business.llc/valuation.html">Valuation</a></nav>
+  <a class="btn" href="https://305business.llc/#inquiry">Submit Inquiry</a>
+</div></header>
+
+<div class="wrap"><div class="crumb"><a href="https://305business.llc">305business</a> / <a href="/ventures/">Ventures</a> / ${v.slug}</div></div>
+
+<section class="vhero"><div class="wrap vhead">
+  <div>
+    <div class="meta"><span class="ind">${v.industry}</span><span class="status ${stClass}">${v.status}</span></div>
+    <h1>${v.name}</h1>
+    <div class="tag">${v.tagline}</div>
+    <p class="lead">${v.summary}</p>
+    <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">${demoBtns}</div>
+  </div>
+  <aside class="pricepanel">
+    <div class="one">One-time acquisition</div>
+    <div class="amt">${fmt(v.price)}</div>
+    <div class="sup">${sup} · Open to offers</div>
+    <form onsubmit="return offerSubmit(event,'${v.slug}','${esc(v.name)}',${v.price})">
+      <input required name="name" placeholder="Your name" />
+      <input required name="email" type="email" placeholder="Email" />
+      <input required name="amount" type="number" min="1000" placeholder="Your offer (USD)" />
+      <textarea name="msg" rows="3" placeholder="Notes (optional)"></textarea>
+      <button class="btn" type="submit">Submit Offer</button>
+    </form>
+    <p class="note">All offers are confidential and reviewed within 48 hours. Acquisition terms, code transfer, and IP assignment negotiated per deal.</p>
+  </aside>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <h2>Capabilities</h2>
+  <div class="caps">${v.capabilities.map(c=>`<div class="cap">${c}</div>`).join('')}</div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <h2>Who This Is For</h2>
+  <div class="tuser">${v.target}</div>
+</div></section>
+
+${rel ? `<section class="block"><div class="wrap"><h2>Related Ventures</h2><div class="relgrid">${rel}</div></div></section>` : ''}
+
+<footer><div class="wrap">© 2026 305business.LLC — Miami, FL · <a href="/ventures/" style="color:var(--cyan)">All ventures</a></div></footer>
+
+<script>
+function offerSubmit(e, slug, name, listed){
+  e.preventDefault();
+  const f = e.target;
+  const body = 'Venture: ' + name + ' (' + slug + ')\\nListed: $' + listed.toLocaleString() + '\\nOffer: $' + Number(f.amount.value).toLocaleString() + '\\n\\nName: ' + f.name.value + '\\nEmail: ' + f.email.value + '\\nNotes: ' + (f.msg.value || '-') ;
+  // Review build: delivers via site inquiry endpoint after approval; mailto fallback for now.
+  location.href = 'mailto:offers@305business.llc?subject=' + encodeURIComponent('Acquisition Offer — ' + name) + '&body=' + encodeURIComponent(body);
+  f.innerHTML = '<p style="color:var(--green);font-weight:600;padding:12px 0">Offer draft opened in your email app. Thank you — we reply within 48 hours.</p>';
+  return false;
+}
+</script>
+</body>
+</html>`;
+}
+
+let made = 0;
+for (const v of V) {
+  const related = V.filter(x => x.slug !== v.slug && (x.industry === v.industry || x.featured)).slice(0, 3);
+  fs.writeFileSync(`${__dirname}/${v.slug}.html`, page(v, related));
+  made++;
+}
+console.log('generated', made, 'venture pages');
