@@ -48,6 +48,8 @@
         .tech-input { background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.2); color: white; font-family: 'JetBrains Mono', monospace; }
         .tech-input:focus { outline: none; border-color: rgba(255,255,255,0.5); }
         .tech-input::placeholder { color: rgba(255,255,255,0.35); }
+        .art-hero { border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.02); height: 260px; overflow: hidden; position: relative; }
+        .art-hero svg { width: 100%; height: 100%; display: block; }
         .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }</style>
 </head>
 <body class="blueprint-bg">
@@ -105,6 +107,8 @@
             <div class="grid lg:grid-cols-3 gap-8 items-start">
                 <div class="lg:col-span-2">
                     <div class="title-block p-8 md:p-10">
+                        <div class="grid md:grid-cols-5 gap-8 items-center">
+                            <div class="md:col-span-3">
                         <div class="flex justify-between items-start gap-4 mb-6 flex-wrap">
                             <span class="tech-label">DATA INTELLIGENCE</span>
                             <span class="vstatus" style="color:#ffffff;border-color:#ffffff55;background:#ffffff12">FUNCTIONAL</span>
@@ -113,6 +117,17 @@
                         <div class="text-[#00D4FF] text-lg font-semibold mt-4">Multi-agent economic simulation & forecasting engine</div>
                         <p class="text-white/70 mt-6 leading-relaxed text-base md:text-lg">A multi-agent economic simulation platform used to stress-test products, pricing, and market strategy before committing capital. Simulates populations of psychologically realistic AI agents — needs, mood, stress, memory, social networks, behavioral economics — inside time-compressed markets. 500 agents across 26 weeks and 8 scenarios (recession, boom, hurricane, competitor entry, policy change) in seconds. ML forecasting ensemble (TimesFM, Prophet, Greykite) with changepoint detection, real-world data ingestion (news, economics, markets, weather), and seasonality modeling.</p>
                         <div class="flex flex-wrap gap-3 mt-8"></div>
+                            </div>
+                            <div class="md:col-span-2">
+                                <div class="art-hero"><svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+<rect x="10" y="10" width="460" height="280" fill="none" stroke="rgba(255,255,255,0.12)"/>
+<path d="M10 32 H34 M10 32 V10 M470 268 H446 M470 268 V290" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1" />
+<circle cx="240" cy="150" r="7" fill="none" stroke="#00D4FF" stroke-width="1.5" /><circle cx="240" cy="150" r="3" fill="#00D4FF" /><path d="M100,150 A140,82 0 1 1 380,150 A140,82 0 1 1 100,150" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-dasharray="4 3" /><path d="M240,150 L140,92 M240,150 L340,92 M240,150 L380,150 M240,150 L340,208 M240,150 L140,208 M240,150 L100,150 M240,150 L190,86 M240,150 L290,86 M240,150 L190,214 M240,150 L290,214" fill="none" stroke="#00D4FF" stroke-width="1.5" /><circle cx="140" cy="92" r="4" fill="#00D4FF" /><circle cx="190" cy="86" r="4" fill="#00D4FF" /><circle cx="240" cy="150" r="4" fill="#00D4FF" /><circle cx="290" cy="214" r="4" fill="#00D4FF" /><circle cx="340" cy="208" r="4" fill="#00D4FF" /><circle cx="100" cy="150" r="4" fill="#00D4FF" /><circle cx="380" cy="150" r="4" fill="#00D4FF" /><circle cx="150" cy="150" r="4" fill="#00D4FF" /><text x="60" y="60" fill="rgba(255,255,255,0.45)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">AGENTS: 5,000</text><text x="420" y="270" fill="#00D4FF" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="end">T-COMPRESSED</text>
+<text x="22" y="291" fill="rgba(255,255,255,0.4)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">MULTI-AGENT SIMULATION</text>
+<text x="458" y="28" fill="#00D4FF" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="end">FIG. 1</text>
+</svg></div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="section-divider"></div>

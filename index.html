@@ -231,6 +231,9 @@
             transform: translateY(-2px);
         }
 
+        .art-sm { height: 120px; overflow: hidden; border-bottom: 1.5px solid rgba(255,255,255,0.15); }
+        .art-sm svg { width: 100%; height: 100%; display: block; }
+
         .vstatus-home { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }
 
         /* Inset Views - More marked */
@@ -992,76 +995,133 @@
                 <p class="text-white/60 mt-3 max-w-2xl mx-auto">Companies we built — available for one-time acquisition. Healthcare AI, sports science, computer vision, intelligent commerce. Every stage labeled honestly, every offer reviewed.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <a href="/ventures/zero-g-simulation.html" class="tech-card p-5 block">
-                    <div class="flex justify-between items-center mb-3 gap-2">
-                        <span class="tech-label">DATA INTELLIGENCE</span>
-                        <span class="vstatus-home" style="color:#ffffff;border-color:#ffffff55;background:#ffffff12">FUNCTIONAL</span>
-                    </div>
-                    <h3 class="text-white font-bold">Zero-G Simulation</h3>
-                    <div class="text-[#00D4FF] text-xs font-semibold mt-1">Multi-agent economic simulation & forecasting engine</div>
-                    <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
-                        <span class="mono text-white font-bold">$50,000</span>
-                        <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
-                    </div>
-                </a>
-                <a href="/ventures/hotel-rate-intelligence.html" class="tech-card p-5 block">
-                    <div class="flex justify-between items-center mb-3 gap-2">
-                        <span class="tech-label">DATA INTELLIGENCE</span>
-                        <span class="vstatus-home" style="color:#00FF88;border-color:#00FF8855;background:#00FF8812">LIVE</span>
-                    </div>
-                    <h3 class="text-white font-bold">Hotel Rate Intelligence</h3>
-                    <div class="text-[#00D4FF] text-xs font-semibold mt-1">Automated hospitality pricing & competitive intelligence</div>
-                    <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
-                        <span class="mono text-white font-bold">$30,000</span>
-                        <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
+                <a href="/ventures/zero-g-simulation.html" class="tech-card block">
+                    <div class="art-sm"><svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+<rect x="10" y="10" width="460" height="280" fill="none" stroke="rgba(255,255,255,0.12)"/>
+<path d="M10 32 H34 M10 32 V10 M470 268 H446 M470 268 V290" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1" />
+<circle cx="240" cy="150" r="7" fill="none" stroke="#00D4FF" stroke-width="1.5" /><circle cx="240" cy="150" r="3" fill="#00D4FF" /><path d="M100,150 A140,82 0 1 1 380,150 A140,82 0 1 1 100,150" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-dasharray="4 3" /><path d="M240,150 L140,92 M240,150 L340,92 M240,150 L380,150 M240,150 L340,208 M240,150 L140,208 M240,150 L100,150 M240,150 L190,86 M240,150 L290,86 M240,150 L190,214 M240,150 L290,214" fill="none" stroke="#00D4FF" stroke-width="1.5" /><circle cx="140" cy="92" r="4" fill="#00D4FF" /><circle cx="190" cy="86" r="4" fill="#00D4FF" /><circle cx="240" cy="150" r="4" fill="#00D4FF" /><circle cx="290" cy="214" r="4" fill="#00D4FF" /><circle cx="340" cy="208" r="4" fill="#00D4FF" /><circle cx="100" cy="150" r="4" fill="#00D4FF" /><circle cx="380" cy="150" r="4" fill="#00D4FF" /><circle cx="150" cy="150" r="4" fill="#00D4FF" /><text x="60" y="60" fill="rgba(255,255,255,0.45)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">AGENTS: 5,000</text><text x="420" y="270" fill="#00D4FF" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="end">T-COMPRESSED</text>
+<text x="22" y="291" fill="rgba(255,255,255,0.4)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">MULTI-AGENT SIMULATION</text>
+<text x="458" y="28" fill="#00D4FF" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="end">FIG. 1</text>
+</svg></div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-3 gap-2">
+                            <span class="tech-label">DATA INTELLIGENCE</span>
+                            <span class="vstatus-home" style="color:#ffffff;border-color:#ffffff55;background:#ffffff12">FUNCTIONAL</span>
+                        </div>
+                        <h3 class="text-white font-bold">Zero-G Simulation</h3>
+                        <div class="text-[#00D4FF] text-xs font-semibold mt-1">Multi-agent economic simulation & forecasting engine</div>
+                        <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
+                            <span class="mono text-white font-bold">$50,000</span>
+                            <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
+                        </div>
                     </div>
                 </a>
-                <a href="/ventures/jmm-jas-miami-method.html" class="tech-card p-5 block">
-                    <div class="flex justify-between items-center mb-3 gap-2">
-                        <span class="tech-label">SPORTS & PERFORMANCE</span>
-                        <span class="vstatus-home" style="color:#00D4FF;border-color:#00D4FF55;background:#00D4FF12">IN DEVELOPMENT</span>
-                    </div>
-                    <h3 class="text-white font-bold">JMM — Jas Miami Method</h3>
-                    <div class="text-[#00D4FF] text-xs font-semibold mt-1">Daily AI personalized biometric coaching</div>
-                    <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
-                        <span class="mono text-white font-bold">$45,000</span>
-                        <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
-                    </div>
-                </a>
-                <a href="/ventures/estatematch.html" class="tech-card p-5 block">
-                    <div class="flex justify-between items-center mb-3 gap-2">
-                        <span class="tech-label">COMMERCE & MARKETPLACES</span>
-                        <span class="vstatus-home" style="color:#00FF88;border-color:#00FF8855;background:#00FF8812">LIVE</span>
-                    </div>
-                    <h3 class="text-white font-bold">EstateMatch</h3>
-                    <div class="text-[#00D4FF] text-xs font-semibold mt-1">AI-enhanced real estate matching & networking</div>
-                    <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
-                        <span class="mono text-white font-bold">$28,000</span>
-                        <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
+                <a href="/ventures/hotel-rate-intelligence.html" class="tech-card block">
+                    <div class="art-sm"><svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+<rect x="10" y="10" width="460" height="280" fill="none" stroke="rgba(255,255,255,0.12)"/>
+<path d="M10 32 H34 M10 32 V10 M470 268 H446 M470 268 V290" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1" />
+<rect x="150" y="70" width="150" height="185" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="170" y="90" width="24" height="20" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="215" y="90" width="24" height="20" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="260" y="90" width="24" height="20" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="170" y="125" width="24" height="20" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="215" y="125" width="24" height="20" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="260" y="125" width="24" height="20" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="170" y="160" width="24" height="20" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="215" y="160" width="24" height="20" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="260" y="160" width="24" height="20" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="210" y="200" width="30" height="55" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><path d="M330,120 L360,92 L408,92 L408,140 L360,140 Z" fill="none" stroke="#00D4FF" stroke-width="1.5" /><circle cx="390" cy="116" r="4" fill="#00D4FF" /><text x="372" y="122" fill="rgba(255,255,255,0.85)" font-size="11" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">$</text><path d="M340,235 L430,150" fill="none" stroke="#00D4FF" stroke-width="1.5" /><path d="M420,152 L430,150 L428,160" fill="none" stroke="#00D4FF" stroke-width="1.5" /><text x="150" y="55" fill="rgba(255,255,255,0.45)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">COMP SET × 40</text><text x="330" y="262" fill="rgba(255,255,255,0.45)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">PRICE SIGNAL</text>
+<text x="22" y="291" fill="rgba(255,255,255,0.4)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">HOTEL RATE ENGINE</text>
+<text x="458" y="28" fill="#00D4FF" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="end">FIG. 1</text>
+</svg></div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-3 gap-2">
+                            <span class="tech-label">DATA INTELLIGENCE</span>
+                            <span class="vstatus-home" style="color:#00FF88;border-color:#00FF8855;background:#00FF8812">LIVE</span>
+                        </div>
+                        <h3 class="text-white font-bold">Hotel Rate Intelligence</h3>
+                        <div class="text-[#00D4FF] text-xs font-semibold mt-1">Automated hospitality pricing & competitive intelligence</div>
+                        <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
+                            <span class="mono text-white font-bold">$30,000</span>
+                            <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
+                        </div>
                     </div>
                 </a>
-                <a href="/ventures/pocketscribe.html" class="tech-card p-5 block">
-                    <div class="flex justify-between items-center mb-3 gap-2">
-                        <span class="tech-label">HEALTHCARE</span>
-                        <span class="vstatus-home" style="color:#00D4FF;border-color:#00D4FF55;background:#00D4FF12">IN DEVELOPMENT</span>
-                    </div>
-                    <h3 class="text-white font-bold">PocketScribe</h3>
-                    <div class="text-[#00D4FF] text-xs font-semibold mt-1">AI clinical documentation & encounter intelligence</div>
-                    <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
-                        <span class="mono text-white font-bold">$25,000</span>
-                        <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
+                <a href="/ventures/jmm-jas-miami-method.html" class="tech-card block">
+                    <div class="art-sm"><svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+<rect x="10" y="10" width="460" height="280" fill="none" stroke="rgba(255,255,255,0.12)"/>
+<path d="M10 32 H34 M10 32 V10 M470 268 H446 M470 268 V290" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1" />
+<g stroke="rgba(255,255,255,0.85)" stroke-width="1.5" fill="none">
+<circle cx="170" cy="90" r="13.299999999999999" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><line x1="170" y1="103.3" x2="166.2" y2="148.9" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><line x1="166.2" y1="118.5" x2="137.7" y2="135.6" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><line x1="166.2" y1="118.5" x2="198.5" y2="128" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" />
+<line x1="166.2" y1="148.9" x2="141.5" y2="192.6" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><line x1="141.5" y1="192.6" x2="128.2" y2="221.1" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><line x1="166.2" y1="148.9" x2="200.4" y2="181.2" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><line x1="200.4" y1="181.2" x2="215.6" y2="209.7" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" />
+<circle cx="166.2" cy="118.5" r="2.5" fill="#00D4FF" /><circle cx="166.2" cy="148.9" r="2.5" fill="#00D4FF" /><circle cx="200.4" cy="181.2" r="2.5" fill="#00D4FF" /></g><path d="M80,235 C110,235 110,205 140,205 C170,205 170,235 200,235 C230,235 230,205 260,205 C290,205 290,235 320,235" fill="none" stroke="#00D4FF" stroke-width="1.5" /><path d="M80,250 H330" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-dasharray="4 3" /><text x="80" y="270" fill="rgba(255,255,255,0.45)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">CADENCE 180 SPM</text><path d="M390,210 V120 M390,120 C372,118 358,106 350,92 M390,120 C408,118 422,106 430,92 M390,120 C390,102 384,88 372,78 M390,120 C390,102 396,88 408,78" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><circle cx="390" cy="120" r="3" fill="#00D4FF" /><text x="360" y="235" fill="rgba(255,255,255,0.45)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">MIAMI</text><text x="80" y="55" fill="#00D4FF" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">JMM-01</text>
+<text x="22" y="291" fill="rgba(255,255,255,0.4)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">JMM TRAINING PROTOCOL</text>
+<text x="458" y="28" fill="#00D4FF" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="end">FIG. 1</text>
+</svg></div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-3 gap-2">
+                            <span class="tech-label">SPORTS & PERFORMANCE</span>
+                            <span class="vstatus-home" style="color:#00D4FF;border-color:#00D4FF55;background:#00D4FF12">IN DEVELOPMENT</span>
+                        </div>
+                        <h3 class="text-white font-bold">JMM — Jas Miami Method</h3>
+                        <div class="text-[#00D4FF] text-xs font-semibold mt-1">Daily AI personalized biometric coaching</div>
+                        <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
+                            <span class="mono text-white font-bold">$45,000</span>
+                            <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
+                        </div>
                     </div>
                 </a>
-                <a href="/ventures/adaptive-marketplace.html" class="tech-card p-5 block">
-                    <div class="flex justify-between items-center mb-3 gap-2">
-                        <span class="tech-label">COMMERCE & MARKETPLACES</span>
-                        <span class="vstatus-home" style="color:#d98ae8;border-color:#d98ae855;background:#d98ae812">R&D</span>
+                <a href="/ventures/estatematch.html" class="tech-card block">
+                    <div class="art-sm"><svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+<rect x="10" y="10" width="460" height="280" fill="none" stroke="rgba(255,255,255,0.12)"/>
+<path d="M10 32 H34 M10 32 V10 M470 268 H446 M470 268 V290" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1" />
+<path d="M160,135 L240,72 L320,135" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="172" y="135" width="136" height="102" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="232" y="175" width="26" height="62" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="190" y="155" width="26" height="22" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="268" y="155" width="26" height="22" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><path d="M330,66 C330,66 312,52 312,40 C312,31 319,26 326,26 C331,26 334,31 336,35 C338,31 341,26 346,26 C353,26 360,31 360,40 C360,52 342,66 342,66 Z" fill="none" stroke="#00D4FF" stroke-width="1.5" /><path d="M90,150 H130 M122,142 L130,150 L122,158 M390,150 H350 M358,142 L350,150 L358,158" fill="none" stroke="#00D4FF" stroke-width="1.5" /><circle cx="240" cy="110" r="3" fill="#00D4FF" /><text x="90" y="262" fill="rgba(255,255,255,0.45)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">SWIPE → MATCH → TOUR</text>
+<text x="22" y="291" fill="rgba(255,255,255,0.4)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">PROPERTY MATCH ENGINE</text>
+<text x="458" y="28" fill="#00D4FF" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="end">FIG. 1</text>
+</svg></div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-3 gap-2">
+                            <span class="tech-label">COMMERCE & MARKETPLACES</span>
+                            <span class="vstatus-home" style="color:#00FF88;border-color:#00FF8855;background:#00FF8812">LIVE</span>
+                        </div>
+                        <h3 class="text-white font-bold">EstateMatch</h3>
+                        <div class="text-[#00D4FF] text-xs font-semibold mt-1">AI-enhanced real estate matching & networking</div>
+                        <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
+                            <span class="mono text-white font-bold">$28,000</span>
+                            <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
+                        </div>
                     </div>
-                    <h3 class="text-white font-bold">Adaptive AI Marketplace</h3>
-                    <div class="text-[#00D4FF] text-xs font-semibold mt-1">Personalized, intent-aware AI commerce engine</div>
-                    <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
-                        <span class="mono text-white font-bold">$22,000</span>
-                        <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
+                </a>
+                <a href="/ventures/pocketscribe.html" class="tech-card block">
+                    <div class="art-sm"><svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+<rect x="10" y="10" width="460" height="280" fill="none" stroke="rgba(255,255,255,0.12)"/>
+<path d="M10 32 H34 M10 32 V10 M470 268 H446 M470 268 V290" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1" />
+<rect x="195" y="45" width="95" height="205" rx="14" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="210" y="65" width="65" height="150" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><line x1="210" y1="82" x2="275" y2="82" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><circle cx="242" cy="55" r="2.5" fill="#00D4FF" /><rect x="222" y="95" width="40" height="26" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><path d="M214,185 h10 l4,-10 l6,20 l5,-14 l4,4 h14" fill="none" stroke="#00D4FF" stroke-width="1.5" /><path d="M300,120 A20,20 0 0 1 320,100 M300,140 A40,40 0 0 1 340,100 M300,160 A60,60 0 0 1 360,100" fill="none" stroke="#00D4FF" stroke-width="1.5" /><text x="300" y="200" fill="rgba(255,255,255,0.45)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">REAL-TIME</text><text x="200" y="275" fill="#00D4FF" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">SOAP NOTE → 40s</text>
+<text x="22" y="291" fill="rgba(255,255,255,0.4)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">MOBILE CLINICAL SCRIBE</text>
+<text x="458" y="28" fill="#00D4FF" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="end">FIG. 1</text>
+</svg></div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-3 gap-2">
+                            <span class="tech-label">HEALTHCARE</span>
+                            <span class="vstatus-home" style="color:#00D4FF;border-color:#00D4FF55;background:#00D4FF12">IN DEVELOPMENT</span>
+                        </div>
+                        <h3 class="text-white font-bold">PocketScribe</h3>
+                        <div class="text-[#00D4FF] text-xs font-semibold mt-1">AI clinical documentation & encounter intelligence</div>
+                        <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
+                            <span class="mono text-white font-bold">$25,000</span>
+                            <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="/ventures/adaptive-marketplace.html" class="tech-card block">
+                    <div class="art-sm"><svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+<rect x="10" y="10" width="460" height="280" fill="none" stroke="rgba(255,255,255,0.12)"/>
+<path d="M10 32 H34 M10 32 V10 M470 268 H446 M470 268 V290" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1" />
+<path d="M100,105 H380 L372,135 H108 Z" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><path d="M116,135 a10,10 0 0 0 20,0 M156,135 a10,10 0 0 0 20,0 M196,135 a10,10 0 0 0 20,0 M236,135 a10,10 0 0 0 20,0 M276,135 a10,10 0 0 0 20,0 M316,135 a10,10 0 0 0 20,0 M356,135 a10,10 0 0 0 14,0" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="110" y="135" width="260" height="110" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="130" y="155" width="70" height="45" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><rect x="280" y="155" width="60" height="90" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><line x1="120" y1="70" x2="360" y2="70" stroke="#00D4FF" stroke-width="1.5" /><circle cx="210" cy="70" r="5" fill="#00D4FF" /><line x1="120" y1="88" x2="360" y2="88" stroke="#00D4FF" stroke-width="1.5" /><circle cx="300" cy="88" r="5" fill="#00D4FF" /><text x="120" y="55" fill="rgba(255,255,255,0.45)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">PRICE</text><text x="330" y="262" fill="#00D4FF" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">LIVE A/B</text>
+<text x="22" y="291" fill="rgba(255,255,255,0.4)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">ADAPTIVE COMMERCE</text>
+<text x="458" y="28" fill="#00D4FF" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="end">FIG. 1</text>
+</svg></div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-3 gap-2">
+                            <span class="tech-label">COMMERCE & MARKETPLACES</span>
+                            <span class="vstatus-home" style="color:#d98ae8;border-color:#d98ae855;background:#d98ae812">R&D</span>
+                        </div>
+                        <h3 class="text-white font-bold">Adaptive AI Marketplace</h3>
+                        <div class="text-[#00D4FF] text-xs font-semibold mt-1">Personalized, intent-aware AI commerce engine</div>
+                        <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
+                            <span class="mono text-white font-bold">$22,000</span>
+                            <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
+                        </div>
                     </div>
                 </a>
             </div>
@@ -1072,7 +1132,6 @@
     </section>
 
     <div class="section-divider"></div>
-
 
     <!-- AI Matching Section -->
     <section id="matching" class="py-20">

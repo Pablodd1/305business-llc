@@ -67,6 +67,8 @@
         .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }
         .fchip { opacity: 0.65; }
         .fchip.on { opacity: 1; border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.1); }
+        .art { height: 165px; overflow: hidden; border-bottom: 1.5px solid rgba(255,255,255,0.15); position: relative; }
+        .art svg { width: 100%; height: 100%; display: block; }
     </style>
 </head>
 <body class="blueprint-bg">
@@ -186,6 +188,7 @@
         </footer>
     </main>
 
+    <script src="art.js"></script>
     <script src="data.js"></script>
     <script>
     (function(){
@@ -220,7 +223,9 @@
 
         function card(v){
             const sup = v.support ? `+ ${fmt(v.support)}/mo support` : 'support included';
-            return `<article class="tech-card p-5 flex flex-col">
+            return `<article class="tech-card flex flex-col">
+                <div class="art">${(window.VENTURE_ART||{})[v.slug]||''}</div>
+                <div class="p-5 flex flex-col flex-1">
                 <div class="flex justify-between items-center mb-3 gap-2">
                     <span class="tech-label">${v.industry.toUpperCase()}</span>
                     <span class="vstatus" ${sc(v.status)}>${v.status}</span>
@@ -238,6 +243,7 @@
                     <a href="/ventures/${v.slug}.html#offer" class="schematic-btn px-4 py-2 shrink-0"><span class="relative z-10">MAKE AN OFFER</span></a>
                 </div>
                 <a class="tech-label text-center mt-4 hover:text-white/90 transition" href="/ventures/${v.slug}.html">VIEW FULL PROFILE →</a>
+                </div>
             </article>`;
         }
 

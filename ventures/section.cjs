@@ -1,22 +1,26 @@
 #!/usr/bin/env node
-/* Emits the homepage VENTURES section HTML (6 featured) for insertion into index.html */
+/* Emits the homepage VENTURES section HTML (6 featured, with schematic art) for insertion into index.html */
 global.window = {};
 eval(require('fs').readFileSync(__dirname + '/data.js', 'utf8'));
-const V = global.window.VENTURES;
+eval(require('fs').readFileSync(__dirname + '/art.js', 'utf8'));
+const V = global.window.VENTURES, A = global.window.VENTURE_ART;
 const fmt = n => '$' + n.toLocaleString('en-US');
 const SC = {'LIVE':'#00FF88','PRODUCTION':'#00FF88','FUNCTIONAL':'#ffffff','PILOT':'#FFC107','IN DEVELOPMENT':'#00D4FF','R&D':'#d98ae8','PROTOTYPE':'#FF006E','AVAILABLE':'#7db8ff'};
 const picks = V.filter(v=>v.featured).concat(V.filter(v=>!v.featured)).slice(0,6);
 const card = v => { const c = SC[v.status]||'#fff'; return `
-                <a href="/ventures/${v.slug}.html" class="tech-card p-5 block">
-                    <div class="flex justify-between items-center mb-3 gap-2">
-                        <span class="tech-label">${v.industry.toUpperCase()}</span>
-                        <span class="vstatus-home" style="color:${c};border-color:${c}55;background:${c}12">${v.status}</span>
-                    </div>
-                    <h3 class="text-white font-bold">${v.name}</h3>
-                    <div class="text-[#00D4FF] text-xs font-semibold mt-1">${v.tagline}</div>
-                    <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
-                        <span class="mono text-white font-bold">${fmt(v.price)}</span>
-                        <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
+                <a href="/ventures/${v.slug}.html" class="tech-card block">
+                    <div class="art-sm">${A[v.slug]||''}</div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-3 gap-2">
+                            <span class="tech-label">${v.industry.toUpperCase()}</span>
+                            <span class="vstatus-home" style="color:${c};border-color:${c}55;background:${c}12">${v.status}</span>
+                        </div>
+                        <h3 class="text-white font-bold">${v.name}</h3>
+                        <div class="text-[#00D4FF] text-xs font-semibold mt-1">${v.tagline}</div>
+                        <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
+                            <span class="mono text-white font-bold">${fmt(v.price)}</span>
+                            <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
+                        </div>
                     </div>
                 </a>`; };
 console.log(`    <!-- Venture Portfolio Section -->

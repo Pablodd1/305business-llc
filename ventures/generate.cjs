@@ -3,7 +3,9 @@
 const fs = require('fs');
 global.window = {};
 eval(fs.readFileSync(__dirname + '/data.js', 'utf8'));
+eval(fs.readFileSync(__dirname + '/art.js', 'utf8'));
 const V = global.window.VENTURES;
+const A = global.window.VENTURE_ART;
 const fmt = n => '$' + n.toLocaleString('en-US');
 const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
 
@@ -78,6 +80,8 @@ const CSS = `
         .tech-input { background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.2); color: white; font-family: 'JetBrains Mono', monospace; }
         .tech-input:focus { outline: none; border-color: rgba(255,255,255,0.5); }
         .tech-input::placeholder { color: rgba(255,255,255,0.35); }
+        .art-hero { border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.02); height: 260px; overflow: hidden; position: relative; }
+        .art-hero svg { width: 100%; height: 100%; display: block; }
         .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }`;
 
 const STATUS_COLOR = {
@@ -147,6 +151,8 @@ ${NAV}
             <div class="grid lg:grid-cols-3 gap-8 items-start">
                 <div class="lg:col-span-2">
                     <div class="title-block p-8 md:p-10">
+                        <div class="grid md:grid-cols-5 gap-8 items-center">
+                            <div class="md:col-span-3">
                         <div class="flex justify-between items-start gap-4 mb-6 flex-wrap">
                             <span class="tech-label">${v.industry.toUpperCase()}</span>
                             <span class="vstatus" ${sc(v.status)}>${v.status}</span>
@@ -155,6 +161,11 @@ ${NAV}
                         <div class="text-[#00D4FF] text-lg font-semibold mt-4">${v.tagline}</div>
                         <p class="text-white/70 mt-6 leading-relaxed text-base md:text-lg">${v.summary}</p>
                         <div class="flex flex-wrap gap-3 mt-8">${demoBtns}</div>
+                            </div>
+                            <div class="md:col-span-2">
+                                <div class="art-hero">${A[v.slug] || ''}</div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="section-divider"></div>

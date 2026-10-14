@@ -48,6 +48,8 @@
         .tech-input { background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.2); color: white; font-family: 'JetBrains Mono', monospace; }
         .tech-input:focus { outline: none; border-color: rgba(255,255,255,0.5); }
         .tech-input::placeholder { color: rgba(255,255,255,0.35); }
+        .art-hero { border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.02); height: 260px; overflow: hidden; position: relative; }
+        .art-hero svg { width: 100%; height: 100%; display: block; }
         .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }</style>
 </head>
 <body class="blueprint-bg">
@@ -105,6 +107,8 @@
             <div class="grid lg:grid-cols-3 gap-8 items-start">
                 <div class="lg:col-span-2">
                     <div class="title-block p-8 md:p-10">
+                        <div class="grid md:grid-cols-5 gap-8 items-center">
+                            <div class="md:col-span-3">
                         <div class="flex justify-between items-start gap-4 mb-6 flex-wrap">
                             <span class="tech-label">ENTERPRISE AI</span>
                             <span class="vstatus" style="color:#7db8ff;border-color:#7db8ff55;background:#7db8ff12">AVAILABLE</span>
@@ -113,6 +117,17 @@
                         <div class="text-[#00D4FF] text-lg font-semibold mt-4">AI-connected customer, sales & workflow management</div>
                         <p class="text-white/70 mt-6 leading-relaxed text-base md:text-lg">Custom CRM builds with lead pipelines, scoring, appointment management, follow-up automation, segmentation, sales dashboards, and AI summaries with next-action recommendations.</p>
                         <div class="flex flex-wrap gap-3 mt-8"></div>
+                            </div>
+                            <div class="md:col-span-2">
+                                <div class="art-hero"><svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+<rect x="10" y="10" width="460" height="280" fill="none" stroke="rgba(255,255,255,0.12)"/>
+<path d="M10 32 H34 M10 32 V10 M470 268 H446 M470 268 V290" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1" />
+<circle cx="130" cy="110" r="26" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><path d="M106,196 A24,24 0 0 1 154,196" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><circle cx="350" cy="110" r="26" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><path d="M326,196 A24,24 0 0 1 374,196" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><circle cx="240" cy="215" r="26" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><path d="M216,301 A24,24 0 0 1 264,301" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><line x1="152" y1="124" x2="328" y2="124" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><line x1="146" y1="134" x2="228" y2="196" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><line x1="354" y1="134" x2="252" y2="196" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" /><circle cx="240" cy="150" r="4" fill="#00D4FF" /><text x="105" y="60" fill="rgba(255,255,255,0.45)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">LEAD</text><text x="345" y="60" fill="rgba(255,255,255,0.45)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">CLIENT</text><text x="232" y="262" fill="#00D4FF" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="middle">TEAM</text>
+<text x="22" y="291" fill="rgba(255,255,255,0.4)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="start">RELATIONSHIP GRAPH</text>
+<text x="458" y="28" fill="#00D4FF" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.2" text-anchor="end">FIG. 1</text>
+</svg></div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="section-divider"></div>
