@@ -16,6 +16,20 @@ window.VENTURES = [
     target: "Funds, venture studios, enterprises making major market bets"
   },
   {
+    slug: "ai-voice-layer",
+    name: "AI Dynamics VoiceLayer",
+    tagline: "Voice AI layer that turns any website into a personalized conversation",
+    industry: "Voice AI & Intelligent Business Automation",
+    status: "PROTOTYPE",
+    price: 8500,
+    support: 149,
+    featured: true,
+    summary: "A reusable voice-enabled intelligence layer that sits on top of ordinary websites and turns them into personalized, interactive experiences. VoiceLayer scans the host site — pages, products, buttons, navigation, sections — and lets visitors navigate, search, compare products, and complete selected forms through natural spoken conversation, in English or Spanish. It builds user profiles from stated goals and preferences, tracks behavioral signals (views, clicks, searches, navigation paths, dwell time), and grounds AI responses in actual site content through configurable AI providers. Includes personal-assistant foundations — calendar, daily briefings, tasks, weather — plus confirmation workflows and post-action verification for every consequential action. Advanced prototype: core functionality is implemented and demonstrated; production readiness (multi-user data isolation, persistent memory, endpoint auth) is the buyer's first milestone. Full source code included (github.com/Pablodd1/Comandvoice).",
+    capabilities: ["Website intelligence scanning","Voice navigation & control","User profile awareness","Behavioral signal tracking","Personalized recommendations","Context-grounded AI conversation","Assistant foundations (calendar, briefings, tasks, weather)","Reusable JS widget + host APIs","English & Spanish","Confirmed, verified actions"],
+    target: "Website owners, SaaS platforms, and agencies adding voice-driven personalization",
+    links: { github: "https://github.com/Pablodd1/Comandvoice" }
+  },
+  {
     slug: "hotel-rate-intelligence",
     name: "Hotel Rate Intelligence",
     tagline: "Automated hospitality pricing & competitive intelligence",

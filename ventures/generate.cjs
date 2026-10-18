@@ -94,7 +94,8 @@ const sc = s => { const c = STATUS_COLOR[s] || '#fff';
 function page(v, related) {
   const demoBtns = [
     v.links?.demo ? `<a href="${v.links.demo}" target="_blank" rel="noopener" class="schematic-btn px-5 py-2"><span class="relative z-10"><i class="fas fa-play mr-2"></i>LIVE DEMO</span></a>` : '',
-    v.links?.website ? `<a href="${v.links.website}" target="_blank" rel="noopener" class="schematic-btn px-5 py-2"><span class="relative z-10"><i class="fas fa-globe mr-2"></i>WEBSITE</span></a>` : ''
+    v.links?.website ? `<a href="${v.links.website}" target="_blank" rel="noopener" class="schematic-btn px-5 py-2"><span class="relative z-10"><i class="fas fa-globe mr-2"></i>WEBSITE</span></a>` : '',
+    v.links?.github ? `<a href="${v.links.github}" target="_blank" rel="noopener" class="schematic-btn px-5 py-2"><span class="relative z-10"><i class="fab fa-github mr-2"></i>SOURCE CODE</span></a>` : ''
   ].join('');
   const sup = v.support ? `Optional support: ${fmt(v.support)}/mo` : 'Support included';
   const rel = related.map(r => `
