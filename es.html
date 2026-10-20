@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>305business.LLC — Marketplace de Empresas en Miami</title>
+<meta name="description" content="Matching impulsado por IA. Conexiones directas. Listados verificados. La plataforma líder de compraventa de empresas en Miami.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{ --cyan:#00D4FF; --green:#00FF88; --navy:#0a1628; }
+  body{ background:#0a1628; font-family:'Inter',sans-serif; }
+  .mono{ font-family:'JetBrains Mono',monospace; }
+  .tech-grid{ background-image:linear-gradient(rgba(0,212,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.045) 1px,transparent 1px); background-size:48px 48px; }
+  .tech-label{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.22em; color:rgba(0,212,255,.9); text-transform:uppercase; }
+  .tech-card{ background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.1); transition:border-color .2s, background .2s; }
+  .tech-card:hover{ border-color:rgba(0,212,255,.45); background:rgba(0,212,255,.04); }
+  .divider-tech{ border-top:1px dashed rgba(255,255,255,.14); }
+  .art-sm{ height:150px; background:rgba(255,255,255,.02); border-bottom:1px solid rgba(255,255,255,.08); overflow:hidden; }
+  .ticker-wrap{ overflow:hidden; white-space:nowrap; }
+  .ticker{ display:inline-block; animation:tick 60s linear infinite; }
+  @keyframes tick{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .vstatus{ font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.14em; padding:2px 8px; border:1px solid; border-radius:2px; text-transform:uppercase; white-space:nowrap; }
+  .stat-n{ font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--cyan); }
+  input,select,textarea{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.14); color:#fff; }
+  input:focus,select:focus,textarea:focus{ outline:none; border-color:var(--cyan); }
+  select option{ background:#0a1628; }
+</style>
+</head>
+<body class="text-white tech-grid">
+
+<!-- NAV -->
+<nav class="border-b border-white/10 sticky top-0 z-50" style="background:rgba(10,22,40,.92);backdrop-filter:blur(8px)">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="/es.html" class="font-extrabold text-xl tracking-tight">305<span style="color:var(--cyan)">business</span><span class="mono text-xs text-white/50 ml-1">LLC</span></a>
+    <div class="hidden md:flex items-center gap-8 mono text-xs tracking-widest text-white/70">
+      <a href="#mercado" class="hover:text-white">MERCADO</a>
+      <a href="#listados" class="hover:text-white">LISTADOS</a>
+      <a href="#aplicaciones" class="hover:text-white">APLICACIONES</a>
+      <a href="#proceso" class="hover:text-white">PROCESO</a>
+      <a href="#servicios" class="hover:text-white">SERVICIOS</a>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="/" class="mono text-xs tracking-widest text-white/50 hover:text-white border border-white/20 px-2 py-1">EN</a>
+      <a href="#contacto" class="mono text-xs tracking-widest px-4 py-2 font-semibold" style="background:var(--green);color:#06281a">COMENZAR →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="relative border-b border-dashed border-white/15">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid lg:grid-cols-2 gap-12 items-center">
+    <div>
+      <div class="tech-label mb-3">PROYECTO N.º 305 · ESCALA 1:1</div>
+      <div class="flex gap-6 mono text-[11px] text-white/60 mb-6 flex-wrap">
+        <span>REV: $2.4M</span><span>OPERACIONES: 50+</span><span>MATCH: 94%</span><span class="text-white" style="color:var(--green)">CRECIMIENTO: +23%</span>
+      </div>
+      <h1 class="text-5xl sm:text-6xl font-extrabold leading-[1.02] tracking-tight">CONECTA &amp; LISTA<br>EMPRESAS</h1>
+      <p class="text-white/60 text-lg mt-6 max-w-xl">Matching impulsado por IA. Conexiones directas. Listados verificados. La plataforma líder de compraventa de empresas en Miami.</p>
+      <div class="flex gap-4 mt-8">
+        <a href="#listados" class="mono text-xs tracking-widest px-6 py-3 font-semibold" style="background:var(--cyan);color:#04202b">EXPLORAR EMPRESAS</a>
+        <a href="#contacto" class="mono text-xs tracking-widest px-6 py-3 border border-white/25 text-white/80 hover:border-white/60">LISTAR MI EMPRESA</a>
+      </div>
+      <div class="mono text-[10px] tracking-[.25em] text-white/40 mt-8">MERCADO EN VIVO — 2,000+ EMPRESAS LISTADAS</div>
+    </div>
+    <div class="tech-card">
+      <div class="art-sm" style="height:280px">
+        <img src="https://images.unsplash.com/photo-1506966953602-c20cc11f75e3?w=1200&q=70&auto=format&fit=crop" alt="Miami Beach — vista aérea" class="w-full h-full object-cover opacity-80" onerror="this.style.display='none'">
+      </div>
+      <div class="grid grid-cols-3 divide-x divide-white/10 text-center">
+        <div class="p-5"><div class="stat-n text-3xl">50</div><div class="tech-label mt-1">LISTADOS ACTIVOS</div></div>
+        <div class="p-5"><div class="stat-n text-3xl">2.4M</div><div class="tech-label mt-1">$ VOLUMEN</div></div>
+        <div class="p-5"><div class="stat-n text-3xl" style="color:var(--green)">98%</div><div class="tech-label mt-1">TASA DE ÉXITO</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TICKER -->
+<section class="border-b border-dashed border-white/15 py-3 ticker-wrap" id="mercado">
+  <div class="ticker mono text-xs text-white/60">
+    <span class="mx-6">AAPL $318.49 ▲ 0.72%</span><span class="mx-6">MSFT $144.36 ▼ 2.53%</span><span class="mx-6">AMZN $545.01 ▲ 0.09%</span><span class="mx-6">TSLA $205.60 ▲ 0.54%</span><span class="mx-6">NVDA $262.53 ▲ 1.04%</span><span class="mx-6">META $308.65 ▲ 1.02%</span><span class="mx-6">GOOGL $118.17 ▼ 2.74%</span><span class="mx-6">CRM $443.38 ▲ 0.53%</span><span class="mx-6">UBER $169.20 ▲ 2.13%</span><span class="mx-6">PLTR $490.01 ▲ 0.57%</span>
+    <span class="mx-6">AAPL $318.49 ▲ 0.72%</span><span class="mx-6">MSFT $144.36 ▼ 2.53%</span><span class="mx-6">AMZN $545.01 ▲ 0.09%</span><span class="mx-6">TSLA $205.60 ▲ 0.54%</span><span class="mx-6">NVDA $262.53 ▲ 1.04%</span><span class="mx-6">META $308.65 ▲ 1.02%</span><span class="mx-6">GOOGL $118.17 ▼ 2.74%</span><span class="mx-6">CRM $443.38 ▲ 0.53%</span><span class="mx-6">UBER $169.20 ▲ 2.13%</span><span class="mx-6">PLTR $490.01 ▲ 0.57%</span>
+  </div>
+  <div class="max-w-7xl mx-auto px-4 mt-2"><span class="tech-label">DATOS DE MERCADO EN VIVO · HOJA: M-1</span></div>
+</section>
+
+<!-- AI MATCHING -->
+<section class="border-b border-dashed border-white/15 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="tech-label mb-2">PARÁMETROS DE BÚSQUEDA · CONSULTA: ACTIVA · HOJA: AI-1</div>
+    <h2 class="text-3xl font-bold">MATCHING POTENCIADO POR IA</h2>
+    <p class="text-white/60 mt-3 max-w-2xl">Análisis con redes neuronales encuentra su empresa ideal entre 2,000+ listados de Miami. Brindamos visibilidad y herramientas — compradores y vendedores se conectan directamente.</p>
+    <div class="grid lg:grid-cols-3 gap-6 mt-10">
+      <div class="tech-card p-6">
+        <div class="tech-label mb-4">PERFIL DEL COMPRADOR</div>
+        <div class="space-y-4 mono text-xs text-white/70">
+          <div><div class="tech-label mb-1">RANGO_DE_PRESUPUESTO</div><div class="text-white text-base">$150K — $400K</div></div>
+          <div><div class="tech-label mb-1">INDUSTRIA</div><div class="text-white text-base">Restaurantes &amp; Retail</div></div>
+          <div><div class="tech-label mb-1">UBICACIÓN_PREF</div><div class="text-white text-base">Miami Beach / Brickell</div></div>
+          <div class="pt-2"><div class="tech-label mb-1">ESTADO</div><div class="text-base font-semibold" style="color:var(--green)">● ANALIZANDO 2,000+ LISTADOS…</div></div>
+        </div>
+      </div>
+      <a href="#contacto" class="tech-card block">
+        <div class="art-sm"><svg viewBox="0 0 480 150" class="w-full h-full"><rect x="8" y="8" width="464" height="134" fill="none" stroke="rgba(255,255,255,.12)"/><circle cx="80" cy="75" r="34" fill="none" stroke="#00D4FF" stroke-width="1.5"/><text x="80" y="80" fill="#00D4FF" font-size="16" font-family="JetBrains Mono" text-anchor="middle">94%</text><text x="140" y="60" fill="#fff" font-size="12" font-family="JetBrains Mono">CAFÉ MIAMI BEACH</text><text x="140" y="80" fill="rgba(255,255,255,.5)" font-size="9" font-family="JetBrains Mono">RESTAURANTE · MIAMI_BEACH, FL</text><text x="140" y="100" fill="rgba(255,255,255,.5)" font-size="9" font-family="JetBrains Mono">$420K/AÑO · 45 ASIENTOS</text></svg></div>
+        <div class="p-5 flex justify-between items-center"><div><div class="tech-label mb-1">RESTAURANTE · MIAMI_BEACH</div><div class="font-bold">Café Miami Beach</div></div><div class="stat-n text-xl">$185,000</div></div>
+      </a>
+      <a href="#contacto" class="tech-card block">
+        <div class="art-sm"><svg viewBox="0 0 480 150" class="w-full h-full"><rect x="8" y="8" width="464" height="134" fill="none" stroke="rgba(255,255,255,.12)"/><circle cx="80" cy="75" r="34" fill="none" stroke="#00FF88" stroke-width="1.5"/><text x="80" y="80" fill="#00FF88" font-size="16" font-family="JetBrains Mono" text-anchor="middle">87%</text><text x="140" y="60" fill="#fff" font-size="12" font-family="JetBrains Mono">WINE BAR BRICKELL</text><text x="140" y="80" fill="rgba(255,255,255,.5)" font-size="9" font-family="JetBrains Mono">RESTAURANTE · BRICKELL, MIAMI</text><text x="140" y="100" fill="rgba(255,255,255,.5)" font-size="9" font-family="JetBrains Mono">$680K/AÑO · 80+ VINOS</text></svg></div>
+        <div class="p-5 flex justify-between items-center"><div><div class="tech-label mb-1">RESTAURANTE · BRICKELL</div><div class="font-bold">Wine Bar Brickell</div></div><div class="stat-n text-xl">$320,000</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO LISTINGS -->
+<section class="border-b border-dashed border-white/15 py-16" id="listados">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
+      <div>
+        <div class="tech-label mb-2">HOJA: P-1 · ACTUALIZADO: AHORA</div>
+        <h2 class="text-3xl font-bold">LISTADOS DESTACADOS</h2>
+      </div>
+      <div class="mono text-[10px] tracking-[.25em] text-white/40">MODO DEMOSTRACIÓN — DATOS DE EJEMPLO</div>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="listingGrid"></div>
+  </div>
+</section>
+
+<!-- APPLICATIONS / VENTURE PORTFOLIO (white-label) -->
+<section class="border-b border-dashed border-white/15 py-16" id="aplicaciones">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10">
+      <div class="tech-label mb-3">HOJA: V-1 · ESCALA 1:1</div>
+      <h2 class="text-3xl font-bold">PORTAFOLIO DE APLICACIONES</h2>
+      <p class="text-white/60 mt-3 max-w-2xl mx-auto">Productos desarrollados en la plataforma — disponibles para adquisición o licencia. Cada etapa etiquetada con honestidad, cada oferta revisada.</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="appGrid"></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="border-b border-dashed border-white/15 py-16" id="proceso">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="tech-label mb-2">HOJA: S-1</div>
+    <h2 class="text-3xl font-bold mb-3">PROCESO DE TRANSACCIÓN</h2>
+    <p class="text-white/60 mb-10">Plataforma segura, transparente y eficiente de listados.</p>
+    <div class="grid md:grid-cols-4 gap-6">
+      <div class="tech-card p-6"><div class="stat-n text-4xl mb-4">1</div><h3 class="font-bold mb-2">BUSCAR</h3><p class="text-white/60 text-sm">Explore empresas con matching de IA o filtre por industria, ubicación y presupuesto.</p></div>
+      <div class="tech-card p-6"><div class="stat-n text-4xl mb-4">2</div><h3 class="font-bold mb-2">CONECTAR</h3><p class="text-white/60 text-sm">Firme NDA, desbloquee chat directo y agende videollamadas con los dueños.</p></div>
+      <div class="tech-card p-6"><div class="stat-n text-4xl mb-4">3</div><h3 class="font-bold mb-2">NEGOCIAR</h3><p class="text-white/60 text-sm">Comprador y vendedor conectan directamente para discutir términos y cerrar acuerdos.</p></div>
+      <div class="tech-card p-6"><div class="stat-n text-4xl mb-4">4</div><h3 class="font-bold mb-2">CERRAR</h3><p class="text-white/60 text-sm">Verificación del administrador, transferencia de fondos y entrega de la empresa completada.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="border-b border-dashed border-white/15 py-16" id="servicios">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="tech-label mb-2">HOJA: W-1</div>
+    <h2 class="text-3xl font-bold mb-3">SERVICIOS EMPRESARIALES</h2>
+    <p class="text-white/60 mb-10">Servicios profesionales para maximizar el valor de su empresa.</p>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="tech-card p-8"><div class="tech-label mb-3">SERVICIO</div><h3 class="font-bold text-xl mb-3">VALORACIÓN DE EMPRESAS</h3><p class="text-white/60 text-sm mb-6">Evaluación integral del valor de su empresa.</p><div class="stat-n text-4xl">$495</div></div>
+      <div class="tech-card p-8"><div class="tech-label mb-3">SERVICIO</div><h3 class="font-bold text-xl mb-3">PRONÓSTICO FINANCIERO</h3><p class="text-white/60 text-sm mb-6">Modelo financiero a 3 años con proyecciones.</p><div class="stat-n text-4xl">$895</div></div>
+      <div class="tech-card p-8"><div class="tech-label mb-3">SERVICIO</div><h3 class="font-bold text-xl mb-3">PITCH DECK PARA INVERSORES</h3><p class="text-white/60 text-sm mb-6">Presentación diseñada a medida para inversores.</p><div class="stat-n text-4xl">$695</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING (white-label) -->
+<section class="border-b border-dashed border-white/15 py-16">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="tech-label mb-3">HOJA: BK-1 · REVISIÓN: 2.0</div>
+    <h2 class="text-3xl font-bold mb-4">Agende una Consultoría Gratuita</h2>
+    <p class="text-white/60 max-w-xl mx-auto">Llamada de estrategia de 30 minutos. Elija su empresa, escoja horario y reciba enlace de Google Meet al instante.</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+      <div class="tech-card p-5"><div class="stat-n text-2xl mb-1">30</div><div class="tech-label">MINUTOS</div></div>
+      <div class="tech-card p-5"><div class="stat-n text-2xl mb-1" style="color:var(--green)">$0</div><div class="tech-label">CONSULTORÍA GRATIS</div></div>
+      <div class="tech-card p-5"><div class="stat-n text-2xl mb-1">GMeet</div><div class="tech-label">ENLACE AUTOMÁTICO</div></div>
+      <div class="tech-card p-5"><div class="stat-n text-2xl mb-1">24/7</div><div class="tech-label">RESERVA EN LÍNEA</div></div>
+    </div>
+    <a href="#contacto" class="inline-block mono text-xs tracking-widest px-8 py-4 font-semibold mt-10" style="background:var(--cyan);color:#04202b">AGENDAR AHORA →</a>
+    <div class="mono text-[10px] tracking-[.25em] text-white/40 mt-4">SISTEMA DE RESERVAS INTEGRADO · CONFIRMACIÓN POR CORREO + INVITACIÓN DE CALENDARIO</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="py-16" id="contacto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12">
+    <div>
+      <div class="tech-label mb-2">HOJA: AI-2</div>
+      <h2 class="text-3xl font-bold mb-4">ENVÍE SU CONSULTA</h2>
+      <p class="text-white/60 max-w-md">Especificaciones completas para solicitud de listado. Responderemos en menos de 24 horas.</p>
+      <div class="mt-10 space-y-4 mono text-sm text-white/70">
+        <div><span class="tech-label block mb-1">CORREO</span>hola@305business.llc</div>
+        <div><span class="tech-label block mb-1">TELÉFONO</span>+1 786-643-2099</div>
+        <div><span class="tech-label block mb-1">UBICACIÓN</span>Miami, FL · EE. UU.</div>
+      </div>
+    </div>
+    <form class="tech-card p-8 space-y-5" onsubmit="event.preventDefault();document.getElementById('formOk').style.display='block';this.reset();">
+      <div><label class="tech-label block mb-2">NOMBRE_COMPLETO</label><input required class="w-full px-4 py-3 text-sm" placeholder="Su nombre"></div>
+      <div class="grid grid-cols-2 gap-4">
+        <div><label class="tech-label block mb-2">CORREO</label><input required type="email" class="w-full px-4 py-3 text-sm" placeholder="correo@empresa.com"></div>
+        <div><label class="tech-label block mb-2">TELÉFONO</label><input class="w-full px-4 py-3 text-sm" placeholder="+1 ..."></div>
+      </div>
+      <div><label class="tech-label block mb-2">TIPO_DE_SOLICITUD</label><select class="w-full px-4 py-3 text-sm"><option>Quiero comprar una empresa</option><option>Quiero vender mi empresa</option><option>Servicios profesionales</option><option>Licencia de aplicación</option><option>Otro</option></select></div>
+      <div><label class="tech-label block mb-2">MENSAJE</label><textarea rows="4" class="w-full px-4 py-3 text-sm" placeholder="Cuéntenos sobre su empresa o lo que busca…"></textarea></div>
+      <button class="mono text-xs tracking-widest px-8 py-4 font-semibold w-full" style="background:var(--green);color:#06281a">ENVIAR CONSULTA →</button>
+      <div id="formOk" style="display:none" class="mono text-xs pt-1" >✓ CONSULTA RECIBIDA — RESPUESTA EN &lt;24H</div>
+    </form>
+  </div>
+</section>
+
+<footer class="border-t border-white/10 py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-between gap-4 items-center">
+    <div class="font-extrabold">305<span style="color:var(--cyan)">business</span><span class="mono text-xs text-white/50 ml-1">LLC</span></div>
+    <div class="mono text-[10px] tracking-[.25em] text-white/40">© 2026 305BUSINESS.LLC · MIAMI, FL · TODOS LOS DERECHOS RESERVADOS</div>
+    <div class="flex gap-6 mono text-[10px] tracking-widest text-white/50">
+      <a href="#" class="hover:text-white">TÉRMINOS</a><a href="#" class="hover:text-white">PRIVACIDAD</a><a href="/" class="hover:text-white">ENGLISH</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---- Demo listings (ES, white-label sample data) ---- */
+const LISTINGS=[
+ {n:"Cafetería Calle Ocho",c:"RESTAURANTE",loc:"LITTLE HAVANA, MIA",rev:"$380K/AÑO",p:"$165,000",m:92,tag:"45 ASIENTOS · LICENCIA COMPLETA"},
+ {n:"Autolavado Biscayne",c:"AUTOMOTRIZ",loc:"BISCAYNE BLVD, MIA",rev:"$290K/AÑO",p:"$140,000",m:89,tag:"3 TÚNELES · PERSONAL FIJO"},
+ {n:"Salón de Belleza Coral Way",c:"BELLEZA",loc:"CORAL WAY, MIA",rev:"$210K/AÑO",p:"$95,000",m:85,tag:"6 SILLAS · CLIENTELA LEAL"},
+ {n:"Bodega & Minimarket Wynwood",c:"RETAIL",loc:"WYNWOOD, MIA",rev:"$520K/AÑO",p:"$230,000",m:91,tag:"24/7 · LICENCIA CERVEZA/VINO"},
+ {n:"Lavandería Kendall",c:"SERVICIOS",loc:"KENDALL, MIA",rev:"$175K/AÑO",p:"$88,000",m:83,tag:"LAVADO EN SECO · 2 LOCALES"},
+ {n:"Gimnasio Downtown",c:"FITNESS",loc:"DOWNTOWN, MIA",rev:"$410K/AÑO",p:"$195,000",m:88,tag:"800 MIEMBROS · EQUIPO NUEVO"},
+ {n:"Food Truck Doral",c:"RESTAURANTE",loc:"DORAL, MIA",rev:"$240K/AÑO",p:"$72,000",m:81,tag:"RUTA FIJA · PERMISO ACTIVO"},
+ {n:"Farmacia Little Haiti",c:"SALUD",loc:"LITTLE HAITI, MIA",rev:"$640K/AÑO",p:"$310,000",m:90,tag:"RECETAS · SEGUROS ACEPTADOS"},
+ {n:"Estudio de Yoga South Beach",c:"BIENESTAR",loc:"MIAMI BEACH, FL",rev:"$160K/AÑO",p:"$68,000",m:79,tag:"200 MIEMBROS · LOCAL PROPIO"}];
+document.getElementById('listingGrid').innerHTML=LISTINGS.map((l,i)=>`
+ <a href="#contacto" class="tech-card block">
+  <div class="art-sm"><svg viewBox="0 0 480 150" class="w-full h-full">
+   <rect x="8" y="8" width="464" height="134" fill="none" stroke="rgba(255,255,255,.12)"/>
+   <circle cx="70" cy="75" r="30" fill="none" stroke="${l.m>=88?'#00FF88':'#00D4FF'}" stroke-width="1.5"/>
+   <text x="70" y="80" fill="${l.m>=88?'#00FF88':'#00D4FF'}" font-size="14" font-family="JetBrains Mono" text-anchor="middle">${l.m}%</text>
+   <text x="125" y="62" fill="#fff" font-size="13" font-family="JetBrains Mono">${l.n.toUpperCase()}</text>
+   <text x="125" y="82" fill="rgba(255,255,255,.5)" font-size="9" font-family="JetBrains Mono">${l.c} · ${l.loc}</text>
+   <text x="125" y="100" fill="rgba(255,255,255,.5)" font-size="9" font-family="JetBrains Mono">${l.rev} · ${l.tag}</text>
+   <text x="458" y="28" fill="rgba(0,212,255,.6)" font-size="9" font-family="JetBrains Mono" text-anchor="end">FIG. ${i+1}</text>
+  </svg></div>
+  <div class="p-5 flex justify-between items-center">
+   <div><div class="tech-label mb-1">${l.c} · ${l.loc}</div><div class="font-bold">${l.n}</div></div>
+   <div class="stat-n text-xl">${l.p}</div>
+  </div>
+ </a>`).join('');
+
+/* ---- Demo applications (white-label product showcase) ---- */
+const APPS=[
+ {n:"Sistema de Reservas Unificado",d:"Reservas en línea con calendario, videollamada y confirmación automática por correo.",s:"FUNCIONAL",sc:"#00FF88",fig:"RESERVAS · CALENDARIO · EMAIL",tag:"PRODUCTIVIDAD"},
+ {n:"Motor de Facturación IA",d:"Facturación médica automatizada: reclamaciones, seguimiento de pagos y reportes.",s:"FUNCIONAL",sc:"#00FF88",fig:"FACTURACIÓN · RCM · REPORTES",tag:"SALUD · FINTECH"},
+ {n:"Vigilancia Inteligente",d:"Análisis de video con IA: detección de intrusos, EPP y alertas por mensajería.",s:"PILOTO",sc:"#00D4FF",fig:"VISIÓN IA · ALERTAS 24/7",tag:"SEGURIDAD"},
+ {n:"Marketplace Multi-Sector",d:"Plataforma de listados con matching por IA, chat y verificación de transacciones.",s:"FUNCIONAL",sc:"#00FF88",fig:"LISTADOS · MATCHING IA",tag:"COMERCIO"},
+ {n:"Generador de Contenido IA",d:"Contenido de marketing generado y programado para redes sociales de la empresa.",s:"FUNCIONAL",sc:"#00FF88",fig:"MARKETING · AUTOMATIZACIÓN",tag:"MARKETING"},
+ {n:"Chatbot de Atención",d:"Asistente conversacional para web: responde, agenda y califica clientes 24/7.",s:"PROTOTIPO",sc:"#FFC107",fig:"CHAT · NLP · 24/7",tag:"ATENCIÓN AL CLIENTE"}];
+document.getElementById('appGrid').innerHTML=APPS.map((a,i)=>`
+ <div class="tech-card block">
+  <div class="art-sm"><svg viewBox="0 0 480 150" class="w-full h-full">
+   <rect x="10" y="10" width="460" height="130" fill="none" stroke="rgba(255,255,255,.12)"/>
+   <path d="M10 30 H34 M10 30 V10 M470 120 H446 M470 120 V140" stroke="rgba(255,255,255,.6)" fill="none"/>
+   <circle cx="70" cy="75" r="26" fill="none" stroke="${a.sc}" stroke-width="1.5" stroke-dasharray="5 4"/>
+   <path d="M60 75h20M70 65v20" stroke="${a.sc}" stroke-width="1.5"/>
+   <text x="120" y="70" fill="#fff" font-size="11" font-family="JetBrains Mono">${a.n.toUpperCase()}</text>
+   <text x="120" y="90" fill="rgba(255,255,255,.45)" font-size="8" font-family="JetBrains Mono" letter-spacing="1.5">${a.fig}</text>
+   <text x="458" y="28" fill="rgba(0,212,255,.6)" font-size="9" font-family="JetBrains Mono" text-anchor="end">FIG. V-${i+1}</text>
+  </svg></div>
+  <div class="p-5">
+   <div class="flex justify-between items-center mb-3 gap-2"><span class="tech-label">${a.tag}</span><span class="vstatus" style="color:${a.sc};border-color:${a.sc}55;background:${a.sc}12">${a.s}</span></div>
+   <h3 class="text-white font-bold">${a.n}</h3>
+   <div class="text-white/50 text-sm mt-2 leading-relaxed">${a.d}</div>
+  </div>
+ </div>`).join('');
+</script>
+</body>
+</html>
