@@ -1,8 +1,10 @@
-const SUPABASE_URL = 'https://uakiregrnzcwuwqjkaxr.supabase.co';
-const SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVha2lyZWdybnpjd3V3cWprYXhyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDA2MDczNywiZXhwIjoyMDk1NjM2NzM3fQ.7wTezXqO9IYYKxa2HLJXkRdcFvOEr_DctcsoNTgQnN8';
+// 305business.llc — Static Business Data (fallback snapshot)
+// Source: migrated from seed-businesses.js (old Supabase project, now defunct)
+// Serves listings when the live DB is unreachable; always available offline.
 
-const businesses = [
+window.BUSINESSES305 = [
   {
+    id: 1,
     slug: "el-palacio-restaurant-lounge",
     name: "El Palacio Restaurant & Lounge",
     category: "restaurant",
@@ -17,8 +19,7 @@ const businesses = [
     state: "FL",
     zip: "33135",
     square_footage: 3400,
-    features: ["liquor_license","real_estate","established_clients","website"],
-    equipment_included: '["real_estate","equipment","liquor_license","website","social_media"]',
+    features: ["liquor_license", "real_estate", "established_clients", "website"],
     reason_for_selling: "retirement",
     lease_terms: "Property included - owner financing available",
     status: "active",
@@ -26,9 +27,11 @@ const businesses = [
     view_count: 142,
     inquiry_count: 8,
     seller_name: "Roberto Garcia",
-    seller_email: "rgarcia@email.com"
+    seller_email: "rgarcia@email.com",
+    created_at: "2026-05-29T12:00:00Z"
   },
   {
+    id: 2,
     slug: "wynwood-art-gallery-event-space",
     name: "Wynwood Art Gallery & Event Space",
     category: "retail",
@@ -43,8 +46,7 @@ const businesses = [
     state: "FL",
     zip: "33127",
     square_footage: 2800,
-    features: ["established_clients","social_media","website"],
-    equipment_included: '["equipment","social_media","website"]',
+    features: ["established_clients", "social_media", "website"],
     reason_for_selling: "new-venture",
     lease_terms: "$8,400/mo - NNN, through March 2028, 3% annual increases",
     status: "active",
@@ -52,9 +54,11 @@ const businesses = [
     view_count: 89,
     inquiry_count: 5,
     seller_name: "Cassandra Mills",
-    seller_email: "cmills@email.com"
+    seller_email: "cmills@email.com",
+    created_at: "2026-05-29T12:00:01Z"
   },
   {
+    id: 3,
     slug: "brickell-financial-advisory",
     name: "Brickell Financial Advisory",
     category: "service",
@@ -69,8 +73,7 @@ const businesses = [
     state: "FL",
     zip: "33131",
     square_footage: 1800,
-    features: ["established_clients","website","trademarks"],
-    equipment_included: '["equipment","website"]',
+    features: ["established_clients", "website", "trademarks"],
     reason_for_selling: "relocation",
     lease_terms: "Office share agreement - flexible terms",
     status: "active",
@@ -78,9 +81,11 @@ const businesses = [
     view_count: 56,
     inquiry_count: 3,
     seller_name: "David Chen",
-    seller_email: "dchen@email.com"
+    seller_email: "dchen@email.com",
+    created_at: "2026-05-29T12:00:02Z"
   },
   {
+    id: 4,
     slug: "coral-gables-dental-practice",
     name: "Coral Gables Dental Practice",
     category: "healthcare",
@@ -95,8 +100,7 @@ const businesses = [
     state: "FL",
     zip: "33134",
     square_footage: 3200,
-    features: ["real_estate","equipment","established_clients","website"],
-    equipment_included: '["real_estate","equipment","established_clients","website"]',
+    features: ["real_estate", "equipment", "established_clients", "website"],
     reason_for_selling: "retirement",
     lease_terms: "Property included in sale",
     status: "active",
@@ -104,9 +108,11 @@ const businesses = [
     view_count: 203,
     inquiry_count: 12,
     seller_name: "Dr. Maria Santos",
-    seller_email: "msantos@email.com"
+    seller_email: "msantos@email.com",
+    created_at: "2026-05-29T12:00:03Z"
   },
   {
+    id: 5,
     slug: "south-beach-boutique-hotel",
     name: "South Beach Boutique Hotel",
     category: "hospitality",
@@ -121,8 +127,7 @@ const businesses = [
     state: "FL",
     zip: "33139",
     square_footage: 8500,
-    features: ["real_estate","liquor_license","website","social_media"],
-    equipment_included: '["real_estate","equipment","liquor_license","website","social_media"]',
+    features: ["real_estate", "liquor_license", "website", "social_media"],
     reason_for_selling: "new-venture",
     lease_terms: "Property included",
     status: "active",
@@ -130,9 +135,11 @@ const businesses = [
     view_count: 178,
     inquiry_count: 9,
     seller_name: "Antonio Ricci",
-    seller_email: "aricci@email.com"
+    seller_email: "aricci@email.com",
+    created_at: "2026-05-29T12:00:04Z"
   },
   {
+    id: 6,
     slug: "doral-auto-repair-body-shop",
     name: "Doral Auto Repair & Body Shop",
     category: "automotive",
@@ -147,8 +154,7 @@ const businesses = [
     state: "FL",
     zip: "33166",
     square_footage: 4200,
-    features: ["equipment","established_clients","website"],
-    equipment_included: '["equipment","established_clients","website"]',
+    features: ["equipment", "established_clients", "website"],
     reason_for_selling: "relocation",
     lease_terms: "$5,200/mo - industrial zone, through 2026",
     status: "active",
@@ -156,9 +162,11 @@ const businesses = [
     view_count: 67,
     inquiry_count: 4,
     seller_name: "Jorge Mendez",
-    seller_email: "jmendez@email.com"
+    seller_email: "jmendez@email.com",
+    created_at: "2026-05-29T12:00:05Z"
   },
   {
+    id: 7,
     slug: "north-miami-gym-wellness",
     name: "North Miami Gym & Wellness Center",
     category: "fitness",
@@ -173,8 +181,7 @@ const businesses = [
     state: "FL",
     zip: "33181",
     square_footage: 8500,
-    features: ["equipment","established_clients","website","social_media"],
-    equipment_included: '["equipment","established_clients","website","social_media"]',
+    features: ["equipment", "established_clients", "website", "social_media"],
     reason_for_selling: "health",
     lease_terms: "$12,000/mo - retail space, through 2027",
     status: "active",
@@ -182,9 +189,11 @@ const businesses = [
     view_count: 94,
     inquiry_count: 6,
     seller_name: "Tanya Williams",
-    seller_email: "twilliams@email.com"
+    seller_email: "twilliams@email.com",
+    created_at: "2026-05-29T12:00:06Z"
   },
   {
+    id: 8,
     slug: "little-havana-bakery-cafe",
     name: "Little Havana Bakery & Café",
     category: "restaurant",
@@ -199,8 +208,7 @@ const businesses = [
     state: "FL",
     zip: "33135",
     square_footage: 1200,
-    features: ["equipment","established_clients","website"],
-    equipment_included: '["equipment","established_clients","website"]',
+    features: ["equipment", "established_clients", "website"],
     reason_for_selling: "retirement",
     lease_terms: "$3,800/mo - corner retail, through 2026",
     status: "active",
@@ -208,38 +216,25 @@ const businesses = [
     view_count: 112,
     inquiry_count: 7,
     seller_name: "Isabella Rodriguez",
-    seller_email: "irodriguez@email.com"
+    seller_email: "irodriguez@email.com",
+    created_at: "2026-05-29T12:00:07Z"
   }
 ];
 
-async function seed() {
-  let created = 0, failed = 0;
-  for (const biz of businesses) {
-    try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/businesses`, {
-        method: 'POST',
-        headers: {
-          'apikey': SERVICE_KEY,
-          'Authorization': `Bearer ${SERVICE_KEY}`,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify(biz)
-      });
-      if (res.ok) {
-        console.log(`✅ ${biz.name}`);
-        created++;
-      } else {
-        const err = await res.text();
-        console.error(`❌ ${biz.name}: ${err}`);
-        failed++;
-      }
-    } catch (e) {
-      console.error(`❌ ${biz.name}: ${e.message}`);
-      failed++;
-    }
-  }
-  console.log(`\nDone: ${created} created, ${failed} failed`);
-}
+window.CATEGORIES305 = [
+  { id: 1, name: "restaurant", label: "Restaurants & Food", business_count: 2 },
+  { id: 2, name: "retail", label: "Retail", business_count: 1 },
+  { id: 3, name: "service", label: "Services", business_count: 1 },
+  { id: 4, name: "healthcare", label: "Healthcare", business_count: 1 },
+  { id: 5, name: "hospitality", label: "Hospitality", business_count: 1 },
+  { id: 6, name: "automotive", label: "Automotive", business_count: 1 },
+  { id: 7, name: "fitness", label: "Fitness & Wellness", business_count: 1 }
+];
 
-seed();
+// Field aliases expected by the renderers (index/es use business_name/location/views)
+window.BUSINESSES305.forEach(b => {
+  b.business_name = b.business_name || b.name;
+  b.location = b.location || [b.address, b.city].filter(Boolean).join(", ") || "Miami, FL";
+  b.views = b.views != null ? b.views : (b.view_count || 0);
+  b.inquiries_count = b.inquiries_count != null ? b.inquiries_count : (b.inquiry_count || 0);
+});

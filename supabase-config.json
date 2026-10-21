@@ -1,5 +1,6 @@
 {
-  "url": "https://uakiregrnzcwuwqjkaxr.supabase.co",
-  "publishable_key": "sb_publishable_BhHyFZplUB8DE6-E2jBxvA_MUrqfQq0",
-  "password": "_4YwNiT7xQ-NZfx"
+  "url": "https://fjeubuopladzxxswomko.supabase.co",
+  "anon_key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqZXVidW9wbGFkenh4c3dvbWtvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY5MTM2NDAsImV4cCI6MjEwMjQ4OTY0MH0.QVp74zTbgUj4Me6T059TnxOKT0w7gCwp5D7gX_7li44",
+  "project": "cedexx-shared (305business schema pending DB password)",
+  "notes": "Old project uakiregrnzcwuwqjkaxr is DEAD (NXDOMAIN). Auth works via built-in auth.users. Data tables (businesses/inquiries/valuations/listing_submissions/contact_messages/profiles) need DDL — requires DB password from Supabase dashboard (Settings → Database)."
 }

@@ -1,8 +1,8 @@
 // 305business.llc — Dashboard & Admin Shared Module
 // Seller dashboard + Admin review queue functionality
 
-const SUPABASE_URL = 'https://uakiregrnzcwuwqjkaxr.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_BhHyFZplUB8DE6-E2jBxvA_MUrqfQq0';
+const SUPABASE_URL = 'https://fjeubuopladzxxswomko.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqZXVidW9wbGFkenh4c3dvbWtvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY5MTM2NDAsImV4cCI6MjEwMjQ4OTY0MH0.QVp74zTbgUj4Me6T059TnxOKT0w7gCwp5D7gX_7li44';
 
 class DashboardApp {
     constructor(options = {}) {
@@ -60,10 +60,22 @@ class DashboardApp {
             }
             if (filter.limit) query += `&limit=${filter.limit}`;
             this.listings = await this.request(query);
-            return this.listings;
+        } catch (e) {
+            // Live table not provisioned — serve local snapshot
+            let rows = (window.BUSINESSES305 || []).slice();
+            if (filter.status) rows = rows.filter(l => l.status === filter.status);
+            if (filter.seller_email) rows = rows.filter(l => l.seller_email === filter.seller_email);
+            if (filter.category) rows = rows.filter(l => l.category === filter.category);
+            if (filter.search) {
+                const s = filter.search.toLowerCase();
+                rows = rows.filter(l => (l.name || '').toLowerCase().includes(s) || (l.seller_email || '').toLowerCase().includes(s));
+            }
+            if (filter.limit) rows = rows.slice(0, filter.limit);
+            this.listings = rows;
         } finally {
             this.loading = false;
         }
+        return this.listings;
     }
 
     async fetchListingsBySeller(email) {
@@ -82,17 +94,25 @@ class DashboardApp {
     // ── Inquiries ──
 
     async fetchInquiries(businessId = null) {
-        let query = 'inquiries?order=created_at.desc';
-        if (businessId) query += `&business_id=eq.${businessId}`;
-        this.inquiries = await this.request(query);
+        try {
+            let query = 'inquiries?order=created_at.desc';
+            if (businessId) query += `&business_id=eq.${businessId}`;
+            this.inquiries = await this.request(query);
+        } catch (e) {
+            this.inquiries = []; // inquiries live in La Jefatura (mc.db) until table is provisioned
+        }
         return this.inquiries;
     }
 
     async fetchInquiriesForListings(listingIds) {
         if (!listingIds || listingIds.length === 0) return [];
-        const ids = listingIds.map(id => `"${id}"`).join(',');
-        const query = `inquiries?business_id=in.(${ids})&order=created_at.desc`;
-        this.inquiries = await this.request(query);
+        try {
+            const ids = listingIds.map(id => `"${id}"`).join(',');
+            const query = `inquiries?business_id=in.(${ids})&order=created_at.desc`;
+            this.inquiries = await this.request(query);
+        } catch (e) {
+            this.inquiries = [];
+        }
         return this.inquiries;
     }
 
@@ -103,7 +123,11 @@ class DashboardApp {
     // ── Categories ──
 
     async fetchCategories() {
-        this.categories = await this.request('categories?order=name.asc');
+        try {
+            this.categories = await this.request('categories?order=name.asc');
+        } catch (e) {
+            this.categories = window.CATEGORIES305 || [];
+        }
         return this.categories;
     }
 
@@ -114,15 +138,21 @@ class DashboardApp {
         if (!validStatuses.includes(status)) {
             throw new Error(`Invalid status: ${status}. Must be one of: ${validStatuses.join(', ')}`);
         }
-        const result = await this.request(`businesses?id=eq.${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify({ status, updated_at: new Date().toISOString() })
-        });
-        // Update local cache
+        try {
+            const result = await this.request(`businesses?id=eq.${id}`, {
+                method: 'PATCH',
+                body: JSON.stringify({ status, updated_at: new Date().toISOString() })
+            });
+            if (result && result[0]) { this._patchLocal(id, status); return result[0]; }
+        } catch (e) { /* local snapshot mode */ }
+        this._patchLocal(id, status);
+        this.onUpdate();
+        return { id, status, local: true };
+    }
+
+    _patchLocal(id, status) {
         const idx = this.listings.findIndex(l => l.id === id);
         if (idx !== -1) this.listings[idx].status = status;
-        this.onUpdate();
-        return result[0];
     }
 
     async approveListing(id) {
