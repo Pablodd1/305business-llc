@@ -60,5 +60,23 @@ create policy "public read activity" on public.activity_log
 create policy "public insert activity" on public.activity_log
     for insert to anon with check (true);
 
+-- ─────────────────────────────────────────────────────────────
+-- ⚠️ REQUIRED AFTER SUPABASE'S OCT 30, 2026 CHANGE:
+-- New tables no longer get automatic Data API grants.
+-- These GRANTs restore PostgREST/supabase-js access.
+-- Without them every API call returns "permission denied".
+-- ─────────────────────────────────────────────────────────────
+grant usage on schema public to anon, authenticated, service_role;
+grant all on all tables in schema public to anon, authenticated, service_role;
+grant all on all sequences in schema public to anon, authenticated, service_role;
+
+-- Future-proof: any table created LATER also gets grants automatically
+alter default privileges in schema public
+    grant all on tables to anon, authenticated, service_role;
+alter default privileges in schema public
+    grant all on sequences to anon, authenticated, service_role;
+
 -- Done. The site needs the new Project URL + anon key dropped into
 -- supabase-client.js (top of file) — ask Kimi Claw to do that part.
+-- Reminder: after Oct 30, if you ever run a fresh setup / db reset,
+-- these GRANT blocks are what keep the site alive.

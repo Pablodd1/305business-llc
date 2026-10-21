@@ -18,6 +18,7 @@
     <script src="agentic-config.js"></script>
     <script>window.EMAIL_SERVER_URL = 'https://305business-llc.vercel.app';</script>
     <script src="supabase-client.js"></script>
+    <script src="js/deal-flow.js"></script>
     <script src="js/email-notify.js"></script>
     <script src="js/auth.js" type="module"></script>
     <!-- Auth Navigation Script -->
@@ -642,16 +643,35 @@
 
             try {
                 const inquiryData = {
-                    business_id: listingId,
+                    listing_id: String(listingId || currentListing?.id || 'listing'),
+                    listing_title: currentListing?.name || document.title || 'Listing',
                     buyer_name: document.getElementById('buyer_name').value,
                     buyer_email: document.getElementById('buyer_email').value,
-                    buyer_phone: document.getElementById('buyer_phone').value || null,
-                    request_type: document.getElementById('inquiryType').value,
-                    message: document.getElementById('inquiryMessage').value,
-                    status: 'new'
+                    buyer_phone: document.getElementById('buyer_phone').value || '',
+                    message: '[' + (document.getElementById('inquiryType').value || 'info') + '] ' + document.getElementById('inquiryMessage').value
                 };
 
-                const result = await window.supabase305.createInquiry(inquiryData);
+                // PRIMARY: Deal Flow engine (live). LEGACY: supabase (best-effort, project may be paused).
+                let dfResult = null;
+                try {
+                    dfResult = await window.DealFlow.submitInquiry(inquiryData);
+                } catch (e) { console.warn('DealFlow offline:', e); }
+                let legacyOk = false;
+                try {
+                    if (window.supabase305 && window.supabase305.createInquiry) {
+                        await window.supabase305.createInquiry({
+                            business_id: listingId,
+                            buyer_name: inquiryData.buyer_name,
+                            buyer_email: inquiryData.buyer_email,
+                            buyer_phone: inquiryData.buyer_phone || null,
+                            request_type: document.getElementById('inquiryType').value,
+                            message: document.getElementById('inquiryMessage').value,
+                            status: 'new'
+                        });
+                        legacyOk = true;
+                    }
+                } catch (e) { console.warn('Legacy supabase unavailable:', e); }
+                if (!dfResult && !legacyOk) throw new Error('No se pudo enviar. Intenta de nuevo en un momento.');
 
                 // Send email notification via email-notify.js
                 if (window.emailNotify && window.emailNotify.sendInquiryAlert) {
@@ -679,11 +699,20 @@
                     });
                 } catch (e) { /* fail silently */ }
 
-                const inquiry = result[0] || result;
+                const inquiry = dfResult ? { id: 'DF-' + dfResult.deal_id } : { id: 'LEGACY-' + Date.now() };
                 currentInquiryId = inquiry.id;
-                document.getElementById('inquiryReference').textContent = inquiry.id.substring(0, 8).toUpperCase();
+                document.getElementById('inquiryReference').textContent = String(inquiry.id).substring(0, 8).toUpperCase();
                 document.getElementById('inquirySuccessModal').classList.add('active');
                 document.getElementById('inquiryFormEl').reset();
+
+                // Deal workflow gate: after a live inquiry, offer the NDA (step 2)
+                if (dfResult && window.DealFlow && window.DealFlow.showNDAGate) {
+                    setTimeout(() => window.DealFlow.showNDAGate({
+                        deal_id: dfResult.deal_id,
+                        listing_id: inquiryData.listing_id,
+                        listing_title: inquiryData.listing_title
+                    }), 700);
+                }
 
                 // Re-pre-fill after reset if still authenticated
                 prefillBuyerInfo();

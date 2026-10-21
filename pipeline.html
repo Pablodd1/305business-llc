@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pipeline de Negocios · 305business</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a4a7a'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>3</text></svg>">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="js/deal-flow.js"></script>
+<style>
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f3f6fa;color:#1a202c}
+.kb{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;align-items:start}
+.col{background:#e9eef5;border-radius:14px;padding:12px;min-height:120px}
+.col h3{font-size:.78rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#475569;margin:2px 4px 10px;display:flex;justify-content:space-between}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px;margin-bottom:10px;box-shadow:0 1px 2px rgba(16,24,40,.06)}
+.card .t{font-weight:700;font-size:.92rem;color:#0f172a}
+.card .b{font-size:.8rem;color:#475569;margin-top:3px}
+.card .m{font-size:.72rem;color:#94a3b8;margin-top:6px}
+.card select{width:100%;margin-top:9px;border:1.5px solid #cbd5e1;border-radius:7px;padding:6px 8px;font-size:.78rem;background:#f8fafc}
+.card .loi{font-size:.78rem;color:#1a4a7a;font-weight:700;margin-top:6px}
+.pill{display:inline-block;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:99px;background:#e0eaff;color:#1a4a7a}
+.dead{opacity:.55}
+</style>
+</head>
+<body>
+<div class="max-w-7xl mx-auto px-4 py-8">
+  <a href="index.html" class="text-sm text-slate-500 hover:text-slate-800"><i class="fas fa-arrow-left mr-1"></i> Volver</a>
+  <h1 class="text-2xl font-extrabold mt-2">Pipeline de Negocios</h1>
+  <p class="text-slate-500 text-sm mt-1">Del primer mensaje al cierre: Consulta → NDA → LOI → Due Diligence → Escrow → Cerrado. Los honorarios por éxito se coordinan con un broker licenciado en Florida.</p>
+  <div id="stats" class="grid grid-cols-2 md:grid-cols-4 gap-3 my-6"></div>
+  <div class="kb" id="board"></div>
+  <p id="err" class="text-red-600 text-sm mt-4 hidden">Motor de tratos no disponible ahora mismo (se reintentará solo).</p>
+</div>
+<script>
+const ORDER=['inquiry','nda_signed','loi_sent','loi_accepted','due_diligence','escrow','closed'];
+const NEXT={inquiry:'nda_signed',nda_signed:'loi_sent',loi_sent:'loi_accepted',loi_accepted:'due_diligence',due_diligence:'escrow',escrow:'closed'};
+const ago=t=>{const d=(Date.now()/1000-t);return d<90?'ahora':d<5400?Math.max(1,d/60|0)+' min':d<86400?(d/3600|0)+' h':'hace '+(d/86400|0)+' d'};
+async function load(){
+  const data=await DealFlow.list();
+  const errEl=document.getElementById('err');
+  if(!data){errEl.classList.remove('hidden');setTimeout(load,15000);return}
+  errEl.classList.add('hidden');
+  const deals=(data.deals||[]).filter(d=>d.stage!=='dead');
+  const dead=(data.deals||[]).filter(d=>d.stage==='dead');
+  document.getElementById('stats').innerHTML=[
+    ['Activos',deals.filter(d=>d.stage!=='closed').length],
+    ['NDA firmados',deals.filter(d=>ORDER.indexOf(d.stage)>=1).length],
+    ['LOI enviadas',deals.filter(d=>ORDER.indexOf(d.stage)>=2).length],
+    ['En escrow',deals.filter(d=>d.stage==='escrow').length]
+  ].map(s=>`<div class="bg-white border border-slate-200 rounded-xl p-4"><div class="text-2xl font-extrabold">${s[1]}</div><div class="text-xs text-slate-500 uppercase tracking-wide">${s[0]}</div></div>`).join('');
+  const opts=d=>ORDER.filter(s=>ORDER.indexOf(s)>ORDER.indexOf(d.stage)).map(s=>`<option value="${s}">→ ${DealFlow.STAGE_LABEL[s]}</option>`).join('');
+  document.getElementById('board').innerHTML=ORDER.map(st=>{
+    const ds=deals.filter(d=>d.stage===st);
+    return `<div class="col"><h3>${DealFlow.STAGE_LABEL[st]} <span>${ds.length}</span></h3>${
+      ds.map(d=>`<div class="card">
+        <div class="t">${(d.listing_title||'Negocio').replace(/</g,'&lt;')}</div>
+        <div class="b">${(d.buyer_name||'').replace(/</g,'&lt;')} · ${(d.buyer_phone||d.buyer_email||'').replace(/</g,'&lt;').slice(0,32)}</div>
+        ${d.loi_amount?`<div class="loi"><i class="fas fa-file-signature mr-1"></i>LOI $${Number(d.loi_amount).toLocaleString()}</div>`:''}
+        ${d.nda_name?`<div class="m"><i class="fas fa-lock mr-1"></i>NDA: ${(d.nda_name||'').replace(/</g,'&lt;')} · ${ago(d.nda_ts)}</div>`:''}
+        <div class="m">${(d.message||'').replace(/</g,'&lt;').slice(0,90)}</div>
+        <div class="m">actualizado ${ago(d.updated)}</div>
+        ${NEXT[st]?`<select onchange="if(this.value){DealFlow.advance(${d.id},this.value).then(()=>load())}"><option value="">Mover etapa…</option>${opts(d)}</select>`:'<span class="pill">Cerrado ✓</span>'}
+      </div>`).join('')||'<div class="text-xs text-slate-400 px-1 py-3">Sin tratos</div>'}
+    </div>`;
+  }).join('')+(dead.length?`<div class="col dead"><h3>Caídos <span>${dead.length}</span></h3>${dead.map(d=>`<div class="card"><div class="t">${(d.listing_title||'').replace(/</g,'&lt;')}</div><div class="b">${(d.buyer_name||'').replace(/</g,'&lt;')}</div></div>`).join('')}</div>`:'');
+}
+load();setInterval(load,25000);
+</script>
+</body>
+</html>
