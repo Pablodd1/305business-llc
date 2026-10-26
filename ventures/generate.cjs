@@ -119,7 +119,7 @@ function page(v, related) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${esc(v.name)} — ${esc(v.tagline)} | Acquisition: ${fmt(v.price)} | 305business</title>
+    <title>${esc(v.name)} — ${esc(v.tagline)} | Buy ${fmt(v.price)} or ${fmt(v.monthly)}/mo | 305business</title>
     <meta name="description" content="${esc(v.summary.slice(0,155))}" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#1a4a7a" />
@@ -129,7 +129,7 @@ function page(v, related) {
     <link rel="alternate" hreflang="ht" href="https://305business.llc/ventures/${v.slug}.html" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="${esc(v.name)} — available for acquisition" />
-    <meta property="og:description" content="${esc(v.tagline)}. One-time acquisition ${fmt(v.price)}. Stage: ${v.status}." />
+    <meta property="og:description" content="${esc(v.tagline)}. Buy ${fmt(v.price)} one-time or ${fmt(v.monthly)}/mo × 18 with maintenance included. Stage: ${v.status}." />
     <meta property="og:image" content="https://305business.llc/305business-logo.png" />
     <meta property="og:url" content="https://305business.llc/ventures/${v.slug}.html" />
     <meta property="twitter:card" content="summary_large_image" />
@@ -188,9 +188,12 @@ ${NAV}
 
                 <aside class="lg:sticky lg:top-24">
                     <div class="tech-card p-6" id="offer">
-                        <div class="tech-label">ONE-TIME ACQUISITION</div>
+                        <div class="tech-label">TWO WAYS TO OWN IT</div>
                         <div class="mono text-4xl font-bold text-white mt-2">${fmt(v.price)}</div>
-                        <div class="text-white/60 text-sm mt-1 mb-6">${sup} · Open to offers</div>
+                        <div class="text-white/60 text-sm">one-time acquisition</div>
+                        <div class="mono text-xl font-bold text-emerald-400 mt-2">${fmt(v.monthly)}<span class="text-white/60 text-xs font-normal">/mo × 18</span></div>
+                        <div class="text-white/60 text-sm mb-1">monthly plan — maintenance & updates included</div>
+                        <div class="text-white/40 text-xs mb-5">${sup} after payoff · Open to offers</div>
                         <form onsubmit="return offerSubmit(event,'${v.slug}','${esc(v.name)}',${v.price})" class="flex flex-col gap-3">
                             <input required name="name" class="tech-input px-4 py-3 text-sm w-full" placeholder="YOUR NAME" />
                             <input required name="email" type="email" class="tech-input px-4 py-3 text-sm w-full" placeholder="EMAIL" />

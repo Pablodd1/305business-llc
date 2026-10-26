@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Venture Portfolio — 24 Companies For Acquisition | 305business.llc</title>
-    <meta name="description" content="24 operating companies and products available for one-time acquisition. Healthcare AI, sports science, computer vision, marketplaces, and growth systems — with optional support plans. Every stage labeled honestly." />
+    <meta name="description" content="24 operating companies and products for sale — one-time purchase or 18-month plan with maintenance included. Priced on the 2026 micro-SaaS asset market. Every stage labeled honestly." />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#1a4a7a" />
     <link rel="canonical" href="https://305business.llc/ventures/" />
@@ -13,14 +13,14 @@
     <link rel="alternate" hreflang="ht" href="https://305business.llc/ventures/" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="305business Venture Portfolio — 24 Companies For Acquisition" />
-    <meta property="og:description" content="Healthcare AI, sports tech, computer vision, marketplaces. One-time acquisition. Make an offer." />
+    <meta property="og:description" content="Healthcare AI, sports tech, computer vision, marketplaces. Buy outright or monthly with maintenance. Make an offer." />
     <meta property="og:image" content="https://305business.llc/305business-logo.png" />
     <meta property="og:url" content="https://305business.llc/ventures/" />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content="305business Venture Portfolio" />
-    <meta property="twitter:description" content="24 companies. One-time acquisition. Make an offer." />
+    <meta property="twitter:description" content="24 companies. Buy or lease-to-own with maintenance included. Make an offer." />
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"CollectionPage","name":"305business Venture Portfolio","description":"Portfolio of companies and products available for one-time acquisition.","url":"https://305business.llc/ventures/","isPartOf":{"@type":"WebSite","name":"305business.llc","url":"https://305business.llc"}}
+    {"@context":"https://schema.org","@type":"CollectionPage","name":"305business Venture Portfolio","description":"Portfolio of companies and products available for acquisition — one-time purchase or monthly plan with maintenance included.","url":"https://305business.llc/ventures/","isPartOf":{"@type":"WebSite","name":"305business.llc","url":"https://305business.llc"}}
     </script>
     <link rel="icon" type="image/png" href="https://305business.llc/305business-logo-transparent.png">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -137,7 +137,7 @@
                     <span class="tech-label">SCALE: 1:1</span>
                 </div>
                 <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-none tracking-tight">VENTURE<br>PORTFOLIO</h1>
-                <p class="text-white/70 mt-6 max-w-2xl text-lg leading-relaxed">We build companies. You can own one. 24 operating products and platforms — healthcare AI, sports science, computer vision, intelligent commerce. One-time acquisition, optional support, every stage labeled honestly.</p>
+                <p class="text-white/70 mt-6 max-w-2xl text-lg leading-relaxed">We build companies. You can own one. 24 operating products and platforms — healthcare AI, sports science, computer vision, intelligent commerce. Buy it once or pay monthly — maintenance included either way. 2026 market pricing on every asset, every stage labeled honestly.</p>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
                     <div class="inset-view p-5" data-view="VENTURES">
                         <div class="mono text-4xl font-bold text-[#00D4FF]" id="statN">24</div>
@@ -236,9 +236,9 @@
                 <div class="flex flex-wrap gap-1.5 mt-4">${v.capabilities.slice(0,4).map(c=>`<span class="tech-label border border-white/15 px-2 py-1" style="font-size:9px">${c.toUpperCase()}</span>`).join('')}</div>
                 <div class="border-t border-dashed border-white/20 mt-4 pt-4 flex justify-between items-end gap-3">
                     <div>
-                        <div class="tech-label" style="font-size:9px">ONE-TIME ACQUISITION</div>
+                        <div class="tech-label" style="font-size:9px">BUY ${fmt(v.price)} · OR ${fmt(v.monthly)}/MO × 18</div>
                         <div class="mono text-2xl font-bold text-white">${fmt(v.price)}</div>
-                        <div class="text-white/50 text-xs">${sup}</div>
+                        <div class="text-white/50 text-xs">${sup} · monthly plan incl. maintenance</div>
                     </div>
                     <a href="/ventures/${v.slug}.html#offer" class="schematic-btn px-4 py-2 shrink-0"><span class="relative z-10">MAKE AN OFFER</span></a>
                 </div>

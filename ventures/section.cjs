@@ -19,7 +19,7 @@ const card = v => { const c = SC[v.status]||'#fff'; return `
                         <div class="text-[#00D4FF] text-xs font-semibold mt-1">${v.tagline}</div>
                         <div class="border-t border-dashed border-white/20 mt-4 pt-3 flex justify-between items-center">
                             <span class="mono text-white font-bold">${fmt(v.price)}</span>
-                            <span class="tech-label" style="font-size:9px">ONE-TIME · MAKE AN OFFER</span>
+                            <span class="tech-label" style="font-size:9px">OR ${fmt(v.monthly)}/MO × 18 · MAINTENANCE INCL.</span>
                         </div>
                     </div>
                 </a>`; };
