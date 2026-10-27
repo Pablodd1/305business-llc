@@ -15,13 +15,33 @@ const R =(x,y,w,h,e='')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fil
 const RC=(x,y,w,h,e='')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="${C}" stroke-width="1.6" ${e}/>`;
 const RR=(x,y,w,h,rx,e='')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="none" stroke="${W}" stroke-width="1.6" ${e}/>`;
 
-const FIG=(label,inner)=>`<svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
-<rect x="10" y="10" width="460" height="280" fill="none" stroke="${G}"/>
+let __uid=0;
+const FIG=(label,inner)=>{const u=++__uid,A='__ACC__';return `<svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+<defs>
+<linearGradient id="bg${u}" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#0d1233"/><stop offset="0.55" stop-color="#080b1e"/><stop offset="1" stop-color="#04060d"/></linearGradient>
+<radialGradient id="gl${u}" cx="0.5" cy="0.4" r="0.75"><stop offset="0" stop-color="${A}" stop-opacity="0.32"/><stop offset="0.6" stop-color="${A}" stop-opacity="0.08"/><stop offset="1" stop-color="${A}" stop-opacity="0"/></radialGradient>
+<linearGradient id="fl${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${A}" stop-opacity="0.22"/><stop offset="1" stop-color="${A}" stop-opacity="0"/></linearGradient>
+<radialGradient id="vg${u}" cx="0.5" cy="0.45" r="0.85"><stop offset="0.62" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.42"/></radialGradient>
+<pattern id="sc${u}" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#ffffff" opacity="0.035"/></pattern>
+<filter id="bl${u}" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>
+</defs>
+<rect width="480" height="300" fill="url(#bg${u})"/>
+<rect width="480" height="300" fill="url(#gl${u})"/>
+<g stroke="rgba(255,255,255,0.05)" stroke-width="1">
+<line x1="0" y1="216" x2="480" y2="216"/><line x1="0" y1="234" x2="480" y2="234"/><line x1="0" y1="258" x2="480" y2="258"/><line x1="0" y1="288" x2="480" y2="288"/>
+<line x1="240" y1="216" x2="240" y2="300"/><line x1="180" y1="216" x2="60" y2="300"/><line x1="300" y1="216" x2="420" y2="300"/><line x1="120" y1="216" x2="-120" y2="300"/><line x1="360" y1="216" x2="600" y2="300"/>
+</g>
+<rect x="0" y="216" width="480" height="84" fill="url(#fl${u})"/>
+<rect width="480" height="300" fill="url(#sc${u})"/>
+<rect x="10" y="10" width="460" height="280" fill="none" stroke="rgba(255,255,255,0.10)"/>
 ${P('M10 30 H30 M10 30 V10 M470 270 H450 M470 270 V290').replace('stroke-width="1.6"','stroke-width="1"')}
-${T(24,46,label,'rgba(255,255,255,0.45)',9)}
-${T(452,282,'FIG. 1','rgba(0,212,255,0.55)',9,'end')}
+<rect x="20" y="36" width="4" height="12" fill="${A}"/>
+${T(30,46,label,'rgba(255,255,255,0.55)',9)}
+${T(452,282,'FIG. 1',A,9,'end')}
+<ellipse cx="240" cy="238" rx="180" ry="24" fill="${A}" opacity="0.15" filter="url(#bl${u})"/>
 ${inner}
-</svg>`;
+<rect width="480" height="300" fill="url(#vg${u})"/>
+</svg>`;};
 
 const runner=(x,y,sc=1,col=W)=>{const s=sc;return `<g stroke="${col}" stroke-width="1.6" fill="none">
 ${CIR(x,y,14*s)}${L(x,y+14*s,x-4*s,y+62*s)}${L(x-4*s,y+30*s,x-34*s,y+48*s)}${L(x-4*s,y+30*s,x+30*s,y+40*s)}
@@ -38,6 +58,13 @@ window.VENTURE_ART={
  PC('M55,150 H160 L176,122 L192,170 L208,108 L224,150 L425,150')+
  PC('M370,88 A26,26 0 0 1 396,62 M382,100 A14,14 0 0 1 396,86')+
  DOT(396,62,3)),
+
+'ai-voice-layer':FIG('VOICE LAYER',
+ R(140,150,14,30)+R(164,130,14,70)+R(188,107,14,115)+R(212,90,14,150)+R(236,107,14,115)+R(260,130,14,70)+R(284,150,14,30)+
+ PC('M322,96 a50,50 0 0 1 0,98')+PC('M384,96 a50,50 0 0 0 0,98')+
+ RR(340,100,26,52,13)+L(353,152,353,176)+P('M341,176 H365')+
+ RR(396,92,58,44,8)+DOT(408,114,3)+DOT(420,114,3)+DOT(432,114,3)+
+ T(150,262,'EN / ES',C,9)+PD('M120,256 H240')),
 
 'rtm-platform':FIG('JOINT RANGE MONITOR',
  P('M190,60 L240,150 L295,240')+CIR(240,150,11)+DOT(240,150,3)+
@@ -180,4 +207,18 @@ window.VENTURE_ART={
  PC('M240,150 L150,100 M240,150 L330,100 M240,150 L360,150 M240,150 L330,200 M240,150 L150,200 M240,150 L120,150 M240,150 L195,95 M240,150 L285,95 M240,150 L195,205 M240,150 L285,205')+
  [[150,100],[330,100],[360,150],[330,200],[150,200],[120,150],[195,95],[285,95],[195,205],[285,205]].map(p=>DOT(p[0],p[1],4)).join('')
 )};
+
+const ACCENT={
+'zero-g-simulation':'#a78bfa','ai-voice-layer':'#22d3ee','hotel-rate-intelligence':'#fbbf24',
+'jmm-jas-miami-method':'#f472b6','estatematch':'#34d399','pocketscribe':'#38bdf8',
+'adaptive-marketplace':'#fb923c','overlay-hd':'#a3e635','runform-ai':'#f87171',
+'clinical-movement-intelligence':'#2dd4bf','website-factory':'#818cf8','dental-ehr':'#67e8f9',
+'room-defect-intelligence':'#fde047','rpm-platform':'#fb7185','three-d-spatial-intelligence':'#c084fc',
+'ai-voice-receptionist':'#22d3ee','cycling-fit-intelligence':'#fdba74','rtm-platform':'#6ee7b7',
+'intelligent-crm':'#60a5fa','agentic-websites':'#a78bfa','ai-chatbots':'#4ade80',
+'ai-market-intelligence':'#fcd34d','revenue-cycle-intelligence':'#34d399','seo-aeo-engine':'#f9a8d4',
+'rapid-digital-launch':'#fb923c'};
+const RAW=window.VENTURE_ART; window.VENTURE_ART={};
+for(const k in RAW){ window.VENTURE_ART[k]=RAW[k].split('__ACC__').join(ACCENT[k]||'#00D4FF'); }
+
 })();
