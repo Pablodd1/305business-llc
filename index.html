@@ -578,6 +578,17 @@
 
         /* Nav menu legibility bump */
         .blueprint-nav a.tech-label { font-size: 11px; }
+
+        /* Language selector — utility bar under the menu (frees nav row space) */
+        .lang-bar { position: fixed; top: 4.25rem; right: 1rem; z-index: 40; }
+        @media (max-width: 768px) { .lang-bar { display: none; } }
+
+        /* Footer legibility — near-white text */
+        footer .text-white\/30 { color: rgba(255,255,255,0.75); }
+        footer a.text-white\/30:hover { color: #ffffff; }
+
+        /* Legal notice — full-width band across the footer */
+        .legal-wide { border: 1.5px dashed rgba(255,255,255,0.25); background: rgba(255,255,255,0.05); }
     </style>
 
 <!-- AISO + Schema.org Injection (auto-added 2026-05-25) -->
@@ -779,7 +790,6 @@
                     <a href="#wealth-intelligence" class="tech-label hover:text-white/60 transition">WEALTH</a>
                     <a href="how-it-works.html" class="tech-label hover:text-white/60 transition" data-i18n="nav_process">HOW IT WORKS</a>
                     <a href="founders.html" class="tech-label hover:text-white/60 transition">FOUNDERS</a>
-                    <div id="lang-toggle" style="margin-left:0.5rem;"></div>
                     <div id="nav-auth" class="flex items-center gap-2 ml-2">
                         <!-- Auth links injected by auth.js -->
                         <a href="/login.html" class="text-white/80 hover:text-white transition text-sm font-medium">Log In</a>
@@ -825,6 +835,9 @@
             </div>
         </div>
     </nav>
+
+    <!-- Language selector — utility bar under the menu -->
+    <div class="lang-bar"><div id="lang-toggle"></div></div>
 
     <!-- Right scrollable social rail (moves with scroll, frees top bar) -->
     <div class="rail" aria-label="Follow 305business">
@@ -1736,16 +1749,16 @@
                         <li><a href="https://facebook.com/305business" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fab fa-facebook mr-2"></i>Facebook</a></li>
                         <li><a href="https://oem-flex-spots-poll.trycloudflare.com/?company=305business" target="_blank" class="text-white/30 hover:text-white/60 text-sm transition" data-i18n="footer_book_consultation"><i class="fas fa-calendar mr-2"></i>Book Consultation</a></li>
                     </ul>
-                    <!-- Legal Notice for Users -->
-                    <div class="mt-8 p-4 border border-white/10 bg-white/5">
-                        <p class="text-white/40 text-xs leading-relaxed">
-                            <strong class="text-white/60">IMPORTANT NOTICE:</strong> 305business.LLC is a business listing platform that connects buyers and sellers. We do not broker, negotiate, or represent either party in any transaction. All negotiations, agreements, and transactions are conducted directly between buyers and sellers. We do not charge commissions or success fees. Listing fees are for advertising visibility only. By using this platform, you acknowledge that 305business.LLC is not a licensed broker and does not provide brokerage services.
-                        </p>
-                        <p class="text-white/40 text-xs mt-2">
-                            <i class="fas fa-shield-alt mr-1"></i> Platform Only - Not a Brokerage · Florida LLC · All transactions are direct between parties
-                        </p>
-                    </div>
                 </div>
+            </div>
+            <!-- Legal notice — spans the full width of the footer -->
+            <div class="legal-wide mt-10 p-5">
+                <p class="text-white/70 text-xs leading-relaxed">
+                    <strong class="text-white">IMPORTANT NOTICE:</strong> 305business.LLC is a business listing platform that connects buyers and sellers. We do not broker, negotiate, or represent either party in any transaction. All negotiations, agreements, and transactions are conducted directly between buyers and sellers. We do not charge commissions or success fees. Listing fees are for advertising visibility only. By using this platform, you acknowledge that 305business.LLC is not a licensed broker and does not provide brokerage services.
+                </p>
+                <p class="text-white/60 text-xs mt-2">
+                    <i class="fas fa-shield-alt mr-1"></i> Platform Only - Not a Brokerage · Florida LLC · All transactions are direct between parties
+                </p>
             </div>
             <div class="border-t border-white/10 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
                 <span class="tech-label">© 2026 305business.LLC - ALL RIGHTS RESERVED - REV 1.0</span>
