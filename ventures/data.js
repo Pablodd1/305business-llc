@@ -41,10 +41,10 @@ window.VENTURES = [
     monthly: 835,
     support: 199,
     featured: true,
-    summary: "A live market-intelligence platform tracking boutique-hotel rates in Miami Beach. Monitors competitor pricing on OTAs, maintains a historical rate database, and delivers scheduled competitive summaries. Currently tracking 20 hotels with 250+ rate observations, a daily 6 AM collector, dashboard, and Telegram delivery.",
-    capabilities: ["OTA rate collection","Historical pricing data","Competitive benchmarking","Pricing analytics","Live dashboard","Telegram reporting","Scheduled pipelines"],
+    summary: "A live competitive-intelligence platform for boutique hotels. Scrapes the open web — including every hotel's own site, which no WAF blocks — to capture decision-maker contacts (61 and counting across a 20-hotel Miami Beach comp set), scores each property on who actually needs rate intelligence (13 hot prospects), and delivers a 6 AM daily Telegram brief. Self-hosted, MIT-licensed, zero paid data APIs.",
+    capabilities: ["Contact capture from hotel websites","Who-needs-it prospect scoring (0–100)","Competitive rate observation","20-hotel Miami Beach comp set","Live dashboard","Daily Telegram briefs","Booking.com OTA engine (residential-IP ready)","SQLite storage + cron pipelines"],
     target: "Hotels, property managers, revenue consultants",
-    links: { demo: "https://aimedicalscriber.com/mission-control/" }
+    links: { github: "https://github.com/Pablodd1/hotel-rate-intelligence", demo: "https://julian-miller-minister-manuals.trycloudflare.com/?k=hri-miami-2026" }
   },
   {
     slug: "jmm-jas-miami-method",
