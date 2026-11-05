@@ -1,5 +1,9 @@
--- 8 Realistic Miami Business Listings for 305business.llc
--- Run this in Supabase Dashboard → SQL Editor after creating schema
+-- ⚠️  DEMO / TEST DATA ONLY — DO NOT RUN IN PRODUCTION
+-- These 8 listings are fabricated sample rows for local development and UI testing.
+-- The production site must only show real, owner-submitted listings.
+-- Run this in a DEV Supabase project (Dashboard → SQL Editor) after creating schema.
+
+-- 8 Sample Miami Business Listings (FABRICATED — dev environment only)
 
 INSERT INTO businesses (slug, name, category, description, asking_price, annual_revenue, cash_flow, employee_count, year_established, address, city, state, zip, square_footage, features, equipment_included, reason_for_selling, lease_terms, status, featured, view_count, inquiry_count, seller_name, seller_email) VALUES
 ('el-palacio-restaurant-lounge', 'El Palacio Restaurant & Lounge', 'restaurant', 'Established Cuban restaurant in the heart of Little Havana. 120 seats, full liquor license, live music venue on weekends. Family-owned for 18 years. Loyal customer base with 4.7 stars on Google.', 485000, 1200000, 185000, 14, 2006, '1528 SW 8th St', 'Miami', 'FL', '33135', 3400, ARRAY['liquor_license','real_estate','established_clients','website'], '["real_estate","equipment","liquor_license","website","social_media"]', 'retirement', 'Property included - owner financing available', 'active', true, 142, 8, 'Roberto Garcia', 'rgarcia@email.com'),
