@@ -163,6 +163,19 @@ window.VENTURE_ART={
  PC('M227,194 C222,212 231,224 225,242 M243,194 C248,212 239,224 245,242 M235,194 V246')+
  PD('M150,80 L118,80 M158,104 L126,104 M322,80 L354,80 M314,104 L346,104')),
 
+'maca-locator':FIG('ROADSIDE AI',
+ PD('M70,246 H410')+
+ R(92,168,118,26)+P('M92,168 L122,146 L150,146 L150,168')+
+ P('M210,194 L210,138 L248,138 L268,168 L268,194 Z')+
+ CIR(124,200,13)+DOT(124,200,2.5)+CIR(238,200,13)+DOT(238,200,2.5)+
+ L(218,138,218,108)+PC('M218,108 L252,108 L252,128')+PC('M252,128 a7,7 0 1 0 7,7')+
+ PC('M280,128 A16,16 0 0 1 296,112 M288,140 A28,28 0 0 1 316,112')+DOT(240,96,3)+
+ P('M300,196 a10,10 0 0 1 10,-10 L356,186 a12,12 0 0 1 12,10 L368,196')+
+ P('M314,186 L326,168 L352,168 L360,186')+
+ CIR(322,200,10)+CIR(358,200,10)+
+ PD('M270,222 C292,214 300,206 312,202')+
+ T(88,118,'24/7 DISPATCH','rgba(255,255,255,0.45)',9)+T(300,238,'ETA 15 MIN',C,9)),
+
 'estatematch':FIG('PROPERTY MATCH',
  P('M165,140 L245,78 L325,140')+R(177,140,136,95)+R(238,180,26,55)+R(195,158,24,20)+R(272,158,24,20)+
  PC('M335,62 C335,62 318,49 318,38 C318,30 324,25 331,25 C336,25 339,30 341,33 C343,30 346,25 351,25 C358,25 364,30 364,38 C364,49 347,62 347,62 Z')+
@@ -217,7 +230,7 @@ const ACCENT={
 'ai-voice-receptionist':'#22d3ee','cycling-fit-intelligence':'#fdba74','rtm-platform':'#6ee7b7',
 'intelligent-crm':'#60a5fa','agentic-websites':'#a78bfa','ai-chatbots':'#4ade80',
 'ai-market-intelligence':'#fcd34d','revenue-cycle-intelligence':'#34d399','seo-aeo-engine':'#f9a8d4',
-'rapid-digital-launch':'#fb923c'};
+'rapid-digital-launch':'#fb923c','maca-locator':'#f59e0b'};
 const RAW=window.VENTURE_ART; window.VENTURE_ART={};
 for(const k in RAW){ window.VENTURE_ART[k]=RAW[k].split('__ACC__').join(ACCENT[k]||'#00D4FF'); }
 

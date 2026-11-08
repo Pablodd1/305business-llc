@@ -336,5 +336,19 @@ window.VENTURES = [
     summary: "A production website delivered fast: mobile-responsive design, lead forms, booking integrations, SEO setup, analytics, AI chat, and bilingual content. Fixed price, fixed scope, live quickly.",
     capabilities: ["Responsive design","Lead forms","Booking integration","SEO setup","Analytics","Bilingual content"],
     target: "New businesses, launches, pivots"
+  },
+  {
+    slug: "maca-locator",
+    name: "MacaLocator",
+    tagline: "AI-powered mobile auto service & roadside assistance platform",
+    industry: "Field Services & Automotive",
+    status: "LIVE",
+    price: 12500,
+    monthly: 880,
+    support: 149,
+    summary: "A deployed 'we come to you' auto service platform — customers book mobile mechanics to their driveway, office, or roadside position. Live unit-tracking map, one-tap 24/7 emergency dispatch (tow, jump start, accident), Gemini AI concierge chat with voice in/out, voice command controller, multi-vehicle garage with maintenance reminders, Google Calendar sync, AI marketing creative studio, and a 5-tab admin command center with analytics and Twilio-ready comms. Production demo live.",
+    capabilities: ["Live dispatch map","On-demand booking","24/7 emergency response","AI concierge chat","Voice commands","Vehicle garage & reminders","Google Calendar sync","Marketing creative studio","Admin command center","Analytics & Twilio comms"],
+    target: "Towing & roadside operators, mobile mechanic fleets, auto service chains, dealership service lanes, roadside membership clubs",
+    links: { demo: "https://maca-locator.vercel.app" }
   }
 ];

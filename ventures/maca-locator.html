@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MacaLocator — AI mobile auto service &amp; roadside assistance platform | Buy $12,500 or $880/mo | 305business</title>
+    <meta name="description" content="A deployed 'we come to you' auto service platform — mobile mechanics dispatched to the customer's location, one-tap 24/7 emergency roadside response, Gemini AI concierge chat with voice, live unit-tracking map, vehicle garage with maintenance reminders, Google Calendar sync, AI marketing studio, and a 5-tab admin command center. Production demo live." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#1a4a7a" />
+    <link rel="canonical" href="https://305business.llc/ventures/maca-locator.html" />
+    <link rel="alternate" hreflang="en" href="https://305business.llc/ventures/maca-locator.html" />
+    <link rel="alternate" hreflang="es" href="https://305business.llc/ventures/maca-locator.html" />
+    <link rel="alternate" hreflang="ht" href="https://305business.llc/ventures/maca-locator.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="MacaLocator — available for acquisition" />
+    <meta property="og:description" content="AI mobile auto service & roadside assistance platform. Buy $12,500 one-time or $880/mo × 18 with maintenance included. Stage: LIVE — production demo running." />
+    <meta property="og:image" content="https://305business.llc/305business-logo.png" />
+    <meta property="og:url" content="https://305business.llc/ventures/maca-locator.html" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MacaLocator","description":"AI-powered mobile auto service and roadside assistance platform — on-demand mechanic dispatch to the customer's location, 24/7 emergency response, AI concierge chat with voice, live unit tracking, vehicle garage with maintenance reminders, Google Calendar sync, AI marketing creative studio, and a 5-tab admin command center. Production demo live.","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":12500,"priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://305business.llc/ventures/maca-locator.html"},"brand":{"@type":"Brand","name":"MacaLocator"}}</script>
+    <link rel="icon" type="image/png" href="https://305business.llc/305business-logo-transparent.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Inter', sans-serif; background: #1a4a7a; color: #e0e0e0; min-height: 100vh; overflow-x: hidden; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .blueprint-bg { background-color: #1a4a7a; background-image: linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px; background-attachment: fixed; }
+        .tech-border { border: 2px solid rgba(255,255,255,0.4); position: relative; margin: 2px; }
+        .tech-border::before, .tech-border::after { content: ''; position: absolute; width: 12px; height: 12px; border: 2px solid rgba(255,255,255,0.6); }
+        .tech-border::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .tech-border::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+        .tech-card { background: rgba(255,255,255,0.03); border: 1.5px solid rgba(255,255,255,0.25); position: relative; transition: all 0.3s ease; }
+        .tech-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 20%, rgba(255,255,255,0.5) 80%, transparent 100%); }
+        .tech-card::after { content: ''; position: absolute; bottom: 8px; right: 8px; width: 20px; height: 20px; border-right: 1.5px solid rgba(255,255,255,0.2); border-bottom: 1.5px solid rgba(255,255,255,0.2); }
+        .tech-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.35); transform: translateY(-2px); }
+        .inset-view { border: 1.5px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.04); position: relative; }
+        .inset-view::before { content: attr(data-view); position: absolute; top: -10px; left: 10px; background: #1a4a7a; padding: 0 5px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; }
+        .schematic-btn { background: transparent; border: 1.5px solid rgba(255,255,255,0.3); color: white; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.05em; position: relative; overflow: hidden; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+        .schematic-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: rgba(255,255,255,0.08); transition: left 0.3s; }
+        .schematic-btn:hover::before { left: 0; }
+        .tech-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+        .section-divider { height: 2px; background: repeating-linear-gradient(90deg, rgba(255,255,255,0.3) 0px, rgba(255,255,255,0.3) 15px, transparent 15px, transparent 25px); margin: 40px 0; position: relative; }
+        .title-block { border: 2px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); position: relative; }
+        .title-block::after { content: ''; position: absolute; bottom: -2px; right: -2px; width: 180px; height: 70px; border: 2px solid rgba(255,255,255,0.4); border-bottom: none; border-right: none; background: rgba(255,255,255,0.02); }
+        .blueprint-nav { background: rgba(26,74,122,0.95); border-bottom: 1.5px solid rgba(255,255,255,0.2); }
+        .tech-input { background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.2); color: white; font-family: 'JetBrains Mono', monospace; }
+        .tech-input:focus { outline: none; border-color: rgba(255,255,255,0.5); }
+        .tech-input::placeholder { color: rgba(255,255,255,0.35); }
+        .art-hero { border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.02); height: 260px; overflow: hidden; position: relative; }
+        .art-hero svg { width: 100%; height: 100%; display: block; }
+        .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }
+        .module-block { border: 1.5px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.025); transition: all 0.25s ease; }
+        .module-block:hover { border-color: rgba(245,158,11,0.45); background: rgba(255,255,255,0.05); }
+        .module-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #f59e0b; text-transform: uppercase; }
+        .spec-row { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+        .spec-row:last-child { border-bottom: none; }
+        .spec-row i { color: #f59e0b; margin-top: 3px; font-size: 11px; }
+        .spec-row span { color: rgba(224,224,224,0.85); font-size: 13.5px; line-height: 1.55; }
+        .stack-cell { border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.03); padding: 10px 12px; }
+    </style>
+</head>
+<body class="blueprint-bg">
+
+    <nav class="blueprint-nav fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="https://305business.llc" class="flex items-center gap-3">
+                    <img src="https://305business.llc/305business-logo-transparent.png" alt="305business" class="h-8 w-auto">
+                    <div><span class="font-bold text-lg text-white tracking-wider">305business</span><span class="tech-label ml-2">.LLC</span></div>
+                </a>
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="https://305business.llc/#market" class="tech-label hover:text-white/60 transition" data-i18n="nav_market">MARKET</a>
+                    <a href="https://305business.llc/#search" class="tech-label hover:text-white/60 transition" data-i18n="nav_search">SEARCH</a>
+                    <a href="https://305business.llc/#listings" class="tech-label hover:text-white/60 transition" data-i18n="nav_listings">LISTINGS</a>
+                    <a href="https://305business.llc/#matching" class="tech-label hover:text-white/60 transition" data-i18n="nav_match">AI MATCH</a>
+                    <a href="/ventures/" class="tech-label transition" style="color:#00D4FF">VENTURES</a>
+                    <a href="https://305business.llc/#wealth-intelligence" class="tech-label hover:text-white/60 transition">WEALTH</a>
+                    <a href="https://305business.llc/how-it-works.html" class="tech-label hover:text-white/60 transition" data-i18n="nav_process">HOW IT WORKS</a>
+                    <a href="https://305business.llc/founders.html" class="tech-label hover:text-white/60 transition">FOUNDERS</a>
+                    <div id="lang-toggle" style="margin-left:0.5rem;"></div>
+                    <button onclick="window.location.href='https://305business.llc/list-business.html'" class="schematic-btn px-4 py-2" data-i18n="nav_list_business"><span class="relative z-10">+ LIST BUSINESS</span></button>
+                    <div id="nav-auth" class="flex items-center gap-2 ml-2">
+                        <a href="/login.html" class="text-white/80 hover:text-white transition text-sm font-medium">Log In</a>
+                        <a href="/signup.html" class="bg-[#23d9b0] text-[#050249] px-3 py-1.5 rounded-lg text-sm font-bold hover:bg-[#1bc9a0] transition">Get Started</a>
+                    </div>
+                    <div class="flex items-center gap-2 ml-2">
+                        <a href="https://t.me/28729102e2163caa3555992f580e1013" target="_blank" class="text-white/60 hover:text-white transition" title="Telegram"><i class="fab fa-telegram text-lg"></i></a>
+                        <a href="https://wa.me/17866432099" target="_blank" class="text-white/60 hover:text-white transition" title="WhatsApp"><i class="fab fa-whatsapp text-lg"></i></a>
+                        <a href="https://instagram.com/305business" target="_blank" class="text-white/60 hover:text-white transition" title="Instagram"><i class="fab fa-instagram text-lg"></i></a>
+                        <a href="https://facebook.com/305business" target="_blank" class="text-white/60 hover:text-white transition" title="Facebook"><i class="fab fa-facebook text-lg"></i></a>
+                    </div>
+                </div>
+                <button class="md:hidden text-white p-2" onclick="toggleMobileMenu()"><i class="fas fa-bars text-xl"></i></button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-[#0a1628]/95 z-50 pt-16">
+            <div class="flex flex-col items-center gap-6 py-8">
+                <a href="https://305business.llc/#market" class="text-white text-lg" onclick="toggleMobileMenu()">MARKET</a>
+                <a href="https://305business.llc/#listings" class="text-white text-lg" onclick="toggleMobileMenu()">LISTINGS</a>
+                <a href="/ventures/" class="text-lg" style="color:#00D4FF" onclick="toggleMobileMenu()">VENTURES</a>
+                <a href="https://305business.llc/how-it-works.html" class="text-white text-lg" onclick="toggleMobileMenu()">HOW IT WORKS</a>
+                <div id="lang-toggle-mobile" style="margin-top:0.5rem;"></div>
+                <button onclick="window.location.href='https://305business.llc/list-business.html'" class="schematic-btn px-6 py-3"><span class="relative z-10">+ LIST BUSINESS</span></button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="tech-label"><a href="https://305business.llc" class="hover:text-white/80">305BUSINESS</a> / <a href="/ventures/" class="hover:text-white/80">VENTURES</a> / <span style="color:#00D4FF">MACALOCATOR</span></div>
+        </div>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+            <div class="grid lg:grid-cols-3 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <div class="title-block p-8 md:p-10">
+                        <div class="grid md:grid-cols-5 gap-8 items-center">
+                            <div class="md:col-span-3">
+                        <div class="flex justify-between items-start gap-4 mb-6 flex-wrap">
+                            <span class="tech-label">FIELD SERVICES &amp; AUTOMOTIVE</span>
+                            <span class="vstatus" style="color:#00FF88;border-color:#00FF8855;background:#00FF8812">LIVE</span>
+                        </div>
+                        <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-none tracking-tight">MACALOCATOR</h1>
+                        <div class="text-[#00D4FF] text-lg font-semibold mt-4">AI-powered mobile auto service &amp; roadside assistance platform</div>
+                        <p class="text-white/70 mt-6 leading-relaxed text-base md:text-lg">A complete "we come to you" auto care business in a box. Customers book certified mobile mechanics to their driveway, office, or roadside position; one tap dispatches 24/7 emergency help. Behind the consumer app sits a live unit-tracking map, a Gemini AI concierge that talks and listens, a voice command controller, a multi-vehicle garage with maintenance reminders, Google Calendar sync, an AI marketing creative studio, and a 5-tab admin command center. Production demo is running right now — click it, break it, imagine your logo on it.</p>
+                        <div class="flex flex-wrap gap-3 mt-8">
+                            <a href="https://maca-locator.vercel.app" target="_blank" rel="noopener" class="schematic-btn px-5 py-2"><span class="relative z-10"><i class="fas fa-play mr-2"></i>LIVE DEMO</span></a>
+                            <a href="#modules" class="schematic-btn px-5 py-2"><span class="relative z-10"><i class="fas fa-diagram-project mr-2"></i>MODULE TOUR</span></a>
+                        </div>
+                            </div>
+                            <div class="md:col-span-2">
+                                <div class="art-hero"><svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+<defs>
+<linearGradient id="bg19" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#0d1233"/><stop offset="0.55" stop-color="#080b1e"/><stop offset="1" stop-color="#04060d"/></linearGradient>
+<radialGradient id="gl19" cx="0.5" cy="0.4" r="0.75"><stop offset="0" stop-color="#f59e0b" stop-opacity="0.32"/><stop offset="0.6" stop-color="#f59e0b" stop-opacity="0.08"/><stop offset="1" stop-color="#f59e0b" stop-opacity="0"/></radialGradient>
+<linearGradient id="fl19" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f59e0b" stop-opacity="0.22"/><stop offset="1" stop-color="#f59e0b" stop-opacity="0"/></linearGradient>
+<radialGradient id="vg19" cx="0.5" cy="0.45" r="0.85"><stop offset="0.62" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.42"/></radialGradient>
+<pattern id="sc19" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#ffffff" opacity="0.035"/></pattern>
+<filter id="bl19" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>
+</defs>
+<rect width="480" height="300" fill="url(#bg19)"/>
+<rect width="480" height="300" fill="url(#gl19)"/>
+<g stroke="rgba(255,255,255,0.05)" stroke-width="1">
+<line x1="0" y1="216" x2="480" y2="216"/><line x1="0" y1="234" x2="480" y2="234"/><line x1="0" y1="258" x2="480" y2="258"/><line x1="0" y1="288" x2="480" y2="288"/>
+<line x1="240" y1="216" x2="240" y2="300"/><line x1="180" y1="216" x2="60" y2="300"/><line x1="300" y1="216" x2="420" y2="300"/><line x1="120" y1="216" x2="-120" y2="300"/><line x1="360" y1="216" x2="600" y2="300"/>
+</g>
+<rect x="0" y="216" width="480" height="84" fill="url(#fl19)"/>
+<rect width="480" height="300" fill="url(#sc19)"/>
+<rect x="10" y="10" width="460" height="280" fill="none" stroke="rgba(255,255,255,0.10)"/>
+<path d="M10 30 H30 M10 30 V10 M470 270 H450 M470 270 V290" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1" />
+<rect x="20" y="36" width="4" height="12" fill="#f59e0b"/>
+<text x="30" y="46" fill="rgba(255,255,255,0.55)" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">ROADSIDE AI</text>
+<text x="452" y="282" fill="#f59e0b" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="end">FIG. 1</text>
+<ellipse cx="240" cy="238" rx="180" ry="24" fill="#f59e0b" opacity="0.15" filter="url(#bl19)"/>
+<line x1="70" y1="246" x2="410" y2="246" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-dasharray="4 3"/>
+<path d="M92,168 L92,194 L210,194 L210,168 Z" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" />
+<path d="M92,168 L122,146 L150,146 L150,168" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" />
+<path d="M210,194 L210,138 L248,138 L268,168 L268,194 Z" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" />
+<circle cx="124" cy="200" r="13" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6"/><circle cx="124" cy="200" r="2.5" fill="#00D4FF"/>
+<circle cx="238" cy="200" r="13" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6"/><circle cx="238" cy="200" r="2.5" fill="#00D4FF"/>
+<line x1="218" y1="138" x2="218" y2="108" stroke="rgba(255,255,255,0.85)" stroke-width="1.6"/>
+<path d="M218,108 L252,108 L252,128" fill="none" stroke="#00D4FF" stroke-width="1.6"/>
+<path d="M252,128 a7,7 0 1 0 7,7" fill="none" stroke="#00D4FF" stroke-width="1.6"/>
+<path d="M280,128 A16,16 0 0 1 296,112 M288,140 A28,28 0 0 1 316,112" fill="none" stroke="#00D4FF" stroke-width="1.6"/>
+<circle cx="240" cy="96" r="3" fill="#00D4FF"/>
+<path d="M300,196 a10,10 0 0 1 10,-10 L356,186 a12,12 0 0 1 12,10 L368,196" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6"/>
+<path d="M314,186 L326,168 L352,168 L360,186" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6"/>
+<circle cx="322" cy="200" r="10" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6"/>
+<circle cx="358" cy="200" r="10" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6"/>
+<path d="M270,222 C292,214 300,206 312,202" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="88" y="118" fill="rgba(255,255,255,0.45)" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5">24/7 DISPATCH</text>
+<text x="300" y="238" fill="#00D4FF" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5">ETA 15 MIN</text>
+<rect width="480" height="300" fill="url(#vg19)"/>
+</svg></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <div class="inset-view p-6 md:p-8" data-view="PLATFORM AT A GLANCE">
+                        <h2 class="text-white text-xl font-bold mb-6">PLATFORM AT A GLANCE</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <div class="stack-cell"><div class="mono text-2xl font-bold text-[#f59e0b]">9</div><div class="tech-label mt-1">APP MODULES</div></div>
+                            <div class="stack-cell"><div class="mono text-2xl font-bold text-[#f59e0b]">2</div><div class="tech-label mt-1">GEMINI AI MODELS</div></div>
+                            <div class="stack-cell"><div class="mono text-2xl font-bold text-[#f59e0b]">24/7</div><div class="tech-label mt-1">EMERGENCY DISPATCH</div></div>
+                            <div class="stack-cell"><div class="mono text-2xl font-bold text-[#f59e0b]">5</div><div class="tech-label mt-1">ADMIN COMMAND TABS</div></div>
+                            <div class="stack-cell"><div class="mono text-2xl font-bold text-[#f59e0b]">8</div><div class="tech-label mt-1">IMAGE FORMAT RATIOS</div></div>
+                            <div class="stack-cell"><div class="mono text-2xl font-bold text-[#00FF88]">LIVE</div><div class="tech-label mt-1">PRODUCTION DEMO</div></div>
+                        </div>
+                    </div>
+
+                    <div class="section-divider" id="modules"></div>
+
+                    <div class="inset-view p-6 md:p-8" data-view="MODULE-BY-MODULE CAPABILITIES">
+                        <h2 class="text-white text-xl font-bold mb-2">WHAT IT ACTUALLY DOES — EVERY MODULE, EVERY DETAIL</h2>
+                        <p class="text-white/60 text-sm mb-6 leading-relaxed">This is not a landing page with screenshots. It's a working multi-sided platform: a consumer app, an operations console, and an AI layer. Below is exactly what each module does in the running demo.</p>
+
+                        <div class="space-y-4">
+
+                            <div class="module-block p-5">
+                                <div class="module-head mb-1"><i class="fas fa-map-location-dot mr-2"></i>01 — CLIENT DASHBOARD &amp; LIVE DISPATCH MAP</div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Real-time unit tracking.</strong> Every mobile unit rendered on a live map with name, zone, vehicle type, equipment payload ("high-voltage battery scanner &amp; tire calibration toolkit"), current status — En Route, Ready &amp; On Call — and live ETA to the active request.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Map intelligence filters.</strong> Filter the board by all units / team only / active requests, tap any point for the full unit dossier.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Booking pipeline control.</strong> Confirm, start, and complete jobs directly from the dashboard — the booking moves pending → confirmed → in progress → completed in real time.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Instant quote estimator.</strong> Pick a vehicle + service and get an on-the-spot price. The estimator <em>detects electric vehicles</em> (Tesla, Bolt…) and adapts the service menu and pricing logic for EV powertrains automatically.</span></div>
+                            </div>
+
+                            <div class="module-block p-5">
+                                <div class="module-head mb-1"><i class="fas fa-calendar-check mr-2"></i>02 — ON-DEMAND BOOKING ENGINE</div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Service catalog cards.</strong> Each service (tire rotation, battery diagnostic, mobile diagnostics, wash &amp; detailing…) ships with its own description, pricing basis, and one-tap select.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Doorstep dispatch addressing.</strong> The customer never drives anywhere — they confirm the service address (home, office, hotel parking) and the mechanic comes to them. That's the whole business model, encoded.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Date &amp; time scheduling</strong> with full lifecycle status tracking on every booking.</span></div>
+                            </div>
+
+                            <div class="module-block p-5">
+                                <div class="module-head mb-1"><i class="fas fa-truck-medical mr-2"></i>03 — 24/7 EMERGENCY ROADSIDE RESPONSE</div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">One-tap emergency grid.</strong> Tow truck, accident help, jump start, or "other — share my location", always one tap away from any screen (pinned in the sidebar on desktop, red button on mobile).</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Live dispatch choreography.</strong> Request → "Locating nearest unit…" → unit dispatched with confirmation screen and direct call action. The exact emotional flow a stranded driver needs.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Visible from both sides.</strong> Emergency requests surface on the operations map and in the admin console for coordinator handoff.</span></div>
+                            </div>
+
+                            <div class="module-block p-5">
+                                <div class="module-head mb-1"><i class="fas fa-headset mr-2"></i>04 — GEMINI AI CONCIERGE CHAT (VOICE IN, VOICE OUT)</div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">GPT-class support desk, branded.</strong> A Gemini 3.1 Flash concierge answers service questions, quotes pricing, explains coverage zones, and walks customers into a booking — in the buyer's brand voice.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Voice dictation input.</strong> Customers can dictate their message by microphone instead of typing.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Spoken readback.</strong> Every AI answer is read aloud with natural speech synthesis — toggleable — and markdown is stripped for clean audio.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Never dead-ends.</strong> If the API is unreachable the chat degrades to a canned concierge instead of hanging — your customers always get an answer.</span></div>
+                            </div>
+
+                            <div class="module-block p-5">
+                                <div class="module-head mb-1"><i class="fas fa-microphone-lines mr-2"></i>05 — VOICE COMMAND CONTROLLER</div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Hands-free operation.</strong> Browser-native speech recognition lets users drive the app by voice; the app talks back with spoken confirmations. Built for drivers, literally.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Permission &amp; error handling.</strong> Microphone-denied states, no-recognition retries, and sound on/off controls are all handled.</span></div>
+                            </div>
+
+                            <div class="module-block p-5">
+                                <div class="module-head mb-1"><i class="fas fa-warehouse mr-2"></i>06 — GARAGE &amp; VEHICLE PROFILES</div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Multi-vehicle garage.</strong> Add/remove vehicles with make, model, year, license plate, and live mileage per vehicle.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Maintenance memory.</strong> Per-vehicle oil-change and tire-rotation baselines with notification preferences — the app knows when each car is due before the customer does.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">EV-aware logic.</strong> Electric vehicles are detected and handled correctly (no oil reminders on a Tesla — battery health checks instead).</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Profile management.</strong> Editable name, email, phone; service history ties back to the vehicle it was performed on.</span></div>
+                            </div>
+
+                            <div class="module-block p-5">
+                                <div class="module-head mb-1"><i class="fas fa-calendar-day mr-2"></i>07 — GOOGLE CALENDAR SYNC</div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">OAuth connect.</strong> One-click Google account connection with live "connected" state and event listing inside the profile.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Bookings become calendar events.</strong> A scheduled service can push a real calendar event to the customer's Google Calendar — no-show reduction built in.</span></div>
+                            </div>
+
+                            <div class="module-block p-5">
+                                <div class="module-head mb-1"><i class="fas fa-wand-magic-sparkles mr-2"></i>08 — AI MARKETING CREATIVE STUDIO</div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Text-to-image generation.</strong> Gemini image model generates flyers, social creatives, and promo visuals from a plain-English prompt.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">8 aspect ratios</strong> — 1:1, 3:4, 4:3, 9:16, 16:9, 21:9, 3:2, 2:3 — covering every placement from Instagram post to billboard.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Built for the operator.</strong> The marketing team of a towing company is usually zero people. This module is the marketing team.</span></div>
+                            </div>
+
+                            <div class="module-block p-5">
+                                <div class="module-head mb-1"><i class="fas fa-user-shield mr-2"></i>09 — ADMIN &amp; FRONT DESK COMMAND CENTER</div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Operations analytics.</strong> Revenue, job, and KPI cards with mini visualizations — the owner view of the whole business.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Live visualization tab.</strong> The full dispatch map, reimagined for coordinators.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">AI front desk.</strong> Configurable automated reception — the first line that answers every inbound, day or night.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Twilio-ready comms.</strong> SMS / voice messaging layer wired for customer notifications and dispatch alerts.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Dedicated communications tab.</strong> Centralized staff comms so dispatch, mechanics, and front desk stay on one thread.</span></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <div class="inset-view p-6 md:p-8" data-view="UNDER THE HOOD">
+                        <h2 class="text-white text-xl font-bold mb-6">TECHNOLOGY — WHAT YOU'D BE BUYING</h2>
+                        <div class="grid sm:grid-cols-2 gap-3">
+                            <div class="stack-cell"><div class="tech-label" style="color:#f59e0b">FRONTEND</div><div class="text-white/85 text-sm mt-1">React 19 + TypeScript + Vite 6 — strictly typed, zero-TS-error build</div></div>
+                            <div class="stack-cell"><div class="tech-label" style="color:#f59e0b">UI SYSTEM</div><div class="text-white/85 text-sm mt-1">Tailwind CSS 4 + shadcn/ui component library + Framer Motion micro-animations</div></div>
+                            <div class="stack-cell"><div class="tech-label" style="color:#f59e0b">AI LAYER</div><div class="text-white/85 text-sm mt-1">Gemini 3.1 Flash (concierge chat) + Gemini image model (creative studio), server-side proxied so keys never ship to the browser</div></div>
+                            <div class="stack-cell"><div class="tech-label" style="color:#f59e0b">BACKEND</div><div class="text-white/85 text-sm mt-1">Express (local dev) + Vercel serverless functions (production) — one codebase, both runtimes</div></div>
+                            <div class="stack-cell"><div class="tech-label" style="color:#f59e0b">INTEGRATIONS</div><div class="text-white/85 text-sm mt-1">Google Calendar API (OAuth), Twilio-ready SMS/voice, Web Speech API (STT + TTS)</div></div>
+                            <div class="stack-cell"><div class="tech-label" style="color:#f59e0b">DATA VIZ</div><div class="text-white/85 text-sm mt-1">Recharts analytics, custom SVG dispatch map, React Router 8 SPA navigation</div></div>
+                        </div>
+                        <p class="text-white/50 text-xs mt-5 leading-relaxed mono">~4,900 lines of TypeScript across 9 view modules, a state context, typed domain models (User, Vehicle, ServiceBooking, EmergencyRequest), and a tested production build.</p>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <div class="inset-view p-6 md:p-8" data-view="WHAT A BUYER GETS">
+                        <h2 class="text-white text-xl font-bold mb-5">WHAT'S INCLUDED IN THE TRANSFER</h2>
+                        <div class="spec-row"><i class="fas fa-check"></i><span>Full source code repository — every module listed above, commented and build-clean</span></div>
+                        <div class="spec-row"><i class="fas fa-check"></i><span>Production deployment configuration — Vercel serverless + local Express dev server, deploys in minutes</span></div>
+                        <div class="spec-row"><i class="fas fa-check"></i><span>Environment key guide: where each key goes (Gemini, Google OAuth, Twilio) and what each unlocks</span></div>
+                        <div class="spec-row"><i class="fas fa-check"></i><span>White-label ready — name, logo, palette, and service catalog are isolated; rebrand without touching logic</span></div>
+                        <div class="spec-row"><i class="fas fa-check"></i><span>Intellectual property assignment and clean code transfer, negotiated per deal</span></div>
+                        <div class="spec-row"><i class="fas fa-check"></i><span>Handover walkthrough call — we show your team how each module runs before you fly solo</span></div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <div class="inset-view p-6 md:p-8" data-view="TARGET USERS">
+                        <h2 class="text-white text-xl font-bold mb-5">WHO THIS IS FOR</h2>
+                        <div class="grid sm:grid-cols-2 gap-3">
+                            <div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#f59e0b">◆</span>&nbsp; TOWING &amp; ROADSIDE ASSISTANCE OPERATORS</div>
+                            <div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#f59e0b">◆</span>&nbsp; MOBILE MECHANIC FLEETS</div>
+                            <div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#f59e0b">◆</span>&nbsp; AUTO SERVICE CHAINS &amp; FRANCHISES</div>
+                            <div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#f59e0b">◆</span>&nbsp; DEALERSHIP SERVICE LANES</div>
+                            <div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#f59e0b">◆</span>&nbsp; ROADSIDE MEMBERSHIP CLUBS</div>
+                            <div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#f59e0b">◆</span>&nbsp; ENTREPRENEURS ENTERING THE US-HISPANIC / LATAM AUTO MARKET</div>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <div class="inset-view p-6 md:p-8" data-view="REVENUE MODEL">
+                        <h2 class="text-white text-xl font-bold mb-5">HOW IT MAKES MONEY</h2>
+                        <div class="spec-row"><i class="fas fa-dollar-sign"></i><span><strong class="text-white">Per-service dispatch margin.</strong> Every booking and emergency call is a billable dispatch — the estimator sets the price, the platform records the job.</span></div>
+                        <div class="spec-row"><i class="fas fa-dollar-sign"></i><span><strong class="text-white">Membership subscriptions.</strong> Roadside clubs charge monthly for peace of mind; this platform manages the members, the units, and the dispatches.</span></div>
+                        <div class="spec-row"><i class="fas fa-dollar-sign"></i><span><strong class="text-white">Fleet &amp; B2B contracts.</strong> Corporate parking lots, rental fleets, and dealerships buy guaranteed response SLAs — the admin console reports on all of it.</span></div>
+                        <div class="spec-row"><i class="fas fa-dollar-sign"></i><span><strong class="text-white">White-label licensing.</strong> Sell the platform itself to operators in other cities — the rebrand path is a config, not a rewrite.</span></div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <div class="inset-view p-6 md:p-8" data-view="STAGE & DEMO NOTES">
+                        <h2 class="text-white text-xl font-bold mb-4">HONEST STATUS REPORT</h2>
+                        <p class="text-white/70 text-sm leading-relaxed">The demo at <a href="https://maca-locator.vercel.app" target="_blank" rel="noopener" class="text-[#00D4FF] underline decoration-dotted">maca-locator.vercel.app</a> is a production deployment of the real codebase — not a mockup. The AI concierge and creative studio currently run in demonstration mode (canned concierge responses, branded placeholder creatives) because the showcase instance ships without a Gemini API key. Add the key to the environment and both go fully live — the integration code, server-side proxying, and fallbacks are already in place and transfer with the sale. Google Calendar OAuth and Twilio require the buyer's own credentials, with a setup guide included.</p>
+                    </div>
+                </div>
+
+                <aside class="lg:sticky lg:top-24">
+                    <div class="tech-card p-6" id="offer">
+                        <div class="tech-label">TWO WAYS TO OWN IT</div>
+                        <div class="mono text-4xl font-bold text-white mt-2">$12,500</div>
+                        <div class="text-white/60 text-sm">one-time acquisition</div>
+                        <div class="mono text-xl font-bold text-emerald-400 mt-2">$880<span class="text-white/60 text-xs font-normal">/mo × 18</span></div>
+                        <div class="text-white/60 text-sm mb-1">monthly plan — maintenance &amp; updates included</div>
+                        <div class="text-white/40 text-xs mb-5">Optional support: $149/mo after payoff · Open to offers</div>
+                        <form onsubmit="return offerSubmit(event,'maca-locator','MacaLocator',12500)" class="flex flex-col gap-3">
+                            <input required name="name" class="tech-input px-4 py-3 text-sm w-full" placeholder="YOUR NAME" />
+                            <input required name="email" type="email" class="tech-input px-4 py-3 text-sm w-full" placeholder="EMAIL" />
+                            <input required name="amount" type="number" min="1000" class="tech-input px-4 py-3 text-sm w-full" placeholder="YOUR OFFER (USD)" />
+                            <textarea name="msg" rows="3" class="tech-input px-4 py-3 text-sm w-full" placeholder="NOTES (OPTIONAL)"></textarea>
+                            <button type="submit" class="schematic-btn px-5 py-3 mt-1"><span class="relative z-10"><i class="fas fa-paper-plane mr-2"></i>SUBMIT OFFER</span></button>
+                        </form>
+                        <p class="tech-label mt-4 leading-relaxed" style="text-transform:none;letter-spacing:0.02em;font-size:10px">All offers confidential. Reviewed within 48 hours. Terms, code transfer and IP assignment negotiated per deal.</p>
+                    </div>
+                    <div class="tech-card p-6 mt-6">
+                        <div class="tech-label mb-3">DEMO ACCESS</div>
+                        <a href="https://maca-locator.vercel.app" target="_blank" rel="noopener" class="schematic-btn w-full px-4 py-3"><span class="relative z-10"><i class="fas fa-up-right-from-square mr-2"></i>OPEN LIVE PLATFORM</span></a>
+                        <p class="text-white/50 text-xs mt-3 leading-relaxed">Try: the emergency button, the chat concierge, the cost estimator, and the admin panel — all in the demo.</p>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+            <div class="section-divider"></div>
+            <h2 class="text-white text-2xl font-bold mb-8">RELATED VENTURES</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <a class="tech-card p-5 block" href="/ventures/estatematch.html">
+                    <div class="flex justify-between items-center mb-3 gap-2">
+                        <span class="tech-label">COMMERCE &amp; MARKETPLACES</span>
+                        <span class="vstatus" style="color:#00FF88;border-color:#00FF8855;background:#00FF8812">LIVE</span>
+                    </div>
+                    <h4 class="text-white font-bold">EstateMatch</h4>
+                    <div class="text-[#00D4FF] text-xs font-semibold mt-1">AI-enhanced real estate matching &amp; networking</div>
+                    <div class="mono text-lg font-bold text-white mt-3">$14,500 <span class="tech-label">ONE-TIME</span></div>
+                </a>
+                <a class="tech-card p-5 block" href="/ventures/hotel-rate-intelligence.html">
+                    <div class="flex justify-between items-center mb-3 gap-2">
+                        <span class="tech-label">DATA INTELLIGENCE</span>
+                        <span class="vstatus" style="color:#00FF88;border-color:#00FF8855;background:#00FF8812">LIVE</span>
+                    </div>
+                    <h4 class="text-white font-bold">Hotel Rate Intelligence</h4>
+                    <div class="text-[#00D4FF] text-xs font-semibold mt-1">Automated hospitality pricing &amp; competitive intelligence</div>
+                    <div class="mono text-lg font-bold text-white mt-3">$12,000 <span class="tech-label">ONE-TIME</span></div>
+                </a>
+                <a class="tech-card p-5 block" href="/ventures/ai-voice-layer.html">
+                    <div class="flex justify-between items-center mb-3 gap-2">
+                        <span class="tech-label">VOICE AI &amp; INTELLIGENT BUSINESS AUTOMATION</span>
+                        <span class="vstatus" style="color:#FF006E;border-color:#FF006E55;background:#FF006E12">PROTOTYPE</span>
+                    </div>
+                    <h4 class="text-white font-bold">AI Dynamics VoiceLayer</h4>
+                    <div class="text-[#00D4FF] text-xs font-semibold mt-1">Voice AI layer that turns any website into a personalized conversation</div>
+                    <div class="mono text-lg font-bold text-white mt-3">$5,000 <span class="tech-label">ONE-TIME</span></div>
+                </a>
+            </div>
+        </section>
+
+        <footer class="border-t border-white/10 py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-wrap justify-between gap-6 items-center">
+                    <div class="tech-label">© 2026 305BUSINESS.LLC — MIAMI, FL</div>
+                    <a href="/ventures/" class="tech-label hover:text-white/80 transition" style="color:#00D4FF">← ALL VENTURES</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="/js/email-notify.js"></script>
+    <script>
+    function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('hidden'); }
+    async function offerSubmit(e, slug, name, listed){
+        e.preventDefault();
+        const f = e.target;
+        const offerStr = '$' + Number(f.amount.value).toLocaleString('en-US');
+        const payload = {
+            business_name: name + ' (' + slug + ') — LISTED ' + '$' + listed.toLocaleString('en-US'),
+            name: f.name.value, email: f.email.value, phone: '',
+            message: 'ACQUISITION OFFER: ' + offerStr + '\nNOTES: ' + (f.msg.value || '-')
+        };
+        if (window.EmailNotify && (window.SENDINBLUE_API_KEY || (EmailNotify.config && EmailNotify.config.API_KEY))) {
+            const r = await EmailNotify.send('new_inquiry', payload, { subject: '💰 Acquisition Offer — ' + name + ' (' + offerStr + ')' });
+            if (r && r.success) {
+                f.innerHTML = '<p style="color:#00FF88;font-family:JetBrains Mono,monospace;font-size:13px;padding:16px 0" class="text-center"><i class="fas fa-check-circle mr-2"></i>OFFER RECEIVED — REVIEW WITHIN 48H</p>';
+                return false;
+            }
+        }
+        if (window.EmailNotify && EmailNotify.ready && !EmailNotify.ready()) console.warn('[EmailNotify] no Brevo key — using mailto fallback');
+        const body = 'Venture: ' + name + ' (' + slug + ')\nListed: $' + listed.toLocaleString('en-US') + '\nMy offer: ' + offerStr + '\n\nName: ' + f.name.value + '\nEmail: ' + f.email.value + '\nNotes: ' + (f.msg.value || '-');
+        location.href = 'mailto:jasmelacosta@gmail.com?subject=' + encodeURIComponent('Acquisition Offer — ' + name) + '&body=' + encodeURIComponent(body);
+        f.innerHTML = '<p style="color:#00FF88;font-family:JetBrains Mono,monospace;font-size:13px;padding:16px 0" class="text-center"><i class="fas fa-envelope mr-2"></i>DRAFT OPENED IN YOUR EMAIL APP</p>';
+        return false;
+    }
+    </script>
+    <script src="https://305business.llc/shared/language-toggle.js"></script>
+    <script>LanguageToggle.init({ toggleContainerId: 'lang-toggle', basePath: '/shared/translations/' });</script>
+</body>
+</html>
