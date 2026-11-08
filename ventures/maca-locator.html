@@ -227,7 +227,7 @@
                                 <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">GPT-class support desk, branded.</strong> A Gemini 3.1 Flash concierge answers service questions, quotes pricing, explains coverage zones, and walks customers into a booking — in the buyer's brand voice.</span></div>
                                 <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Voice dictation input.</strong> Customers can dictate their message by microphone instead of typing.</span></div>
                                 <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Spoken readback.</strong> Every AI answer is read aloud with natural speech synthesis — toggleable — and markdown is stripped for clean audio.</span></div>
-                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Never dead-ends.</strong> If the API is unreachable the chat degrades to a canned concierge instead of hanging — your customers always get an answer.</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span><strong class="text-white">Never dead-ends.</strong> If the API is unreachable the chat degrades to a canned concierge instead of hanging — your customers always get an answer. (Live on the demo; verified working.)</span></div>
                             </div>
 
                             <div class="module-block p-5">
@@ -324,7 +324,7 @@
 
                     <div class="inset-view p-6 md:p-8" data-view="STAGE & DEMO NOTES">
                         <h2 class="text-white text-xl font-bold mb-4">HONEST STATUS REPORT</h2>
-                        <p class="text-white/70 text-sm leading-relaxed">The demo at <a href="https://maca-locator.vercel.app" target="_blank" rel="noopener" class="text-[#00D4FF] underline decoration-dotted">maca-locator.vercel.app</a> is a production deployment of the real codebase — not a mockup. The AI concierge and creative studio currently run in demonstration mode (canned concierge responses, branded placeholder creatives) because the showcase instance ships without a Gemini API key. Add the key to the environment and both go fully live — the integration code, server-side proxying, and fallbacks are already in place and transfer with the sale. Google Calendar OAuth and Twilio require the buyer's own credentials, with a setup guide included.</p>
+                        <p class="text-white/70 text-sm leading-relaxed">The demo at <a href="https://maca-locator.vercel.app" target="_blank" rel="noopener" class="text-[#00D4FF] underline decoration-dotted">maca-locator.vercel.app</a> is a production deployment of the real codebase — not a mockup. The Gemini AI concierge and the creative studio are <strong class="text-white">live and working on the demo right now</strong> — open the chat and ask for a tow-truck price, or generate a marketing image. Keys are server-side (never exposed to the browser), and the app degrades gracefully if a key ever lapses. Google Calendar OAuth and Twilio connect with the buyer's own credentials — the setup guide is included in the transfer.</p>
                     </div>
                 </div>
 
