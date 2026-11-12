@@ -49,8 +49,22 @@
         .tech-input:focus { outline: none; border-color: rgba(255,255,255,0.5); }
         .tech-input::placeholder { color: rgba(255,255,255,0.35); }
         .art-hero { border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.02); height: 260px; overflow: hidden; position: relative; }
-        .art-hero svg { width: 100%; height: 100%; display: block; }
-        .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }</style>
+        .art-hero svg { width: 100%; height: 100%; display: block; transition: transform .6s ease; }
+        .title-block:hover .art-hero svg { transform: scale(1.045); }
+        .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }
+        .problem-view { border-color: rgba(255,122,89,0.45) !important; background: rgba(255,122,89,0.05) !important; }
+        .problem-view::before { color: #FF7A59 !important; }
+        .problem-icon { width: 42px; height: 42px; border: 1.5px solid rgba(255,122,89,0.55); background: rgba(255,122,89,0.10); color: #FF7A59; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 17px; }
+        .module-block { border: 1.5px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.025); transition: all 0.25s ease; }
+        .module-block:hover { border-color: rgba(0,212,255,0.45); background: rgba(255,255,255,0.05); }
+        .module-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #00D4FF; text-transform: uppercase; }
+        .spec-row { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+        .spec-row:last-child { border-bottom: none; }
+        .spec-row i { color: #00D4FF; margin-top: 3px; font-size: 11px; }
+        .spec-row span { color: rgba(224,224,224,0.85); font-size: 13.5px; line-height: 1.55; }
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }</style>
 </head>
 <body class="blueprint-bg">
 
@@ -121,29 +135,29 @@
                             <div class="md:col-span-2">
                                 <div class="art-hero"><svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
 <defs>
-<linearGradient id="bg24" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#0d1233"/><stop offset="0.55" stop-color="#080b1e"/><stop offset="1" stop-color="#04060d"/></linearGradient>
-<radialGradient id="gl24" cx="0.5" cy="0.4" r="0.75"><stop offset="0" stop-color="#fdba74" stop-opacity="0.32"/><stop offset="0.6" stop-color="#fdba74" stop-opacity="0.08"/><stop offset="1" stop-color="#fdba74" stop-opacity="0"/></radialGradient>
-<linearGradient id="fl24" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdba74" stop-opacity="0.22"/><stop offset="1" stop-color="#fdba74" stop-opacity="0"/></linearGradient>
-<radialGradient id="vg24" cx="0.5" cy="0.45" r="0.85"><stop offset="0.62" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.42"/></radialGradient>
-<pattern id="sc24" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#ffffff" opacity="0.035"/></pattern>
-<filter id="bl24" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>
+<linearGradient id="bg25" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#0d1233"/><stop offset="0.55" stop-color="#080b1e"/><stop offset="1" stop-color="#04060d"/></linearGradient>
+<radialGradient id="gl25" cx="0.5" cy="0.4" r="0.75"><stop offset="0" stop-color="#fdba74" stop-opacity="0.36"/><stop offset="0.6" stop-color="#fdba74" stop-opacity="0.09"/><stop offset="1" stop-color="#fdba74" stop-opacity="0"/></radialGradient>
+<linearGradient id="fl25" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdba74" stop-opacity="0.24"/><stop offset="1" stop-color="#fdba74" stop-opacity="0"/></linearGradient>
+<radialGradient id="vg25" cx="0.5" cy="0.45" r="0.85"><stop offset="0.62" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.42"/></radialGradient>
+<pattern id="sc25" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#ffffff" opacity="0.035"/></pattern>
+<filter id="bl25" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>
 </defs>
-<rect width="480" height="300" fill="url(#bg24)"/>
-<rect width="480" height="300" fill="url(#gl24)"/>
+<rect width="480" height="300" fill="url(#bg25)"/>
+<rect width="480" height="300" fill="url(#gl25)"/>
 <g stroke="rgba(255,255,255,0.05)" stroke-width="1">
 <line x1="0" y1="216" x2="480" y2="216"/><line x1="0" y1="234" x2="480" y2="234"/><line x1="0" y1="258" x2="480" y2="258"/><line x1="0" y1="288" x2="480" y2="288"/>
 <line x1="240" y1="216" x2="240" y2="300"/><line x1="180" y1="216" x2="60" y2="300"/><line x1="300" y1="216" x2="420" y2="300"/><line x1="120" y1="216" x2="-120" y2="300"/><line x1="360" y1="216" x2="600" y2="300"/>
 </g>
-<rect x="0" y="216" width="480" height="84" fill="url(#fl24)"/>
-<rect width="480" height="300" fill="url(#sc24)"/>
+<rect x="0" y="216" width="480" height="84" fill="url(#fl25)"/>
+<rect width="480" height="300" fill="url(#sc25)"/>
 <rect x="10" y="10" width="460" height="280" fill="none" stroke="rgba(255,255,255,0.10)"/>
 <path d="M10 30 H30 M10 30 V10 M470 270 H450 M470 270 V290" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1" />
 <rect x="20" y="36" width="4" height="12" fill="#fdba74"/>
 <text x="30" y="46" fill="rgba(255,255,255,0.55)" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">BIKE FIT</text>
 <text x="452" y="282" fill="#fdba74" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="end">FIG. 1</text>
-<ellipse cx="240" cy="238" rx="180" ry="24" fill="#fdba74" opacity="0.15" filter="url(#bl24)"/>
-<circle cx="150" cy="200" r="42" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><circle cx="340" cy="200" r="42" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="150" y1="200" x2="235" y2="105" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="235" y1="105" x2="200" y2="200" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="235" y1="105" x2="305" y2="105" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="305" y1="105" x2="340" y2="200" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="200" y1="200" x2="305" y2="105" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="200" y1="200" x2="206" y2="170" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="194" y1="167" x2="218" y2="167" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><circle cx="252" cy="200" r="12" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><circle cx="252" cy="200" r="2.5" fill="#00D4FF" /><path d="M240,150 L262,100 L302,106" fill="none" stroke="#00D4FF" stroke-width="1.6" /><path d="M240,150 L264,174 L252,212" fill="none" stroke="#00D4FF" stroke-width="1.6" /><circle cx="272" cy="84" r="10" fill="none" stroke="#00D4FF" stroke-width="1.6" /><path d="M266,94 L270,88" fill="none" stroke="#00D4FF" stroke-width="1.6" /><circle cx="252" cy="212" r="3" fill="#00D4FF" /><circle cx="264" cy="174" r="2.5" fill="#00D4FF" /><path d="M252,158 A16,16 0 0 1 272,170" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-dasharray="4 3" /><text x="282" y="158" fill="#00D4FF" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">145°</text><path d="M206,160 V105" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-dasharray="4 3" /><text x="214" y="112" fill="rgba(255,255,255,0.45)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">+2cm</text>
-<rect width="480" height="300" fill="url(#vg24)"/>
+<ellipse cx="240" cy="238" rx="180" ry="24" fill="#fdba74" opacity="0.15" filter="url(#bl25)"/>
+<circle cx="148" cy="202" r="44" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><circle cx="344" cy="202" r="44" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="148" y1="202" x2="236" y2="102" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="236" y1="102" x2="198" y2="202" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="236" y1="102" x2="308" y2="102" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="308" y1="102" x2="344" y2="202" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="198" y1="202" x2="308" y2="102" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="198" y1="202" x2="204" y2="170" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="192" y1="167" x2="218" y2="167" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><circle cx="254" cy="202" r="13" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><circle cx="254" cy="202" r="2.5" fill="#00D4FF" /><path d="M240,150 L264,98 L306,104" fill="none" stroke="#00D4FF" stroke-width="1.6" /><path d="M240,150 L266,176 L254,216" fill="none" stroke="#00D4FF" stroke-width="1.6" /><circle cx="274" cy="80" r="11" fill="none" stroke="#00D4FF" stroke-width="1.6" /><path d="M268,90 L272,84" fill="none" stroke="#00D4FF" stroke-width="1.6" /><circle cx="254" cy="216" r="3" fill="#00D4FF" /><circle cx="266" cy="176" r="2.5" fill="#00D4FF" /><path d="M254,158 A17,17 0 0 1 276,171" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-dasharray="4 3" /><text x="286" y="158" fill="#00D4FF" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">145°</text><path d="M206,160 V102" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-dasharray="4 3" /><text x="214" y="110" fill="rgba(255,255,255,0.35)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">+2cm</text><text x="330" y="66" fill="#00D4FF" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">POWER +11W</text>
+<rect width="480" height="300" fill="url(#vg25)"/>
 </svg></div>
                             </div>
                         </div>
@@ -151,7 +165,22 @@
 
                     <div class="section-divider"></div>
 
-                    <div class="inset-view p-6 md:p-8" data-view="CAPABILITIES">
+                    <div class="inset-view problem-view p-6 md:p-8 reveal" data-view="THE PROBLEM IT SOLVES">
+                        <div class="flex items-start gap-4">
+                            <div class="problem-icon"><i class="fas fa-fire-flame-curved"></i></div>
+                            <div>
+                                <div class="tech-label mb-2" style="color:#FF7A59">THE PAIN</div>
+                                <h2 class="text-white text-xl font-bold mb-3">$300 studio bike fits</h2>
+                                <p class="text-white/70 leading-relaxed">A bad bike fit means knee pain, lost watts, and overuse injuries — but a professional fit costs $300+ and requires a studio most riders don't live near. Cycling Fit Intelligence analyzes hip angle, knee extension, ankle tracking, and torso position from a plain video, delivering shop-ready fit reports for road, triathlon, and TT positions — scalable to every customer who walks in the door.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="section-divider"></div>
+
+                    <div class="inset-view p-6 md:p-8 reveal" data-view="CAPABILITIES">
                         <h2 class="text-white text-xl font-bold mb-6">CAPABILITIES</h2>
                         <div class="grid sm:grid-cols-2 gap-3">
                             <div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; TT/TRIATHLON FIT</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; JOINT-ANGLE ANALYSIS</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; POSITION ASYMMETRY</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; MOVEMENT CONSISTENCY</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; VISUAL REPORTS</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; VIDEO-BASED ASSESSMENT</div>
@@ -160,7 +189,7 @@
 
                     <div class="section-divider"></div>
 
-                    <div class="inset-view p-6 md:p-8" data-view="TARGET USERS">
+                    <div class="inset-view p-6 md:p-8 reveal" data-view="TARGET USERS">
                         <h2 class="text-white text-xl font-bold mb-4">WHO THIS IS FOR</h2>
                         <p class="text-white/70 leading-relaxed">Bike shops, fit studios, coaches</p>
                     </div>
@@ -173,7 +202,7 @@
                         <div class="text-white/60 text-sm">one-time acquisition</div>
                         <div class="mono text-xl font-bold text-emerald-400 mt-2">$280<span class="text-white/60 text-xs font-normal">/mo × 18</span></div>
                         <div class="text-white/60 text-sm mb-1">monthly plan — maintenance & updates included</div>
-                        <div class="text-white/40 text-xs mb-5">Optional support: $99/mo after payoff · Open to offers</div>
+                        <div class="text-white/40 text-xs mb-5">Optional support after payoff: $99/mo — updates, security patches & priority fixes · Open to offers</div>
                         <form onsubmit="return offerSubmit(event,'cycling-fit-intelligence','Cycling Fit Intelligence',4000)" class="flex flex-col gap-3">
                             <input required name="name" class="tech-input px-4 py-3 text-sm w-full" placeholder="YOUR NAME" />
                             <input required name="email" type="email" class="tech-input px-4 py-3 text-sm w-full" placeholder="EMAIL" />
@@ -235,6 +264,8 @@
     <script src="/js/email-notify.js"></script>
     <script>
     function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('hidden'); }
+    const io = new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     async function offerSubmit(e, slug, name, listed){
         e.preventDefault();
         const f = e.target;

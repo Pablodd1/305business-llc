@@ -49,8 +49,22 @@
         .tech-input:focus { outline: none; border-color: rgba(255,255,255,0.5); }
         .tech-input::placeholder { color: rgba(255,255,255,0.35); }
         .art-hero { border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.02); height: 260px; overflow: hidden; position: relative; }
-        .art-hero svg { width: 100%; height: 100%; display: block; }
-        .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }</style>
+        .art-hero svg { width: 100%; height: 100%; display: block; transition: transform .6s ease; }
+        .title-block:hover .art-hero svg { transform: scale(1.045); }
+        .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }
+        .problem-view { border-color: rgba(255,122,89,0.45) !important; background: rgba(255,122,89,0.05) !important; }
+        .problem-view::before { color: #FF7A59 !important; }
+        .problem-icon { width: 42px; height: 42px; border: 1.5px solid rgba(255,122,89,0.55); background: rgba(255,122,89,0.10); color: #FF7A59; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 17px; }
+        .module-block { border: 1.5px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.025); transition: all 0.25s ease; }
+        .module-block:hover { border-color: rgba(0,212,255,0.45); background: rgba(255,255,255,0.05); }
+        .module-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #00D4FF; text-transform: uppercase; }
+        .spec-row { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+        .spec-row:last-child { border-bottom: none; }
+        .spec-row i { color: #00D4FF; margin-top: 3px; font-size: 11px; }
+        .spec-row span { color: rgba(224,224,224,0.85); font-size: 13.5px; line-height: 1.55; }
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }</style>
 </head>
 <body class="blueprint-bg">
 
@@ -121,29 +135,29 @@
                             <div class="md:col-span-2">
                                 <div class="art-hero"><svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
 <defs>
-<linearGradient id="bg19" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#0d1233"/><stop offset="0.55" stop-color="#080b1e"/><stop offset="1" stop-color="#04060d"/></linearGradient>
-<radialGradient id="gl19" cx="0.5" cy="0.4" r="0.75"><stop offset="0" stop-color="#34d399" stop-opacity="0.32"/><stop offset="0.6" stop-color="#34d399" stop-opacity="0.08"/><stop offset="1" stop-color="#34d399" stop-opacity="0"/></radialGradient>
-<linearGradient id="fl19" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34d399" stop-opacity="0.22"/><stop offset="1" stop-color="#34d399" stop-opacity="0"/></linearGradient>
-<radialGradient id="vg19" cx="0.5" cy="0.45" r="0.85"><stop offset="0.62" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.42"/></radialGradient>
-<pattern id="sc19" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#ffffff" opacity="0.035"/></pattern>
-<filter id="bl19" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>
+<linearGradient id="bg20" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#0d1233"/><stop offset="0.55" stop-color="#080b1e"/><stop offset="1" stop-color="#04060d"/></linearGradient>
+<radialGradient id="gl20" cx="0.5" cy="0.4" r="0.75"><stop offset="0" stop-color="#34d399" stop-opacity="0.36"/><stop offset="0.6" stop-color="#34d399" stop-opacity="0.09"/><stop offset="1" stop-color="#34d399" stop-opacity="0"/></radialGradient>
+<linearGradient id="fl20" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34d399" stop-opacity="0.24"/><stop offset="1" stop-color="#34d399" stop-opacity="0"/></linearGradient>
+<radialGradient id="vg20" cx="0.5" cy="0.45" r="0.85"><stop offset="0.62" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.42"/></radialGradient>
+<pattern id="sc20" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#ffffff" opacity="0.035"/></pattern>
+<filter id="bl20" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>
 </defs>
-<rect width="480" height="300" fill="url(#bg19)"/>
-<rect width="480" height="300" fill="url(#gl19)"/>
+<rect width="480" height="300" fill="url(#bg20)"/>
+<rect width="480" height="300" fill="url(#gl20)"/>
 <g stroke="rgba(255,255,255,0.05)" stroke-width="1">
 <line x1="0" y1="216" x2="480" y2="216"/><line x1="0" y1="234" x2="480" y2="234"/><line x1="0" y1="258" x2="480" y2="258"/><line x1="0" y1="288" x2="480" y2="288"/>
 <line x1="240" y1="216" x2="240" y2="300"/><line x1="180" y1="216" x2="60" y2="300"/><line x1="300" y1="216" x2="420" y2="300"/><line x1="120" y1="216" x2="-120" y2="300"/><line x1="360" y1="216" x2="600" y2="300"/>
 </g>
-<rect x="0" y="216" width="480" height="84" fill="url(#fl19)"/>
-<rect width="480" height="300" fill="url(#sc19)"/>
+<rect x="0" y="216" width="480" height="84" fill="url(#fl20)"/>
+<rect width="480" height="300" fill="url(#sc20)"/>
 <rect x="10" y="10" width="460" height="280" fill="none" stroke="rgba(255,255,255,0.10)"/>
 <path d="M10 30 H30 M10 30 V10 M470 270 H450 M470 270 V290" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1" />
 <rect x="20" y="36" width="4" height="12" fill="#34d399"/>
 <text x="30" y="46" fill="rgba(255,255,255,0.55)" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">PROPERTY MATCH</text>
 <text x="452" y="282" fill="#34d399" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="end">FIG. 1</text>
-<ellipse cx="240" cy="238" rx="180" ry="24" fill="#34d399" opacity="0.15" filter="url(#bl19)"/>
-<path d="M165,140 L245,78 L325,140" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="177" y="140" width="136" height="95" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="238" y="180" width="26" height="55" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="195" y="158" width="24" height="20" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="272" y="158" width="24" height="20" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><path d="M335,62 C335,62 318,49 318,38 C318,30 324,25 331,25 C336,25 339,30 341,33 C343,30 346,25 351,25 C358,25 364,30 364,38 C364,49 347,62 347,62 Z" fill="none" stroke="#00D4FF" stroke-width="1.6" /><path d="M85,160 H125 M117,152 L125,160 L117,168 M405,160 H365 M373,152 L365,160 L373,168" fill="none" stroke="#00D4FF" stroke-width="1.6" />
-<rect width="480" height="300" fill="url(#vg19)"/>
+<ellipse cx="240" cy="238" rx="180" ry="24" fill="#34d399" opacity="0.15" filter="url(#bl20)"/>
+<path d="M158,142 L240,78 L322,142" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="170" y="142" width="140" height="96" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="232" y="184" width="28" height="54" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="190" y="160" width="26" height="22" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="272" y="160" width="26" height="22" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><path d="M100,168 H142 M134,160 L142,168 L134,176 M410,168 H368 M376,160 L368,168 L376,176" fill="none" stroke="#00D4FF" stroke-width="1.6" /><path d="M336,64 C336,64 318,50 318,38 C318,29 325,24 332,24 C338,24 341,30 343,33 C345,30 348,24 354,24 C361,24 368,29 368,38 C368,50 350,64 350,64 Z" fill="none" stroke="#00D4FF" stroke-width="1.6" /><text x="96" y="244" fill="#00D4FF" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">SWIPE → MATCH</text><text x="306" y="244" fill="rgba(255,255,255,0.35)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">12,400 USERS</text><path d="M96,236 H200 M306,236 H420" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-dasharray="4 3" />
+<rect width="480" height="300" fill="url(#vg20)"/>
 </svg></div>
                             </div>
                         </div>
@@ -151,7 +165,22 @@
 
                     <div class="section-divider"></div>
 
-                    <div class="inset-view p-6 md:p-8" data-view="CAPABILITIES">
+                    <div class="inset-view problem-view p-6 md:p-8 reveal" data-view="THE PROBLEM IT SOLVES">
+                        <div class="flex items-start gap-4">
+                            <div class="problem-icon"><i class="fas fa-fire-flame-curved"></i></div>
+                            <div>
+                                <div class="tech-label mb-2" style="color:#FF7A59">THE PAIN</div>
+                                <h2 class="text-white text-xl font-bold mb-3">Dead-end listings & cold leads</h2>
+                                <p class="text-white/70 leading-relaxed">Buyers scroll hundreds of irrelevant listings, sellers wait months for serious interest, and agents burn their best hours on dead-end leads. EstateMatch replaces the endless list with swipe-style matching — buyers, sellers, and agents connected by actual fit, with messaging and CRM built in so no opportunity slips.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="section-divider"></div>
+
+                    <div class="inset-view p-6 md:p-8 reveal" data-view="CAPABILITIES">
                         <h2 class="text-white text-xl font-bold mb-6">CAPABILITIES</h2>
                         <div class="grid sm:grid-cols-2 gap-3">
                             <div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; MATCHING ALGORITHMS</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; USER PROFILES</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; IN-APP MESSAGING</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; CRM & LEAD MANAGEMENT</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; PROPERTY DISCOVERY</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; ANALYTICS</div>
@@ -160,7 +189,7 @@
 
                     <div class="section-divider"></div>
 
-                    <div class="inset-view p-6 md:p-8" data-view="TARGET USERS">
+                    <div class="inset-view p-6 md:p-8 reveal" data-view="TARGET USERS">
                         <h2 class="text-white text-xl font-bold mb-4">WHO THIS IS FOR</h2>
                         <p class="text-white/70 leading-relaxed">Brokerages, agents, proptech operators</p>
                     </div>
@@ -173,7 +202,7 @@
                         <div class="text-white/60 text-sm">one-time acquisition</div>
                         <div class="mono text-xl font-bold text-emerald-400 mt-2">$1,010<span class="text-white/60 text-xs font-normal">/mo × 18</span></div>
                         <div class="text-white/60 text-sm mb-1">monthly plan — maintenance & updates included</div>
-                        <div class="text-white/40 text-xs mb-5">Optional support: $149/mo after payoff · Open to offers</div>
+                        <div class="text-white/40 text-xs mb-5">Optional support after payoff: $149/mo — updates, security patches & priority fixes · Open to offers</div>
                         <form onsubmit="return offerSubmit(event,'estatematch','EstateMatch',14500)" class="flex flex-col gap-3">
                             <input required name="name" class="tech-input px-4 py-3 text-sm w-full" placeholder="YOUR NAME" />
                             <input required name="email" type="email" class="tech-input px-4 py-3 text-sm w-full" placeholder="EMAIL" />
@@ -235,6 +264,8 @@
     <script src="/js/email-notify.js"></script>
     <script>
     function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('hidden'); }
+    const io = new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     async function offerSubmit(e, slug, name, listed){
         e.preventDefault();
         const f = e.target;

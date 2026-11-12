@@ -81,8 +81,22 @@ const CSS = `
         .tech-input:focus { outline: none; border-color: rgba(255,255,255,0.5); }
         .tech-input::placeholder { color: rgba(255,255,255,0.35); }
         .art-hero { border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.02); height: 260px; overflow: hidden; position: relative; }
-        .art-hero svg { width: 100%; height: 100%; display: block; }
-        .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }`;
+        .art-hero svg { width: 100%; height: 100%; display: block; transition: transform .6s ease; }
+        .title-block:hover .art-hero svg { transform: scale(1.045); }
+        .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }
+        .problem-view { border-color: rgba(255,122,89,0.45) !important; background: rgba(255,122,89,0.05) !important; }
+        .problem-view::before { color: #FF7A59 !important; }
+        .problem-icon { width: 42px; height: 42px; border: 1.5px solid rgba(255,122,89,0.55); background: rgba(255,122,89,0.10); color: #FF7A59; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 17px; }
+        .module-block { border: 1.5px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.025); transition: all 0.25s ease; }
+        .module-block:hover { border-color: rgba(0,212,255,0.45); background: rgba(255,255,255,0.05); }
+        .module-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #00D4FF; text-transform: uppercase; }
+        .spec-row { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+        .spec-row:last-child { border-bottom: none; }
+        .spec-row i { color: #00D4FF; margin-top: 3px; font-size: 11px; }
+        .spec-row span { color: rgba(224,224,224,0.85); font-size: 13.5px; line-height: 1.55; }
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }`;
 
 const STATUS_COLOR = {
   'LIVE':'#00FF88','PRODUCTION':'#00FF88','FUNCTIONAL':'#ffffff','PILOT':'#FFC107',
@@ -94,10 +108,9 @@ const sc = s => { const c = STATUS_COLOR[s] || '#fff';
 function page(v, related) {
   const demoBtns = [
     v.links?.demo ? `<a href="${v.links.demo}" target="_blank" rel="noopener" class="schematic-btn px-5 py-2"><span class="relative z-10"><i class="fas fa-play mr-2"></i>LIVE DEMO</span></a>` : '',
-    v.links?.website ? `<a href="${v.links.website}" target="_blank" rel="noopener" class="schematic-btn px-5 py-2"><span class="relative z-10"><i class="fas fa-globe mr-2"></i>WEBSITE</span></a>` : '',
-    v.links?.github ? `<a href="${v.links.github}" target="_blank" rel="noopener" class="schematic-btn px-5 py-2"><span class="relative z-10"><i class="fab fa-github mr-2"></i>SOURCE CODE</span></a>` : ''
+    v.links?.website ? `<a href="${v.links.website}" target="_blank" rel="noopener" class="schematic-btn px-5 py-2"><span class="relative z-10"><i class="fas fa-globe mr-2"></i>WEBSITE</span></a>` : ''
   ].join('');
-  const sup = v.support ? `Optional support: ${fmt(v.support)}/mo` : 'Support included';
+  const sup = v.support ? `Optional support after payoff: ${fmt(v.support)}/mo — updates, security patches & priority fixes` : 'Support included';
   const rel = related.map(r => `
                 <a class="tech-card p-5 block" href="/ventures/${r.slug}.html">
                     <div class="flex justify-between items-center mb-3 gap-2">
@@ -171,7 +184,35 @@ ${NAV}
 
                     <div class="section-divider"></div>
 
-                    <div class="inset-view p-6 md:p-8" data-view="CAPABILITIES">
+                    <div class="inset-view problem-view p-6 md:p-8 reveal" data-view="THE PROBLEM IT SOLVES">
+                        <div class="flex items-start gap-4">
+                            <div class="problem-icon"><i class="fas fa-fire-flame-curved"></i></div>
+                            <div>
+                                <div class="tech-label mb-2" style="color:#FF7A59">THE PAIN</div>
+                                <h2 class="text-white text-xl font-bold mb-3">${v.pain}</h2>
+                                <p class="text-white/70 leading-relaxed">${v.problem}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    ${v.modules ? `
+                    <div class="section-divider"></div>
+
+                    <div class="inset-view p-6 md:p-8 reveal" data-view="INSIDE THE PLATFORM">
+                        <h2 class="text-white text-xl font-bold mb-2">INSIDE THE PLATFORM — MODULE BY MODULE</h2>
+                        <p class="text-white/60 text-sm mb-6 leading-relaxed">Exactly what each module does in the running product — no vaporware, no mockups.</p>
+                        <div class="space-y-4">
+                        ${v.modules.map((m,i)=>`
+                            <div class="module-block p-5 reveal">
+                                <div class="module-head mb-1"><i class="fas fa-cube mr-2"></i>${String(i+1).padStart(2,'0')} — ${m.name.toUpperCase()}</div>
+                                ${m.points.map(p=>`<div class="spec-row"><i class="fas fa-check"></i><span>${p}</span></div>`).join('')}
+                            </div>`).join('')}
+                        </div>
+                    </div>` : ''}
+
+                    <div class="section-divider"></div>
+
+                    <div class="inset-view p-6 md:p-8 reveal" data-view="CAPABILITIES">
                         <h2 class="text-white text-xl font-bold mb-6">CAPABILITIES</h2>
                         <div class="grid sm:grid-cols-2 gap-3">
                             ${v.capabilities.map(c=>`<div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; ${c.toUpperCase()}</div>`).join('')}
@@ -180,7 +221,7 @@ ${NAV}
 
                     <div class="section-divider"></div>
 
-                    <div class="inset-view p-6 md:p-8" data-view="TARGET USERS">
+                    <div class="inset-view p-6 md:p-8 reveal" data-view="TARGET USERS">
                         <h2 class="text-white text-xl font-bold mb-4">WHO THIS IS FOR</h2>
                         <p class="text-white/70 leading-relaxed">${v.target}</p>
                     </div>
@@ -193,7 +234,7 @@ ${NAV}
                         <div class="text-white/60 text-sm">one-time acquisition</div>
                         <div class="mono text-xl font-bold text-emerald-400 mt-2">${fmt(v.monthly)}<span class="text-white/60 text-xs font-normal">/mo × 18</span></div>
                         <div class="text-white/60 text-sm mb-1">monthly plan — maintenance & updates included</div>
-                        <div class="text-white/40 text-xs mb-5">${sup} after payoff · Open to offers</div>
+                        <div class="text-white/40 text-xs mb-5">${sup} · Open to offers</div>
                         <form onsubmit="return offerSubmit(event,'${v.slug}','${esc(v.name)}',${v.price})" class="flex flex-col gap-3">
                             <input required name="name" class="tech-input px-4 py-3 text-sm w-full" placeholder="YOUR NAME" />
                             <input required name="email" type="email" class="tech-input px-4 py-3 text-sm w-full" placeholder="EMAIL" />
@@ -228,6 +269,8 @@ ${NAV}
     <script src="/js/email-notify.js"></script>
     <script>
     function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('hidden'); }
+    const io = new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     async function offerSubmit(e, slug, name, listed){
         e.preventDefault();
         const f = e.target;

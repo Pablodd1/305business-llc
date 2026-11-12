@@ -1,6 +1,7 @@
 /* 305business Venture Portfolio — master data registry
    One-time acquisition model: buy the app/product, optional monthly support.
-   "Make an offer" enabled on every venture. Status labels are honest. */
+   "Make an offer" enabled on every venture. Status labels are honest.
+   Every venture leads with the PROBLEM it solves — that's the pitch. */
 window.VENTURES = [
   {
     slug: "zero-g-simulation",
@@ -12,6 +13,8 @@ window.VENTURES = [
     monthly: 1290,
     support: 199,
     featured: true,
+    pain: "Gut-feel product bets",
+    problem: "Most new products fail because founders test ideas with gut feel and spreadsheets. Real market research takes months and $50k+ — and by the time it lands, the window has moved. Zero-G stress-tests pricing, positioning, and strategy against thousands of psychologically realistic AI consumers before a single real dollar is committed.",
     summary: "A multi-agent economic simulation platform used to stress-test products, pricing, and market strategy before committing capital. Simulates populations of psychologically realistic AI agents — needs, mood, stress, memory, social networks, behavioral economics — inside time-compressed markets. 500 agents across 26 weeks and 8 scenarios (recession, boom, hurricane, competitor entry, policy change) in seconds. ML forecasting ensemble (TimesFM, Prophet, Greykite) with changepoint detection, real-world data ingestion (news, economics, markets, weather), and seasonality modeling.",
     capabilities: ["Multi-agent simulation","Behavioral economics","ML forecasting ensemble","Scenario stress-testing","Real-world data feeds","Seasonality modeling","REST API","Time-compressed markets"],
     target: "Funds, venture studios, enterprises making major market bets"
@@ -24,12 +27,13 @@ window.VENTURES = [
     status: "PROTOTYPE",
     price: 5000,
     monthly: 350,
-    support: 149,
+    support: 99,
     featured: true,
-    summary: "A reusable voice-enabled intelligence layer that sits on top of ordinary websites and turns them into personalized, interactive experiences. VoiceLayer scans the host site — pages, products, buttons, navigation, sections — and lets visitors navigate, search, compare products, and complete selected forms through natural spoken conversation, in English or Spanish. It builds user profiles from stated goals and preferences, tracks behavioral signals (views, clicks, searches, navigation paths, dwell time), and grounds AI responses in actual site content through configurable AI providers. Includes personal-assistant foundations — calendar, daily briefings, tasks, weather — plus confirmation workflows and post-action verification for every consequential action. Advanced prototype: core functionality is implemented and demonstrated; production readiness (multi-user data isolation, persistent memory, endpoint auth) is the buyer's first milestone. Full source code included (github.com/Pablodd1/Comandvoice).",
+    pain: "Passive websites that don't sell",
+    problem: "Websites are passive brochures — every visitor gets the same pages and the same forms, and most leave without buying. VoiceLayer turns a static site into a conversational guide that listens to each visitor, answers from the site's actual content, and walks them to the right page, product, or form — by voice, in English or Spanish.",
+    summary: "A reusable voice-enabled intelligence layer that sits on top of ordinary websites and turns them into personalized, interactive experiences. VoiceLayer scans the host site — pages, products, buttons, navigation, sections — and lets visitors navigate, search, compare products, and complete selected forms through natural spoken conversation, in English or Spanish. It builds user profiles from stated goals and preferences, tracks behavioral signals (views, clicks, searches, navigation paths, dwell time), and grounds AI responses in actual site content through configurable AI providers. Includes personal-assistant foundations — calendar, daily briefings, tasks, weather — plus confirmation workflows and post-action verification for every consequential action. Advanced prototype: core functionality is implemented and demonstrated; production readiness (multi-user data isolation, persistent memory, endpoint auth) is the buyer's first milestone. Full source code transfers privately with the sale.",
     capabilities: ["Website intelligence scanning","Voice navigation & control","User profile awareness","Behavioral signal tracking","Personalized recommendations","Context-grounded AI conversation","Assistant foundations (calendar, briefings, tasks, weather)","Reusable JS widget + host APIs","English & Spanish","Confirmed, verified actions"],
-    target: "Website owners, SaaS platforms, and agencies adding voice-driven personalization",
-    links: { github: "https://github.com/Pablodd1/Comandvoice" }
+    target: "Website owners, SaaS platforms, and agencies adding voice-driven personalization"
   },
   {
     slug: "hotel-rate-intelligence",
@@ -39,12 +43,14 @@ window.VENTURES = [
     status: "LIVE",
     price: 12000,
     monthly: 835,
-    support: 199,
+    support: 149,
     featured: true,
+    pain: "Stale rates, gut-feel pricing",
+    problem: "Independent hotels set rates by gut and a monthly comp report that's stale on arrival, while the chains reprice dynamically every single day. The result: rooms sold too cheap during demand spikes and sitting empty in soft weeks — tens of thousands in revenue quietly lost. HRI gives boutique properties the same daily competitive intelligence the big brands have, at a fraction of the cost.",
     summary: "A live competitive-intelligence platform for boutique hotels. Scrapes the open web — including every hotel's own site, which no WAF blocks — to capture decision-maker contacts (61 and counting across a 20-hotel Miami Beach comp set), scores each property on who actually needs rate intelligence (13 hot prospects), and delivers a 6 AM daily Telegram brief. Self-hosted, MIT-licensed, zero paid data APIs.",
     capabilities: ["Contact capture from hotel websites","Who-needs-it prospect scoring (0–100)","Competitive rate observation","20-hotel Miami Beach comp set","Live dashboard","Daily Telegram briefs","Booking.com OTA engine (residential-IP ready)","SQLite storage + cron pipelines"],
     target: "Hotels, property managers, revenue consultants",
-    links: { github: "https://github.com/Pablodd1/hotel-rate-intelligence", demo: "https://julian-miller-minister-manuals.trycloudflare.com/?k=hri-miami-2026" }
+    links: { demo: "https://julian-miller-minister-manuals.trycloudflare.com/?k=hri-miami-2026" }
   },
   {
     slug: "jmm-jas-miami-method",
@@ -54,8 +60,10 @@ window.VENTURES = [
     status: "IN DEVELOPMENT",
     price: 9500,
     monthly: 660,
-    support: 199,
+    support: 149,
     featured: true,
+    pain: "Generic plans, real injuries",
+    problem: "Generic training plans ignore the athlete in front of them — yesterday's sleep, this morning's HRV, last week's load. Athletes overtrain, get injured, or plateau while following a PDF meant for everyone. JMM adapts training daily to real physiology and wearable data, for runners, cyclists, triathletes, HYROX athletes, and boxers.",
     summary: "An AI-driven coaching platform that adapts training to athlete physiology, recovery, goals, and wearable data. Covers running, cycling, swimming, triathlon, HYROX, boxing, and strength training — with daily readiness, training-load analysis, hydration and fueling guidance, and race strategy. Built on a library of evidence-based sports-science research.",
     capabilities: ["Biometric check-ins","HRV & readiness","Training-load analysis","Sport-specific fueling","Recovery guidance","Race strategy","Wearable integration"],
     target: "Athletes, coaches, clubs, performance programs",
@@ -71,6 +79,8 @@ window.VENTURES = [
     monthly: 1010,
     support: 149,
     featured: true,
+    pain: "Dead-end listings & cold leads",
+    problem: "Buyers scroll hundreds of irrelevant listings, sellers wait months for serious interest, and agents burn their best hours on dead-end leads. EstateMatch replaces the endless list with swipe-style matching — buyers, sellers, and agents connected by actual fit, with messaging and CRM built in so no opportunity slips.",
     summary: "A deployed real-estate matching platform — swipe-style discovery connecting buyers, sellers, and agents. Matching algorithms, in-app messaging, CRM, lead management, and analytics. Production deployment live.",
     capabilities: ["Matching algorithms","User profiles","In-app messaging","CRM & lead management","Property discovery","Analytics"],
     target: "Brokerages, agents, proptech operators",
@@ -86,6 +96,8 @@ window.VENTURES = [
     monthly: 590,
     support: 149,
     featured: true,
+    pain: "2 hrs of paperwork per 1 of care",
+    problem: "Physicians spend roughly two hours on documentation for every hour of patient care — the single biggest driver of burnout and a direct revenue leak for practices. PocketScribe transcribes encounters and drafts structured, specialty-templated SOAP notes in seconds, with the clinician approving every word before anything is final.",
     summary: "An AI medical scribe for encounter transcription, clinical summarization, and structured SOAP notes with specialty templates. Medical terminology handling, coding assistance, and human approval before finalization — built for clinic workflows, not chatbot demos.",
     capabilities: ["Encounter transcription","SOAP notes","Specialty templates","Coding assistance","Structured documentation","Human-in-the-loop review"],
     target: "Clinics, specialty practices, telehealth"
@@ -98,7 +110,10 @@ window.VENTURES = [
     status: "R&D",
     price: 5500,
     monthly: 385,
-    support: 149,
+    support: 99,
+    featured: true,
+    pain: "Shoppers abandon generic stores",
+    problem: "Shoppers leave stores that don't understand what they're looking for — and store owners can't personalize at Amazon scale without an Amazon budget. The Adaptive Marketplace engine gives any commerce platform semantic search, real recommendations, and intent detection, so niche marketplaces convert like the giants.",
     summary: "A commerce platform engine with semantic search, recommendation systems, shopping assistants, and user-intent detection. Personalization, adaptive content, behavioral analytics, and agentic shopping workflows — built to power niche marketplaces.",
     capabilities: ["Semantic search","Recommendations","Shopping assistants","Intent detection","Personalization","Commerce automation"],
     target: "Marketplace operators, retail, D2C brands"
@@ -111,7 +126,10 @@ window.VENTURES = [
     status: "PROTOTYPE",
     price: 6500,
     monthly: 455,
-    support: 149,
+    support: 119,
+    featured: true,
+    pain: "Patients can't picture the result",
+    problem: "Cosmetic dentistry's biggest barrier is imagination — patients can't visualize a $10,000+ smile transformation, so they hesitate, delay, and walk out to 'think about it.' Overlay HD generates illustrative smile previews from the patient's own photo during the consultation, with dentist-controlled approval, turning maybes into scheduled cases.",
     summary: "A patient-facing dental visualization system that helps dentists show illustrative proposed cosmetic outcomes from patient photos. Whitening previews, veneer concepts, bonding previews, before/after comparison — with dentist-controlled approval. Images are illustrative, not guaranteed clinical outcomes.",
     capabilities: ["Smile visualization","Whitening previews","Veneer concepts","Before/after comparison","Patient education","Dentist approval flow"],
     target: "Cosmetic dentists, DSOs, dental labs"
@@ -125,6 +143,9 @@ window.VENTURES = [
     price: 5500,
     monthly: 385,
     support: 99,
+    featured: true,
+    pain: "$200 lab gait analysis",
+    problem: "Half of all runners get injured every year, and proper gait analysis costs $200+ at a lab most will never visit. RunForm brings lab-grade biomechanics to a smartphone video — pose estimation, knee valgus, foot-strike, overstriding, cadence, bilateral asymmetry — with automatic reports running stores, coaches, and clinics can hand to customers in minutes.",
     summary: "Running biomechanics analysis from smartphone video. Pose estimation, joint tracking, knee valgus, foot-strike, overstriding, cadence, and bilateral asymmetry — with automatic reports and English/Spanish interface. Built for running stores, coaches, and sports clinics.",
     capabilities: ["Pose estimation","Gait analysis","Joint tracking","Overstriding analysis","Automatic reports","Bilingual interface"],
     target: "Running stores, coaches, sports clinics"
@@ -132,12 +153,15 @@ window.VENTURES = [
   {
     slug: "clinical-movement-intelligence",
     name: "Clinical Movement Intelligence",
-    tagline: "Remote gait, balance & ataxia assessment support",
-    industry: "Healthcare",
+    tagline: "Computer-vision movement assessment for neuro & rehab",
+    industry: "Computer Vision & Spatial",
     status: "R&D",
     price: 4500,
     monthly: 315,
-    support: 0,
+    support: 99,
+    featured: true,
+    pain: "Care blindspots between visits",
+    problem: "Neurological decline and rehab progress happen between appointments — where clinicians have no eyes. Care relies on memory and occasional in-office tests. Clinical Movement Intelligence tracks gait, balance, and mobility from video longitudinally, making change visible visit-to-visit and enabling remote review workflows. It supports — never replaces — licensed clinical assessment.",
     summary: "Computer-vision-assisted movement evaluation supporting longitudinal neurological and rehabilitation assessment. Gait tracking, balance, functional mobility, clinician-reviewed reports, and remote PT workflows. Supports — never replaces — licensed clinical assessment.",
     capabilities: ["Gait tracking","Balance assessment","Movement asymmetry","Longitudinal tracking","Clinician-reviewed reports","Remote rehab support"],
     target: "Neurology clinics, rehab providers, research"
@@ -150,7 +174,10 @@ window.VENTURES = [
     status: "LIVE",
     price: 7500,
     monthly: 520,
-    support: 199,
+    support: 149,
+    featured: true,
+    pain: "Hours burned per demo site",
+    problem: "Agencies burn their best hours rebuilding the same five websites from scratch for every pitch. The Website Factory discovers local businesses and generates personalized, niche-specific demo sites in under five seconds each — so your sales team walks into every first meeting with the prospect's website already built. It changes the sales conversation completely.",
     summary: "An automated pipeline that discovers local businesses, generates personalized niche-specific demo websites, and prepares them for deployment. Under five seconds per generated site across six-plus niche templates — a sales-engineering machine for agencies.",
     capabilities: ["Lead discovery","Template engine","Personalized generation","Rapid deployment","Industry services","Demo automation"],
     target: "Agencies, white-label resellers, sales teams"
@@ -163,7 +190,10 @@ window.VENTURES = [
     status: "IN DEVELOPMENT",
     price: 7000,
     monthly: 490,
-    support: 99,
+    support: 119,
+    featured: true,
+    pain: "Drowning in documentation",
+    problem: "Dental teams drown in paperwork — charting, treatment plans, clinical notes, procedure tracking, billing — and every hour on admin is an hour not chairside, producing revenue. This EHR automates the documentation loop with AI assistance while keeping provider review at every step, so the practice runs on its workflows instead of its filing cabinets.",
     summary: "Dental charting, treatment-plan organization, AI clinical notes, procedure tracking, and billing support — an intelligent practice-documentation system with provider review at every step.",
     capabilities: ["Dental charting","AI clinical notes","Treatment plans","Image organization","Billing support","Appointment workflows"],
     target: "Dental practices, DSOs"
@@ -177,6 +207,9 @@ window.VENTURES = [
     price: 4000,
     monthly: 280,
     support: 99,
+    featured: true,
+    pain: "Damage found when it's expensive",
+    problem: "Hotels, HOAs, and contractors discover damage when it's already expensive — the hairline crack that became a wall replacement, the ceiling stain that became a mold claim. Visual Defect Intelligence inspects rooms with computer vision, compares against inspection history, and flags defects while they're still cheap to fix.",
     summary: "Computer-vision inspection for cracks, water stains, floor damage, and fixture defects — with image comparison, inspection history, and repair reporting. Built for hotels, HOAs, contractors, and property managers.",
     capabilities: ["Crack detection","Damage localization","Image comparison","Inspection history","Repair reporting","Severity assessment"],
     target: "Hotels, HOAs, facilities, contractors"
@@ -190,6 +223,9 @@ window.VENTURES = [
     price: 5000,
     monthly: 350,
     support: 99,
+    featured: true,
+    pain: "Vitals seen once a month",
+    problem: "Chronic disease management fails between visits — a hypertensive patient's blood pressure is seen once a month, if that, and deterioration is discovered at the emergency visit. This RPM platform connects home devices and streams vitals to patient and provider dashboards with thresholds, alerts, and billing documentation built in — turning episodic care into continuous monitoring that pays for itself.",
     summary: "Connected-health monitoring: blood pressure, scales, pulse oximetry, and compatible glucose devices — with patient and provider dashboards, thresholds, alerts, and billing-documentation support.",
     capabilities: ["Device integrations","Patient dashboards","Provider dashboards","Thresholds & alerts","Historical trends","Billing documentation"],
     target: "Chronic-care programs, clinics, RPM providers"
@@ -203,6 +239,9 @@ window.VENTURES = [
     price: 5500,
     monthly: 385,
     support: 99,
+    featured: true,
+    pain: "Manual measurement errors",
+    problem: "Measuring rooms, drawing floor plans, and documenting spaces is slow, manual, and full of expensive errors — a wrong dimension delays a renovation, a missed detail kills a listing. 3D Spatial Intelligence scans rooms with a phone camera/LiDAR and generates floor plans, dimensions, and 3D reconstructions automatically — the foundation for facility digital twins and spatial apps.",
     summary: "Phone-based room scanning with depth/LiDAR integration, floor-plan generation, dimensions, and 3D reconstruction — the foundation for facility digital twins and spatial measurement apps.",
     capabilities: ["Room scanning","Floor-plan generation","3D reconstruction","Object localization","Spatial measurements","Digital-twin research"],
     target: "PropTech, facilities, construction, real estate"
@@ -215,7 +254,10 @@ window.VENTURES = [
     status: "PILOT",
     price: 6500,
     monthly: 455,
-    support: 99,
+    support: 119,
+    featured: true,
+    pain: "30–40% of calls missed",
+    problem: "Every missed call is lost revenue — and offices miss 30–40% of calls during busy hours, after hours, and weekends. The AI Voice Receptionist answers every call in English or Spanish, books appointments, qualifies leads, routes urgent matters, and follows up by SMS — a round-the-clock front desk without the payroll, the sick days, or the hold music.",
     summary: "Automated call answering in English and Spanish: scheduling, lead qualification, routing, FAQ, intake workflows, CRM integration, transcripts, and SMS/Telegram follow-up. A round-the-clock front desk without the payroll.",
     capabilities: ["Call answering","EN/ES conversations","Scheduling","Lead qualification","CRM integration","Transcripts & follow-up"],
     target: "Medical offices, service businesses, law firms"
@@ -229,6 +271,9 @@ window.VENTURES = [
     price: 4000,
     monthly: 280,
     support: 99,
+    featured: true,
+    pain: "$300 studio bike fits",
+    problem: "A bad bike fit means knee pain, lost watts, and overuse injuries — but a professional fit costs $300+ and requires a studio most riders don't live near. Cycling Fit Intelligence analyzes hip angle, knee extension, ankle tracking, and torso position from a plain video, delivering shop-ready fit reports for road, triathlon, and TT positions — scalable to every customer who walks in the door.",
     summary: "Camera-based cycling posture and joint-angle analysis for road, triathlon, and TT positions. Hip angle, knee extension, ankle tracking, torso position, and visual fitting reports — video-based, shop-ready.",
     capabilities: ["TT/triathlon fit","Joint-angle analysis","Position asymmetry","Movement consistency","Visual reports","Video-based assessment"],
     target: "Bike shops, fit studios, coaches"
@@ -242,6 +287,9 @@ window.VENTURES = [
     price: 4500,
     monthly: 315,
     support: 99,
+    featured: true,
+    pain: "Therapy fails at home",
+    problem: "MSK therapy fails at home — patients forget or fudge their exercises, providers can't see adherence until the next visit, and RTM reimbursement documentation is a paperwork swamp. The RTM platform tracks therapy adherence, collects patient-reported data and functional assessments, and generates billing-support documentation automatically — better outcomes and a revenue stream instead of an admin burden.",
     summary: "MSK therapy tracking with adherence monitoring, patient-reported data, functional assessments, exercise progression, and RTM billing-support workflows.",
     capabilities: ["MSK tracking","Therapy adherence","Functional assessments","Exercise progression","Provider reporting","RTM documentation"],
     target: "PT practices, MSK clinics, health systems"
@@ -255,6 +303,9 @@ window.VENTURES = [
     price: 3500,
     monthly: 245,
     support: 99,
+    featured: true,
+    pain: "Leads die in spreadsheets",
+    problem: "Leads die in spreadsheets and inboxes — no follow-up, no scoring, no visibility into what's actually moving. Deals stall not because of competition, but because nobody called back at the right moment. The Intelligent CRM builds proper pipelines with lead scoring, automated follow-ups, segmentation, and AI summaries that tell each rep their next best action.",
     summary: "Custom CRM builds with lead pipelines, scoring, appointment management, follow-up automation, segmentation, sales dashboards, and AI summaries with next-action recommendations.",
     capabilities: ["Lead pipelines","Lead scoring","Follow-up automation","Segmentation","Sales dashboards","AI summaries"],
     target: "SMBs, sales teams, agencies"
@@ -267,7 +318,10 @@ window.VENTURES = [
     status: "AVAILABLE",
     price: 4500,
     monthly: 315,
-    support: 149,
+    support: 99,
+    featured: true,
+    pain: "Under 2% conversion",
+    problem: "Static websites convert under 2% because every visitor — a first-timer, a comparison shopper, a ready-to-buy — gets the exact same experience. Adaptive AI Websites personalize content, calls-to-action, and recommendations to each visitor's intent, with AI chat and CRM integration that turns anonymous traffic into a named pipeline.",
     summary: "Websites that adapt: personalized content, AI chat interfaces, recommendation engines, dynamic CTAs, and visitor-intent modeling — with CRM integration and conversion analytics.",
     capabilities: ["Adaptive content","AI chat interfaces","Recommendations","Dynamic CTAs","Intent modeling","CRM integration"],
     target: "Businesses converting traffic into pipeline"
@@ -281,6 +335,9 @@ window.VENTURES = [
     price: 3000,
     monthly: 210,
     support: 79,
+    featured: true,
+    pain: "Same 20 questions all day",
+    problem: "Your team answers the same twenty questions every day — pricing, hours, availability, location — while real opportunities sit on hold. Intelligent Assistants answer instantly from your own knowledge base, book appointments, qualify leads, and escalate to a human only when it actually matters. Trained on your business, not generic small talk, in the languages your customers speak.",
     summary: "Website assistants with knowledge-base Q&A, RAG, lead intake, customer support, scheduling, multilingual conversations, and human escalation — trained on your business, not generic small talk.",
     capabilities: ["Knowledge-base Q&A","RAG","Lead intake","Scheduling","Multilingual","Human escalation"],
     target: "Any business with repetitive customer questions"
@@ -294,6 +351,9 @@ window.VENTURES = [
     price: 3500,
     monthly: 245,
     support: 99,
+    featured: true,
+    pain: "Decisions on stale data",
+    problem: "Founders and investors make six-figure decisions on stale reports and gut feel — while competitors, pricing, and customer intent shift weekly. AI Market Intelligence automates competitive research and customer-intent discovery, synthesizing everything into dashboards and strategic opportunity assessments on demand, so decisions ride on current signal instead of last quarter's PDF.",
     summary: "Automated competitive research, market analysis, customer-intent discovery, and structured intelligence — research synthesized into dashboards and strategic opportunity assessments.",
     capabilities: ["Competitive research","Market analysis","Intent discovery","Trend analysis","Research synthesis","Dashboards"],
     target: "Founders, investors, operators"
@@ -306,7 +366,10 @@ window.VENTURES = [
     status: "PRODUCTION",
     price: 6000,
     monthly: 420,
-    support: 99,
+    support: 119,
+    featured: true,
+    pain: "3–5% of revenue leaked",
+    problem: "Medical practices silently lose 3–5% of revenue to coding errors, denied claims, and slow follow-up — on a $1M practice, that's $30,000–$50,000 gone every year. Revenue Cycle Intelligence automates claims workflows, coding support, denial tracking, and payment reconciliation — proven in live medical-billing operations, with RPM/RTM billing support and EHR integration paths.",
     summary: "Claims workflow automation, coding support, payment reconciliation, denial tracking, credentialing workflows, and revenue-cycle reporting — proven in live medical-billing operations, with RPM/RTM billing support and EHR integration paths.",
     capabilities: ["Claims automation","Coding support","Denial tracking","Payment reconciliation","RCM reporting","EHR integration"],
     target: "Medical practices, billing companies"
@@ -319,7 +382,10 @@ window.VENTURES = [
     status: "AVAILABLE",
     price: 2000,
     monthly: 140,
-    support: 99,
+    support: 79,
+    featured: true,
+    pain: "Invisible on Google & AI search",
+    problem: "Being invisible on Google — and now on AI search — is a slow business death, and most small-business sites are technically broken for both: no schema, no structured data, pages machines can't read. The Search & Discovery Engine fixes the engineering underneath — schema.org, structured data, crawlability, AEO — so search engines and AI assistants can actually find, understand, and recommend the business.",
     summary: "Technical SEO, schema.org structured data, crawlability, sitemaps, semantic content, AEO, and AI-search readiness. One-time engine build plus optional monitoring — no guaranteed rankings, just correct engineering.",
     capabilities: ["Technical SEO","Schema.org","Structured data","Sitemaps","AEO","AI search readiness"],
     target: "Businesses that need to be found"
@@ -332,7 +398,10 @@ window.VENTURES = [
     status: "AVAILABLE",
     price: 1500,
     monthly: 105,
-    support: 0,
+    support: 79,
+    featured: true,
+    pain: "$5k and 6 weeks for a website",
+    problem: "A business without a website in 2026 effectively doesn't exist — but agencies quote $5,000 and six weeks for what should be a commodity. Rapid Digital Launch delivers a professional, lead-generating, bilingual website at a fixed price, fast: responsive design, forms, booking, SEO setup, analytics, and an AI chat — live in days, not months.",
     summary: "A production website delivered fast: mobile-responsive design, lead forms, booking integrations, SEO setup, analytics, AI chat, and bilingual content. Fixed price, fixed scope, live quickly.",
     capabilities: ["Responsive design","Lead forms","Booking integration","SEO setup","Analytics","Bilingual content"],
     target: "New businesses, launches, pivots"
@@ -346,7 +415,21 @@ window.VENTURES = [
     price: 12500,
     monthly: 880,
     support: 149,
+    featured: true,
+    pain: "Stranded drivers, missed calls, greasy shops",
+    problem: "When a car dies, the experience is awful: phone tag with tow companies, opaque pricing, hours at a greasy shop, no idea when help arrives. And the operators on the other side run dispatch from phone calls and whiteboards. MacaLocator fixes both sides — customers get one-tap dispatch with live ETAs and AI concierge support; operators get a live unit map, booking pipeline, and a 24/7 AI front desk.",
     summary: "A deployed 'we come to you' auto service platform — customers book mobile mechanics to their driveway, office, or roadside position. Live unit-tracking map, one-tap 24/7 emergency dispatch (tow, jump start, accident), Gemini AI concierge chat with voice in/out, voice command controller, multi-vehicle garage with maintenance reminders, Google Calendar sync, AI marketing creative studio, and a 5-tab admin command center with analytics and Twilio-ready comms. Production demo live.",
+    modules: [
+      { name: "Client Dashboard & Live Dispatch Map", points: ["Real-time unit tracking — every mobile unit on a live map with status (En Route / On Call) and live ETA to the active request", "Map intelligence filters — all units / team only / active requests, tap any point for the full unit dossier", "Booking pipeline control — confirm, start, and complete jobs; booking moves pending → confirmed → in progress → completed in real time", "Instant quote estimator — picks vehicle + service for an on-the-spot price; detects electric vehicles and adapts pricing logic for EV powertrains"] },
+      { name: "On-Demand Booking Engine", points: ["Service catalog cards — each service ships with description, pricing basis, and one-tap select", "Doorstep dispatch addressing — the customer confirms home, office, or hotel parking and the mechanic comes to them", "Date & time scheduling with full lifecycle status tracking on every booking"] },
+      { name: "24/7 Emergency Roadside Response", points: ["One-tap emergency grid — tow truck, accident help, jump start, or share-my-location, one tap from any screen", "Live dispatch choreography — request → locating nearest unit → dispatched with confirmation and direct call action", "Visible from both sides — emergencies surface on the operations map and admin console for coordinator handoff"] },
+      { name: "Gemini AI Concierge Chat — Voice In, Voice Out", points: ["A Gemini concierge answers service questions, quotes pricing, explains coverage zones, and walks customers into a booking — in the buyer's brand voice", "Voice dictation input — customers dictate by microphone instead of typing", "Spoken readback — every AI answer read aloud with natural speech synthesis, toggleable", "Never dead-ends — degrades to canned concierge answers if the API is unreachable"] },
+      { name: "Voice Command Controller", points: ["Hands-free operation — browser-native speech recognition drives the app by voice, with spoken confirmations", "Full permission and error handling — microphone-denied states, no-recognition retries, sound controls"] },
+      { name: "Garage & Vehicle Profiles", points: ["Multi-vehicle garage — add/remove vehicles with make, model, year, plate, and live mileage", "Maintenance memory — per-vehicle oil and tire baselines with notification preferences", "EV-aware logic — electric vehicles detected and handled correctly (battery health checks, no oil reminders)", "Editable profile with service history tied to each vehicle"] },
+      { name: "Google Calendar Sync", points: ["One-click Google OAuth connect with live connected state and event listing", "Bookings become real calendar events — no-show reduction built in"] },
+      { name: "AI Marketing Creative Studio", points: ["Text-to-image generation of flyers, social creatives, and promo visuals from plain prompts", "8 aspect ratios — 1:1, 3:4, 4:3, 9:16, 16:9, 21:9, 3:2, 2:3 — every placement from Instagram post to billboard", "The marketing team a towing company never had"] },
+      { name: "Admin & Front Desk Command Center", points: ["Operations analytics — revenue, job, and KPI cards with mini visualizations", "Live visualization tab — the full dispatch map, reimagined for coordinators", "AI front desk — configurable automated reception, day or night", "Twilio-ready comms — SMS/voice layer wired for notifications and dispatch alerts", "Dedicated communications tab — dispatch, mechanics, and front desk on one thread"] }
+    ],
     capabilities: ["Live dispatch map","On-demand booking","24/7 emergency response","AI concierge chat","Voice commands","Vehicle garage & reminders","Google Calendar sync","Marketing creative studio","Admin command center","Analytics & Twilio comms"],
     target: "Towing & roadside operators, mobile mechanic fleets, auto service chains, dealership service lanes, roadside membership clubs",
     links: { demo: "https://maca-locator.vercel.app" }

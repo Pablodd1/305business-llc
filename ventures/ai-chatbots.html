@@ -49,8 +49,22 @@
         .tech-input:focus { outline: none; border-color: rgba(255,255,255,0.5); }
         .tech-input::placeholder { color: rgba(255,255,255,0.35); }
         .art-hero { border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.02); height: 260px; overflow: hidden; position: relative; }
-        .art-hero svg { width: 100%; height: 100%; display: block; }
-        .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }</style>
+        .art-hero svg { width: 100%; height: 100%; display: block; transition: transform .6s ease; }
+        .title-block:hover .art-hero svg { transform: scale(1.045); }
+        .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }
+        .problem-view { border-color: rgba(255,122,89,0.45) !important; background: rgba(255,122,89,0.05) !important; }
+        .problem-view::before { color: #FF7A59 !important; }
+        .problem-icon { width: 42px; height: 42px; border: 1.5px solid rgba(255,122,89,0.55); background: rgba(255,122,89,0.10); color: #FF7A59; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 17px; }
+        .module-block { border: 1.5px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.025); transition: all 0.25s ease; }
+        .module-block:hover { border-color: rgba(0,212,255,0.45); background: rgba(255,255,255,0.05); }
+        .module-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #00D4FF; text-transform: uppercase; }
+        .spec-row { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+        .spec-row:last-child { border-bottom: none; }
+        .spec-row i { color: #00D4FF; margin-top: 3px; font-size: 11px; }
+        .spec-row span { color: rgba(224,224,224,0.85); font-size: 13.5px; line-height: 1.55; }
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }</style>
 </head>
 <body class="blueprint-bg">
 
@@ -122,8 +136,8 @@
                                 <div class="art-hero"><svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
 <defs>
 <linearGradient id="bg12" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#0d1233"/><stop offset="0.55" stop-color="#080b1e"/><stop offset="1" stop-color="#04060d"/></linearGradient>
-<radialGradient id="gl12" cx="0.5" cy="0.4" r="0.75"><stop offset="0" stop-color="#4ade80" stop-opacity="0.32"/><stop offset="0.6" stop-color="#4ade80" stop-opacity="0.08"/><stop offset="1" stop-color="#4ade80" stop-opacity="0"/></radialGradient>
-<linearGradient id="fl12" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4ade80" stop-opacity="0.22"/><stop offset="1" stop-color="#4ade80" stop-opacity="0"/></linearGradient>
+<radialGradient id="gl12" cx="0.5" cy="0.4" r="0.75"><stop offset="0" stop-color="#4ade80" stop-opacity="0.36"/><stop offset="0.6" stop-color="#4ade80" stop-opacity="0.09"/><stop offset="1" stop-color="#4ade80" stop-opacity="0"/></radialGradient>
+<linearGradient id="fl12" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4ade80" stop-opacity="0.24"/><stop offset="1" stop-color="#4ade80" stop-opacity="0"/></linearGradient>
 <radialGradient id="vg12" cx="0.5" cy="0.45" r="0.85"><stop offset="0.62" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.42"/></radialGradient>
 <pattern id="sc12" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#ffffff" opacity="0.035"/></pattern>
 <filter id="bl12" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>
@@ -142,7 +156,7 @@
 <text x="30" y="46" fill="rgba(255,255,255,0.55)" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">CHAT AGENTS</text>
 <text x="452" y="282" fill="#4ade80" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="end">FIG. 1</text>
 <ellipse cx="240" cy="238" rx="180" ry="24" fill="#4ade80" opacity="0.15" filter="url(#bl12)"/>
-<rect x="70" y="75" width="210" height="80" rx="16" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><path d="M105,155 L105,182 L138,155" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><circle cx="120" cy="116" r="4" fill="#00D4FF" /><circle cx="145" cy="116" r="4" fill="#00D4FF" /><circle cx="170" cy="116" r="4" fill="#00D4FF" /><rect x="265" y="170" width="165" height="72" rx="16" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><path d="M395,242 L395,268 L364,242" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="285" y1="196" x2="410" y2="196" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="285" y1="214" x2="382" y2="214" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" />
+<rect x="66" y="72" width="216" height="84" rx="18" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><path d="M102,156 L102,186 L138,156" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><circle cx="118" cy="114" r="4" fill="#00D4FF" /><circle cx="146" cy="114" r="4" fill="#00D4FF" /><circle cx="174" cy="114" r="4" fill="#00D4FF" /><path d="M96,138 H200" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-dasharray="4 3" /><rect x="268" y="176" width="172" height="78" rx="18" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><path d="M402,254 L402,284 L366,254" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="288" y1="202" x2="420" y2="202" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="288" y1="222" x2="394" y2="222" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><circle cx="96" cy="228" r="22" fill="none" stroke="#00D4FF" stroke-width="1.6" /><circle cx="88" cy="226" r="2" fill="#00D4FF" /><circle cx="104" cy="226" r="2" fill="#00D4FF" /><path d="M88,234 Q96,240 104,234" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><text x="86" y="268" fill="#00D4FF" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">24/7</text><text x="300" y="60" fill="#00D4FF" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">< 3s REPLY</text>
 <rect width="480" height="300" fill="url(#vg12)"/>
 </svg></div>
                             </div>
@@ -151,7 +165,22 @@
 
                     <div class="section-divider"></div>
 
-                    <div class="inset-view p-6 md:p-8" data-view="CAPABILITIES">
+                    <div class="inset-view problem-view p-6 md:p-8 reveal" data-view="THE PROBLEM IT SOLVES">
+                        <div class="flex items-start gap-4">
+                            <div class="problem-icon"><i class="fas fa-fire-flame-curved"></i></div>
+                            <div>
+                                <div class="tech-label mb-2" style="color:#FF7A59">THE PAIN</div>
+                                <h2 class="text-white text-xl font-bold mb-3">Same 20 questions all day</h2>
+                                <p class="text-white/70 leading-relaxed">Your team answers the same twenty questions every day — pricing, hours, availability, location — while real opportunities sit on hold. Intelligent Assistants answer instantly from your own knowledge base, book appointments, qualify leads, and escalate to a human only when it actually matters. Trained on your business, not generic small talk, in the languages your customers speak.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="section-divider"></div>
+
+                    <div class="inset-view p-6 md:p-8 reveal" data-view="CAPABILITIES">
                         <h2 class="text-white text-xl font-bold mb-6">CAPABILITIES</h2>
                         <div class="grid sm:grid-cols-2 gap-3">
                             <div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; KNOWLEDGE-BASE Q&A</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; RAG</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; LEAD INTAKE</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; SCHEDULING</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; MULTILINGUAL</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; HUMAN ESCALATION</div>
@@ -160,7 +189,7 @@
 
                     <div class="section-divider"></div>
 
-                    <div class="inset-view p-6 md:p-8" data-view="TARGET USERS">
+                    <div class="inset-view p-6 md:p-8 reveal" data-view="TARGET USERS">
                         <h2 class="text-white text-xl font-bold mb-4">WHO THIS IS FOR</h2>
                         <p class="text-white/70 leading-relaxed">Any business with repetitive customer questions</p>
                     </div>
@@ -173,7 +202,7 @@
                         <div class="text-white/60 text-sm">one-time acquisition</div>
                         <div class="mono text-xl font-bold text-emerald-400 mt-2">$210<span class="text-white/60 text-xs font-normal">/mo × 18</span></div>
                         <div class="text-white/60 text-sm mb-1">monthly plan — maintenance & updates included</div>
-                        <div class="text-white/40 text-xs mb-5">Optional support: $79/mo after payoff · Open to offers</div>
+                        <div class="text-white/40 text-xs mb-5">Optional support after payoff: $79/mo — updates, security patches & priority fixes · Open to offers</div>
                         <form onsubmit="return offerSubmit(event,'ai-chatbots','Intelligent AI Assistants',3000)" class="flex flex-col gap-3">
                             <input required name="name" class="tech-input px-4 py-3 text-sm w-full" placeholder="YOUR NAME" />
                             <input required name="email" type="email" class="tech-input px-4 py-3 text-sm w-full" placeholder="EMAIL" />
@@ -235,6 +264,8 @@
     <script src="/js/email-notify.js"></script>
     <script>
     function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('hidden'); }
+    const io = new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     async function offerSubmit(e, slug, name, listed){
         e.preventDefault();
         const f = e.target;

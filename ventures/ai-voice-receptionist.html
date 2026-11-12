@@ -49,8 +49,22 @@
         .tech-input:focus { outline: none; border-color: rgba(255,255,255,0.5); }
         .tech-input::placeholder { color: rgba(255,255,255,0.35); }
         .art-hero { border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.02); height: 260px; overflow: hidden; position: relative; }
-        .art-hero svg { width: 100%; height: 100%; display: block; }
-        .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }</style>
+        .art-hero svg { width: 100%; height: 100%; display: block; transition: transform .6s ease; }
+        .title-block:hover .art-hero svg { transform: scale(1.045); }
+        .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }
+        .problem-view { border-color: rgba(255,122,89,0.45) !important; background: rgba(255,122,89,0.05) !important; }
+        .problem-view::before { color: #FF7A59 !important; }
+        .problem-icon { width: 42px; height: 42px; border: 1.5px solid rgba(255,122,89,0.55); background: rgba(255,122,89,0.10); color: #FF7A59; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 17px; }
+        .module-block { border: 1.5px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.025); transition: all 0.25s ease; }
+        .module-block:hover { border-color: rgba(0,212,255,0.45); background: rgba(255,255,255,0.05); }
+        .module-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #00D4FF; text-transform: uppercase; }
+        .spec-row { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+        .spec-row:last-child { border-bottom: none; }
+        .spec-row i { color: #00D4FF; margin-top: 3px; font-size: 11px; }
+        .spec-row span { color: rgba(224,224,224,0.85); font-size: 13.5px; line-height: 1.55; }
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }</style>
 </head>
 <body class="blueprint-bg">
 
@@ -122,8 +136,8 @@
                                 <div class="art-hero"><svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
 <defs>
 <linearGradient id="bg11" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#0d1233"/><stop offset="0.55" stop-color="#080b1e"/><stop offset="1" stop-color="#04060d"/></linearGradient>
-<radialGradient id="gl11" cx="0.5" cy="0.4" r="0.75"><stop offset="0" stop-color="#22d3ee" stop-opacity="0.32"/><stop offset="0.6" stop-color="#22d3ee" stop-opacity="0.08"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
-<linearGradient id="fl11" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22d3ee" stop-opacity="0.22"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></linearGradient>
+<radialGradient id="gl11" cx="0.5" cy="0.4" r="0.75"><stop offset="0" stop-color="#22d3ee" stop-opacity="0.36"/><stop offset="0.6" stop-color="#22d3ee" stop-opacity="0.09"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+<linearGradient id="fl11" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22d3ee" stop-opacity="0.24"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></linearGradient>
 <radialGradient id="vg11" cx="0.5" cy="0.45" r="0.85"><stop offset="0.62" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.42"/></radialGradient>
 <pattern id="sc11" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#ffffff" opacity="0.035"/></pattern>
 <filter id="bl11" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>
@@ -142,7 +156,7 @@
 <text x="30" y="46" fill="rgba(255,255,255,0.55)" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">VOICE RECEPTIONIST</text>
 <text x="452" y="282" fill="#22d3ee" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="end">FIG. 1</text>
 <ellipse cx="240" cy="238" rx="180" ry="24" fill="#22d3ee" opacity="0.15" filter="url(#bl11)"/>
-<circle cx="165" cy="150" r="38" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><path d="M127,141 A38,38 0 0 1 203,141" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><path d="M203,152 Q222,160 216,180" fill="none" stroke="#00D4FF" stroke-width="1.6" /><circle cx="214" cy="182" r="3" fill="#00D4FF" /><path d="M224,140 A26,26 0 0 1 224,192 M240,126 A44,44 0 0 1 240,206" fill="none" stroke="#00D4FF" stroke-width="1.6" /><rect x="330" y="130" width="11" height="44" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="348" y="112" width="11" height="80" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="366" y="96" width="11" height="112" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="384" y="124" width="11" height="56" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" />
+<circle cx="160" cy="148" r="40" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><path d="M120,138 A40,40 0 0 1 200,138" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><path d="M200,152 Q220,160 214,182" fill="none" stroke="#00D4FF" stroke-width="1.6" /><circle cx="212" cy="184" r="3" fill="#00D4FF" /><path d="M222,138 A28,28 0 0 1 222,194 M240,122 A48,48 0 0 1 240,210" fill="none" stroke="#00D4FF" stroke-width="1.6" /><rect x="320" y="96" width="13" height="52" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="340" y="76" width="13" height="92" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="360" y="58" width="13" height="128" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="380" y="88" width="13" height="68" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="320" y="196" width="72" height="30" rx="6" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><path d="M332,211 l8,8 16,-18" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><text x="320" y="246" fill="#00D4FF" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">BOOKED 14:30</text><text x="120" y="236" fill="rgba(255,255,255,0.35)" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">EN / ES</text><path d="M110,230 H190" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-dasharray="4 3" />
 <rect width="480" height="300" fill="url(#vg11)"/>
 </svg></div>
                             </div>
@@ -151,7 +165,22 @@
 
                     <div class="section-divider"></div>
 
-                    <div class="inset-view p-6 md:p-8" data-view="CAPABILITIES">
+                    <div class="inset-view problem-view p-6 md:p-8 reveal" data-view="THE PROBLEM IT SOLVES">
+                        <div class="flex items-start gap-4">
+                            <div class="problem-icon"><i class="fas fa-fire-flame-curved"></i></div>
+                            <div>
+                                <div class="tech-label mb-2" style="color:#FF7A59">THE PAIN</div>
+                                <h2 class="text-white text-xl font-bold mb-3">30–40% of calls missed</h2>
+                                <p class="text-white/70 leading-relaxed">Every missed call is lost revenue — and offices miss 30–40% of calls during busy hours, after hours, and weekends. The AI Voice Receptionist answers every call in English or Spanish, books appointments, qualifies leads, routes urgent matters, and follows up by SMS — a round-the-clock front desk without the payroll, the sick days, or the hold music.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="section-divider"></div>
+
+                    <div class="inset-view p-6 md:p-8 reveal" data-view="CAPABILITIES">
                         <h2 class="text-white text-xl font-bold mb-6">CAPABILITIES</h2>
                         <div class="grid sm:grid-cols-2 gap-3">
                             <div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; CALL ANSWERING</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; EN/ES CONVERSATIONS</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; SCHEDULING</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; LEAD QUALIFICATION</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; CRM INTEGRATION</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; TRANSCRIPTS & FOLLOW-UP</div>
@@ -160,7 +189,7 @@
 
                     <div class="section-divider"></div>
 
-                    <div class="inset-view p-6 md:p-8" data-view="TARGET USERS">
+                    <div class="inset-view p-6 md:p-8 reveal" data-view="TARGET USERS">
                         <h2 class="text-white text-xl font-bold mb-4">WHO THIS IS FOR</h2>
                         <p class="text-white/70 leading-relaxed">Medical offices, service businesses, law firms</p>
                     </div>
@@ -173,7 +202,7 @@
                         <div class="text-white/60 text-sm">one-time acquisition</div>
                         <div class="mono text-xl font-bold text-emerald-400 mt-2">$455<span class="text-white/60 text-xs font-normal">/mo × 18</span></div>
                         <div class="text-white/60 text-sm mb-1">monthly plan — maintenance & updates included</div>
-                        <div class="text-white/40 text-xs mb-5">Optional support: $99/mo after payoff · Open to offers</div>
+                        <div class="text-white/40 text-xs mb-5">Optional support after payoff: $119/mo — updates, security patches & priority fixes · Open to offers</div>
                         <form onsubmit="return offerSubmit(event,'ai-voice-receptionist','AI Voice Receptionist',6500)" class="flex flex-col gap-3">
                             <input required name="name" class="tech-input px-4 py-3 text-sm w-full" placeholder="YOUR NAME" />
                             <input required name="email" type="email" class="tech-input px-4 py-3 text-sm w-full" placeholder="EMAIL" />
@@ -235,6 +264,8 @@
     <script src="/js/email-notify.js"></script>
     <script>
     function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('hidden'); }
+    const io = new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     async function offerSubmit(e, slug, name, listed){
         e.preventDefault();
         const f = e.target;

@@ -49,8 +49,22 @@
         .tech-input:focus { outline: none; border-color: rgba(255,255,255,0.5); }
         .tech-input::placeholder { color: rgba(255,255,255,0.35); }
         .art-hero { border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.02); height: 260px; overflow: hidden; position: relative; }
-        .art-hero svg { width: 100%; height: 100%; display: block; }
-        .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }</style>
+        .art-hero svg { width: 100%; height: 100%; display: block; transition: transform .6s ease; }
+        .title-block:hover .art-hero svg { transform: scale(1.045); }
+        .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }
+        .problem-view { border-color: rgba(255,122,89,0.45) !important; background: rgba(255,122,89,0.05) !important; }
+        .problem-view::before { color: #FF7A59 !important; }
+        .problem-icon { width: 42px; height: 42px; border: 1.5px solid rgba(255,122,89,0.55); background: rgba(255,122,89,0.10); color: #FF7A59; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 17px; }
+        .module-block { border: 1.5px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.025); transition: all 0.25s ease; }
+        .module-block:hover { border-color: rgba(0,212,255,0.45); background: rgba(255,255,255,0.05); }
+        .module-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #00D4FF; text-transform: uppercase; }
+        .spec-row { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+        .spec-row:last-child { border-bottom: none; }
+        .spec-row i { color: #00D4FF; margin-top: 3px; font-size: 11px; }
+        .spec-row span { color: rgba(224,224,224,0.85); font-size: 13.5px; line-height: 1.55; }
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }</style>
 </head>
 <body class="blueprint-bg">
 
@@ -122,8 +136,8 @@
                                 <div class="art-hero"><svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
 <defs>
 <linearGradient id="bg8" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#0d1233"/><stop offset="0.55" stop-color="#080b1e"/><stop offset="1" stop-color="#04060d"/></linearGradient>
-<radialGradient id="gl8" cx="0.5" cy="0.4" r="0.75"><stop offset="0" stop-color="#fde047" stop-opacity="0.32"/><stop offset="0.6" stop-color="#fde047" stop-opacity="0.08"/><stop offset="1" stop-color="#fde047" stop-opacity="0"/></radialGradient>
-<linearGradient id="fl8" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fde047" stop-opacity="0.22"/><stop offset="1" stop-color="#fde047" stop-opacity="0"/></linearGradient>
+<radialGradient id="gl8" cx="0.5" cy="0.4" r="0.75"><stop offset="0" stop-color="#fde047" stop-opacity="0.36"/><stop offset="0.6" stop-color="#fde047" stop-opacity="0.09"/><stop offset="1" stop-color="#fde047" stop-opacity="0"/></radialGradient>
+<linearGradient id="fl8" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fde047" stop-opacity="0.24"/><stop offset="1" stop-color="#fde047" stop-opacity="0"/></linearGradient>
 <radialGradient id="vg8" cx="0.5" cy="0.45" r="0.85"><stop offset="0.62" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.42"/></radialGradient>
 <pattern id="sc8" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#ffffff" opacity="0.035"/></pattern>
 <filter id="bl8" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>
@@ -142,7 +156,7 @@
 <text x="30" y="46" fill="rgba(255,255,255,0.55)" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">DEFECT DETECTION</text>
 <text x="452" y="282" fill="#fde047" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="end">FIG. 1</text>
 <ellipse cx="240" cy="238" rx="180" ry="24" fill="#fde047" opacity="0.15" filter="url(#bl8)"/>
-<rect x="80" y="70" width="230" height="165" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="175" y1="70" x2="175" y2="155" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="175" y1="155" x2="80" y2="155" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><path d="M205,95 l14,16 l-8,14 l16,18 l-6,16 l14,12" fill="none" stroke="#00D4FF" stroke-width="1.6" /><circle cx="228" cy="155" r="40" fill="none" stroke="#00D4FF" stroke-width="1.6" /><line x1="258" y1="185" x2="300" y2="234" stroke="#00D4FF" stroke-width="1.6" /><text x="330" y="110" fill="rgba(255,255,255,0.35)" font-size="9" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">CRACK</text><text x="330" y="126" fill="#00D4FF" font-size="10" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">+94%</text>
+<rect x="80" y="70" width="230" height="165" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="175" y1="70" x2="175" y2="158" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="175" y1="158" x2="80" y2="158" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><path d="M205,92 l14,16 l-8,14 l16,18 l-6,16 l14,12" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><path d="M212,100 l10,11 M226,146 l10,9" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1" /><circle cx="232" cy="158" r="42" fill="none" stroke="#00D4FF" stroke-width="1.6" /><line x1="264" y1="190" x2="308" y2="240" stroke="#00D4FF" stroke-width="1.6" /><line x1="348" y1="100" x2="404" y2="156" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><line x1="404" y1="100" x2="348" y2="156" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><text x="330" y="86" fill="rgba(255,255,255,0.45)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">SEVERITY</text><rect x="330" y="94" width="96" height="24" rx="4" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" /><rect x="334" y="98" width="58" height="16" fill="#fde047" opacity="0.6"/><text x="342" y="111" fill="rgba(255,255,255,0.85)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">HIGH · FIX NOW</text><text x="330" y="140" fill="rgba(255,255,255,0.35)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">Δ vs LAST</text><text x="330" y="156" fill="#00D4FF" font-size="12" font-family="JetBrains Mono, monospace" letter-spacing="1.5" text-anchor="start">+94%</text>
 <rect width="480" height="300" fill="url(#vg8)"/>
 </svg></div>
                             </div>
@@ -151,7 +165,22 @@
 
                     <div class="section-divider"></div>
 
-                    <div class="inset-view p-6 md:p-8" data-view="CAPABILITIES">
+                    <div class="inset-view problem-view p-6 md:p-8 reveal" data-view="THE PROBLEM IT SOLVES">
+                        <div class="flex items-start gap-4">
+                            <div class="problem-icon"><i class="fas fa-fire-flame-curved"></i></div>
+                            <div>
+                                <div class="tech-label mb-2" style="color:#FF7A59">THE PAIN</div>
+                                <h2 class="text-white text-xl font-bold mb-3">Damage found when it's expensive</h2>
+                                <p class="text-white/70 leading-relaxed">Hotels, HOAs, and contractors discover damage when it's already expensive — the hairline crack that became a wall replacement, the ceiling stain that became a mold claim. Visual Defect Intelligence inspects rooms with computer vision, compares against inspection history, and flags defects while they're still cheap to fix.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="section-divider"></div>
+
+                    <div class="inset-view p-6 md:p-8 reveal" data-view="CAPABILITIES">
                         <h2 class="text-white text-xl font-bold mb-6">CAPABILITIES</h2>
                         <div class="grid sm:grid-cols-2 gap-3">
                             <div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; CRACK DETECTION</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; DAMAGE LOCALIZATION</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; IMAGE COMPARISON</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; INSPECTION HISTORY</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; REPAIR REPORTING</div><div class="tech-label border border-white/15 px-3 py-2.5" style="font-size:11px;color:#c9d8ea"><span style="color:#00D4FF">◆</span>&nbsp; SEVERITY ASSESSMENT</div>
@@ -160,7 +189,7 @@
 
                     <div class="section-divider"></div>
 
-                    <div class="inset-view p-6 md:p-8" data-view="TARGET USERS">
+                    <div class="inset-view p-6 md:p-8 reveal" data-view="TARGET USERS">
                         <h2 class="text-white text-xl font-bold mb-4">WHO THIS IS FOR</h2>
                         <p class="text-white/70 leading-relaxed">Hotels, HOAs, facilities, contractors</p>
                     </div>
@@ -173,7 +202,7 @@
                         <div class="text-white/60 text-sm">one-time acquisition</div>
                         <div class="mono text-xl font-bold text-emerald-400 mt-2">$280<span class="text-white/60 text-xs font-normal">/mo × 18</span></div>
                         <div class="text-white/60 text-sm mb-1">monthly plan — maintenance & updates included</div>
-                        <div class="text-white/40 text-xs mb-5">Optional support: $99/mo after payoff · Open to offers</div>
+                        <div class="text-white/40 text-xs mb-5">Optional support after payoff: $99/mo — updates, security patches & priority fixes · Open to offers</div>
                         <form onsubmit="return offerSubmit(event,'room-defect-intelligence','Visual Property Defect Intelligence',4000)" class="flex flex-col gap-3">
                             <input required name="name" class="tech-input px-4 py-3 text-sm w-full" placeholder="YOUR NAME" />
                             <input required name="email" type="email" class="tech-input px-4 py-3 text-sm w-full" placeholder="EMAIL" />
@@ -235,6 +264,8 @@
     <script src="/js/email-notify.js"></script>
     <script>
     function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('hidden'); }
+    const io = new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     async function offerSubmit(e, slug, name, listed){
         e.preventDefault();
         const f = e.target;
