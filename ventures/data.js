@@ -47,10 +47,10 @@ window.VENTURES = [
     featured: true,
     pain: "Stale rates, gut-feel pricing",
     problem: "Independent hotels set rates by gut and a monthly comp report that's stale on arrival, while the chains reprice dynamically every single day. The result: rooms sold too cheap during demand spikes and sitting empty in soft weeks — tens of thousands in revenue quietly lost. HRI gives boutique properties the same daily competitive intelligence the big brands have, at a fraction of the cost.",
-    summary: "A live competitive-intelligence platform for boutique hotels. Scrapes the open web — including every hotel's own site, which no WAF blocks — to capture decision-maker contacts (61 and counting across a 20-hotel Miami Beach comp set), scores each property on who actually needs rate intelligence (13 hot prospects), and delivers a 6 AM daily Telegram brief. Self-hosted, MIT-licensed, zero paid data APIs.",
-    capabilities: ["Contact capture from hotel websites","Who-needs-it prospect scoring (0–100)","Competitive rate observation","20-hotel Miami Beach comp set","Live dashboard","Daily Telegram briefs","Booking.com OTA engine (residential-IP ready)","SQLite storage + cron pipelines"],
+    summary: "A live competitive-intelligence platform for boutique hotels. Scrapes the open web — including every hotel's own site, which no WAF blocks — to capture decision-maker contacts (171 and counting across a 30-hotel Miami Beach comp set), scores each property on who actually needs rate intelligence (27 hot prospects, with parity-undercut detection and ADR tracking), and delivers a 6 AM daily Telegram brief. Self-hosted, zero paid data APIs.",
+    capabilities: ["Contact capture from hotel websites","Who-needs-it prospect scoring (0–100)","Competitive rate observation","30-hotel Miami Beach comp set","Live dashboard","Daily Telegram briefs","Booking.com OTA engine (residential-IP ready)","SQLite storage + cron pipelines"],
     target: "Hotels, property managers, revenue consultants",
-    links: { demo: "https://julian-miller-minister-manuals.trycloudflare.com/?k=hri-miami-2026" }
+    links: { demo: "https://hotel-rate-intelligence-pablos-projects-0f79dff2.vercel.app/?k=hri-miami-2026" }
   },
   {
     slug: "jmm-jas-miami-method",
