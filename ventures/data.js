@@ -50,7 +50,7 @@ window.VENTURES = [
     summary: "A live competitive-intelligence platform for boutique hotels. Scrapes the open web — including every hotel's own site, which no WAF blocks — to capture decision-maker contacts (171 and counting across a 30-hotel Miami Beach comp set), scores each property on who actually needs rate intelligence (27 hot prospects, with parity-undercut detection and ADR tracking), and delivers a 6 AM daily Telegram brief. Self-hosted, zero paid data APIs.",
     capabilities: ["Contact capture from hotel websites","Who-needs-it prospect scoring (0–100)","Competitive rate observation","30-hotel Miami Beach comp set","Live dashboard","Daily Telegram briefs","Booking.com OTA engine (residential-IP ready)","SQLite storage + cron pipelines"],
     target: "Hotels, property managers, revenue consultants",
-    links: { demo: "https://hotel-rate-intelligence-pablos-projects-0f79dff2.vercel.app/?k=hri-miami-2026" }
+    links: { website: "https://hotelrateintel.com/" }
   },
   {
     slug: "jmm-jas-miami-method",
@@ -100,7 +100,8 @@ window.VENTURES = [
     problem: "Physicians spend roughly two hours on documentation for every hour of patient care — the single biggest driver of burnout and a direct revenue leak for practices. PocketScribe transcribes encounters and drafts structured, specialty-templated SOAP notes in seconds, with the clinician approving every word before anything is final.",
     summary: "An AI medical scribe for encounter transcription, clinical summarization, and structured SOAP notes with specialty templates. Medical terminology handling, coding assistance, and human approval before finalization — built for clinic workflows, not chatbot demos.",
     capabilities: ["Encounter transcription","SOAP notes","Specialty templates","Coding assistance","Structured documentation","Human-in-the-loop review"],
-    target: "Clinics, specialty practices, telehealth"
+    target: "Clinics, specialty practices, telehealth",
+    links: { website: "https://aiscribers.com" }
   },
   {
     slug: "adaptive-marketplace",
