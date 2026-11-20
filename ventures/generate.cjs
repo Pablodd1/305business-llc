@@ -105,7 +105,46 @@ const STATUS_COLOR = {
 const sc = s => { const c = STATUS_COLOR[s] || '#fff';
   return `style="color:${c};border-color:${c}55;background:${c}12"`; };
 
+function ventureImage(v) {
+  const ind = (v.industry || '').toLowerCase();
+  const slug = (v.slug || '').toLowerCase();
+  if (ind.includes('health') || slug.includes('dental') || slug.includes('rpm') || slug.includes('rtm') || slug.includes('pocketscribe') || slug.includes('revenue-cycle')) {
+    return '/images/healthcare-ai-ventures.webp';
+  }
+  if (ind.includes('sport') || ind.includes('vision') || slug.includes('runform') || slug.includes('cycling') || slug.includes('movement') || slug.includes('jmm') || slug.includes('spatial')) {
+    return '/images/sports-vision-ventures.webp';
+  }
+  if (ind.includes('commerce') || ind.includes('hospitality') || slug.includes('hotel') || slug.includes('estate') || slug.includes('marketplace') || slug.includes('room-defect')) {
+    return '/images/hospitality-commerce-ventures.webp';
+  }
+  if (ind.includes('data') || slug.includes('zero-g') || slug.includes('market-intelligence')) {
+    return '/images/valuation-advisory.webp';
+  }
+  return '/images/ventures-studio.webp';
+}
+
+function valuationContext(v) {
+  const replaceLow = Math.round((v.price * 2.5) / 500) * 500;
+  const replaceHigh = Math.round((v.price * 4.5) / 500) * 500;
+  const stageNotes = {
+    'LIVE': 'Deployed, live operating software with verified end-to-end workflows — priced on 2026 micro-SaaS asset multiples for fast operator acquisition.',
+    'PRODUCTION': 'Production-ready architecture tested on real workflows — priced below custom agency build cost for immediate commercial deployment.',
+    'FUNCTIONAL': 'Working functional platform ready for branding, customer onboarding, and commercial rollout.',
+    'PILOT': 'Active pilot-stage system ready for a buyer to scale into full commercial accounts.',
+    'IN DEVELOPMENT': 'Core architecture and product modules built; discounted to reflect remaining go-to-market polish.',
+    'PROTOTYPE': 'Validated working prototype priced as a high-leverage technical head start over building from zero.',
+    'R&D': 'Applied R&D engine priced for technical buyers or studios seeking proprietary IP without months of research.',
+    'AVAILABLE': 'Turnkey, ready-to-deploy business system priced competitively below custom agency development.'
+  };
+  return {
+    replaceRange: `${fmt(replaceLow)}–${fmt(replaceHigh)}`,
+    stageNote: stageNotes[v.status] || 'Priced on 2026 micro-SaaS asset benchmarks with transparent stage labeling.'
+  };
+}
+
 function page(v, related) {
+  const heroImg = ventureImage(v);
+  const valCtx = valuationContext(v);
   const demoBtns = [
     v.links?.demo ? `<a href="${v.links.demo}" target="_blank" rel="noopener" class="schematic-btn px-5 py-2"><span class="relative z-10"><i class="fas fa-play mr-2"></i>LIVE DEMO</span></a>` : '',
     v.links?.website ? `<a href="${v.links.website}" target="_blank" rel="noopener" class="schematic-btn px-5 py-2"><span class="relative z-10"><i class="fas fa-globe mr-2"></i>WEBSITE</span></a>` : ''
@@ -186,6 +225,37 @@ ${NAV}
                             </div>
                             <div class="md:col-span-2">
                                 <div class="art-hero">${A[v.slug] || ''}</div>
+                            </div>
+                        </div>
+                        <div class="mt-6 border border-white/15 overflow-hidden bg-black/20">
+                            <img src="${heroImg}" alt="${esc(v.name)} — ${esc(v.industry)}" width="1280" height="720" class="w-full h-52 sm:h-64 object-cover" />
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <div class="inset-view p-6 md:p-8 reveal" data-view="COMPANY &amp; ACQUISITION BRIEF">
+                        <h2 class="text-white text-xl font-bold mb-4">FULL COMPANY &amp; ACQUISITION BREAKDOWN</h2>
+                        <div class="grid sm:grid-cols-2 gap-4 mb-5">
+                            <div class="module-block p-4">
+                                <div class="module-head mb-2"><i class="fas fa-chart-line mr-2"></i>2026 MARKET PRICING</div>
+                                <p class="text-white/75 text-sm leading-relaxed">Listed at <strong class="text-white">${fmt(v.price)} one-time</strong> (or <strong class="text-[#00FF88]">${fmt(v.monthly)}/mo × 18</strong> with maintenance included) vs. estimated <strong class="text-white">${valCtx.replaceRange}</strong> custom engineering replacement cost.</p>
+                                <p class="text-white/55 text-xs mt-2 leading-relaxed">${valCtx.stageNote}</p>
+                            </div>
+                            <div class="module-block p-4">
+                                <div class="module-head mb-2"><i class="fas fa-box-open mr-2"></i>WHAT IS INCLUDED</div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span>100% source code repository &amp; full IP assignment upon payoff</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span>Architecture walkthrough, deployment handoff &amp; environment setup</span></div>
+                                <div class="spec-row"><i class="fas fa-check"></i><span>Zero broker commission — direct acquisition through 305business.llc</span></div>
+                            </div>
+                        </div>
+                        <div class="module-block p-4">
+                            <div class="module-head mb-2"><i class="fas fa-route mr-2"></i>ACQUISITION &amp; HANDOFF PROCESS</div>
+                            <div class="grid sm:grid-cols-4 gap-3 text-xs text-white/75 mt-2">
+                                <div><span class="text-[#00D4FF] font-mono font-bold">01. OFFER</span><br/>Submit confidential offer &amp; sign mutual NDA.</div>
+                                <div><span class="text-[#00D4FF] font-mono font-bold">02. WALKTHROUGH</span><br/>Live technical demo &amp; code/architecture review.</div>
+                                <div><span class="text-[#00D4FF] font-mono font-bold">03. AGREEMENT</span><br/>1× purchase or 18-month lease-to-own terms.</div>
+                                <div><span class="text-[#00D4FF] font-mono font-bold">04. TRANSFER</span><br/>Full repo, infrastructure &amp; IP handoff.</div>
                             </div>
                         </div>
                     </div>
