@@ -840,8 +840,8 @@
     <!-- Language selector — utility bar under the menu -->
     <div class="lang-bar"><div id="lang-toggle"></div></div>
 
-    <!-- Right scrollable social rail (moves with scroll, frees top bar) -->
-    <div class="rail" aria-label="Follow 305business">
+    <!-- Right scrollable social rail (shown on wide >=1536px screens so 1280px content never overlaps) -->
+    <div class="rail hidden 2xl:flex" aria-label="Follow 305business">
         <span class="rail-tab">FOLLOW</span>
         <a class="rail-btn" href="https://t.me/28729102e2163caa3555992f580e1013" target="_blank" aria-label="Telegram">
             <i class="fab fa-telegram"></i><span class="tip">Telegram</span>
@@ -1042,8 +1042,19 @@
                 <div class="tech-label mb-3">SHEET: V-1 · SCALE 1:1</div>
                 <h2 class="text-3xl font-bold text-white">VENTURE PORTFOLIO</h2>
                 <p class="text-white/60 mt-3 max-w-2xl mx-auto">Companies we built — buy outright or monthly with maintenance included. Healthcare AI, sports science, computer vision, intelligent commerce. Every stage labeled honestly, every offer reviewed.</p>
-                <div class="mt-6 max-w-3xl mx-auto tech-card p-0 overflow-hidden">
-                    <img src="images/ventures-studio.webp" alt="305business Venture Studio Software Architecture" width="1280" height="720" loading="lazy" class="w-full h-48 sm:h-56 object-cover">
+                <div class="mt-6 grid sm:grid-cols-3 gap-4 max-w-5xl mx-auto">
+                    <div class="tech-card p-0 overflow-hidden text-left">
+                        <img src="images/healthcare-ai-ventures.webp" alt="Healthcare AI & Clinical Software Ventures" width="1280" height="720" loading="lazy" class="w-full h-36 object-cover">
+                        <div class="p-3"><span class="tech-label text-[#00FF88]">HEALTHCARE AI · EHR · RCM</span></div>
+                    </div>
+                    <div class="tech-card p-0 overflow-hidden text-left">
+                        <img src="images/hospitality-commerce-ventures.webp" alt="Hospitality Rate Intelligence & Commerce Ventures" width="1280" height="720" loading="lazy" class="w-full h-36 object-cover">
+                        <div class="p-3"><span class="tech-label text-[#00D4FF]">HOSPITALITY · COMMERCE</span></div>
+                    </div>
+                    <div class="tech-card p-0 overflow-hidden text-left">
+                        <img src="images/sports-vision-ventures.webp" alt="Sports Biomechanics & Computer Vision Ventures" width="1280" height="720" loading="lazy" class="w-full h-36 object-cover">
+                        <div class="p-3"><span class="tech-label text-white/80">SPORTS SCIENCE · VISION AI</span></div>
+                    </div>
                 </div>
             </div>
             <div id="vchips" class="flex flex-wrap justify-center gap-2 mb-4"></div>
@@ -1314,6 +1325,9 @@
                 <span class="tech-label block mb-2">SHEET: W-1</span>
                 <h2 class="text-3xl font-bold text-white mb-4">WEALTH INTELLIGENCE</h2>
                 <p class="text-white/40 max-w-2xl mx-auto">Real market data. Real opportunities. Real wealth.</p>
+                <div class="mt-6 max-w-3xl mx-auto tech-card p-0 overflow-hidden">
+                    <img src="images/valuation-advisory.webp" alt="Miami Business Valuation and M&A Advisory Desk in Brickell" width="1280" height="720" loading="lazy" class="w-full h-48 sm:h-56 object-cover">
+                </div>
             </div>
 
             <!-- Block 1: Richest States -->
@@ -1665,7 +1679,7 @@
   </section>
 
   <!-- Footer -->
-    <footer class="blueprint-nav border-t border-white/10 py-12 mt-20">
+    <footer class="blueprint-nav border-t border-white/10 pt-12 pb-24 mt-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
                 <div>

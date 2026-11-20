@@ -757,19 +757,19 @@
                     <a href="#listings" class="tech-label hover:text-white/60 transition" data-i18n="nav_listings">LISTINGS</a>
                     <a href="#matching" class="tech-label hover:text-white/60 transition" data-i18n="nav_match">AI MATCH</a>
                     <a href="/ventures/" class="tech-label hover:text-white/60 transition">EMPRESAS</a>
-                    <a href="#wealth-intelligence" class="tech-label hover:text-white/60 transition">PROSPERIDAD</a>
-                    <a href="how-it-works.html" class="tech-label hover:text-white/60 transition" data-i18n="nav_process">CÓMO FUNCIONA</a>
-                    <a href="founders.html" class="tech-label hover:text-white/60 transition">FUNDADORES</a>
-                    <div id="lang-toggle" style="margin-left:0.5rem;"></div>
-                    <button onclick="window.location.href='list-business.html'" class="schematic-btn px-4 py-2" data-i18n="nav_list_business">
+                    <a href="#wealth-intelligence" class="tech-label hover:text-white/60 transition whitespace-nowrap">PROSPERIDAD</a>
+                    <a href="how-it-works.html" class="tech-label hover:text-white/60 transition whitespace-nowrap" data-i18n="nav_process">CÓMO FUNCIONA</a>
+                    <a href="founders.html" class="tech-label hover:text-white/60 transition whitespace-nowrap">FUNDADORES</a>
+                    <div id="lang-toggle" class="shrink-0"></div>
+                    <button onclick="window.location.href='list-business.html'" class="schematic-btn px-3 py-1.5 whitespace-nowrap shrink-0" data-i18n="nav_list_business">
                         <span class="relative z-10">+ LISTAR EMPRESA</span>
                     </button>
-                    <div id="nav-auth" class="flex items-center gap-2 ml-2">
+                    <div id="nav-auth" class="flex items-center gap-2 shrink-0 whitespace-nowrap">
                         <!-- Auth links injected by auth.js -->
-                        <a href="/login.html" class="text-white/80 hover:text-white transition text-sm font-medium">Entrar</a>
-                        <a href="/signup.html" class="bg-[#23d9b0] text-[#050249] px-3 py-1.5 rounded-lg text-sm font-bold hover:bg-[#1bc9a0] transition">Comenzar</a>
+                        <a href="/login.html" class="text-white/80 hover:text-white transition text-xs font-medium whitespace-nowrap">Entrar</a>
+                        <a href="/signup.html" class="bg-[#23d9b0] text-[#050249] px-2.5 py-1.5 rounded-lg text-xs font-bold hover:bg-[#1bc9a0] transition whitespace-nowrap">Comenzar</a>
                     </div>
-                    <div class="flex items-center gap-2 ml-2">
+                    <div class="hidden xl:flex items-center gap-2 shrink-0">
                         <a href="https://t.me/28729102e2163caa3555992f580e1013" target="_blank" class="text-white/60 hover:text-white transition" title="Telegram">
                             <i class="fab fa-telegram text-lg"></i>
                         </a>
@@ -1010,8 +1010,19 @@
                 <div class="tech-label mb-3">HOJA: V-1 · ESCALA 1:1</div>
                 <h2 class="text-3xl font-bold text-white">PORTAFOLIO DE EMPRESAS</h2>
                 <p class="text-white/60 mt-3 max-w-2xl mx-auto">Empresas desarrolladas en la plataforma — disponibles para adquisición única. IA en salud, ciencia deportiva, visión computarizada y comercio inteligente. Cada etapa etiquetada con honestidad, cada oferta revisada.</p>
-                <div class="mt-6 max-w-3xl mx-auto tech-card p-0 overflow-hidden">
-                    <img src="images/ventures-studio.webp" alt="Arquitectura de Software del Estudio Venture 305business" width="1280" height="720" loading="lazy" class="w-full h-48 sm:h-56 object-cover">
+                <div class="mt-6 grid sm:grid-cols-3 gap-4 max-w-5xl mx-auto">
+                    <div class="tech-card p-0 overflow-hidden text-left">
+                        <img src="images/healthcare-ai-ventures.webp" alt="Empresas de IA en Salud y Software Clínico" width="1280" height="720" loading="lazy" class="w-full h-36 object-cover">
+                        <div class="p-3"><span class="tech-label text-[#00FF88]">IA EN SALUD · EHR · RCM</span></div>
+                    </div>
+                    <div class="tech-card p-0 overflow-hidden text-left">
+                        <img src="images/hospitality-commerce-ventures.webp" alt="Inteligencia Hotelera y Comercio" width="1280" height="720" loading="lazy" class="w-full h-36 object-cover">
+                        <div class="p-3"><span class="tech-label text-[#00D4FF]">HOTELERÍA · COMERCIO</span></div>
+                    </div>
+                    <div class="tech-card p-0 overflow-hidden text-left">
+                        <img src="images/sports-vision-ventures.webp" alt="Biomecánica Deportiva y Visión IA" width="1280" height="720" loading="lazy" class="w-full h-36 object-cover">
+                        <div class="p-3"><span class="tech-label text-white/80">DEPORTE · VISIÓN IA</span></div>
+                    </div>
                 </div>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1167,7 +1178,7 @@
                 </a>
             </div>
             <div class="text-center mt-10">
-                <a href="/ventures/" class="schematic-btn px-8 py-3 inline-flex"><span class="relative z-10">VER LAS 25 EMPRESAS →</span></a>
+                <a href="/ventures/" class="schematic-btn px-8 py-3 inline-flex"><span class="relative z-10">VER LAS 26 EMPRESAS →</span></a>
             </div>
         </div>
     </section>
