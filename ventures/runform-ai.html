@@ -14,9 +14,17 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="RunForm AI — available for acquisition" />
     <meta property="og:description" content="Camera-based running biomechanics intelligence. Buy $5,500 one-time or $385/mo × 18 with maintenance included. Stage: PILOT." />
-    <meta property="og:image" content="https://305business.llc/305business-logo.png" />
+    <meta property="og:image" content="https://305business.llc/images/ventures-studio.jpg" />
     <meta property="og:url" content="https://305business.llc/ventures/runform-ai.html" />
     <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:image" content="https://305business.llc/images/ventures-studio.jpg" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WTHCPMC25C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-WTHCPMC25C');
+    </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"RunForm AI","description":"Running biomechanics analysis from smartphone video. Pose estimation, joint tracking, knee valgus, foot-strike, overstriding, cadence, and bilateral asymmetry — with automatic reports and English/Spanish interface. Built for running stores, coaches, and sports clinics.","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":5500,"priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://305business.llc/ventures/runform-ai.html"},"brand":{"@type":"Brand","name":"RunForm AI"}}</script>
     <link rel="icon" type="image/png" href="https://305business.llc/305business-logo-transparent.png">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -272,6 +280,9 @@
         e.preventDefault();
         const f = e.target;
         const offerStr = '$' + Number(f.amount.value).toLocaleString('en-US');
+        if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', { event_category: 'venture_offer', event_label: slug, currency: 'USD', value: Number(f.amount.value) || 0 });
+        }
         const payload = {
             business_name: name + ' (' + slug + ') — LISTED ' + '$' + listed.toLocaleString('en-US'),
             name: f.name.value, email: f.email.value, phone: '',
@@ -286,7 +297,7 @@
         }
         if (window.EmailNotify && EmailNotify.ready && !EmailNotify.ready()) console.warn('[EmailNotify] no Brevo key — using mailto fallback');
         const body = 'Venture: ' + name + ' (' + slug + ')\nListed: $' + listed.toLocaleString('en-US') + '\nMy offer: ' + offerStr + '\n\nName: ' + f.name.value + '\nEmail: ' + f.email.value + '\nNotes: ' + (f.msg.value || '-');
-        location.href = 'mailto:jasmelacosta@gmail.com?subject=' + encodeURIComponent('Acquisition Offer — ' + name) + '&body=' + encodeURIComponent(body);
+        location.href = 'mailto:hola@305business.llc?subject=' + encodeURIComponent('Acquisition Offer — ' + name) + '&body=' + encodeURIComponent(body);
         f.innerHTML = '<p style="color:#00FF88;font-family:JetBrains Mono,monospace;font-size:13px;padding:16px 0" class="text-center"><i class="fas fa-envelope mr-2"></i>DRAFT OPENED IN YOUR EMAIL APP</p>';
         return false;
     }

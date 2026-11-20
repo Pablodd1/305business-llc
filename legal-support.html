@@ -151,9 +151,43 @@
                         <li>• Governing Law (Florida)</li>
                     </ul>
                 </div>
-                <button onclick="alert('NDA Template download coming soon. Contact us to receive the template via email.')" class="schematic-btn">
-                    <span class="relative z-10"><i class="fas fa-download mr-2"></i>DOWNLOAD NDA TEMPLATE</span>
+                <button onclick="downloadNdaTemplate()" class="schematic-btn">
+                    <span class="relative z-10"><i class="fas fa-download mr-2"></i>DOWNLOAD MUTUAL NDA (.TXT)</span>
                 </button>
+                <p id="ndaStatus" class="text-[#00FF88] text-xs font-mono mt-3 hidden">Mutual NDA template downloaded. Review with qualified Florida legal counsel before execution.</p>
+                <script>
+                    function downloadNdaTemplate() {
+                        const ndaText = [
+                            'MUTUAL NON-DISCLOSURE AGREEMENT (FLORIDA — SAMPLE STARTING TEMPLATE)',
+                            'Notice: Informational template provided by 305business.llc (non-brokerage platform). Not legal advice; consult a licensed Florida attorney before signing.',
+                            '',
+                            '1. PARTIES: Disclosing Party (Seller / Owner) and Receiving Party (Prospective Buyer / Investor), as identified at execution.',
+                            '2. CONFIDENTIAL INFORMATION: Non-public financial statements, tax returns, customer lists, supplier contracts, pricing, trade secrets, and business operations marked or reasonably understood as confidential.',
+                            '3. OBLIGATIONS: Receiving Party shall hold Confidential Information in strict confidence, use it solely to evaluate a potential direct transaction, and not disclose it to third parties other than advisors bound by confidentiality.',
+                            '4. EXCLUSIONS: Publicly available information, prior lawful possession, independent development, or legally compelled disclosure.',
+                            '5. TERM: Confidentiality obligations continue for two (2) years from the date of last disclosure.',
+                            '6. GOVERNING LAW: State of Florida, venue in Miami-Dade County, Florida.',
+                            '',
+                            'Seller Signature / Date: _______________________',
+                            'Buyer Signature / Date:  _______________________',
+                            'Contact for M&A listing questions: hola@305business.llc | +1 786-643-2099'
+                        ].join('\n');
+                        const blob = new Blob([ndaText], { type: 'text/plain;charset=utf-8' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = '305business-mutual-nda-template-fl.txt';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                        const status = document.getElementById('ndaStatus');
+                        if (status) status.classList.remove('hidden');
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'file_download', { file_name: '305business-mutual-nda-template-fl.txt' });
+                        }
+                    }
+                </script>
             </div>
         </div>
     </section>
@@ -161,8 +195,8 @@
     <!-- CTA -->
     <section class="py-12 mb-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <a href="https://oem-flex-spots-poll.trycloudflare.com/?company=305business" target="_blank" class="schematic-btn text-lg">
-                <span class="relative z-10">BOOK LEGAL CONSULTATION →</span>
+            <a href="https://www.aidynamic.pro/booking?service=free_ai_consultation" target="_blank" rel="noopener noreferrer" class="schematic-btn text-lg">
+                <span class="relative z-10">BOOK CONSULTATION →</span>
             </a>
         </div>
     </section>

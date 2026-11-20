@@ -27,7 +27,7 @@
         FROM_NAME: '305business.llc Notifications',
         NOTIFY_EMAIL: 'jasmelacosta@gmail.com',
         NOTIFY_NAME: 'Jasmel Acosta',
-        REPLY_TO: 'jasmelacosta@gmail.com'
+        REPLY_TO: 'hola@305business.llc'
     };
 
     // ═══════════════════════════════════════════════════════════

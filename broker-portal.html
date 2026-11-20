@@ -31,7 +31,7 @@
           "logo": "https://305business.llc/305business-logo-transparent.png",
           "contactPoint": {
             "@type": "ContactPoint",
-            "email": "jasmelacosta@gmail.com",
+            "email": "hola@305business.llc",
             "contactType": "customer service",
             "availableLanguage": ["English", "Spanish", "Russian", "Haitian Creole"]
           }
@@ -206,27 +206,70 @@
                 <span class="tech-label">EARLY ACCESS</span>
                 <h2 class="text-2xl font-bold text-white mt-4 mb-4">JOIN THE WAITLIST</h2>
                 <p class="text-white/60 mb-6">Be the first to access the Broker Portal when it launches. Enter your details below:</p>
-                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Thank you! You have been added to the Broker Portal waitlist. We will contact you when early access is available.');">
+                <form id="waitlistForm" class="space-y-4">
                     <div>
                         <label class="tech-label block mb-2">BROKER_NAME</label>
-                        <input type="text" class="tech-input" placeholder="Full Name" required>
+                        <input id="brokerName" type="text" class="tech-input" placeholder="Full Name" required>
                     </div>
                     <div>
                         <label class="tech-label block mb-2">LICENSE_NUMBER</label>
-                        <input type="text" class="tech-input" placeholder="Business Broker License #" required>
+                        <input id="brokerLicense" type="text" class="tech-input" placeholder="Business Broker License #" required>
                     </div>
                     <div>
                         <label class="tech-label block mb-2">EMAIL</label>
-                        <input type="email" class="tech-input" placeholder="Email Address" required>
+                        <input id="brokerEmail" type="email" class="tech-input" placeholder="Email Address" required>
                     </div>
                     <div>
                         <label class="tech-label block mb-2">PHONE</label>
-                        <input type="tel" class="tech-input" placeholder="Phone Number">
+                        <input id="brokerPhone" type="tel" class="tech-input" placeholder="Phone Number">
                     </div>
-                    <button type="submit" class="schematic-btn w-full py-4 mt-4">
+                    <button id="waitlistBtn" type="submit" class="schematic-btn w-full py-4 mt-4">
                         <span class="relative z-10">REQUEST EARLY ACCESS →</span>
                     </button>
+                    <p id="waitlistStatus" class="hidden text-sm font-mono mt-3"></p>
                 </form>
+                <script src="supabase-client.js"></script>
+                <script>
+                    document.getElementById('waitlistForm').addEventListener('submit', async function (e) {
+                        e.preventDefault();
+                        const name = document.getElementById('brokerName').value.trim();
+                        const license = document.getElementById('brokerLicense').value.trim();
+                        const email = document.getElementById('brokerEmail').value.trim();
+                        const phone = document.getElementById('brokerPhone').value.trim();
+                        const btn = document.getElementById('waitlistBtn');
+                        const status = document.getElementById('waitlistStatus');
+                        btn.disabled = true;
+                        status.classList.add('hidden');
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'generate_lead', { event_category: 'broker_waitlist', event_label: license || 'broker' });
+                        }
+                        try {
+                            if (window.supabase305 && typeof window.supabase305.submitContactMessage === 'function') {
+                                await window.supabase305.submitContactMessage({
+                                    name: name,
+                                    phone: phone || null,
+                                    subject: 'Broker Portal Waitlist — License #' + license,
+                                    message: 'Broker: ' + name + '\nLicense #: ' + license + '\nEmail: ' + email + '\nPhone: ' + (phone || 'Not provided')
+                                });
+                            } else {
+                                throw new Error('Lead client unavailable');
+                            }
+                            status.textContent = 'Request received. Our team will reach out to ' + email + ' regarding Broker Portal early access.';
+                            status.className = 'text-sm font-mono mt-3 text-[#00FF88]';
+                            status.classList.remove('hidden');
+                            e.target.reset();
+                        } catch (err) {
+                            const subject = 'Broker Portal Early Access — ' + name;
+                            const body = 'Name: ' + name + '\nLicense #: ' + license + '\nEmail: ' + email + '\nPhone: ' + (phone || '-');
+                            location.href = 'mailto:hola@305business.llc?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+                            status.textContent = 'Opening your email app to complete your request — or email hola@305business.llc directly.';
+                            status.className = 'text-sm font-mono mt-3 text-[#00D4FF]';
+                            status.classList.remove('hidden');
+                        } finally {
+                            btn.disabled = false;
+                        }
+                    });
+                </script>
             </div>
         </div>
     </section>
