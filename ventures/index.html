@@ -205,6 +205,7 @@
     </main>
 
     <script src="art.js?v=3"></script>
+    <script src="media.js?v=1"></script>
     <script src="data.js?v=3"></script>
     <script>
     (function(){
@@ -239,8 +240,13 @@
 
         function card(v){
             const sup = v.support ? `+ ${fmt(v.support)}/mo support` : 'support included';
-            return `<article class="tech-card flex flex-col">
-                <div class="art">${(window.VENTURE_ART||{})[v.slug]||''}</div>
+            const media = (window.VENTURE_MEDIA && window.VENTURE_MEDIA[v.slug]) || [];
+            const photo = media[0] ? media[0].src : '/images/ventures-studio.webp';
+            return `<article class="tech-card flex flex-col overflow-hidden">
+                <a href="/ventures/${v.slug}.html" class="block relative overflow-hidden border-b border-white/15">
+                    <img src="${photo}" alt="${v.name}" width="1280" height="720" loading="lazy" class="w-full h-44 object-cover hover:scale-105 transition duration-500" />
+                    <span class="absolute bottom-2 right-2 bg-[#0a1628]/85 border border-white/20 px-2 py-0.5 tech-label" style="font-size:9px;color:#00D4FF">${media.length || 3} PHOTOS · FULL BRIEF</span>
+                </a>
                 <div class="p-5 flex flex-col flex-1">
                 <div class="flex justify-between items-center mb-3 gap-2">
                     <span class="tech-label">${v.industry.toUpperCase()}</span>

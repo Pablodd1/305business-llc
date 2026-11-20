@@ -105,22 +105,18 @@ const STATUS_COLOR = {
 const sc = s => { const c = STATUS_COLOR[s] || '#fff';
   return `style="color:${c};border-color:${c}55;background:${c}12"`; };
 
+const MEDIA_MAP = require('./media.js');
+
+function ventureGallery(v) {
+  return MEDIA_MAP[v.slug] || [
+    { src: '/images/ventures-studio.webp', label: (v.industry || 'VENTURE').toUpperCase() },
+    { src: '/images/valuation-advisory.webp', label: 'DIRECT M&A ACQUISITION' },
+    { src: '/images/marketplace-hero.webp', label: 'MIAMI VENTURE PORTFOLIO' }
+  ];
+}
+
 function ventureImage(v) {
-  const ind = (v.industry || '').toLowerCase();
-  const slug = (v.slug || '').toLowerCase();
-  if (ind.includes('health') || slug.includes('dental') || slug.includes('rpm') || slug.includes('rtm') || slug.includes('pocketscribe') || slug.includes('revenue-cycle')) {
-    return '/images/healthcare-ai-ventures.webp';
-  }
-  if (ind.includes('sport') || ind.includes('vision') || slug.includes('runform') || slug.includes('cycling') || slug.includes('movement') || slug.includes('jmm') || slug.includes('spatial')) {
-    return '/images/sports-vision-ventures.webp';
-  }
-  if (ind.includes('commerce') || ind.includes('hospitality') || slug.includes('hotel') || slug.includes('estate') || slug.includes('marketplace') || slug.includes('room-defect')) {
-    return '/images/hospitality-commerce-ventures.webp';
-  }
-  if (ind.includes('data') || slug.includes('zero-g') || slug.includes('market-intelligence')) {
-    return '/images/valuation-advisory.webp';
-  }
-  return '/images/ventures-studio.webp';
+  return ventureGallery(v)[0].src;
 }
 
 function valuationContext(v) {
@@ -143,7 +139,8 @@ function valuationContext(v) {
 }
 
 function page(v, related) {
-  const heroImg = ventureImage(v);
+  const gallery = ventureGallery(v);
+  const heroImg = gallery[0].src;
   const valCtx = valuationContext(v);
   const demoBtns = [
     v.links?.demo ? `<a href="${v.links.demo}" target="_blank" rel="noopener" class="schematic-btn px-5 py-2"><span class="relative z-10"><i class="fas fa-play mr-2"></i>LIVE DEMO</span></a>` : '',
@@ -229,6 +226,13 @@ ${NAV}
                         </div>
                         <div class="mt-6 border border-white/15 overflow-hidden bg-black/20">
                             <img src="${heroImg}" alt="${esc(v.name)} — ${esc(v.industry)}" width="1280" height="720" class="w-full h-52 sm:h-64 object-cover" />
+                        </div>
+                        <div class="grid sm:grid-cols-3 gap-3 mt-3">
+                            ${gallery.map((g, idx) => `
+                            <figure class="border border-white/15 bg-black/25 overflow-hidden">
+                                <img src="${g.src}" alt="${esc(v.name)} — ${esc(g.label)}" width="1280" height="720" loading="lazy" class="w-full h-28 object-cover" />
+                                <figcaption class="px-2.5 py-2 tech-label" style="font-size:9px;color:${idx === 0 ? '#00D4FF' : 'rgba(255,255,255,0.65)'}">${String(idx + 1).padStart(2, '0')} · ${esc(g.label)}</figcaption>
+                            </figure>`).join('')}
                         </div>
                     </div>
 

@@ -141,6 +141,7 @@
     <script src="js/auth.js" type="module"></script>
     <script src="js/nav.js" type="module"></script>
     <script src="ventures/data.js"></script>
+    <script src="ventures/media.js"></script>
     <script src="js/email-notify.js"></script>
 
     <!-- Agentic Website Engine -->
@@ -2385,8 +2386,13 @@
             var caps = v.capabilities.slice(0,4).map(function(c){
                 return '<span class="tech-label border border-white/15 px-2 py-1" style="font-size:9px">' + c.toUpperCase() + '</span>';
             }).join('');
-            return '<article class="tech-card flex flex-col">' +
-                '<a href="/ventures/' + v.slug + '.html" class="art block" aria-label="' + v.name + '">' + art + '</a>' +
+            var media = (window.VENTURE_MEDIA && window.VENTURE_MEDIA[v.slug]) || [];
+            var photo = media[0] ? media[0].src : '/images/ventures-studio.webp';
+            return '<article class="tech-card flex flex-col overflow-hidden">' +
+                '<a href="/ventures/' + v.slug + '.html" class="block relative overflow-hidden border-b border-white/15" aria-label="' + v.name + '">' +
+                    '<img src="' + photo + '" alt="' + v.name + '" width="1280" height="720" loading="lazy" class="w-full h-44 object-cover hover:scale-105 transition duration-500">' +
+                    '<span class="absolute bottom-2 right-2 bg-[#0a1628]/85 border border-white/20 px-2 py-0.5 tech-label" style="font-size:9px;color:#00D4FF">' + (media.length || 3) + ' PHOTOS \u00b7 FULL BRIEF</span>' +
+                '</a>' +
                 '<div class="p-5 flex flex-col flex-1">' +
                     '<div class="flex justify-between items-center mb-3 gap-2">' +
                         '<span class="tech-label">' + v.industry.toUpperCase() + '</span>' +
