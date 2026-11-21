@@ -101,7 +101,7 @@ window.VENTURES = [
     summary: "An AI medical scribe for encounter transcription, clinical summarization, and structured SOAP notes with specialty templates. Medical terminology handling, coding assistance, and human approval before finalization — built for clinic workflows, not chatbot demos.",
     capabilities: ["Encounter transcription","SOAP notes","Specialty templates","Coding assistance","Structured documentation","Human-in-the-loop review"],
     target: "Clinics, specialty practices, telehealth",
-    links: { website: "https://aiscribers.com" }
+    links: { website: "https://pocketscribe.online/", demo: "https://aiscribers.com" }
   },
   {
     slug: "adaptive-marketplace",

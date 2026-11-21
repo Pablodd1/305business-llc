@@ -25,7 +25,6 @@ const NAV = `
                     <a href="/ventures/" class="tech-label transition" style="color:#00D4FF">VENTURES</a>
                     <a href="https://305business.llc/#wealth-intelligence" class="tech-label hover:text-white/60 transition">WEALTH</a>
                     <a href="https://305business.llc/how-it-works.html" class="tech-label hover:text-white/60 transition" data-i18n="nav_process">HOW IT WORKS</a>
-                    <a href="https://305business.llc/founders.html" class="tech-label hover:text-white/60 transition">FOUNDERS</a>
                     <div id="lang-toggle" style="margin-left:0.5rem;"></div>
                     <button onclick="window.location.href='https://305business.llc/list-business.html'" class="schematic-btn px-4 py-2" data-i18n="nav_list_business"><span class="relative z-10">+ LIST BUSINESS</span></button>
                     <div id="nav-auth" class="flex items-center gap-2 ml-2">

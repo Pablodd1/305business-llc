@@ -12,12 +12,11 @@
   - [Financial Forecasting](https://305business.llc/financial-forecasting.html)
   - [Mutual NDA & Legal Support Resources](https://305business.llc/legal-support.html)
   - [Broker Portal](https://305business.llc/broker-portal.html)
-  - [Founder & Team](https://305business.llc/founders.html)
 
 ## Partner Ecosystem
 - **AI Dynamics** — Custom AI apps, automation workflows, and bilingual voice receptionists ([aidynamic.pro](https://www.aidynamic.pro) | [Free 15-Minute Triage Call](https://www.aidynamic.pro/booking?service=free_ai_consultation))
 - **Medical Billing Miami Beach** — Healthcare revenue cycle management & denial recovery for Florida practices ([medicalbillingmb.com](https://medicalbillingmb.com))
-- **PocketScribe (AI Medical Scribe)** — AI clinical documentation ([aiscribers.com](https://aiscribers.com))
+- **PocketScribe (AI Medical Scribe)** — AI clinical documentation ([pocketscribe.online](https://pocketscribe.online/) | [aiscribers.com](https://aiscribers.com))
 - **AI Law Helper** — AI-assisted legal intake & research ([new-law-helper-app.vercel.app](https://new-law-helper-app.vercel.app/))
 
 ## Contact & Governance
