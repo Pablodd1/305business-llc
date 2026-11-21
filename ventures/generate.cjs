@@ -218,6 +218,7 @@ ${NAV}
                         <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-none tracking-tight">${v.name.toUpperCase()}</h1>
                         <div class="text-[#00D4FF] text-lg font-semibold mt-4">${v.tagline}</div>
                         <p class="text-white/70 mt-6 leading-relaxed text-base md:text-lg">${v.summary}</p>
+                        ${v.distinction ? `<p class="text-white/60 mt-4 text-sm leading-relaxed border-l-2 border-[#00D4FF]/60 pl-3"><strong class="text-[#00D4FF] font-mono text-xs">PORTFOLIO SCOPE:</strong> ${esc(v.distinction)}</p>` : ''}
                         <div class="flex flex-wrap gap-3 mt-8">${demoBtns}</div>
                             </div>
                             <div class="md:col-span-2">

@@ -116,6 +116,7 @@ window.VENTURES = [
     pain: "Shoppers abandon generic stores",
     problem: "Shoppers leave stores that don't understand what they're looking for — and store owners can't personalize at Amazon scale without an Amazon budget. The Adaptive Marketplace engine gives any commerce platform semantic search, real recommendations, and intent detection, so niche marketplaces convert like the giants.",
     summary: "A commerce platform engine with semantic search, recommendation systems, shopping assistants, and user-intent detection. Personalization, adaptive content, behavioral analytics, and agentic shopping workflows — built to power niche marketplaces.",
+    distinction: "Commerce & multi-vendor catalog engine (semantic product search, basket recommendations, shopping assistant) — distinct from Adaptive AI Websites, which personalizes marketing websites and lead-capture funnels.",
     capabilities: ["Semantic search","Recommendations","Shopping assistants","Intent detection","Personalization","Commerce automation"],
     target: "Marketplace operators, retail, D2C brands"
   },
@@ -148,6 +149,7 @@ window.VENTURES = [
     pain: "$200 lab gait analysis",
     problem: "Half of all runners get injured every year, and proper gait analysis costs $200+ at a lab most will never visit. RunForm brings lab-grade biomechanics to a smartphone video — pose estimation, knee valgus, foot-strike, overstriding, cadence, bilateral asymmetry — with automatic reports running stores, coaches, and clinics can hand to customers in minutes.",
     summary: "Running biomechanics analysis from smartphone video. Pose estimation, joint tracking, knee valgus, foot-strike, overstriding, cadence, and bilateral asymmetry — with automatic reports and English/Spanish interface. Built for running stores, coaches, and sports clinics.",
+    distinction: "Shares pose-estimation computer-vision foundations with Cycling Fit Intelligence and Clinical Movement Intelligence, but is specialized for running gait mechanics (foot-strike, overstriding, cadence, knee valgus) from smartphone video.",
     capabilities: ["Pose estimation","Gait analysis","Joint tracking","Overstriding analysis","Automatic reports","Bilingual interface"],
     target: "Running stores, coaches, sports clinics"
   },
@@ -164,6 +166,7 @@ window.VENTURES = [
     pain: "Care blindspots between visits",
     problem: "Neurological decline and rehab progress happen between appointments — where clinicians have no eyes. Care relies on memory and occasional in-office tests. Clinical Movement Intelligence tracks gait, balance, and mobility from video longitudinally, making change visible visit-to-visit and enabling remote review workflows. It supports — never replaces — licensed clinical assessment.",
     summary: "Computer-vision-assisted movement evaluation supporting longitudinal neurological and rehabilitation assessment. Gait tracking, balance, functional mobility, clinician-reviewed reports, and remote PT workflows. Supports — never replaces — licensed clinical assessment.",
+    distinction: "Shares pose-estimation CV foundations with RunForm AI and Cycling Fit Intelligence, but adds visit-over-visit longitudinal mobility, balance, and clinician-reviewed rehab reporting rather than athletic performance metrics.",
     capabilities: ["Gait tracking","Balance assessment","Movement asymmetry","Longitudinal tracking","Clinician-reviewed reports","Remote rehab support"],
     target: "Neurology clinics, rehab providers, research"
   },
@@ -180,6 +183,7 @@ window.VENTURES = [
     pain: "Hours burned per demo site",
     problem: "Agencies burn their best hours rebuilding the same five websites from scratch for every pitch. The Website Factory discovers local businesses and generates personalized, niche-specific demo sites in under five seconds each — so your sales team walks into every first meeting with the prospect's website already built. It changes the sales conversation completely.",
     summary: "An automated pipeline that discovers local businesses, generates personalized niche-specific demo websites, and prepares them for deployment. Under five seconds per generated site across six-plus niche templates — a sales-engineering machine for agencies.",
+    distinction: "B2B agency software pipeline ($7,500) that discovers local leads and auto-generates niche demo websites at scale — distinct from Rapid Digital Launch ($1,500), which is a single done-for-you production website for one small business.",
     capabilities: ["Lead discovery","Template engine","Personalized generation","Rapid deployment","Industry services","Demo automation"],
     target: "Agencies, white-label resellers, sales teams"
   },
@@ -276,6 +280,7 @@ window.VENTURES = [
     pain: "$300 studio bike fits",
     problem: "A bad bike fit means knee pain, lost watts, and overuse injuries — but a professional fit costs $300+ and requires a studio most riders don't live near. Cycling Fit Intelligence analyzes hip angle, knee extension, ankle tracking, and torso position from a plain video, delivering shop-ready fit reports for road, triathlon, and TT positions — scalable to every customer who walks in the door.",
     summary: "Camera-based cycling posture and joint-angle analysis for road, triathlon, and TT positions. Hip angle, knee extension, ankle tracking, torso position, and visual fitting reports — video-based, shop-ready.",
+    distinction: "Shares pose-estimation CV foundations with RunForm AI and Clinical Movement Intelligence, but is dedicated to bicycle geometry (hip angle, knee extension, aero torso posture) for road, triathlon, and time-trial bike fits.",
     capabilities: ["TT/triathlon fit","Joint-angle analysis","Position asymmetry","Movement consistency","Visual reports","Video-based assessment"],
     target: "Bike shops, fit studios, coaches"
   },
@@ -324,6 +329,7 @@ window.VENTURES = [
     pain: "Under 2% conversion",
     problem: "Static websites convert under 2% because every visitor — a first-timer, a comparison shopper, a ready-to-buy — gets the exact same experience. Adaptive AI Websites personalize content, calls-to-action, and recommendations to each visitor's intent, with AI chat and CRM integration that turns anonymous traffic into a named pipeline.",
     summary: "Websites that adapt: personalized content, AI chat interfaces, recommendation engines, dynamic CTAs, and visitor-intent modeling — with CRM integration and conversion analytics.",
+    distinction: "General website & content personalization system (adaptive copy, dynamic CTAs, AI chat, CRM capture) — distinct from Adaptive AI Marketplace, which is a multi-seller e-commerce catalog engine.",
     capabilities: ["Adaptive content","AI chat interfaces","Recommendations","Dynamic CTAs","Intent modeling","CRM integration"],
     target: "Businesses converting traffic into pipeline"
   },
@@ -404,6 +410,7 @@ window.VENTURES = [
     pain: "$5k and 6 weeks for a website",
     problem: "A business without a website in 2026 effectively doesn't exist — but agencies quote $5,000 and six weeks for what should be a commodity. Rapid Digital Launch delivers a professional, lead-generating, bilingual website at a fixed price, fast: responsive design, forms, booking, SEO setup, analytics, and an AI chat — live in days, not months.",
     summary: "A production website delivered fast: mobile-responsive design, lead forms, booking integrations, SEO setup, analytics, AI chat, and bilingual content. Fixed price, fixed scope, live quickly.",
+    distinction: "Single done-for-you production website ($1,500) built for one small business — distinct from Rapid Website Factory ($7,500), which is an automated B2B agency pipeline generating demo sites at scale.",
     capabilities: ["Responsive design","Lead forms","Booking integration","SEO setup","Analytics","Bilingual content"],
     target: "New businesses, launches, pivots"
   },

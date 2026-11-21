@@ -1,9 +1,9 @@
 # 305business.llc
 
-> Direct business marketplace and venture acquisition studio in Miami, Florida. Zero buyer or seller commissions; buyers and sellers connect directly. Operated by a Florida LLC (platform only — not a licensed business brokerage).
+> Direct business marketplace and venture acquisition studio in Miami, Florida. $0 commission, $0 success fee, and $0 finder's fee; buyers and sellers connect directly. Operated by a Florida LLC (platform only — not a licensed business brokerage).
 
 ## Core Offerings
-- **Direct Business Marketplace**: Browse South Florida business listings with $0 brokerage commissions or success fees ([Home](https://305business.llc/) | [Español](https://305business.llc/es.html)).
+- **Direct Business Marketplace**: Direct South Florida business listing platform with $0 commissions, $0 success fees, and $0 finder's fees ([Home](https://305business.llc/) | [Español](https://305business.llc/es.html)).
 - **Venture Studio Portfolio (26 Assets)**: Acquire software products and operating ventures outright (1x payment) or on an 18-month lease-to-own plan with maintenance included across healthcare AI, sports science, computer vision, and data intelligence ([Venture Portfolio](https://305business.llc/ventures/)).
 - **Seller & Valuation Tools**:
   - [List a Business](https://305business.llc/list-business.html)
@@ -12,12 +12,12 @@
   - [Financial Forecasting](https://305business.llc/financial-forecasting.html)
   - [Mutual NDA & Legal Support Resources](https://305business.llc/legal-support.html)
   - [Broker Portal](https://305business.llc/broker-portal.html)
-  - [Founders](https://305business.llc/founders.html)
+  - [Founder & Team](https://305business.llc/founders.html)
 
 ## Partner Ecosystem
-- **AI Dynamic Pro** — Custom AI apps, automation workflows, and bilingual voice receptionists ([aidynamic.pro](https://www.aidynamic.pro) | [Free 15-Minute Triage Call](https://www.aidynamic.pro/booking?service=free_ai_consultation))
+- **AI Dynamics** — Custom AI apps, automation workflows, and bilingual voice receptionists ([aidynamic.pro](https://www.aidynamic.pro) | [Free 15-Minute Triage Call](https://www.aidynamic.pro/booking?service=free_ai_consultation))
 - **Medical Billing Miami Beach** — Healthcare revenue cycle management & denial recovery for Florida practices ([medicalbillingmb.com](https://medicalbillingmb.com))
-- **PocketScribe (AI Scribers)** — AI clinical documentation ([aiscribers.com](https://aiscribers.com))
+- **PocketScribe (AI Medical Scribe)** — AI clinical documentation ([aiscribers.com](https://aiscribers.com))
 - **AI Law Helper** — AI-assisted legal intake & research ([new-law-helper-app.vercel.app](https://new-law-helper-app.vercel.app/))
 
 ## Contact & Governance
