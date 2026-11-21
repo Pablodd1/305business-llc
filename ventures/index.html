@@ -179,6 +179,16 @@
 
         <!-- FILTERS -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="inset-view p-4 mb-6 flex flex-wrap items-center justify-between gap-3" data-view="DIRECT CLOSING PROTECTION">
+                <div class="text-white/80 text-xs sm:text-sm"><i class="fas fa-shield-halved text-[#00FF88] mr-2"></i><strong class="text-white">$0 Broker Commission</strong> · Mutual NDA before code walkthrough · Optional <strong class="text-white">Escrow.com / Florida closing attorney</strong> milestone IP transfer.</div>
+                <a href="/legal-support.html" class="tech-label text-[#00D4FF] hover:underline whitespace-nowrap">DOWNLOAD MUTUAL NDA →</a>
+            </div>
+            <div class="mb-3 tech-label">FILTER — ASSET TIER</div>
+            <div class="flex flex-wrap gap-2 mb-5" id="tierFilters">
+                <button class="schematic-btn fchip on px-4 py-2" data-v="All"><span class="relative z-10">ALL VENTURES (26)</span></button>
+                <button class="schematic-btn fchip px-4 py-2" data-v="flagship"><span class="relative z-10">FLAGSHIP COMPANIES ($6K–$18.5K)</span></button>
+                <button class="schematic-btn fchip px-4 py-2" data-v="systems"><span class="relative z-10">TURNKEY BUSINESS SYSTEMS ($1.5K–$5.5K)</span></button>
+            </div>
             <div class="mb-3 tech-label">FILTER — INDUSTRY</div>
             <div class="flex flex-wrap gap-2 mb-5" id="indFilters"></div>
             <div class="mb-3 tech-label">FILTER — STAGE</div>
@@ -222,7 +232,18 @@
 
         const industries = [...new Set(V.map(v=>v.industry))];
         const statuses = [...new Set(V.map(v=>v.status))];
-        let fInd = 'All', fSt = 'All';
+        let fTier = 'All', fInd = 'All', fSt = 'All';
+
+        const tierEl = document.getElementById('tierFilters');
+        if (tierEl) {
+            tierEl.addEventListener('click', e => {
+                const b = e.target.closest('.fchip'); if(!b) return;
+                tierEl.querySelectorAll('.fchip').forEach(c=>c.classList.remove('on'));
+                b.classList.add('on');
+                fTier = b.dataset.v;
+                render();
+            });
+        }
 
         function chips(el, items, key){
             el.innerHTML = '<button class="schematic-btn fchip on px-4 py-2" data-v="All"><span class="relative z-10">ALL</span></button>' +
@@ -271,7 +292,10 @@
         }
 
         function render(){
-            const list = V.filter(v=>(fInd==='All'||v.industry===fInd)&&(fSt==='All'||v.status===fSt));
+            const list = V.filter(v=>{
+                const tierOk = fTier==='All' || (fTier==='flagship' ? v.price >= 6000 : v.price < 6000);
+                return tierOk && (fInd==='All'||v.industry===fInd)&&(fSt==='All'||v.status===fSt);
+            });
             document.getElementById('grid').innerHTML = list.map((v,i)=>`<div class="reveal" style="transition-delay:${(i%3)*70}ms">${card(v)}</div>`).join('') ||
                 '<div class="tech-card p-10 text-center text-white/60 col-span-full">No ventures match these filters.</div>';
             document.getElementById('count').textContent = `SHOWING ${list.length} / ${V.length} VENTURES`;

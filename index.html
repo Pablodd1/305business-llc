@@ -1042,6 +1042,15 @@
                         <div class="p-3"><span class="tech-label text-white/80">SPORTS SCIENCE · VISION AI</span></div>
                     </div>
                 </div>
+                <div class="mt-6 max-w-5xl mx-auto inset-view p-4 flex flex-wrap items-center justify-between gap-3 text-left" data-view="SAFE DIRECT CLOSING">
+                    <div class="text-white/80 text-xs sm:text-sm"><i class="fas fa-shield-halved text-[#00FF88] mr-2"></i><strong class="text-white">$0 Commission</strong> · Mutual NDA before walkthrough · Optional <strong class="text-white">Escrow.com / FL business closing attorney</strong> milestone IP handoff.</div>
+                    <a href="legal-support.html" class="tech-label text-[#00D4FF] hover:underline whitespace-nowrap">MUTUAL NDA →</a>
+                </div>
+            </div>
+            <div id="vtiers" class="flex flex-wrap justify-center gap-2 mb-3">
+                <button onclick="vTier('All', this)" class="schematic-btn px-4 py-1.5 text-xs vactive"><span class="relative z-10">ALL (26)</span></button>
+                <button onclick="vTier('flagship', this)" class="schematic-btn px-4 py-1.5 text-xs"><span class="relative z-10">FLAGSHIP COMPANIES ($6K–$18.5K)</span></button>
+                <button onclick="vTier('systems', this)" class="schematic-btn px-4 py-1.5 text-xs"><span class="relative z-10">TURNKEY SYSTEMS ($1.5K–$5.5K)</span></button>
             </div>
             <div id="vchips" class="flex flex-wrap justify-center gap-2 mb-4"></div>
             <div class="tech-label text-center mb-10" id="vcount"></div>
@@ -1696,10 +1705,10 @@
                 <div>
                     <span class="tech-label block mb-4">ECOSYSTEM</span>
                     <ul class="space-y-2">
-                        <li><a href="https://www.aidynamic.pro" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-[#00D4FF] text-sm transition"><i class="fas fa-robot mr-2"></i>AI Dynamic Pro</a></li>
-                        <li><a href="https://medicalbillingmb.com" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-[#00FF88] text-sm transition"><i class="fas fa-heartbeat mr-2"></i>Medical Billing Miami Beach</a></li>
-                        <li><a href="https://aiscribers.com" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fas fa-stethoscope mr-2"></i>PocketScribe (AI Scribers)</a></li>
-                        <li><a href="https://new-law-helper-app.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fas fa-balance-scale mr-2"></i>AI Law Helper</a></li>
+                        <li><a href="https://www.aidynamic.pro/?utm_source=305business&utm_medium=ecosystem&utm_campaign=footer_partner" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-[#00D4FF] text-sm transition"><i class="fas fa-robot mr-2"></i>AI Dynamic Pro</a></li>
+                        <li><a href="https://medicalbillingmb.com/?utm_source=305business&utm_medium=ecosystem&utm_campaign=footer_partner" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-[#00FF88] text-sm transition"><i class="fas fa-heartbeat mr-2"></i>Medical Billing Miami Beach</a></li>
+                        <li><a href="https://aiscribers.com/?utm_source=305business&utm_medium=ecosystem&utm_campaign=footer_partner" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fas fa-stethoscope mr-2"></i>PocketScribe (AI Scribers)</a></li>
+                        <li><a href="https://new-law-helper-app.vercel.app/?utm_source=305business&utm_medium=ecosystem&utm_campaign=footer_partner" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fas fa-balance-scale mr-2"></i>AI Law Helper</a></li>
                     </ul>
                 </div>
                 <div>
@@ -2091,13 +2100,15 @@
             emptyEl.style.display = 'none';
 
             try {
-                // Try API first, fallback to local data if API is down
-                const response = await fetch('/api/trending?limit=6');
-                if (response.ok) {
-                    const data = await response.json();
-                    trendingListings = data.trending || [];
-                } else {
-                    // Fallback: use existing listings sorted by view_count
+                // Use explicit trending API only if configured; otherwise compute directly from local listings (avoids 404 on static hosts)
+                if (window.TRENDING_API_URL) {
+                    const response = await fetch(window.TRENDING_API_URL);
+                    if (response.ok) {
+                        const data = await response.json();
+                        trendingListings = data.trending || [];
+                    }
+                }
+                if (!trendingListings || trendingListings.length === 0) {
                     trendingListings = [...allListings]
                         .sort((a, b) => (b.views || b.view_count || 0) - (a.views || a.view_count || 0))
                         .slice(0, 6)
@@ -2401,7 +2412,14 @@
         }
         var IND = [];
         window.VENTURES.forEach(function(v){ if (IND.indexOf(v.industry) === -1) IND.push(v.industry); });
-        var vInd = 'All';
+        var vInd = 'All', vTierFilter = 'All';
+        window.vTier = function(t, btn){
+            vTierFilter = t;
+            render();
+            var btns = document.querySelectorAll('#vtiers button');
+            for (var j = 0; j < btns.length; j++) btns[j].classList.remove('vactive');
+            if (btn) btn.classList.add('vactive');
+        };
         window.vFilter = function(i, btn){
             vInd = i;
             render();
@@ -2410,7 +2428,10 @@
             if (btn) btn.classList.add('vactive');
         };
         function render(){
-            var list = window.VENTURES.filter(function(v){ return vInd === 'All' || v.industry === vInd; });
+            var list = window.VENTURES.filter(function(v){
+                var tierOk = vTierFilter === 'All' || (vTierFilter === 'flagship' ? v.price >= 6000 : v.price < 6000);
+                return tierOk && (vInd === 'All' || v.industry === vInd);
+            });
             document.getElementById('vgrid').innerHTML = list.map(card).join('');
             document.getElementById('vcount').textContent = 'SHOWING ' + list.length + ' / ' + window.VENTURES.length + ' VENTURES';
         }

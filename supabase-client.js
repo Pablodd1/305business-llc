@@ -17,7 +17,7 @@ const MC_ENDPOINTS = [
     'http://localhost:8090'
 ];
 
-const EMAIL_SERVER_URL = window.EMAIL_SERVER_URL || (window.location.hostname === 'localhost' ? 'http://localhost:8081' : '');
+const EMAIL_SERVER_URL = window.EMAIL_SERVER_URL || (window.location.hostname === 'localhost' ? 'https://305business-llc.vercel.app' : 'https://305business-llc.vercel.app');
 
 class SupabaseClient {
     constructor() {
@@ -140,10 +140,28 @@ class SupabaseClient {
         }
     }
 
-    // ── Inquiries (→ La Jefatura) ──
+    async _deliverLead(eventType, notifyData, jefaturaPayload) {
+        // Fire Mission Control webhook best-effort in the background
+        this.sendToJefatura(jefaturaPayload).catch(() => {});
+        // Primary delivery: Vercel serverless Brevo notifier (always-on HTTPS)
+        const res = await this.sendNotification(eventType, notifyData);
+        if (res && (res.success || res.ok)) {
+            return [{ id: '305-' + Date.now().toString(36).toUpperCase(), ok: true }];
+        }
+        // Fallback: wait on Mission Control if notify endpoint failed
+        const mcRes = await this.sendToJefatura(jefaturaPayload);
+        return [{ id: (mcRes && mcRes.id) || ('305-' + Date.now().toString(36).toUpperCase()), ok: true }];
+    }
+
+    // ── Inquiries (→ Vercel /api/notify + La Jefatura) ──
     async createInquiry(inquiryData) {
         const d = inquiryData || {};
-        return this.sendToJefatura({
+        return this._deliverLead('new_inquiry', {
+            business_name: d.listing_title || d.business_name || d.listing_id || 'Listing Inquiry',
+            buyer_name: d.buyer_name || d.name || 'Buyer',
+            buyer_email: d.buyer_email || d.email || '',
+            message: `${d.buyer_phone || d.phone ? 'Phone: ' + (d.buyer_phone || d.phone) + '\n' : ''}${d.message || ''}`
+        }, {
             name: d.buyer_name || d.name || 'Buyer',
             phone: d.buyer_phone || d.phone || '',
             channel: 'website',
@@ -153,10 +171,15 @@ class SupabaseClient {
         });
     }
 
-    // ── Valuations (→ La Jefatura) ──
+    // ── Valuations (→ Vercel /api/notify + La Jefatura) ──
     async createValuationRequest(valuationData) {
         const d = valuationData || {};
-        return this.sendToJefatura({
+        return this._deliverLead('new_valuation', {
+            business_name: d.business_name || d.category || 'Business Valuation',
+            contact_name: d.name || d.contact_name || 'Requester',
+            contact_email: d.email || d.contact_email || '',
+            tier_requested: d.tier_requested || d.tier || 'Valuation Request'
+        }, {
             name: d.name || d.contact_name || 'Valuation request',
             phone: d.phone || '',
             channel: 'website',
@@ -166,10 +189,15 @@ class SupabaseClient {
         });
     }
 
-    // ── Listing submissions (→ La Jefatura) ──
+    // ── Listing submissions (→ Vercel /api/notify + La Jefatura) ──
     async submitListing(listingData) {
         const d = listingData || {};
-        return this.sendToJefatura({
+        return this._deliverLead('new_listing', {
+            business_name: d.name || d.business_name || 'New Business Listing',
+            seller_name: d.seller_name || d.name || 'Seller',
+            seller_email: d.seller_email || d.email || '',
+            category: d.category || 'Business'
+        }, {
             name: d.seller_name || d.name || 'Seller',
             phone: d.seller_phone || d.phone || '',
             channel: 'website',
@@ -179,10 +207,15 @@ class SupabaseClient {
         });
     }
 
-    // ── Contact messages (→ La Jefatura) ──
+    // ── Contact messages (→ Vercel /api/notify + La Jefatura) ──
     async submitContactMessage(messageData) {
         const d = messageData || {};
-        return this.sendToJefatura({
+        return this._deliverLead('new_contact', {
+            name: d.name || 'Visitor',
+            email: d.email || '',
+            subject: d.subject || 'Contact form',
+            message: `${d.phone ? 'Phone: ' + d.phone + '\n' : ''}${d.message || ''}`
+        }, {
             name: d.name || 'Contact',
             phone: d.phone || '',
             channel: 'website',

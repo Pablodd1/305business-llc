@@ -112,7 +112,8 @@ class AgenticWebsite {
   }
 
   sendToServer(event) {
-    // Batch events and send every 5 seconds
+    // Only POST batched events when an explicit external HTTPS endpoint is configured (avoids 404s on static hosts)
+    if (!this.apiEndpoint || !/^https?:\/\//i.test(this.apiEndpoint)) return;
     if (!this.eventQueue) this.eventQueue = [];
     this.eventQueue.push(event);
     

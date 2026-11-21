@@ -207,11 +207,12 @@
                             </div>
                         </div>
                         <div class="module-block p-4">
-                            <div class="module-head mb-2"><i class="fas fa-route mr-2"></i>ACQUISITION &amp; HANDOFF PROCESS</div>
+                            <div class="module-head mb-2"><i class="fas fa-shield-halved mr-2"></i>SAFE DIRECT CLOSING ($0 BROKER COMMISSION)</div>
+                            <p class="text-white/70 text-xs leading-relaxed mb-3">No broker middlemen, no 8–12% commission fee. Closings can be structured through <strong class="text-white">Escrow.com</strong> or a licensed <strong class="text-white">Florida business closing attorney</strong> with milestone repository &amp; IP release.</p>
                             <div class="grid sm:grid-cols-4 gap-3 text-xs text-white/75 mt-2">
                                 <div><span class="text-[#00D4FF] font-mono font-bold">01. OFFER</span><br/>Submit confidential offer &amp; sign mutual NDA.</div>
                                 <div><span class="text-[#00D4FF] font-mono font-bold">02. WALKTHROUGH</span><br/>Live technical demo &amp; code/architecture review.</div>
-                                <div><span class="text-[#00D4FF] font-mono font-bold">03. AGREEMENT</span><br/>1× purchase or 18-month lease-to-own terms.</div>
+                                <div><span class="text-[#00D4FF] font-mono font-bold">03. ESCROW / TERMS</span><br/>1× purchase or 18-month lease-to-own via escrow.</div>
                                 <div><span class="text-[#00D4FF] font-mono font-bold">04. TRANSFER</span><br/>Full repo, infrastructure &amp; IP handoff.</div>
                             </div>
                         </div>
@@ -377,6 +378,23 @@
             name: f.name.value, email: f.email.value, phone: '',
             message: 'ACQUISITION OFFER: ' + offerStr + '\nNOTES: ' + (f.msg.value || '-')
         };
+        try {
+            const resp = await fetch('https://305business-llc.vercel.app/api/notify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    event_type: 'new_inquiry',
+                    business_name: payload.business_name,
+                    buyer_name: f.name.value,
+                    buyer_email: f.email.value,
+                    message: payload.message
+                })
+            });
+            if (resp.ok) {
+                f.innerHTML = '<p style="color:#00FF88;font-family:JetBrains Mono,monospace;font-size:13px;padding:16px 0" class="text-center"><i class="fas fa-check-circle mr-2"></i>OFFER RECEIVED — REVIEW WITHIN 48H</p>';
+                return false;
+            }
+        } catch (err) { /* fall through to Brevo client or mailto */ }
         if (window.EmailNotify && (window.SENDINBLUE_API_KEY || (EmailNotify.config && EmailNotify.config.API_KEY))) {
             const r = await EmailNotify.send('new_inquiry', payload, { subject: '💰 Acquisition Offer — ' + name + ' (' + offerStr + ')' });
             if (r && r.success) {
