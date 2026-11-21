@@ -3,34 +3,31 @@
 
 User-agent: *
 Allow: /
-
-# Disallow admin area (optional but recommended)
 Disallow: /admin.html
+Disallow: /admin/
+Disallow: /api/
 
-# Sitemap location
-Sitemap: https://305business.llc/sitemap.xml
-
-# Crawl-delay (optional, for polite crawlers)
-Crawl-delay: 1
-
-# Common bot-specific rules
+# Explicitly allow AI Search & Answer Engines (GEO / AEO / LLMO)
 User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: Googlebot
+User-agent: PerplexityBot
 Allow: /
 
-User-agent: Bingbot
+User-agent: ClaudeBot
 Allow: /
 
-User-agent: Slurp
+User-agent: Google-Extended
 Allow: /
 
-User-agent: DuckDuckBot
+User-agent: Applebot-Extended
 Allow: /
 
-User-agent: Baiduspider
-Allow: /
+Sitemap: https://305business.llc/sitemap.xml
+# LLM Knowledge Index: https://305business.llc/llms.txt
