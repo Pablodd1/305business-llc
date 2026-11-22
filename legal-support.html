@@ -132,9 +132,60 @@
         </div>
     </section>
 
-    <!-- NDA Download Section -->
+    <!-- NDA Download & Digital Execution Section -->
     <section class="py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="tech-border p-8">
+                <span class="tech-label">DIGITAL NDA EXECUTION · DOCUMENSO READY</span>
+                <h2 class="text-2xl font-bold text-white mt-4 mb-2">EXECUTE MUTUAL NDA ONLINE</h2>
+                <p class="text-white/60 mb-6">Sign digitally under the Florida Electronic Signature Act / UETA (or open your Documenso signing room when connected) to unlock confidential seller financials and receive a timestamped NDA certificate.</p>
+                <form id="digitalNdaForm" onsubmit="event.preventDefault(); executeDigitalNda();" class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="tech-label block mb-2" for="ndaFullName">Full Legal Name *</label>
+                        <input id="ndaFullName" type="text" required placeholder="Jane Doe" class="w-full px-4 py-3 bg-white/5 border border-white/20 text-white text-sm focus:outline-none focus:border-[#00D4FF]" />
+                    </div>
+                    <div>
+                        <label class="tech-label block mb-2" for="ndaCompany">Entity / Company</label>
+                        <input id="ndaCompany" type="text" placeholder="Miami Acquisitions LLC (or Individual)" class="w-full px-4 py-3 bg-white/5 border border-white/20 text-white text-sm focus:outline-none focus:border-[#00D4FF]" />
+                    </div>
+                    <div>
+                        <label class="tech-label block mb-2" for="ndaEmail">Email Address *</label>
+                        <input id="ndaEmail" type="email" required placeholder="buyer@company.com" class="w-full px-4 py-3 bg-white/5 border border-white/20 text-white text-sm focus:outline-none focus:border-[#00D4FF]" />
+                    </div>
+                    <div>
+                        <label class="tech-label block mb-2" for="ndaPhone">Phone Number</label>
+                        <input id="ndaPhone" type="tel" placeholder="(305) 555-0100" class="w-full px-4 py-3 bg-white/5 border border-white/20 text-white text-sm focus:outline-none focus:border-[#00D4FF]" />
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="tech-label block mb-2" for="ndaListing">Target Listing or Venture *</label>
+                        <input id="ndaListing" type="text" required placeholder="e.g., Brickell Medical Practice or AI Dynamics VoiceLayer" class="w-full px-4 py-3 bg-white/5 border border-white/20 text-white text-sm focus:outline-none focus:border-[#00D4FF]" />
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="tech-label block mb-2" for="ndaSignature">Typed Electronic Signature *</label>
+                        <input id="ndaSignature" type="text" required placeholder="/s/ Jane Doe" class="w-full px-4 py-3 bg-white/5 border border-white/20 text-white font-mono text-sm focus:outline-none focus:border-[#00D4FF]" />
+                    </div>
+                    <div class="md:col-span-2 flex items-start gap-3 text-white/80 text-sm">
+                        <input id="ndaConsent" type="checkbox" required class="mt-1" />
+                        <label for="ndaConsent">I agree to the Mutual Non-Disclosure terms below and consent to electronic execution under ESIGN &amp; Florida UETA (Fla. Stat. § 668.50).</label>
+                    </div>
+                    <div class="md:col-span-2 flex flex-wrap gap-4 items-center">
+                        <button type="submit" id="ndaExecBtn" class="schematic-btn">
+                            <span class="relative z-10"><i class="fas fa-pen-nib mr-2"></i>SIGN MUTUAL NDA NOW</span>
+                        </button>
+                        <span id="ndaExecStatus" class="text-[#00FF88] text-xs font-mono hidden"></span>
+                    </div>
+                </form>
+                <div id="ndaCertificateBox" class="hidden bg-white/5 border border-[#00FF88]/40 p-5 rounded mb-4">
+                    <div class="flex flex-wrap justify-between items-center gap-3 mb-2">
+                        <span class="text-[#00FF88] font-mono text-xs font-bold">MUTUAL NDA EXECUTED ✓</span>
+                        <button type="button" onclick="downloadSignedNdaReceipt()" class="schematic-btn" style="padding:8px 14px;font-size:11px;">
+                            <span class="relative z-10"><i class="fas fa-file-download mr-2"></i>DOWNLOAD SIGNED RECEIPT (.TXT)</span>
+                        </button>
+                    </div>
+                    <pre id="ndaCertificateText" class="text-white/80 font-mono text-xs whitespace-pre-wrap"></pre>
+                </div>
+            </div>
+
             <div class="tech-border p-8">
                 <span class="tech-label">FREE RESOURCE</span>
                 <h2 class="text-2xl font-bold text-white mt-4 mb-4">STANDARD NDA TEMPLATE</h2>
@@ -156,22 +207,78 @@
                 </button>
                 <p id="ndaStatus" class="text-[#00FF88] text-xs font-mono mt-3 hidden">Mutual NDA template downloaded. Review with qualified Florida legal counsel before execution.</p>
                 <script>
-                    function downloadNdaTemplate() {
-                        const ndaText = [
-                            'MUTUAL NON-DISCLOSURE AGREEMENT (FLORIDA — SAMPLE STARTING TEMPLATE)',
-                            'Notice: Informational template provided by 305business.llc (non-brokerage platform). Not legal advice; consult a licensed Florida attorney before signing.',
+                    function buildNdaBody(meta) {
+                        const m = meta || {};
+                        return [
+                            'MUTUAL NON-DISCLOSURE AGREEMENT (FLORIDA — 305BUSINESS.LLC)',
+                            'Notice: 305business.llc is a non-brokerage direct marketplace platform; consult qualified Florida counsel as needed.',
                             '',
-                            '1. PARTIES: Disclosing Party (Seller / Owner) and Receiving Party (Prospective Buyer / Investor), as identified at execution.',
-                            '2. CONFIDENTIAL INFORMATION: Non-public financial statements, tax returns, customer lists, supplier contracts, pricing, trade secrets, and business operations marked or reasonably understood as confidential.',
-                            '3. OBLIGATIONS: Receiving Party shall hold Confidential Information in strict confidence, use it solely to evaluate a potential direct transaction, and not disclose it to third parties other than advisors bound by confidentiality.',
-                            '4. EXCLUSIONS: Publicly available information, prior lawful possession, independent development, or legally compelled disclosure.',
-                            '5. TERM: Confidentiality obligations continue for two (2) years from the date of last disclosure.',
-                            '6. GOVERNING LAW: State of Florida, venue in Miami-Dade County, Florida.',
+                            '1. PARTIES: Disclosing Party (Listing Owner) and Receiving Party (' + (m.fullName || 'Prospective Buyer / Investor') + (m.company ? ' / ' + m.company : '') + ').',
+                            '2. TARGET TRANSACTION: ' + (m.listing || 'Confidential Business / Venture Evaluation'),
+                            '3. CONFIDENTIAL INFORMATION: Non-public financial statements, tax returns, customer lists, supplier contracts, pricing, trade secrets, and operations marked or reasonably understood as confidential.',
+                            '4. OBLIGATIONS: Receiving Party shall hold Confidential Information in strict confidence, use it solely to evaluate a potential direct transaction, and not contact staff, clients, or vendors without written seller consent.',
+                            '5. EXCLUSIONS: Publicly available information, prior lawful possession, independent development, or legally compelled disclosure.',
+                            '6. TERM & GOVERNING LAW: Two (2) years from last disclosure; governed by the State of Florida (venue: Miami-Dade County).',
                             '',
-                            'Seller Signature / Date: _______________________',
-                            'Buyer Signature / Date:  _______________________',
+                            m.certId ? ('CERTIFICATE ID: ' + m.certId) : 'Seller Signature / Date: _______________________',
+                            m.signedAt ? ('EXECUTED AT (UTC): ' + m.signedAt) : 'Buyer Signature / Date:  _______________________',
+                            m.signature ? ('ELECTRONIC SIGNATURE: ' + m.signature + ' (' + (m.email || '') + ')') : '',
                             'Contact for M&A listing questions: hola@305business.llc | +1 786-643-2099'
-                        ].join('\n');
+                        ].filter(Boolean).join('\n');
+                    }
+
+                    async function executeDigitalNda() {
+                        const documensoUrl = (window.DOCUMENSO_NDA_URL || '').trim();
+                        if (documensoUrl) {
+                            window.open(documensoUrl, '_blank', 'noopener,noreferrer');
+                        }
+                        const fullName = document.getElementById('ndaFullName').value.trim();
+                        const company = document.getElementById('ndaCompany').value.trim();
+                        const email = document.getElementById('ndaEmail').value.trim();
+                        const phone = document.getElementById('ndaPhone').value.trim();
+                        const listing = document.getElementById('ndaListing').value.trim();
+                        const signature = document.getElementById('ndaSignature').value.trim();
+                        const certId = 'NDA-305-' + Date.now().toString(36).toUpperCase();
+                        const signedAt = new Date().toISOString();
+                        const record = { certId, signedAt, fullName, company, email, phone, listing, signature };
+
+                        localStorage.setItem('nda_signed', 'true');
+                        localStorage.setItem('nda_305_record', JSON.stringify(record));
+                        window._lastSignedNdaText = buildNdaBody(record);
+
+                        document.getElementById('ndaCertificateText').textContent = window._lastSignedNdaText;
+                        document.getElementById('ndaCertificateBox').classList.remove('hidden');
+                        const status = document.getElementById('ndaExecStatus');
+                        status.textContent = documensoUrl
+                            ? 'Documenso signing room opened & local NDA badge unlocked (' + certId + ').'
+                            : 'Signed digitally (' + certId + '). NDA Verified badge is now active across listings.';
+                        status.classList.remove('hidden');
+
+                        try {
+                            if (window.DealFlow && window.DealFlow.signNDA) {
+                                await window.DealFlow.signNDA('direct-' + certId, fullName);
+                            }
+                        } catch (_) { /* non-blocking */ }
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'nda_executed', { cert_id: certId, listing: listing });
+                        }
+                    }
+
+                    function downloadSignedNdaReceipt() {
+                        if (!window._lastSignedNdaText) return;
+                        const blob = new Blob([window._lastSignedNdaText], { type: 'text/plain;charset=utf-8' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = '305business-signed-nda-certificate.txt';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                    }
+
+                    function downloadNdaTemplate() {
+                        const ndaText = buildNdaBody({});
                         const blob = new Blob([ndaText], { type: 'text/plain;charset=utf-8' });
                         const url = URL.createObjectURL(blob);
                         const a = document.createElement('a');
