@@ -14,7 +14,7 @@
     'hotel-rate-intelligence': [
       { src: '/images/hospitality-commerce-ventures.webp', label: 'HOSPITALITY COMP-SET PRICING' },
       { src: '/images/simulation-data.webp', label: 'AUTOMATED RATE & DEMAND SIGNALS' },
-      { src: '/images/marketplace-hero.webp', label: 'MIAMI BEACH HOSPITALITY MARKET' }
+      { src: '/images/marketplace-hero.webp?v=2', label: 'MIAMI BEACH HOSPITALITY MARKET' }
     ],
     'jmm-jas-miami-method': [
       { src: '/images/sports-vision-ventures.webp', label: 'BIOMECHANICS & PERFORMANCE LAB' },
@@ -23,7 +23,7 @@
     ],
     'estatematch': [
       { src: '/images/real-estate-match.webp', label: 'WATERFRONT BUYER-PROPERTY MATCHING' },
-      { src: '/images/marketplace-hero.webp', label: 'SOUTH FLORIDA REAL ESTATE NETWORK' },
+      { src: '/images/marketplace-hero.webp?v=2', label: 'SOUTH FLORIDA REAL ESTATE NETWORK' },
       { src: '/images/valuation-advisory.webp', label: 'DEAL FLOW & ADVISORY WORKSPACE' }
     ],
     'pocketscribe': [
@@ -34,7 +34,7 @@
     'adaptive-marketplace': [
       { src: '/images/hospitality-commerce-ventures.webp', label: 'INTENT-AWARE COMMERCE EXPERIENCE' },
       { src: '/images/web-growth-factory.webp', label: 'DYNAMIC MERCHANDISING STUDIO' },
-      { src: '/images/marketplace-hero.webp', label: 'MULTI-VENDOR MARKETPLACE SCALE' }
+      { src: '/images/marketplace-hero.webp?v=2', label: 'MULTI-VENDOR MARKETPLACE SCALE' }
     ],
     'overlay-hd': [
       { src: '/images/dental-ai.webp', label: 'COSMETIC SMILE VISUALIZATION' },
@@ -54,7 +54,7 @@
     'website-factory': [
       { src: '/images/web-growth-factory.webp', label: 'AUTOMATED LEAD-TO-SITE DEPLOYMENT' },
       { src: '/images/ventures-studio.webp', label: 'MULTI-CLIENT TEMPLATE ENGINE' },
-      { src: '/images/marketplace-hero.webp', label: 'LOCAL SMB DIGITAL LAUNCHES' }
+      { src: '/images/marketplace-hero.webp?v=2', label: 'LOCAL SMB DIGITAL LAUNCHES' }
     ],
     'dental-ehr': [
       { src: '/images/dental-ai.webp', label: 'MODERN DENTAL PRACTICE SUITE' },
@@ -79,7 +79,7 @@
     'ai-voice-receptionist': [
       { src: '/images/voice-ai-desk.webp', label: '24/7 BILINGUAL FRONT-DESK AI' },
       { src: '/images/healthcare-ai-ventures.webp', label: 'CLINIC & SERVICE CALL TRIAGE' },
-      { src: '/images/marketplace-hero.webp', label: 'MIAMI MULTI-LANGUAGE OPERATIONS' }
+      { src: '/images/marketplace-hero.webp?v=2', label: 'MIAMI MULTI-LANGUAGE OPERATIONS' }
     ],
     'cycling-fit-intelligence': [
       { src: '/images/sports-vision-ventures.webp', label: 'ROAD, TRIATHLON & TT BIKE FIT' },
@@ -109,7 +109,7 @@
     'ai-market-intelligence': [
       { src: '/images/simulation-data.webp', label: 'AUTOMATED COMPETITIVE INTELLIGENCE' },
       { src: '/images/valuation-advisory.webp', label: 'EXECUTIVE DECISION BRIEFINGS' },
-      { src: '/images/marketplace-hero.webp', label: 'SECTOR & REGIONAL SIGNAL TRACKING' }
+      { src: '/images/marketplace-hero.webp?v=2', label: 'SECTOR & REGIONAL SIGNAL TRACKING' }
     ],
     'revenue-cycle-intelligence': [
       { src: '/images/healthcare-ai-ventures.webp', label: 'MEDICAL BILLING & CODING QA' },
@@ -119,16 +119,16 @@
     'seo-aeo-engine': [
       { src: '/images/web-growth-factory.webp', label: 'TECHNICAL SEO & ANSWER-ENGINE OPS' },
       { src: '/images/simulation-data.webp', label: 'AI CITATION & SEARCH VISIBILITY' },
-      { src: '/images/marketplace-hero.webp', label: 'LOCAL & ORGANIC DEMAND GROWTH' }
+      { src: '/images/marketplace-hero.webp?v=2', label: 'LOCAL & ORGANIC DEMAND GROWTH' }
     ],
     'rapid-digital-launch': [
       { src: '/images/web-growth-factory.webp', label: 'HIGH-SPEED BUSINESS WEB LAUNCH' },
-      { src: '/images/marketplace-hero.webp', label: 'MIAMI SMB DIGITAL STOREFRONTS' },
+      { src: '/images/marketplace-hero.webp?v=2', label: 'MIAMI SMB DIGITAL STOREFRONTS' },
       { src: '/images/ventures-studio.webp', label: 'TURNKEY DEPLOYMENT STACK' }
     ],
     'maca-locator': [
       { src: '/images/maca-auto.webp', label: 'MOBILE AUTO & ROADSIDE DISPATCH' },
-      { src: '/images/marketplace-hero.webp', label: 'SOUTH FLORIDA COVERAGE NETWORK' },
+      { src: '/images/marketplace-hero.webp?v=2', label: 'SOUTH FLORIDA COVERAGE NETWORK' },
       { src: '/images/voice-ai-desk.webp', label: 'AI TRIAGE & LIVE TECHNICIAN ROUTING' }
     ]
   };
