@@ -790,22 +790,30 @@
         </div>
     </nav>
 
-    <!-- Hero Section - Dynamic Landing -->
-    <section class="pt-32 pb-12 relative">
+    <!-- Hero Section - Full-Bleed Miami Skyline Background -->
+    <section class="pt-32 pb-16 relative overflow-hidden min-h-[620px] flex items-center border-b border-white/15">
+        <!-- Full-Width Miami Brickell & Biscayne Bay Background -->
+        <img src="images/marketplace-hero.webp?v=3"
+             alt="Horizonte de Brickell Miami sobre la Bahía de Biscayne al Atardecer"
+             width="1600" height="900"
+             fetchpriority="high"
+             class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none">
+        <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(105deg, rgba(10,22,40,0.84) 0%, rgba(20,52,92,0.45) 50%, rgba(10,22,40,0.74) 100%), linear-gradient(180deg, rgba(10,22,40,0.35) 0%, transparent 30%, transparent 72%, #1a4a7a 100%);"></div>
+
         <!-- Animated Background Elements -->
         <div class="absolute inset-0 pointer-events-none overflow-hidden">
             <!-- Corner brackets -->
-            <div class="absolute top-20 left-10 w-px h-40 bg-white/10"></div>
-            <div class="absolute top-20 left-10 w-20 h-px bg-white/10"></div>
-            <div class="absolute bottom-20 right-10 w-px h-40 bg-white/10"></div>
-            <div class="absolute bottom-20 right-10 w-20 h-px bg-white/10"></div>
+            <div class="absolute top-20 left-10 w-px h-40 bg-white/15"></div>
+            <div class="absolute top-20 left-10 w-20 h-px bg-white/15"></div>
+            <div class="absolute bottom-20 right-10 w-px h-40 bg-white/15"></div>
+            <div class="absolute bottom-20 right-10 w-20 h-px bg-white/15"></div>
             <!-- Floating data points -->
             <div class="data-point" style="top: 15%; left: 8%; animation-delay: 0s;">COMISIONES: $0</div>
             <div class="data-point" style="top: 25%; right: 12%; animation-delay: 2s;">VENTURES: 26</div>
             <div class="data-point" style="top: 60%; left: 5%; animation-delay: 4s;">DIRECTO: 100%</div>
             <div class="data-point" style="top: 70%; right: 8%; animation-delay: 6s;">MIAMI: 305</div>
             <!-- SVG Connection Lines -->
-            <svg class="absolute inset-0 w-full h-full" style="opacity: 0.3;">
+            <svg class="absolute inset-0 w-full h-full" style="opacity: 0.25;">
                 <line x1="10%" y1="20%" x2="30%" y2="40%" class="connection-line"/>
                 <line x1="70%" y1="15%" x2="85%" y2="35%" class="connection-line"/>
                 <line x1="20%" y1="60%" x2="40%" y2="80%" class="connection-line"/>
@@ -813,13 +821,13 @@
             </svg>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <!-- Left: Title Block -->
-                <div class="title-block p-8">
+                <div class="title-block p-8 bg-[#0a1628]/70 backdrop-blur-md">
                     <div class="flex justify-between items-start mb-4">
-                        <span class="tech-label">PROYECTO N.º 305</span>
-                        <span class="tech-label">ESCALA 1:1</span>
+                        <span class="tech-label">PROYECTO N.º 305 · MIAMI BRICKELL</span>
+                        <span class="tech-label text-[#00FF88]">0% COMISIÓN</span>
                     </div>
                     <div class="live-pill mb-6">
                         <span class="live-dot"></span>
@@ -828,12 +836,12 @@
                     <h1 class="text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
                         CONECTA & LISTA<br>EMPRESAS
                     </h1>
-                    <p class="text-lg text-white/50 max-w-xl mb-6">
-                        Matching impulsado por IA. Conexiones directas sin comisiones. Listados en Miami, Broward y Palm Beach.
+                    <p class="text-lg text-white/75 max-w-xl mb-6">
+                        Adquiera hoy uno de nuestros 26 ventures propios de IA y SaaS, o liste su empresa en el Sur de Florida con 0% comisiones ni cuotas de éxito.
                     </p>
-                    <div class="flex gap-4">
-                        <button onclick="document.getElementById('search').scrollIntoView({behavior:'smooth'})" class="schematic-btn px-6 py-3" data-i18n="hero_cta_primary">
-                            <span class="relative z-10"><i class="fas fa-search mr-2"></i>BUSCAR AHORA</span>
+                    <div class="flex gap-4 flex-wrap">
+                        <button onclick="document.getElementById('ventures').scrollIntoView({behavior:'smooth'})" class="schematic-btn px-6 py-3" data-i18n="hero_cta_primary">
+                            <span class="relative z-10"><i class="fas fa-cubes mr-2"></i>VER 26 VENTURES</span>
                         </button>
                         <button onclick="document.getElementById('matching').scrollIntoView({behavior:'smooth'})" class="schematic-btn px-6 py-3" data-i18n="hero_cta_secondary">
                             <span class="relative z-10"><i class="fas fa-magic mr-2"></i>AI MATCH</span>
@@ -843,36 +851,24 @@
 
                 <!-- Right: Live Stats Dashboard -->
                 <div class="space-y-4">
-                    <!-- Miami Business Marketplace Hero Visual -->
-                    <div class="tech-card p-0 overflow-hidden">
-                        <img src="images/marketplace-hero.webp?v=2"
-                             alt="Horizonte de Brickell Miami sobre la Bahía de Biscayne al Atardecer"
-                             width="1280" height="720"
-                             class="w-full h-64 object-cover">
-                        <div class="p-3 flex items-center justify-between">
-                            <span class="tech-label">ASESORÍA DIRECTA M&amp;A EN MIAMI · BRICKELL</span>
-                            <span class="tech-label text-[#00FF88]">0% COMISIÓN</span>
-                        </div>
-                    </div>
-
                     <!-- Stats Grid — datos reales de la plataforma -->
                     <div class="grid grid-cols-3 gap-4">
-                        <div class="hero-stat-card text-center">
+                        <div class="hero-stat-card text-center bg-[#0a1628]/70 backdrop-blur-md">
                             <div class="stat-number">$0</div>
                             <div class="stat-label">COMISIONES</div>
                         </div>
-                        <div class="hero-stat-card text-center">
+                        <div class="hero-stat-card text-center bg-[#0a1628]/70 backdrop-blur-md">
                             <div class="stat-number">26</div>
                             <div class="stat-label">VENTURES PROPIOS</div>
                         </div>
-                        <div class="hero-stat-card text-center">
+                        <div class="hero-stat-card text-center bg-[#0a1628]/70 backdrop-blur-md">
                             <div class="stat-number">ABIERTO</div>
                             <div class="stat-label">LISTADOS</div>
                         </div>
                     </div>
 
                     <!-- Estado de la plataforma — sin transacciones fabricadas -->
-                    <div class="tech-card p-4">
+                    <div class="tech-card p-5 bg-[#0a1628]/75 backdrop-blur-md">
                         <div class="flex justify-between items-center mb-3">
                             <span class="tech-label">ESTADO DE LA PLATAFORMA</span>
                             <span class="tech-label"><i class="fas fa-circle text-[#00FF88] mr-1" style="font-size:8px"></i>ABIERTO A OFERTAS</span>
