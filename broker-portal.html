@@ -104,18 +104,40 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .tech-input {
-            background: rgba(255,255,255,0.05);
-            border: 1.5px solid rgba(255,255,255,0.2);
-            color: white;
+            color-scheme: dark;
+            background-color: #0b1e36;
+            border: 1.5px solid rgba(255,255,255,0.4);
+            color: #ffffff;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
+            font-size: 13px;
             padding: 12px;
             width: 100%;
         }
         .tech-input:focus {
             outline: none;
-            border-color: rgba(255,255,255,0.4);
-            background: rgba(255,255,255,0.08);
+            border-color: #00D4FF;
+            background-color: #071526;
+            box-shadow: 0 0 0 2px rgba(0,212,255,0.2);
+        }
+        .tech-input::placeholder {
+            color: rgba(255,255,255,0.65);
+            opacity: 1;
+        }
+        select.tech-input option {
+            background-color: #0b1e36;
+            color: #ffffff;
+        }
+        .tech-input:-webkit-autofill,
+        .tech-input:-webkit-autofill:hover,
+        .tech-input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #ffffff !important;
+            -webkit-box-shadow: 0 0 0px 1000px #0b1e36 inset !important;
+            caret-color: #ffffff;
+        }
+        form label.tech-label {
+            color: rgba(255,255,255,0.88);
+            font-size: 11px;
+            font-weight: 600;
         }
     </style>
 </head>

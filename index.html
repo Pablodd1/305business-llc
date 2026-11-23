@@ -330,14 +330,45 @@
             border-bottom: 1.5px solid rgba(255,255,255,0.2);
         }
 
-        /* Technical Input - More visible */
+        /* Technical Input - High-contrast dark surface + readable native dropdowns */
         .tech-input {
-            background: rgba(255,255,255,0.05);
-            border: 1.5px solid rgba(255,255,255,0.2);
-            color: white;
+            color-scheme: dark;
+            background-color: #0b1e36;
+            border: 1.5px solid rgba(255,255,255,0.4);
+            color: #ffffff;
             font-family: 'JetBrains Mono', monospace;
         }
-        .tech-input:focus { outline: none; border-color: rgba(255,255,255,0.5); }
+        .tech-input:focus {
+            outline: none;
+            border-color: #00D4FF;
+            background-color: #071526;
+            box-shadow: 0 0 0 2px rgba(0,212,255,0.2);
+        }
+        .tech-input::placeholder {
+            color: rgba(255,255,255,0.65);
+            opacity: 1;
+        }
+        select.tech-input,
+        select.tech-input option,
+        select.tech-input optgroup {
+            color-scheme: dark;
+            background-color: #0b1e36;
+            color: #ffffff;
+        }
+        .tech-input:-webkit-autofill,
+        .tech-input:-webkit-autofill:hover,
+        .tech-input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #ffffff !important;
+            -webkit-box-shadow: 0 0 0px 1000px #0b1e36 inset !important;
+            caret-color: #ffffff;
+        }
+        #matching label.tech-label,
+        #contact label.tech-label,
+        #search .tech-label {
+            color: rgba(255,255,255,0.88);
+            font-size: 11px;
+            font-weight: 600;
+        }
 
         /* Dimension Lines - Brighter */
         .dimension { position: relative; padding: 0 20px; }
@@ -1711,7 +1742,6 @@
                         <li><a href="https://medicalbillingmb.com/?utm_source=305business&utm_medium=ecosystem&utm_campaign=footer_partner" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-[#00FF88] text-sm transition"><i class="fas fa-heartbeat mr-2"></i>Medical Billing Miami Beach</a></li>
                         <li><a href="https://pocketscribe.online/?utm_source=305business&utm_medium=ecosystem&utm_campaign=footer_partner" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fas fa-stethoscope mr-2"></i>PocketScribe (AI Medical Scribe)</a></li>
                         <li><a href="https://aiscribers.com/?utm_source=305business&utm_medium=ecosystem&utm_campaign=footer_partner" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fas fa-notes-medical mr-2"></i>AI Scribers</a></li>
-                        <li><a href="https://new-law-helper-app.vercel.app/?utm_source=305business&utm_medium=ecosystem&utm_campaign=footer_partner" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-white/60 text-sm transition"><i class="fas fa-balance-scale mr-2"></i>AI Law Helper</a></li>
                     </ul>
                 </div>
                 <div>

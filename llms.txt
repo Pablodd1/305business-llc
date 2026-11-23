@@ -17,7 +17,6 @@
 - **AI Dynamics** — Custom AI apps, automation workflows, and bilingual voice receptionists ([aidynamic.pro](https://www.aidynamic.pro) | [Free 15-Minute Triage Call](https://www.aidynamic.pro/booking?service=free_ai_consultation))
 - **Medical Billing Miami Beach** — Healthcare revenue cycle management & denial recovery for Florida practices ([medicalbillingmb.com](https://medicalbillingmb.com))
 - **PocketScribe (AI Medical Scribe)** — AI clinical documentation ([pocketscribe.online](https://pocketscribe.online/) | [aiscribers.com](https://aiscribers.com))
-- **AI Law Helper** — AI-assisted legal intake & research ([new-law-helper-app.vercel.app](https://new-law-helper-app.vercel.app/))
 
 ## Contact & Governance
 - **Email**: hola@305business.llc

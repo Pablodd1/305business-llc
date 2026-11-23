@@ -70,7 +70,7 @@ async function handleTwilioAction(project, action, userInfo, container) {
   inputDiv.style.cssText = 'padding: 10px 12px; display: flex; gap: 8px; align-items: center;';
   inputDiv.innerHTML = `
     <input type="tel" placeholder="+1 (555) 123-4567" 
-      style="flex: 1; padding: 8px 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 13px;"
+      style="flex: 1; padding: 8px 12px; border-radius: 8px; border: 1.5px solid #cbd5e1; background: #ffffff; color: #0f172a; color-scheme: light; font-size: 13px;"
       id="twilio-phone-input" value="${userInfo.phone || ''}"/>
     <button id="twilio-confirm-btn" style="padding: 8px 16px; border-radius: 8px; background: #3b82f6; color: white; border: none; cursor: pointer; font-size: 12px;">Send</button>
   `;

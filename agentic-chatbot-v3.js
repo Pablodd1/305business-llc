@@ -327,7 +327,10 @@
         }
         .agentic-chat-input {
           flex: 1;
-          border: 1px solid #e2e8f0;
+          color-scheme: light;
+          background-color: #ffffff;
+          color: #0f172a;
+          border: 1.5px solid #cbd5e1;
           border-radius: 20px;
           padding: 10px 16px;
           font-size: 0.9375rem;
@@ -336,6 +339,10 @@
           min-height: 20px;
           max-height: 120px;
           font-family: inherit;
+        }
+        .agentic-chat-input::placeholder {
+          color: #64748b;
+          opacity: 1;
         }
         .agentic-chat-input:focus {
           border-color: ${this.config.primaryColor};

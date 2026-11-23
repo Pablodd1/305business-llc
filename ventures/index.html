@@ -70,8 +70,10 @@
         .title-block { border: 2px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); position: relative; }
         .title-block::after { content: ''; position: absolute; bottom: -2px; right: -2px; width: 180px; height: 70px; border: 2px solid rgba(255,255,255,0.4); border-bottom: none; border-right: none; background: rgba(255,255,255,0.02); }
         .blueprint-nav { background: rgba(26,74,122,0.95); border-bottom: 1.5px solid rgba(255,255,255,0.2); }
-        .tech-input { background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.2); color: white; font-family: 'JetBrains Mono', monospace; }
-        .tech-input:focus { outline: none; border-color: rgba(255,255,255,0.5); }
+        .tech-input { color-scheme: dark; background-color: #0b1e36; border: 1.5px solid rgba(255,255,255,0.4); color: #ffffff; font-family: 'JetBrains Mono', monospace; }
+        .tech-input:focus { outline: none; border-color: #00D4FF; background-color: #071526; box-shadow: 0 0 0 2px rgba(0,212,255,0.2); }
+        .tech-input::placeholder { color: rgba(255,255,255,0.65); opacity: 1; }
+        select.tech-input, select.tech-input option { color-scheme: dark; background-color: #0b1e36; color: #ffffff; }
         .vstatus { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 999px; white-space: nowrap; text-transform: uppercase; }
         .fchip { opacity: 0.65; }
         .fchip.on { opacity: 1; border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.1); }

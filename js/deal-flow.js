@@ -47,7 +47,8 @@
   .df-modal h3{margin:0 0 6px;font-size:1.25rem;font-weight:700;color:#111}
   .df-modal .df-sub{color:#667085;font-size:.875rem;margin-bottom:18px;line-height:1.5}
   .df-modal label{display:block;font-size:.8rem;font-weight:600;color:#374151;margin:12px 0 4px}
-  .df-modal input[type=text],.df-modal input[type=email],.df-modal input[type=tel],.df-modal input[type=number],.df-modal textarea{width:100%;border:1.5px solid #d0d5dd;border-radius:8px;padding:10px 12px;font-size:.9rem;box-sizing:border-box}
+  .df-modal input[type=text],.df-modal input[type=email],.df-modal input[type=tel],.df-modal input[type=number],.df-modal textarea{width:100%;color-scheme:light;background:#ffffff;color:#111827;border:1.5px solid #cbd5e1;border-radius:8px;padding:10px 12px;font-size:.9rem;box-sizing:border-box}
+  .df-modal input::placeholder,.df-modal textarea::placeholder{color:#64748b;opacity:1}
   .df-modal textarea{min-height:80px}
   .df-check{display:flex;gap:10px;align-items:flex-start;margin:14px 0;font-size:.85rem;color:#374151;line-height:1.45}
   .df-btn{display:inline-block;background:#1a4a7a;color:#fff;border:none;border-radius:8px;padding:11px 20px;font-weight:600;font-size:.9rem;cursor:pointer}

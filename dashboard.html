@@ -177,12 +177,14 @@
 
         /* Search input */
         .dash-input {
-            background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.15);
-            color: white; font-family: 'Inter', sans-serif; font-size: 14px;
+            color-scheme: dark;
+            background-color: #0b1e36; border: 1.5px solid rgba(255,255,255,0.35);
+            color: #ffffff; font-family: 'Inter', sans-serif; font-size: 14px;
             padding: 8px 14px; border-radius: 4px; outline: none; width: 100%;
         }
-        .dash-input:focus { border-color: rgba(0,212,255,0.5); }
-        .dash-input::placeholder { color: rgba(255,255,255,0.3); }
+        .dash-input:focus { border-color: #00D4FF; background-color: #071526; }
+        .dash-input::placeholder { color: rgba(255,255,255,0.6); opacity: 1; }
+        .dash-input:-webkit-autofill, .dash-input:-webkit-autofill:hover, .dash-input:-webkit-autofill:focus { -webkit-text-fill-color: #ffffff !important; -webkit-box-shadow: 0 0 0px 1000px #0b1e36 inset !important; caret-color: #ffffff; }
 
         /* Loading */
         .loading-spinner {

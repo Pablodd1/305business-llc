@@ -105,9 +105,12 @@
         .btn-outline:hover { background: #1a4a7a; color: white; }
         .section-header { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #1a4a7a; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
         .section-header::before { content: ''; width: 24px; height: 2px; background: #1a4a7a; }
-        .form-input { background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: 14px; width: 100%; transition: all 0.2s; }
-        .form-input:focus { outline: none; border-color: #1a4a7a; box-shadow: 0 0 0 3px rgba(26,74,122,0.1); }
-        .form-textarea { background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: 14px; width: 100%; resize: vertical; min-height: 120px; }
+        .form-input { color-scheme: light; background-color: #ffffff; color: #0f172a; border: 2px solid #cbd5e1; border-radius: 8px; padding: 12px 16px; font-size: 14px; width: 100%; transition: all 0.2s; }
+        .form-input:focus, .form-textarea:focus { outline: none; border-color: #1a4a7a; box-shadow: 0 0 0 3px rgba(26,74,122,0.12); }
+        .form-input option { background-color: #ffffff; color: #0f172a; }
+        .form-textarea { color-scheme: light; background-color: #ffffff; color: #0f172a; border: 2px solid #cbd5e1; border-radius: 8px; padding: 12px 16px; font-size: 14px; width: 100%; resize: vertical; min-height: 120px; }
+        .form-input::placeholder, .form-textarea::placeholder { color: #64748b; opacity: 1; }
+        .form-input:-webkit-autofill, .form-input:-webkit-autofill:hover, .form-input:-webkit-autofill:focus, .form-textarea:-webkit-autofill { -webkit-text-fill-color: #0f172a !important; -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important; }
         .chat-widget { position: fixed; bottom: 20px; right: 20px; width: 380px; max-height: 500px; background: white; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 1000; display: none; flex-direction: column; }
         .chat-widget.active { display: flex; }
         .chat-header { background: #1a4a7a; color: white; padding: 16px; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center; }

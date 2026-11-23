@@ -69,6 +69,38 @@
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
+        #digitalNdaForm input:not([type="checkbox"]) {
+            color-scheme: dark;
+            background-color: #0b1e36 !important;
+            border: 1.5px solid rgba(255,255,255,0.4) !important;
+            color: #ffffff !important;
+        }
+        #digitalNdaForm input:not([type="checkbox"]):focus {
+            border-color: #00D4FF !important;
+            background-color: #071526 !important;
+            box-shadow: 0 0 0 2px rgba(0,212,255,0.2);
+        }
+        #digitalNdaForm input::placeholder {
+            color: rgba(255,255,255,0.62) !important;
+            opacity: 1;
+        }
+        #digitalNdaForm input:-webkit-autofill,
+        #digitalNdaForm input:-webkit-autofill:hover,
+        #digitalNdaForm input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #ffffff !important;
+            -webkit-box-shadow: 0 0 0px 1000px #0b1e36 inset !important;
+            caret-color: #ffffff;
+        }
+        #digitalNdaForm label.tech-label {
+            color: rgba(255,255,255,0.88);
+            font-size: 11px;
+            font-weight: 600;
+        }
+        #ndaConsent {
+            accent-color: #00D4FF;
+            width: 18px;
+            height: 18px;
+        }
     </style>
 </head>
 <body class="blueprint-bg">
