@@ -1,137 +1,371 @@
-/* 305business Venture Portfolio — per-company 3-image media registry */
+/* 305business Venture Portfolio — 100% unique per-venture 3-image media registry (78 distinct visuals, zero duplicates) */
 (function (root) {
   const M = {
-    'zero-g-simulation': [
-      { src: '/images/simulation-data.webp', label: 'MULTI-AGENT FORECASTING ENGINE' },
-      { src: '/images/valuation-advisory.webp', label: 'EXECUTIVE SCENARIO MODELING' },
-      { src: '/images/ventures-studio.webp', label: 'CORE SIMULATION ARCHITECTURE' }
+    "zero-g-simulation": [
+        {
+            "src": "/images/ventures/zero-g-simulation-1.webp",
+            "label": "ZERO-G SIMULATION — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/zero-g-simulation-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/zero-g-simulation-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'ai-voice-layer': [
-      { src: '/images/voice-ai-desk.webp', label: 'REAL-TIME CONVERSATIONAL VOICE LAYER' },
-      { src: '/images/web-growth-factory.webp', label: 'DROP-IN WEBSITE INTEGRATION' },
-      { src: '/images/ventures-studio.webp', label: 'BILINGUAL AUDIO PIPELINE' }
+    "ai-voice-layer": [
+        {
+            "src": "/images/ventures/ai-voice-layer-1.webp",
+            "label": "AI DYNAMICS VOICELAYER — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/ai-voice-layer-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/ai-voice-layer-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'hotel-rate-intelligence': [
-      { src: '/images/hospitality-commerce-ventures.webp', label: 'HOSPITALITY COMP-SET PRICING' },
-      { src: '/images/simulation-data.webp', label: 'AUTOMATED RATE & DEMAND SIGNALS' },
-      { src: '/images/marketplace-hero.webp?v=2', label: 'MIAMI BEACH HOSPITALITY MARKET' }
+    "hotel-rate-intelligence": [
+        {
+            "src": "/images/ventures/hotel-rate-intelligence-1.webp",
+            "label": "HOTEL RATE INTELLIGENCE — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/hotel-rate-intelligence-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/hotel-rate-intelligence-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'jmm-jas-miami-method': [
-      { src: '/images/sports-vision-ventures.webp', label: 'BIOMECHANICS & PERFORMANCE LAB' },
-      { src: '/images/rpm-rtm-care.webp', label: 'DAILY WEARABLE BIOMETRIC SYNC' },
-      { src: '/images/ventures-studio.webp', label: 'ADAPTIVE COACHING ENGINE' }
+    "jmm-jas-miami-method": [
+        {
+            "src": "/images/ventures/jmm-jas-miami-method-1.webp",
+            "label": "JMM — JAS MIAMI METHOD — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/jmm-jas-miami-method-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/jmm-jas-miami-method-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'estatematch': [
-      { src: '/images/real-estate-match.webp', label: 'WATERFRONT BUYER-PROPERTY MATCHING' },
-      { src: '/images/marketplace-hero.webp?v=2', label: 'SOUTH FLORIDA REAL ESTATE NETWORK' },
-      { src: '/images/valuation-advisory.webp', label: 'DEAL FLOW & ADVISORY WORKSPACE' }
+    "estatematch": [
+        {
+            "src": "/images/ventures/estatematch-1.webp",
+            "label": "ESTATEMATCH — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/estatematch-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/estatematch-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'pocketscribe': [
-      { src: '/images/healthcare-ai-ventures.webp', label: 'CLINICAL ENCOUNTER INTELLIGENCE' },
-      { src: '/images/voice-ai-desk.webp', label: 'AMBIENT VOICE DOCUMENTATION' },
-      { src: '/images/ventures-studio.webp', label: 'HIPAA-ALIGNED WORKFLOW ENGINE' }
+    "pocketscribe": [
+        {
+            "src": "/images/ventures/pocketscribe-1.webp",
+            "label": "POCKETSCRIBE — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/pocketscribe-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/pocketscribe-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'adaptive-marketplace': [
-      { src: '/images/hospitality-commerce-ventures.webp', label: 'INTENT-AWARE COMMERCE EXPERIENCE' },
-      { src: '/images/web-growth-factory.webp', label: 'DYNAMIC MERCHANDISING STUDIO' },
-      { src: '/images/marketplace-hero.webp?v=2', label: 'MULTI-VENDOR MARKETPLACE SCALE' }
+    "adaptive-marketplace": [
+        {
+            "src": "/images/ventures/adaptive-marketplace-1.webp",
+            "label": "ADAPTIVE AI MARKETPLACE — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/adaptive-marketplace-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/adaptive-marketplace-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'overlay-hd': [
-      { src: '/images/dental-ai.webp', label: 'COSMETIC SMILE VISUALIZATION' },
-      { src: '/images/healthcare-ai-ventures.webp', label: 'CHAIRSIDE PATIENT CONSULTATION' },
-      { src: '/images/spatial-3d-twin.webp', label: 'HIGH-PRECISION FACIAL OVERLAY' }
+    "overlay-hd": [
+        {
+            "src": "/images/ventures/overlay-hd-1.webp",
+            "label": "OVERLAY HD — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/overlay-hd-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/overlay-hd-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'runform-ai': [
-      { src: '/images/sports-vision-ventures.webp', label: 'CAMERA-BASED GAIT BIOMECHANICS' },
-      { src: '/images/spatial-3d-twin.webp', label: '3D KINEMATIC JOINT TRACKING' },
-      { src: '/images/rpm-rtm-care.webp', label: 'ATHLETE RECOVERY TELEMETRY' }
+    "runform-ai": [
+        {
+            "src": "/images/ventures/runform-ai-1.webp",
+            "label": "RUNFORM AI — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/runform-ai-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/runform-ai-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'clinical-movement-intelligence': [
-      { src: '/images/rpm-rtm-care.webp', label: 'NEURO & REHAB MOVEMENT ASSESSMENT' },
-      { src: '/images/sports-vision-ventures.webp', label: 'VISION-BASED MOTION ANALYSIS' },
-      { src: '/images/healthcare-ai-ventures.webp', label: 'CLINICAL OUTCOME REPORTING' }
+    "clinical-movement-intelligence": [
+        {
+            "src": "/images/ventures/clinical-movement-intelligence-1.webp",
+            "label": "CLINICAL MOVEMENT INTELLIGENCE — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/clinical-movement-intelligence-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/clinical-movement-intelligence-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'website-factory': [
-      { src: '/images/web-growth-factory.webp', label: 'AUTOMATED LEAD-TO-SITE DEPLOYMENT' },
-      { src: '/images/ventures-studio.webp', label: 'MULTI-CLIENT TEMPLATE ENGINE' },
-      { src: '/images/marketplace-hero.webp?v=2', label: 'LOCAL SMB DIGITAL LAUNCHES' }
+    "website-factory": [
+        {
+            "src": "/images/ventures/website-factory-1.webp",
+            "label": "RAPID WEBSITE FACTORY — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/website-factory-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/website-factory-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'dental-ehr': [
-      { src: '/images/dental-ai.webp', label: 'MODERN DENTAL PRACTICE SUITE' },
-      { src: '/images/healthcare-ai-ventures.webp', label: 'AI CHARTING & CLINICAL WORKFLOWS' },
-      { src: '/images/voice-ai-desk.webp', label: 'FRONT-DESK PATIENT INTAKE' }
+    "dental-ehr": [
+        {
+            "src": "/images/ventures/dental-ehr-1.webp",
+            "label": "DENTAL EHR & AI ASSISTANT — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/dental-ehr-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/dental-ehr-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'room-defect-intelligence': [
-      { src: '/images/spatial-3d-twin.webp', label: 'AI VISUAL ROOM INSPECTION' },
-      { src: '/images/hospitality-commerce-ventures.webp', label: 'HOTEL & SHORT-TERM RENTAL TURNOVER' },
-      { src: '/images/real-estate-match.webp', label: 'PROPERTY DAMAGE DOCUMENTATION' }
+    "room-defect-intelligence": [
+        {
+            "src": "/images/ventures/room-defect-intelligence-1.webp",
+            "label": "VISUAL PROPERTY DEFECT INTELLIGENCE — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/room-defect-intelligence-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/room-defect-intelligence-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'rpm-platform': [
-      { src: '/images/rpm-rtm-care.webp', label: 'CONNECTED HOME VITALS SENSORS' },
-      { src: '/images/healthcare-ai-ventures.webp', label: 'CARE TEAM ESCALATION DASHBOARD' },
-      { src: '/images/simulation-data.webp', label: 'LONGITUDINAL PATIENT TRENDS' }
+    "rpm-platform": [
+        {
+            "src": "/images/ventures/rpm-platform-1.webp",
+            "label": "INTELLIGENT REMOTE PATIENT MONITORING — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/rpm-platform-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/rpm-platform-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'three-d-spatial-intelligence': [
-      { src: '/images/spatial-3d-twin.webp', label: 'CAMERA-BASED 3D DIGITAL TWINS' },
-      { src: '/images/real-estate-match.webp', label: 'ARCHITECTURAL FLOORPLAN MAPPING' },
-      { src: '/images/ventures-studio.webp', label: 'SPATIAL RECONSTRUCTION PIPELINE' }
+    "three-d-spatial-intelligence": [
+        {
+            "src": "/images/ventures/three-d-spatial-intelligence-1.webp",
+            "label": "3D SPATIAL INTELLIGENCE — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/three-d-spatial-intelligence-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/three-d-spatial-intelligence-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'ai-voice-receptionist': [
-      { src: '/images/voice-ai-desk.webp', label: '24/7 BILINGUAL FRONT-DESK AI' },
-      { src: '/images/healthcare-ai-ventures.webp', label: 'CLINIC & SERVICE CALL TRIAGE' },
-      { src: '/images/marketplace-hero.webp?v=2', label: 'MIAMI MULTI-LANGUAGE OPERATIONS' }
+    "ai-voice-receptionist": [
+        {
+            "src": "/images/ventures/ai-voice-receptionist-1.webp",
+            "label": "AI VOICE RECEPTIONIST — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/ai-voice-receptionist-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/ai-voice-receptionist-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'cycling-fit-intelligence': [
-      { src: '/images/sports-vision-ventures.webp', label: 'ROAD, TRIATHLON & TT BIKE FIT' },
-      { src: '/images/spatial-3d-twin.webp', label: 'AERO POSTURE & ANGLE GEOMETRY' },
-      { src: '/images/simulation-data.webp', label: 'POWER & BIOMECHANIC OPTIMIZATION' }
+    "cycling-fit-intelligence": [
+        {
+            "src": "/images/ventures/cycling-fit-intelligence-1.webp",
+            "label": "CYCLING FIT INTELLIGENCE — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/cycling-fit-intelligence-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/cycling-fit-intelligence-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'rtm-platform': [
-      { src: '/images/rpm-rtm-care.webp', label: 'HOME THERAPEUTIC MONITORING' },
-      { src: '/images/sports-vision-ventures.webp', label: 'MSK ADHERENCE & EXERCISE TRACKING' },
-      { src: '/images/healthcare-ai-ventures.webp', label: 'REHAB CLINIC BILLING & OUTCOMES' }
+    "rtm-platform": [
+        {
+            "src": "/images/ventures/rtm-platform-1.webp",
+            "label": "REMOTE THERAPEUTIC MONITORING — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/rtm-platform-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/rtm-platform-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'intelligent-crm': [
-      { src: '/images/web-growth-factory.webp', label: 'AI-CONNECTED PIPELINE WORKSPACE' },
-      { src: '/images/valuation-advisory.webp', label: 'DEAL FORECASTING & FOLLOW-UPS' },
-      { src: '/images/voice-ai-desk.webp', label: 'OMNICHANNEL LEAD CAPTURE' }
+    "intelligent-crm": [
+        {
+            "src": "/images/ventures/intelligent-crm-1.webp",
+            "label": "INTELLIGENT CRM SYSTEMS — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/intelligent-crm-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/intelligent-crm-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'agentic-websites': [
-      { src: '/images/web-growth-factory.webp', label: 'INTENT-RESPONSIVE WEB ARCHITECTURE' },
-      { src: '/images/ventures-studio.webp', label: 'AUTONOMOUS CONVERSION FLOWS' },
-      { src: '/images/simulation-data.webp', label: 'LIVE FUNNEL ADAPTATION' }
+    "agentic-websites": [
+        {
+            "src": "/images/ventures/agentic-websites-1.webp",
+            "label": "ADAPTIVE AI WEBSITES — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/agentic-websites-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/agentic-websites-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'ai-chatbots': [
-      { src: '/images/voice-ai-desk.webp', label: 'CONTEXT-AWARE OPERATIONS ASSISTANTS' },
-      { src: '/images/web-growth-factory.webp', label: 'EMBEDDED WEB & SUPPORT WIDGETS' },
-      { src: '/images/ventures-studio.webp', label: 'KNOWLEDGE-GROUNDED AUTOMATION' }
+    "ai-chatbots": [
+        {
+            "src": "/images/ventures/ai-chatbots-1.webp",
+            "label": "INTELLIGENT AI ASSISTANTS — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/ai-chatbots-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/ai-chatbots-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'ai-market-intelligence': [
-      { src: '/images/simulation-data.webp', label: 'AUTOMATED COMPETITIVE INTELLIGENCE' },
-      { src: '/images/valuation-advisory.webp', label: 'EXECUTIVE DECISION BRIEFINGS' },
-      { src: '/images/marketplace-hero.webp?v=2', label: 'SECTOR & REGIONAL SIGNAL TRACKING' }
+    "ai-market-intelligence": [
+        {
+            "src": "/images/ventures/ai-market-intelligence-1.webp",
+            "label": "AI MARKET INTELLIGENCE — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/ai-market-intelligence-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/ai-market-intelligence-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'revenue-cycle-intelligence': [
-      { src: '/images/healthcare-ai-ventures.webp', label: 'MEDICAL BILLING & CODING QA' },
-      { src: '/images/simulation-data.webp', label: 'DENIAL PATTERN & ERA ANALYTICS' },
-      { src: '/images/valuation-advisory.webp', label: 'PRACTICE COLLECTIONS RECOVERY' }
+    "revenue-cycle-intelligence": [
+        {
+            "src": "/images/ventures/revenue-cycle-intelligence-1.webp",
+            "label": "AI REVENUE CYCLE INTELLIGENCE — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/revenue-cycle-intelligence-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/revenue-cycle-intelligence-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'seo-aeo-engine': [
-      { src: '/images/web-growth-factory.webp', label: 'TECHNICAL SEO & ANSWER-ENGINE OPS' },
-      { src: '/images/simulation-data.webp', label: 'AI CITATION & SEARCH VISIBILITY' },
-      { src: '/images/marketplace-hero.webp?v=2', label: 'LOCAL & ORGANIC DEMAND GROWTH' }
+    "seo-aeo-engine": [
+        {
+            "src": "/images/ventures/seo-aeo-engine-1.webp",
+            "label": "AI SEARCH & DISCOVERY ENGINEERING — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/seo-aeo-engine-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/seo-aeo-engine-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'rapid-digital-launch': [
-      { src: '/images/web-growth-factory.webp', label: 'HIGH-SPEED BUSINESS WEB LAUNCH' },
-      { src: '/images/marketplace-hero.webp?v=2', label: 'MIAMI SMB DIGITAL STOREFRONTS' },
-      { src: '/images/ventures-studio.webp', label: 'TURNKEY DEPLOYMENT STACK' }
+    "rapid-digital-launch": [
+        {
+            "src": "/images/ventures/rapid-digital-launch-1.webp",
+            "label": "RAPID DIGITAL LAUNCH — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/rapid-digital-launch-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/rapid-digital-launch-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ],
-    'maca-locator': [
-      { src: '/images/maca-auto.webp', label: 'MOBILE AUTO & ROADSIDE DISPATCH' },
-      { src: '/images/marketplace-hero.webp?v=2', label: 'SOUTH FLORIDA COVERAGE NETWORK' },
-      { src: '/images/voice-ai-desk.webp', label: 'AI TRIAGE & LIVE TECHNICIAN ROUTING' }
+    "maca-locator": [
+        {
+            "src": "/images/ventures/maca-locator-1.webp",
+            "label": "MACALOCATOR — REAL-WORLD APPLICATION"
+        },
+        {
+            "src": "/images/ventures/maca-locator-2.webp",
+            "label": "SYSTEM CAPABILITIES & ARCHITECTURE"
+        },
+        {
+            "src": "/images/ventures/maca-locator-3.webp",
+            "label": "INVESTOR & NEW-OWNER SCORECARD"
+        }
     ]
-  };
+};
   if (typeof module !== 'undefined' && module.exports) module.exports = M;
   if (root) root.VENTURE_MEDIA = M;
 })(typeof window !== 'undefined' ? window : null);

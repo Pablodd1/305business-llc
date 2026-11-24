@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>305business.llc - Miami Business Marketplace</title>
-    <meta name="description" content="Miami's premier business marketplace. Buy or sell businesses, connect with brokers, get valuations, and access legal support. Serving Miami-Dade, Broward, and Palm Beach." />
+    <title>305business.llc — Own a Ready Business in Miami | 26 Turnkey Ventures ($1.5K–$18.5K)</title>
+    <meta name="description" content="Built for capital investors and aspiring founders: acquire 100% of one of 26 ready-built software & AI service businesses ($1,500–$18,500 outright or $105–$1,290/mo, zero coding required), or buy and sell South Florida businesses with $0 broker commissions." />
     <meta name="keywords" content="buy business Miami, sell business Miami, business broker Florida, business valuation, Miami business marketplace, 305business, business for sale Florida" />
     <meta name="author" content="305business.llc" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
@@ -167,7 +167,7 @@
     <script src="supabase-client.js"></script>
     <script src="js/auth.js" type="module"></script>
     <script src="js/nav.js" type="module"></script>
-    <script src="ventures/media.js"></script>
+    <script src="ventures/media.js?v=2"></script>
     <script src="js/email-notify.js"></script>
 
     <!-- PostHog Analytics & Marketplace Funnel (active when window.POSTHOG_KEY is configured) -->
@@ -903,70 +903,65 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <!-- Left: Title Block -->
-                <div class="title-block p-8 bg-[#0a1628]/70 backdrop-blur-md">
+                <div class="title-block p-8 bg-[#0a1628]/75 backdrop-blur-md">
                     <div class="flex justify-between items-start mb-4">
-                        <span class="tech-label">PROJECT NO. 305 · MIAMI BRICKELL</span>
-                        <span class="tech-label text-[#00FF88]">$0 COMMISSION</span>
+                        <span class="tech-label">MIAMI TURNKEY VENTURES &amp; MARKETPLACE</span>
+                        <span class="tech-label text-[#00FF88]">$0 BROKER COMMISSION</span>
                     </div>
                     <div class="live-pill mb-6">
                         <span class="live-dot"></span>
-                        <span>26 VENTURES AVAILABLE · $0 COMMISSIONS</span>
+                        <span>FOR INVESTORS &amp; NEW OWNERS · FROM $1,500 OR $105/MO</span>
                     </div>
-                    <h1 class="text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
-                        CONNECT & LIST<br>BUSINESSES
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight leading-tight">
+                        OWN A READY BUSINESS.<br>SKIP STARTING FROM ZERO.
                     </h1>
-                    <p class="text-lg text-white/75 max-w-xl mb-6">
-                        Acquire one of 26 built-in-house AI &amp; SaaS ventures today, or list your South Florida business directly with $0 commissions, $0 success fees, and $0 finder's fees.
+                    <p class="text-base sm:text-lg text-white/85 max-w-xl mb-6 leading-relaxed">
+                        Have capital saved and aren't sure how to invest it—or want to start a business without spending a year building from scratch? Acquire 100% of one of <strong class="text-white">26 already-built software &amp; service businesses</strong> ($1,500–$18,500 one-time or $105–$1,290/mo with tech maintenance included, <strong class="text-[#00FF88]">zero coding required</strong>), or buy &amp; list South Florida businesses with $0 broker fees.
                     </p>
-                    <div class="flex gap-4 flex-wrap">
-                        <button onclick="document.getElementById('ventures').scrollIntoView({behavior:'smooth'})" class="schematic-btn px-6 py-3" data-i18n="hero_cta_primary">
-                            <span class="relative z-10"><i class="fas fa-cubes mr-2"></i>BROWSE 26 VENTURES</span>
+                    <div class="flex gap-3 flex-wrap">
+                        <button onclick="document.getElementById('ventures').scrollIntoView({behavior:'smooth'})" class="schematic-btn px-6 py-3" style="border-color:#00FF88;background:rgba(0,255,136,0.12)" data-i18n="hero_cta_primary">
+                            <span class="relative z-10 text-[#00FF88] font-bold"><i class="fas fa-rocket mr-2"></i>EXPLORE 26 READY BUSINESSES</span>
                         </button>
-                        <button onclick="document.getElementById('matching').scrollIntoView({behavior:'smooth'})" class="schematic-btn px-6 py-3" data-i18n="hero_cta_secondary">
-                            <span class="relative z-10"><i class="fas fa-magic mr-2"></i>AI MATCH</span>
-                        </button>
+                        <a href="https://www.aidynamic.pro/booking?service=free_ai_consultation" target="_blank" rel="noopener noreferrer" class="schematic-btn px-5 py-3">
+                            <span class="relative z-10"><i class="fas fa-comments-dollar mr-2 text-[#00D4FF]"></i>UNSURE WHAT TO BUY? FREE 15-MIN CALL</span>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Right: Live Stats Dashboard -->
+                <!-- Right: Live Buyer Fit Dashboard -->
                 <div class="space-y-4">
-                    <!-- Stats Grid — real platform facts only -->
                     <div class="grid grid-cols-3 gap-4">
-                        <div class="hero-stat-card text-center bg-[#0a1628]/70 backdrop-blur-md">
-                            <div class="stat-number">$0</div>
-                            <div class="stat-label">COMMISSIONS</div>
+                        <div class="hero-stat-card text-center bg-[#0a1628]/75 backdrop-blur-md">
+                            <div class="stat-number">$1.5K+</div>
+                            <div class="stat-label">STARTING ENTRY</div>
                         </div>
-                        <div class="hero-stat-card text-center bg-[#0a1628]/70 backdrop-blur-md">
+                        <div class="hero-stat-card text-center bg-[#0a1628]/75 backdrop-blur-md">
                             <div class="stat-number">26</div>
-                            <div class="stat-label">VENTURES BUILT</div>
+                            <div class="stat-label">READY ASSETS</div>
                         </div>
-                        <div class="hero-stat-card text-center bg-[#0a1628]/70 backdrop-blur-md">
-                            <div class="stat-number">OPEN</div>
-                            <div class="stat-label">SELLER INTAKE</div>
+                        <div class="hero-stat-card text-center bg-[#0a1628]/75 backdrop-blur-md">
+                            <div class="stat-number">$0</div>
+                            <div class="stat-label">BROKER FEES</div>
                         </div>
                     </div>
 
-                    <!-- Platform status — honest, no fabricated transactions -->
-                    <div class="tech-card p-5 bg-[#0a1628]/75 backdrop-blur-md">
+                    <div class="tech-card p-5 bg-[#0a1628]/80 backdrop-blur-md">
                         <div class="flex justify-between items-center mb-3">
-                            <span class="tech-label">PLATFORM STATUS</span>
-                            <span class="tech-label"><i class="fas fa-circle text-[#00FF88] mr-1" style="font-size:8px"></i>OPEN FOR OFFERS</span>
+                            <span class="tech-label">WHO THIS IS BUILT FOR</span>
+                            <span class="tech-label"><i class="fas fa-circle text-[#00FF88] mr-1" style="font-size:8px"></i>NO CODING NEEDED</span>
                         </div>
                         <div class="space-y-2">
-                            <div class="flex items-center gap-3 py-2 border-b border-white/5">
-                                <i class="fas fa-check-circle" style="color: #00FF88; width: 16px;"></i>
-                                <div class="flex-1"><span class="text-white/70 text-sm">26 proprietary ventures available for direct acquisition</span></div>
-                                <span class="tech-label">READY</span>
+                            <div class="flex items-center gap-3 py-2 border-b border-white/10">
+                                <i class="fas fa-wallet" style="color: #00FF88; width: 16px;"></i>
+                                <div class="flex-1"><span class="text-white/85 text-sm"><strong class="text-white">Capital Investors:</strong> Put idle cash into a real, ownable digital asset instead of guessing</span></div>
                             </div>
-                            <div class="flex items-center gap-3 py-2 border-b border-white/5">
-                                <i class="fas fa-handshake" style="color: #00D4FF; width: 16px;"></i>
-                                <div class="flex-1"><span class="text-white/70 text-sm">No commissions, success fees, or finder's fees — ever</span></div>
-                                <span class="tech-label">POLICY</span>
+                            <div class="flex items-center gap-3 py-2 border-b border-white/10">
+                                <i class="fas fa-key" style="color: #00D4FF; width: 16px;"></i>
+                                <div class="flex-1"><span class="text-white/85 text-sm"><strong class="text-white">New Business Owners:</strong> We deploy under your brand &amp; handle tech maintenance</span></div>
                             </div>
                             <div class="flex items-center gap-3 py-2">
-                                <i class="fas fa-flag" style="color: #FFC107; width: 16px;"></i>
-                                <div class="flex-1"><span class="text-white/70 text-sm">Third-party Miami listings now onboarding — <a href="list-business.html" class="underline text-[#00D4FF]">list your business free</a></span></div>
-                                <span class="tech-label">OPEN</span>
+                                <i class="fas fa-shield-halved" style="color: #FFC107; width: 16px;"></i>
+                                <div class="flex-1"><span class="text-white/85 text-sm"><strong class="text-white">Direct Miami Deals:</strong> 1× buyout or 18-mo lease-to-own · <a href="list-business.html" class="underline text-[#00D4FF]">list your business free</a></span></div>
                             </div>
                         </div>
                     </div>
@@ -980,14 +975,52 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
             <div class="flex justify-between items-end">
                 <div>
-                    <span class="tech-label block mb-1">PORTFOLIO: REAL PRODUCTS</span>
-                    <h2 class="text-xl font-bold text-white" data-i18n="section_market_data">VENTURE INDEX</h2>
+                    <span class="tech-label block mb-1">PORTFOLIO: REAL ACQUIRABLE ASSETS</span>
+                    <h2 class="text-xl font-bold text-white" data-i18n="section_market_data">VENTURE INDEX ($1,500 – $18,500)</h2>
                 </div>
                 <span class="tech-label">SOURCE: 305BUSINESS VENTURES</span>
             </div>
         </div>
         <div class="ticker-bar">
             <div class="ticker-track" id="tickerTrack"></div>
+        </div>
+    </section>
+
+    <!-- Buyer Clarity Section: Capital Investors & Aspiring Founders -->
+    <section id="who-its-for" class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="tech-border p-8 bg-[#0a1628]/45">
+                <div class="flex flex-wrap justify-between items-center gap-2 mb-4">
+                    <span class="tech-label text-[#00FF88]">SHEET: B-0 · BUYER &amp; INVESTOR GUIDE</span>
+                    <span class="tech-label">ZERO TECHNICAL BACKGROUND REQUIRED</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3">Have Money Ready to Invest—or Want to Start a Business Without Building From Zero?</h2>
+                <p class="text-white/75 max-w-3xl mb-8 text-sm sm:text-base leading-relaxed">Most people with savings get stuck between leaving cash idle, gambling on volatile markets, or paying $150,000+ for a traditional brick-and-mortar franchise. 305business gives you a practical middle path: <strong class="text-white">step straight into an already-built software or AI service business</strong> for $1,500–$18,500, with our engineering team handling setup and maintenance.</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="inset-view p-6" data-view="PATH 01 · INVESTORS WITH CAPITAL">
+                        <div class="text-[#00FF88] font-mono text-xs font-bold mb-2">UNSURE WHERE TO INVEST?</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Own a Tangible Asset at 80–90% Below Build Cost</h3>
+                        <p class="text-white/70 text-sm leading-relaxed">Hiring developers to build any of these 26 platforms from scratch costs $15,000–$140,000+ and takes 6–12 months. Here you acquire the working asset today—with $0 broker or finder's fees.</p>
+                    </div>
+                    <div class="inset-view p-6" data-view="PATH 02 · FIRST-TIME BUSINESS OWNERS">
+                        <div class="text-[#00D4FF] font-mono text-xs font-bold mb-2">WANT TO LAUNCH YOUR OWN COMPANY?</div>
+                        <h3 class="text-lg font-bold text-white mb-2">You Run the Business. We Handle the Code.</h3>
+                        <p class="text-white/70 text-sm leading-relaxed">You do not need to be a programmer. We configure your domain, brand name, and cloud hosting, walk you through operations 1-on-1, and provide ongoing tech maintenance so you focus on getting paying clients.</p>
+                    </div>
+                    <div class="inset-view p-6" data-view="PATH 03 · LOW-RISK MONTHLY ENTRY">
+                        <div class="text-[#FFC107] font-mono text-xs font-bold mb-2">KEEP YOUR CASH FOR MARKETING</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Buy Outright or Lease-to-Own From $105/mo</h3>
+                        <p class="text-white/70 text-sm leading-relaxed">Pay once for immediate 100% IP transfer, or spread ownership over 18 monthly payments ($105–$1,290/mo, maintenance included) so you keep capital free for sales and customer acquisition.</p>
+                    </div>
+                </div>
+                <div class="mt-6 pt-5 border-t border-white/15 flex flex-wrap items-center justify-between gap-4">
+                    <div class="text-white/80 text-xs sm:text-sm"><strong class="text-white">Need help picking the right business for your budget?</strong> Tell us your capital range and goals on a free 15-minute triage call.</div>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="document.getElementById('ventures').scrollIntoView({behavior:'smooth'})" class="schematic-btn px-5 py-2.5 text-xs"><span class="relative z-10">COMPARE ALL 26 BUSINESSES ↓</span></button>
+                        <a href="https://www.aidynamic.pro/booking?service=free_ai_consultation" target="_blank" rel="noopener noreferrer" class="schematic-btn px-5 py-2.5 text-xs" style="border-color:#00D4FF"><span class="relative z-10 text-[#00D4FF]">BOOK FREE 15-MIN MATCH CALL →</span></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -998,7 +1031,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="tech-border p-6 max-w-3xl mx-auto">
                 <div class="flex justify-between items-start mb-4">
-                    <span class="tech-label">SEARCH PARAMETERS</span>
+                    <span class="tech-label">SEARCH THIRD-PARTY MIAMI LISTINGS</span>
                     <span class="tech-label">QUERY: ACTIVE</span>
                 </div>
                 <div class="flex flex-col md:flex-row gap-4">
@@ -1046,21 +1079,21 @@
     <section id="ventures" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8">
-                <div class="tech-label mb-3">SHEET: V-1 · SCALE 1:1</div>
-                <h2 class="text-3xl font-bold text-white">VENTURE PORTFOLIO</h2>
-                <p class="text-white/60 mt-3 max-w-2xl mx-auto">Companies we built — buy outright or monthly with maintenance included. Healthcare AI, sports science, computer vision, intelligent commerce. Every stage labeled honestly, every offer reviewed.</p>
+                <div class="tech-label mb-3">SHEET: V-1 · 26 UNIQUE TURNKEY BUSINESSES</div>
+                <h2 class="text-3xl font-bold text-white">READY-TO-OWN BUSINESS PORTFOLIO</h2>
+                <p class="text-white/75 mt-3 max-w-3xl mx-auto">Pick a business by your starting budget and target industry. Buy 100% outright in one payment or start from $105/mo on our 18-month lease-to-own plan with maintenance included—no coding required, every stage labeled honestly.</p>
                 <div class="mt-6 grid sm:grid-cols-3 gap-4 max-w-5xl mx-auto">
                     <div class="tech-card p-0 overflow-hidden text-left">
                         <img src="images/healthcare-ai-ventures.webp" alt="Healthcare AI & Clinical Software Ventures" width="1280" height="720" loading="lazy" class="w-full h-36 object-cover">
-                        <div class="p-3"><span class="tech-label text-[#00FF88]">HEALTHCARE AI · EHR · RCM</span></div>
+                        <div class="p-3"><span class="tech-label text-[#00FF88]">HEALTHCARE · DENTAL · BILLING</span></div>
                     </div>
                     <div class="tech-card p-0 overflow-hidden text-left">
                         <img src="images/hospitality-commerce-ventures.webp" alt="Hospitality Rate Intelligence & Commerce Ventures" width="1280" height="720" loading="lazy" class="w-full h-36 object-cover">
-                        <div class="p-3"><span class="tech-label text-[#00D4FF]">HOSPITALITY · COMMERCE</span></div>
+                        <div class="p-3"><span class="tech-label text-[#00D4FF]">HOTELS · REAL ESTATE · COMMERCE</span></div>
                     </div>
                     <div class="tech-card p-0 overflow-hidden text-left">
                         <img src="images/sports-vision-ventures.webp" alt="Sports Biomechanics & Computer Vision Ventures" width="1280" height="720" loading="lazy" class="w-full h-36 object-cover">
-                        <div class="p-3"><span class="tech-label text-white/80">SPORTS SCIENCE · VISION AI</span></div>
+                        <div class="p-3"><span class="tech-label text-white/80">SPORTS · AUTO DISPATCH · B2B AI</span></div>
                     </div>
                 </div>
                 <div class="mt-6 max-w-5xl mx-auto inset-view p-4 flex flex-wrap items-center justify-between gap-3 text-left" data-view="SAFE DIRECT CLOSING">
@@ -1068,10 +1101,12 @@
                     <a href="legal-support.html" class="tech-label text-[#00D4FF] hover:underline whitespace-nowrap">MUTUAL NDA →</a>
                 </div>
             </div>
+            <div class="text-center tech-label mb-2">FILTER BY YOUR STARTING CAPITAL</div>
             <div id="vtiers" class="flex flex-wrap justify-center gap-2 mb-3">
-                <button onclick="vTier('All', this)" class="schematic-btn px-4 py-1.5 text-xs vactive"><span class="relative z-10">ALL (26)</span></button>
-                <button onclick="vTier('flagship', this)" class="schematic-btn px-4 py-1.5 text-xs"><span class="relative z-10">FLAGSHIP COMPANIES ($6K–$18.5K)</span></button>
-                <button onclick="vTier('systems', this)" class="schematic-btn px-4 py-1.5 text-xs"><span class="relative z-10">TURNKEY SYSTEMS ($1.5K–$5.5K)</span></button>
+                <button onclick="vTier('All', this)" class="schematic-btn px-4 py-1.5 text-xs vactive"><span class="relative z-10">ALL 26 BUSINESSES</span></button>
+                <button onclick="vTier('starter', this)" class="schematic-btn px-4 py-1.5 text-xs"><span class="relative z-10">STARTER ($1.5K–$4.5K · FROM $105/MO)</span></button>
+                <button onclick="vTier('growth', this)" class="schematic-btn px-4 py-1.5 text-xs"><span class="relative z-10">GROWTH ($5K–$8.5K · FROM $350/MO)</span></button>
+                <button onclick="vTier('flagship', this)" class="schematic-btn px-4 py-1.5 text-xs"><span class="relative z-10">FLAGSHIP ($9.5K–$18.5K · FROM $660/MO)</span></button>
             </div>
             <div id="vchips" class="flex flex-wrap justify-center gap-2 mb-4"></div>
             <div class="max-w-5xl mx-auto inset-view p-3.5 mb-6 text-left" data-view="STAGE LEGEND">
@@ -2420,7 +2455,7 @@
             return '<article class="tech-card flex flex-col overflow-hidden">' +
                 '<a href="/ventures/' + v.slug + '.html" class="block relative overflow-hidden border-b border-white/15" aria-label="' + v.name + '">' +
                     '<img src="' + photo + '" alt="' + v.name + '" width="1280" height="720" loading="lazy" class="w-full h-44 object-cover hover:scale-105 transition duration-500">' +
-                    '<span class="absolute bottom-2 right-2 bg-[#0a1628]/85 border border-white/20 px-2 py-0.5 tech-label" style="font-size:9px;color:#00D4FF">' + (media.length || 3) + ' PHOTOS \u00b7 FULL BRIEF</span>' +
+                    '<span class="absolute bottom-2 right-2 bg-[#0a1628]/85 border border-white/20 px-2 py-0.5 tech-label" style="font-size:9px;color:#00D4FF">3 VISUALS \u00b7 NO CODING NEEDED</span>' +
                 '</a>' +
                 '<div class="p-5 flex flex-col flex-1">' +
                     '<div class="flex justify-between items-center mb-3 gap-2">' +
@@ -2433,13 +2468,13 @@
                     '<div class="flex flex-wrap gap-1.5 mt-4">' + caps + '</div>' +
                     '<div class="border-t border-dashed border-white/20 mt-4 pt-4 flex justify-between items-end gap-3">' +
                         '<div>' +
-                            '<div class="tech-label" style="font-size:9px">BUY ' + fmt(v.price) + ' \u00b7 OR ' + fmt(v.monthly) + '/MO \u00d7 18</div>' +
+                            '<div class="tech-label" style="font-size:9px">OWN ' + fmt(v.price) + ' \u00b7 OR ' + fmt(v.monthly) + '/MO \u00d7 18</div>' +
                             '<div class="font-mono text-2xl font-bold text-white">' + fmt(v.price) + '</div>' +
                             '<div class="text-white/50 text-xs">' + sup + '</div>' +
                         '</div>' +
                         '<a href="/ventures/' + v.slug + '.html#offer" class="schematic-btn px-4 py-2 shrink-0"><span class="relative z-10">MAKE AN OFFER</span></a>' +
                     '</div>' +
-                    '<a class="tech-label block text-center mt-4 hover:text-white/90 transition" href="/ventures/' + v.slug + '.html">VIEW FULL PROFILE \u2192</a>' +
+                    '<a class="tech-label block text-center mt-4 hover:text-white/90 transition" href="/ventures/' + v.slug + '.html">VIEW BUYER SCORECARD &amp; BRIEF \u2192</a>' +
                 '</div>' +
             '</article>';
         }
@@ -2462,7 +2497,10 @@
         };
         function render(){
             var list = window.VENTURES.filter(function(v){
-                var tierOk = vTierFilter === 'All' || (vTierFilter === 'flagship' ? v.price >= 6000 : v.price < 6000);
+                var tierOk = vTierFilter === 'All'
+                    || (vTierFilter === 'starter' && v.price <= 4500)
+                    || (vTierFilter === 'growth' && v.price >= 5000 && v.price <= 8500)
+                    || (vTierFilter === 'flagship' && v.price >= 9000);
                 return tierOk && (vInd === 'All' || v.industry === vInd);
             });
             document.getElementById('vgrid').innerHTML = list.map(card).join('');

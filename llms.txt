@@ -1,6 +1,11 @@
 # 305business.llc
 
-> Direct business marketplace and venture acquisition studio in Miami, Florida. $0 commission, $0 success fee, and $0 finder's fee; buyers and sellers connect directly. Operated by a Florida LLC (platform only — not a licensed business brokerage).
+> Turnkey business acquisition studio and direct business marketplace in Miami, Florida — built for capital investors unsure where to deploy cash and aspiring entrepreneurs who want to own a ready-made business without starting from zero or writing code. $0 commission, $0 success fee, and $0 finder's fee; buyers and sellers connect directly. Operated by a Florida LLC (platform only — not a licensed business brokerage).
+
+## Who It Is Built For
+- **Capital Investors Seeking Tangible Assets**: Deploy $1,500–$18,500 one-time (or $105–$1,290/mo × 18 lease-to-own) to own 100% of an already-built software or AI service platform instead of spending $15K–$140K+ and 12 months building from scratch.
+- **First-Time & Non-Technical Business Owners**: Launch under your own brand with cloud hosting, domain setup, 1-on-1 handover, and optional ongoing technical maintenance handled for you so you focus on customers and revenue.
+- **Direct South Florida Business Buyers & Sellers**: Buy or list brick-and-mortar and operating businesses across Miami-Dade, Broward, and Palm Beach with $0 broker commissions.
 
 ## Core Offerings
 - **Direct Business Marketplace**: Direct South Florida business listing platform with $0 commissions, $0 success fees, and $0 finder's fees ([Home](https://305business.llc/) | [Español](https://305business.llc/es.html)).
